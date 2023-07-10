@@ -36,7 +36,7 @@ Use more chunks. Define a smaller top and bottom, and for the rest use 1-lat-1-l
 
 1.1 - Find currentPPc's chunk
 
-1.2 - Find all points within currentPPc's viewshed (currentPPc_VS) and remove from PPC (use STRM30?, investigate the fastest way to do this)
+1.2 - Find all points within currentPPc's viewshed (currentPPc_VS) and remove from PPc (use STRM30?, investigate the fastest way to do this)
 
 1.3 - If no points in currentPPc_VS have a higher elevation than currentPPc: (Check if this is a pinnacle point)
 
