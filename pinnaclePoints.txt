@@ -1,0 +1,2780 @@
+country,state,latitude,longitude,elevation_m,prominence_m
+China,Tibet,27.9883,86.925,8839.8,8839.8
+Pakistan,Gilgit-Baltistan,35.8808,76.5133,8599.9,4001.1
+China,Tibet,29.6317,95.055,7755.9,4069.1
+China,Sichuan,29.5958,101.8792,7507.8,3593.9
+Kyrgyzstan,Issyk-Kul Region,42.035,80.1292,7429.8,4138.9
+China,Tibet,36.4125,87.3842,6969.9,1940.1
+Argentina,Mendoza,-32.6533,-70.0108,6928.7,6928.7
+Chile,Atacama Region,-27.1092,-68.5408,6867.8,3654.9
+China,Xinjiang,36.0242,90.8658,6823.9,1811.1
+Peru,Ancash,-9.1217,-77.6042,6735.8,2763.0
+Bolivia,Oruro,-18.1083,-68.8833,6548.9,2435.0
+Peru,Arequipa,-15.5458,-72.6608,6402.9,2206.1
+China,Qinghai,34.7383,99.5033,6263.9,1941.0
+Ecuador,Chimborazo,-1.4692,-78.8175,6258.8,4112.1
+United States,Alaska,63.0692,-151.0058,6187.7,6187.7
+Chile,Antofagasta Region,-21.2208,-68.4683,6171.9,2160.1
+China,Qinghai,35.6525,94.2508,6171.0,1621.2
+Canada,Yukon,60.5675,-140.405,5920.7,5204.8
+Tanzania,Kilimanjaro,-3.0758,37.3525,5883.9,5883.9
+China,Gansu,39.2508,93.6967,5820.8,2517.0
+China,Qinghai,38.5008,97.725,5794.9,2218.0
+Colombia,Magdalena,10.8383,-73.6875,5666.8,5475.1
+Russia,Kabardino-Balkaria Republic,43.3525,42.4375,5628.7,4727.8
+Mexico,Puebla,19.0311,-97.2706,5605.0,5605.0
+Iran,Mazandaran Province,35.955,52.11,5594.9,4652.2
+China,Xinjiang,43.8,88.335,5439.8,4116.0
+Colombia,Cauca,2.9242,-76.0292,5374.8,2634.1
+Colombia,Boyacá,6.4942,-72.2975,5340.7,3572.0
+Uganda,Kasese,0.3858,29.8725,5069.7,3885.0
+,,-78.535,-85.5708,5018.8,5018.8
+China,Xinjiang,43.0742,94.3467,4875.9,3231.2
+Indonesia,Central Papua,-4.0675,137.1875,4839.9,4839.9
+France,Auvergne-Rhône-Alpes,45.8325,6.865,4786.0,4672.0
+Russia,Kamchatka Krai,56.0558,160.6417,4752.7,4652.8
+Ethiopia,Amhara Region,13.2367,38.3725,4516.8,3963.0
+Kazakhstan,East Kazakhstan Region,49.8075,86.59,4476.0,3313.2
+Iran,Kerman Province,29.5117,57.2717,4471.7,2711.8
+Papua New Guinea,Jiwaka,-5.78,145.0292,4456.8,2903.8
+,,-83.8942,168.3842,4448.9,2521.9
+United States,California,36.5785,-118.2924,4419.0,4419.0
+Iran,Kohgiluye and Buyer Ahmad Province,30.9508,51.4358,4414.7,2603.9
+United States,Colorado,39.1178,-106.4453,4399.2,2767.3
+United States,Washington,46.8529,-121.7604,4392.5,4113.0
+Ethiopia,Oromia Region,6.8267,39.8192,4384.9,2511.9
+United States,California,41.409,-122.1949,4316.6,2977.3
+Mexico,Jalisco,19.5636,-103.6089,4249.8,2692.0
+United States,Wyoming,43.1843,-109.6543,4212.9,2161.0
+Guatemala,San Marcos,15.0433,-91.9033,4207.8,3967.9
+United States,Hawaii,19.8207,-155.468,4205.0,4205.0
+Mongolia,Govi-Altai,46.6175,93.5933,4202.9,1832.2
+Morocco,,31.06,-7.915,4152.0,3741.1
+,,-80.3417,77.3708,4082.8,1631.0
+Chile,Aysén Region,-46.5958,-73.345,4042.9,3680.2
+,,-77.0417,-126.0558,4025.8,2258.0
+Cameroon,Southwest,4.2167,9.1725,4024.0,3885.0
+,,-71.7858,168.7575,4019.7,2470.7
+,,-78.0617,162.6808,4010.9,2311.0
+Canada,British Columbia,51.3736,-125.2633,3989.2,3320.5
+United States,Nevada,38.9858,-114.3139,3981.6,2305.5
+Canada,British Columbia,53.1106,-119.1567,3956.0,3241.9
+Mongolia,Bayankhongor,44.995,100.2308,3950.8,1969.0
+Taiwan,Taiwan Province,23.47,120.9575,3917.0,3917.0
+Turkey,,38.5317,35.4467,3875.8,2377.1
+United States,Arizona,35.3464,-111.678,3850.5,1839.5
+Costa Rica,,9.4758,-83.51,3794.8,3742.9
+,,-77.2167,39.1917,3787.7,93.0
+Indonesia,Jambi,-1.6967,101.2642,3773.7,3773.7
+China,Shaanxi,33.955,107.7633,3747.8,2229.9
+Japan,,35.3608,138.7275,3741.7,3741.7
+Mexico,Coahuila,25.3619,-100.5569,3712.8,1863.2
+New Zealand,Canterbury,-43.595,170.1417,3711.9,3711.9
+,,-73.9675,162.6308,3708.8,1406.0
+Spain,,28.2725,-16.6425,3694.8,3694.8
+Indonesia,West Nusa Tenggara,-8.4117,116.4592,3680.8,3680.8
+Greenland,,68.9183,-29.8992,3673.8,3673.8
+Yemen,Sana'a Governorate,15.28,43.9783,3651.8,3296.1
+United States,New Mexico,33.3743,-105.8088,3649.4,1691.0
+Pakistan,Balochistan,30.2625,67.3017,3551.8,1567.0
+China,Inner Mongolia,38.8333,105.9508,3525.9,2084.2
+Lesotho,Mokhotlong District,-29.4683,29.2692,3472.9,2380.2
+Spain,Andalusia,37.0533,-3.3117,3459.8,3266.8
+Russia,Buryatia,51.7192,100.5975,3450.9,1538.0
+Indonesia,Aceh,3.7975,97.2192,3447.9,2922.1
+Chad,Tibesti,19.7933,18.5517,3440.0,2927.0
+Indonesia,South Sulawesi,-3.385,120.0242,3427.8,3427.8
+Spain,Aragon,42.6308,0.6558,3399.7,2810.0
+Greenland,,66.935,-36.7875,3381.8,1595.9
+Mexico,Durango,23.2067,-104.9442,3327.8,1349.0
+Italy,Sicily,37.7542,14.9958,3312.9,3312.9
+Iran,Razavi Khorasan,36.2808,59.0492,3304.9,1861.1
+Mexico,Chihuahua,25.9561,-107.0475,3292.8,852.8
+Greenland,,72.5783,-37.5858,3235.8,580.0
+South Sudan,Eastern Equatoria,3.9458,32.91,3171.7,2104.0
+,,-71.8758,6.6617,3143.7,808.9
+,,-88.1517,-171.0383,3142.8,92.0
+Vietnam,Lai Châu Province,22.3033,103.775,3105.9,1570.9
+Dominican Republic,Santiago,19.0317,-71.0058,3092.8,3092.8
+China,Hubei,31.44,110.3075,3089.8,2258.0
+Lebanon,North Governorate,34.3008,36.1158,3084.0,2389.0
+,,-69.7758,-69.7875,3077.0,3044.0
+Myanmar,Chin,21.2333,93.9033,3068.7,2147.0
+Mexico,Chihuahua,28.2542,-107.5953,3062.6,802.8
+Russia,Zabaykalsky Krai,56.8642,117.5775,3059.9,2218.0
+China,Shanxi,39.0808,113.5667,3059.0,1782.2
+France,Réunion,-21.0992,55.48,3055.9,3055.9
+Turkey,,36.605,30.1208,3052.0,1948.0
+Indonesia,Moluccas,-3.1733,129.455,3023.9,3023.9
+Canada,British Columbia,57.3464,-124.0928,3017.8,2293.0
+,,-73.4592,-126.4758,3017.8,2945.9
+,,-72.0925,12.4175,3002.9,242.9
+Russia,Sakha Republic,65.1767,146.01,3002.0,2441.1
+Sudan,Central Darfur,12.9342,24.2292,2996.8,2463.1
+Saudi Arabia,'Asir Province,18.2658,42.3683,2989.8,1193.0
+Oman,Al Batinah South Governorate,23.2133,57.2775,2977.9,2855.1
+Malawi,Mulanje,-15.9492,35.5925,2972.7,2290.9
+Tanzania,Njombe Region,-9.0775,34.0225,2961.7,1667.9
+Greenland,,73.0908,-28.6175,2942.8,1202.1
+Indonesia,West Papua,-1.1558,133.98,2939.8,2760.9
+Russia,Sakha Republic,62.6067,140.9592,2938.0,1901.0
+East Timor,Ainaro,-8.9067,125.4933,2935.8,2935.8
+Philippines,North Cotabato,6.9875,125.2708,2932.8,2932.8
+South Georgia and the South Sandwich Islands,South Georgia,-54.45,-36.5242,2931.9,2931.9
+Canada,Yukon,63.4311,-130.3236,2918.2,2122.3
+Bulgaria,,42.1792,23.585,2914.8,2463.1
+,,-72.1425,23.2625,2913.9,653.2
+,,-71.5667,159.8133,2906.9,684.0
+Philippines,Nueva Vizcaya,16.5975,120.8992,2902.9,2902.9
+Italy,Abruzzo,42.4692,13.5658,2889.8,2450.9
+Greenland,,63.1392,-44.8367,2875.8,395.0
+Madagascar,Diana Region,-14.0225,48.9675,2874.9,2874.9
+Algeria,Tamanrasset,23.2892,5.5333,2863.9,2284.2
+Brazil,Minas Gerais,-20.4342,-41.7967,2853.8,2603.0
+Greenland,,75.0075,-35.8925,2840.7,34.7
+United States,Alaska,54.755,-163.9708,2835.9,2835.9
+Greenland,,61.8317,-44.6633,2820.9,305.1
+,,-72.42,1.1225,2815.7,466.0
+Mongolia,Töv,48.4658,107.4125,2787.7,1425.9
+,,-85.0458,-90.8617,2785.0,581.3
+Brazil,Minas Gerais,-22.4283,-44.8433,2785.0,2053.1
+Cape Verde,,14.95,-24.3425,2781.0,2781.0
+Greenland,,71.3608,-32.1617,2749.9,59.1
+,,-64.6175,-63.465,2749.9,2749.9
+United States,Alaska,69.2775,-144.9108,2749.0,2467.1
+Sudan,Red Sea State,17.5625,38.0058,2735.9,1392.9
+North Korea,Ryanggang,41.9933,128.0775,2735.0,2583.2
+Australia,,-53.1042,73.5175,2730.7,2730.7
+Venezuela,Vargas State,10.5433,-66.7825,2728.9,2418.9
+Papua New Guinea,Autonomous Region of Bougainville,-5.905,154.995,2703.9,2703.9
+,,-74.84,-11.2017,2692.0,421.2
+India,Kerala,10.17,77.0608,2673.7,2457.0
+Saudi Arabia,Makkah Region,20.7792,40.7983,2646.9,990.0
+Spain,Castile and León,43.1733,-4.8575,2639.9,1922.1
+Slovakia,Region of Prešov,49.1642,20.1342,2635.9,2338.1
+Madagascar,Vakinankaratra,-19.3492,47.2433,2622.8,1638.0
+Madagascar,Haute Matsiatra,-22.195,46.885,2622.8,1838.9
+Egypt,South Sinai,28.5125,33.9542,2614.0,2406.1
+Myanmar,Kayin State,18.81,97.0375,2612.7,1716.0
+Angola,Huambo Province,-12.4625,15.1742,2608.8,1499.0
+Vietnam,Kon Tum Province,15.0692,107.975,2582.9,2193.0
+Zimbabwe,Manicaland Province,-18.3,32.8417,2580.7,1503.0
+Turkey,,41.1,33.8633,2572.8,1530.1
+Chile,Region of Magallanes and Chilean Antarctica,-54.6583,-69.5975,2561.8,2561.8
+Greenland,,75.0142,-29.3075,2559.7,32.0
+Canada,Nunavut,81.9064,-75.1206,2558.2,2558.2
+China,Guizhou,27.8817,108.6817,2557.9,1748.9
+Namibia,Erongo Region,-21.1492,14.5775,2553.9,1750.2
+Spain,Castile and León,40.2458,-5.2975,2532.0,1630.1
+United States,Alaska,67.4125,-154.965,2518.9,1852.9
+Sri Lanka,Central Province,7.0008,80.7733,2518.0,2518.0
+Romania,,45.6,24.7358,2509.7,2012.0
+Greenland,,63.7858,-42.8867,2487.8,44.8
+Democratic Republic of the Congo,Tanganyika,-7.5042,29.9867,2477.7,1464.0
+Norway,,61.6508,8.555,2465.8,2368.9
+Namibia,Khomas,-22.6508,17.1792,2461.9,1318.0
+Somalia,Sanaag,10.735,47.245,2446.9,1471.0
+South Africa,Eastern Cape,-31.7592,24.54,2443.0,948.2
+Greece,Region of Crete,35.2267,24.7708,2441.8,2441.8
+Russia,Kamchatka Krai,61.8883,171.17,2434.7,2315.9
+Greenland,Avannaata,70.5933,-46.0667,2407.9,107.0
+Greenland,,76.4692,-25.6408,2404.9,487.1
+Russia,Sakha Republic,67.5825,128.1408,2402.7,1684.0
+,,-80.6058,-96.8825,2372.9,376.1
+Greenland,Avannaata,70.0125,-45.3017,2363.7,58.8
+Russia,Sakha Republic,55.8975,130.4533,2354.9,1658.1
+Comoros,Grande Comore,-11.7592,43.3675,2354.9,2354.9
+Saudi Arabia,Medina Province,23.9767,39.2825,2347.9,1426.2
+Russia,Khabarovsk Krai,53.6075,134.5767,2336.9,1882.1
+China,Inner Mongolia,40.9758,110.6192,2331.7,908.9
+Papua New Guinea,West New Britain,-5.0508,151.3308,2330.8,2330.8
+South Africa,Mpumalanga,-25.2092,30.15,2327.8,676.0
+Solomon Islands,Guadalcanal,-9.7033,160.0608,2313.7,2313.7
+Algeria,Batna,35.3183,6.6367,2311.0,1595.0
+Portugal,,38.4683,-28.3992,2304.0,2304.0
+South Africa,Western Cape,-33.3983,21.3675,2302.8,1521.0
+Indonesia,Central Kalimantan,-0.6592,112.6883,2293.9,2011.1
+Japan,,43.6633,142.8542,2272.9,2272.9
+Norway,,71.08,-8.18,2272.0,2272.0
+Greenland,,64.8508,-42.5042,2260.7,39.9
+Greenland,Avannaata,71.3983,-51.84,2256.7,1976.0
+Greenland,Avannaata,75.3942,-51.7342,2241.8,38.1
+France,French Polynesia,-17.6208,-149.4775,2235.7,2235.7
+Greenland,Avannaata,74.7467,-51.0625,2233.9,38.1
+,,-66.7817,54.1567,2228.7,931.8
+Algeria,Naâma,32.9117,-0.4675,2224.7,962.9
+Australia,New South Wales,-36.4558,148.2633,2219.9,2219.9
+United States,South Dakota,43.8661,-103.5312,2208.6,891.5
+Greenland,,76.7658,-30.7467,2197.0,31.1
+Greenland,,66.0383,-52.255,2191.8,1489.9
+Namibia,Karas,-27.1808,18.7292,2183.0,1203.0
+Sudan,Red Sea State,20.7458,36.8392,2176.0,1753.2
+Malaysia,Kelantan,4.6325,102.2342,2173.8,2119.9
+Russia,Sakha Republic,64.1592,133.6225,2158.0,1296.0
+Yemen,Hadramaut Governorate,14.4925,48.6592,2156.8,887.0
+China,Fujian,27.8608,117.7842,2154.9,1950.1
+Canada,Nunavut,66.8203,-65.3361,2135.1,2135.1
+South Africa,Limpopo,-24.4708,27.5925,2134.8,1061.0
+Namibia,Otjozondjupa,-19.615,17.62,2128.7,636.7
+China,Jiangxi,26.3133,114.0367,2108.0,1889.2
+Greenland,Avannaata,76.0108,-53.8592,2108.0,48.2
+Somalia,Bari,11.3267,49.7483,2105.9,1581.9
+,,-67.6867,98.36,2103.7,196.9
+Sweden,,67.9008,18.5183,2103.7,1745.9
+Greenland,Avannaata,76.5333,-54.645,2099.8,42.1
+Iceland,,64.0158,-16.675,2099.8,2099.8
+,,-74.1367,-66.5158,2089.7,545.9
+Mexico,Baja California Sur,23.5394,-109.9544,2076.9,1897.1
+Russia,Khabarovsk Krai,48.8967,138.0542,2073.9,1973.0
+Namibia,Kunene Region,-17.2008,13.0208,2069.0,812.0
+Greenland,,64.2133,-48.0992,2062.0,110.0
+United States,Alaska,53.125,-168.695,2056.8,2056.8
+Namibia,Karas,-25.2708,15.755,2044.0,986.0
+,,-84.8658,-65.26,2037.9,589.2
+United States,North Carolina,35.7649,-82.2651,2037.3,1860.5
+Myanmar,Tanintharyi Region,13.4667,98.805,2023.9,1808.1
+"Saint Helena, Ascension and Tristan da Cunha",,-37.1117,-12.2892,2023.0,2023.0
+Brazil,Bahia,-13.2967,-41.9075,2020.8,1382.9
+Sudan,North Darfur State,15.3083,26.5492,2009.9,1103.1
+Somalia,Sahil,9.97,45.0208,2001.9,831.2
+São Tomé and Príncipe,,0.2692,6.5408,1999.8,1999.8
+Niger,,17.8383,8.72,1989.7,1290.8
+,,-73.35,68.5008,1984.9,741.0
+Indonesia,North Sulawesi,1.4533,125.0308,1969.9,1827.0
+Egypt,Red Sea,24.2042,35.0058,1960.8,1464.0
+Japan,,33.8542,134.095,1941.0,1941.0
+Canada,Nunavut,73.23,-78.6231,1940.4,1940.4
+Mexico,Baja California Sur,27.4703,-112.5922,1937.9,1618.2
+Sierra Leone,Koinadugu District,9.2275,-11.115,1928.8,1646.8
+South Korea,,33.3617,126.5292,1918.7,1918.7
+United States,New Hampshire,44.2705,-71.3034,1916.6,1877.0
+Japan,,30.3358,130.5042,1912.9,1912.9
+South Africa,Gauteng,-26.5117,28.2292,1911.7,318.8
+Democratic Republic of the Congo,Haut-Katanga,-8.8617,27.0683,1909.9,771.1
+Russia,Zabaykalsky Krai,53.7275,117.5583,1905.9,848.0
+Libya,Kufra,21.9158,25.0017,1892.8,1263.1
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,65.035,60.1142,1887.9,1764.2
+Russia,Chukotka Autonomous Okrug,67.8175,178.2942,1887.9,1496.0
+Turkmenistan,Balkan Region,39.6733,54.5433,1874.8,1742.8
+Zambia,Central Province,-13.345,29.6117,1874.8,602.0
+Zambia,Muchinga Province,-11.5233,31.5917,1870.9,434.9
+South Africa,Northern Cape,-27.8875,23.5608,1861.7,545.0
+Canada,Nunavut,70.7989,-71.6486,1858.4,1581.6
+Greenland,,65.6317,-48.1992,1854.7,79.9
+Samoa,Gagaʻifomauga,-13.6183,-172.4867,1853.8,1853.8
+Indonesia,South Kalimantan,-2.7108,115.6258,1852.9,1752.9
+Portugal,,32.7592,-16.9425,1850.7,1850.7
+Greenland,,82.8867,-32.8992,1849.8,1494.1
+Russia,Primorsky Krai,43.6958,134.1992,1849.8,1425.9
+Vanuatu,Sanma,-15.3625,166.7542,1837.9,1837.9
+France,French Southern and Antarctic Lands,-49.5942,69.4942,1835.8,1835.8
+Brazil,Paraná,-25.2408,-48.8292,1830.9,1080.2
+,,-80.605,-27.3867,1820.9,415.1
+China,Hainan Province,18.8983,109.7042,1820.9,1820.9
+Brazil,Santa Catarina,-27.9083,-49.32,1817.8,1011.9
+Russia,Chukotka Autonomous Okrug,66.025,163.2367,1816.9,1310.0
+Cambodia,Kampong Speu,12.0325,104.1708,1806.9,1738.0
+Greenland,,63.1883,-49.2092,1800.8,125.9
+Greenland,Avannaata,75.0333,-53.4483,1800.8,32.9
+Greenland,,80.8825,-43.9875,1791.9,38.1
+,,-61.2783,-54.1383,1784.9,1784.9
+United States,Alaska,51.8833,-178.1433,1782.8,1782.8
+Russia,Chukotka Autonomous Okrug,67.5392,168.1383,1780.9,1256.1
+Thailand,Nakhon Si Thammarat Province,8.4942,99.73,1772.7,1706.9
+Mongolia,Sükhbaatar,45.4725,114.5892,1764.8,677.0
+Oman,Dhofar,17.1625,54.8533,1759.9,952.2
+Greenland,Avannaata,70.0642,-48.1408,1752.9,37.2
+Nigeria,Plateau State,9.9342,9.0342,1752.0,1297.2
+Zimbabwe,Mashonaland West Province,-17.1942,30.6892,1748.9,313.9
+Côte d'Ivoire,Montagnes,7.6167,-8.4117,1746.8,1286.0
+China,Inner Mongolia,47.0575,120.5217,1740.7,794.9
+Democratic Republic of the Congo,Haut-Katanga,-11.1133,26.3917,1734.9,458.1
+Greenland,,80.4325,-19.69,1703.8,1613.9
+Norway,,79.01,17.4908,1702.9,1702.9
+Ecuador,Galápagos,0.0425,-91.335,1699.9,1699.9
+India,Rajasthan,24.65,72.7767,1697.7,1371.9
+South Korea,,38.1192,128.465,1692.9,1186.0
+Russia,Krasnoyarsk Krai,69.0975,95.3875,1684.9,1395.1
+Angola,Moxico Province,-13.4792,17.99,1679.8,183.8
+Zambia,Northern Province,-9.79,30.3475,1676.7,228.9
+South Africa,Northern Cape,-30.4358,18.0942,1674.0,778.2
+Brazil,Goiás,-14.0192,-47.51,1670.0,906.2
+Angola,Bié Province,-13.6008,17.0017,1665.7,61.9
+India,Andhra Pradesh,18.2275,82.7225,1663.9,1289.9
+Angola,Cuando Cubango Province,-14.5608,16.9275,1663.0,156.1
+South Africa,North West,-26.6867,26.2792,1645.9,135.0
+,,-68.8292,-90.6308,1639.8,1639.8
+Angola,Moxico Province,-12.0267,23.5667,1638.0,244.1
+Greenland,Avannaata,74.4108,-53.65,1634.9,36.0
+Russia,Republic of Bashkortostan,54.255,58.1042,1632.8,1329.8
+Greenland,Avannaata,75.26,-54.5925,1631.9,32.9
+France,,-20.5883,164.77,1621.8,1621.8
+Zimbabwe,Midlands Province,-20.6333,30.315,1610.0,718.1
+Australia,Queensland,-17.3992,145.8183,1604.8,1310.0
+Australia,Tasmania,-41.8708,146.0333,1601.7,1601.7
+,,-73.575,-94.0592,1601.7,445.9
+Chad,Guéra,11.9033,18.1908,1600.8,1137.8
+India,Maharashtra,19.6008,73.7092,1599.9,1033.0
+Russia,Sakhalin Oblast,50.8517,143.1417,1599.0,1599.0
+United States,Hawaii,22.0586,-159.4975,1598.7,1598.7
+Australia,New South Wales,-32.0025,151.4475,1596.8,1110.1
+Czechia,,50.7358,15.74,1593.8,1178.1
+Canada,Newfoundland and Labrador,58.9444,-63.7906,1590.8,1348.1
+Greenland,,79.9483,-53.88,1585.9,35.1
+United States,Alaska,60.0658,-159.3633,1575.8,1332.9
+Greenland,Avannaata,76.7275,-63.0958,1574.0,41.1
+Russia,Sverdlovsk Oblast,59.6317,59.1342,1558.7,1158.8
+Kazakhstan,Karaganda Region,48.4242,75.4708,1549.0,843.1
+Namibia,Omaheke,-22.555,19.1592,1543.8,40.8
+Zambia,Central Province,-14.7242,26.85,1542.0,394.1
+Zambia,Southern Province,-16.2825,28.1233,1540.8,468.8
+Ukraine,,44.6125,34.2425,1535.9,1530.1
+Zambia,North-Western Province,-11.3258,24.1625,1530.7,128.9
+Guinea,Labé Region,12.1125,-12.2633,1530.7,1040.9
+Saudi Arabia,Ḥa'il Province,27.51,41.5483,1530.7,463.0
+Angola,Cuanza Norte Province,-8.7558,15.4975,1529.8,407.8
+Zambia,North-Western Province,-12.5092,24.3167,1525.8,132.9
+Zambia,North-Western Province,-13.0667,26.1758,1524.9,215.2
+,,-67.3083,164.6317,1524.0,1524.0
+Russia,Arkhangelsk Oblast,75.1758,57.8167,1521.9,1521.9
+Democratic Republic of the Congo,Haut-Katanga,-12.2158,27.8108,1519.7,214.9
+China,Shandong,36.2558,117.105,1517.0,1476.1
+China,Heilongjiang,51.2975,123.1283,1514.9,657.1
+Russia,Sakhalin Oblast,46.815,151.7867,1503.9,1503.9
+Australia,,-23.4008,132.3958,1503.9,1295.1
+Yemen,Socotra Governorate,12.575,54.0225,1503.0,1503.0
+Saudi Arabia,Riyadh Region,22.8025,44.9167,1503.0,542.2
+Greenland,,78.6683,-28.8025,1493.8,31.1
+United States,West Virginia,38.7004,-79.5325,1482.5,855.9
+South Africa,North West,-27.0683,24.1733,1481.9,36.0
+Angola,Malanje Province,-10.345,17.94,1480.7,255.7
+Russia,Chukotka Autonomous Okrug,62.9142,176.5158,1467.9,1246.0
+Cameroon,Far-North,10.8875,13.7808,1461.8,1083.0
+France,Guadeloupe,16.045,-61.6642,1453.9,1453.9
+Sudan,South Kordofan State,11.9833,31.0708,1449.9,863.2
+China,Inner Mongolia,44.4158,112.5058,1446.0,228.0
+Angola,Cuando Cubango Province,-14.9308,18.3583,1444.8,50.0
+United States,Colorado,40.2491,-103.3086,1443.2,41.5
+Australia,South Australia,-26.3183,131.7433,1432.0,942.1
+Mongolia,Dornogovi,44.4042,108.14,1426.8,246.9
+China,Heilongjiang,46.6325,128.465,1426.8,1048.8
+Mongolia,Dornogovi,43.0925,109.9125,1426.8,321.9
+South Africa,Free State,-28.2575,25.2575,1426.8,122.8
+United States,Alaska,64.9925,-165.3292,1424.9,1319.2
+South Africa,North West,-26.4392,25.4192,1421.9,53.9
+South Africa,North West,-27.1225,25.2575,1421.0,49.1
+Yemen,Al Mahrah Governorate,16.7108,52.5108,1412.7,486.8
+Mozambique,Niassa Province,-12.0775,37.63,1412.7,951.0
+United States,Colorado,38.8234,-102.543,1400.3,49.1
+Zambia,Southern Province,-16.8283,26.8175,1393.9,266.1
+Saudi Arabia,Al-Qassim Province,24.7275,42.6742,1389.9,388.9
+Australia,New South Wales,-33.3433,148.9833,1389.9,669.0
+South Africa,North West,-26.4608,24.7283,1382.9,50.9
+,,-74.5358,-86.89,1371.9,106.1
+Botswana,North-West District,-18.7717,21.7533,1369.8,336.8
+Greenland,,79.5242,-28.5875,1366.7,57.9
+Central African Republic,Vakaga,9.135,23.145,1366.7,692.8
+Namibia,Omaheke,-23.3908,18.99,1359.7,40.8
+India,Jharkhand,23.9633,86.1292,1358.8,1009.8
+Chad,East Ennedi,17.1458,22.4967,1353.9,487.1
+Chile,Valparaiso Region,-33.7842,-80.8033,1350.0,1350.0
+,,-75.8758,-70.0075,1346.9,212.1
+Madagascar,Atsimo-Andrefana,-22.6325,44.1675,1342.9,774.2
+Angola,Cunene Province,-15.7075,16.575,1341.7,41.8
+United Kingdom,Scotland,56.7967,-5.0042,1335.9,1335.9
+,,-76.8633,-143.495,1323.7,123.7
+Botswana,North-East District,-20.4783,27.3783,1323.7,41.8
+United States,Puerto Rico,18.1725,-66.5917,1319.8,1319.8
+,,-66.6525,112.8433,1319.8,624.8
+India,Madhya Pradesh,22.45,78.3733,1316.7,937.9
+,,-70.7225,67.2508,1316.7,115.8
+United States,Nebraska,42.2666,-102.2335,1311.6,126.2
+Chad,Wadi Fira,14.3442,21.6583,1310.9,440.1
+Angola,Cunene Province,-16.1717,15.8425,1309.7,93.9
+Angola,Moxico Province,-13.9483,20.9242,1307.9,32.9
+Greenland,Avannaata,78.1067,-70.9758,1304.8,152.1
+Fiji,Western,-17.615,178.0183,1302.7,1302.7
+Bolivia,Santa Cruz,-18.1208,-60.0167,1301.8,955.9
+Angola,Moxico Province,-12.7983,20.635,1294.8,40.8
+,,-60.5808,-45.4783,1294.8,1294.8
+Brazil,Bahia,-10.3283,-41.4242,1286.0,590.1
+South Africa,North West,-27.7008,24.8192,1286.0,33.2
+Mexico,Baja California,29.0958,-118.3117,1282.0,1282.0
+Botswana,Kgalagadi District,-23.4558,20.3858,1278.9,34.1
+Canada,Quebec,48.9875,-65.9486,1275.0,1095.1
+Mongolia,Dornogovi,44.0967,110.9875,1268.9,183.2
+Australia,Queensland,-21.015,148.6017,1264.9,1001.0
+Angola,Lunda Norte Province,-8.82,18.98,1263.7,118.0
+Botswana,North-West District,-19.7875,21.0117,1263.7,105.8
+China,Xinjiang,38.475,84.7883,1257.0,58.2
+Brazil,Goiás,-16.7525,-47.6075,1253.9,318.2
+Zambia,North-Western Province,-14.4475,25.53,1250.0,90.2
+Mongolia,Dornod,46.9733,115.15,1250.0,399.3
+Australia,Queensland,-24.9517,148.1192,1248.8,904.0
+France,French Polynesia,-9.8108,-139.0692,1247.9,1247.9
+South Africa,North West,-25.85,23.5892,1246.9,105.2
+Zambia,Northern Province,-10.7492,30.4617,1245.7,32.0
+Namibia,Otjozondjupa,-19.52,19.7292,1245.7,32.0
+Botswana,Kgalagadi District,-23.4892,21.2233,1244.8,39.0
+Zambia,Western Province,-14.3717,24.8975,1243.9,55.2
+Australia,Western Australia,-22.9808,118.5875,1238.7,826.0
+South Georgia and the South Sandwich Islands,South Sandwich Islands,-56.7117,-27.2067,1234.7,1234.7
+India,Chhattisgarh,23.4892,83.6117,1233.8,741.0
+Zambia,Southern Province,-15.6908,25.5075,1232.9,42.1
+United States,Colorado,38.2681,-102.7191,1232.9,32.9
+Botswana,North-West District,-20.9308,22.5008,1231.7,157.0
+Angola,Cuando Cubango Province,-16.7458,18.9617,1231.7,36.9
+Namibia,Hardap,-24.0108,19.6933,1230.8,32.9
+Suriname,,3.6825,-56.5358,1225.9,1141.2
+Botswana,Kgalagadi District,-23.9483,20.3725,1225.0,31.1
+Australia,Queensland,-19.4883,146.9675,1225.0,1175.0
+South Africa,,-46.9033,37.7092,1225.0,1225.0
+Argentina,Buenos Aires,-38.1583,-61.9517,1223.8,1061.0
+South Africa,Northern Cape,-29.025,19.2067,1204.9,273.1
+Russia,Murmansk Oblast,67.7258,33.4733,1200.9,1051.0
+Brazil,Pernambuco,-8.16,-36.3925,1198.8,730.9
+Sudan,Northern State,20.5258,31.5283,1198.8,843.1
+Angola,Cuando Cubango Province,-17.4225,18.9817,1195.7,32.9
+Zambia,North-Western Province,-13.7558,24.4092,1195.7,41.8
+Australia,,-23.1017,134.9033,1193.9,476.1
+Russia,Chukotka Autonomous Okrug,64.855,-173.4367,1188.7,1055.8
+Canada,Newfoundland and Labrador,53.6464,-58.5544,1188.1,839.7
+Angola,Lunda Sul Province,-10.9817,20.2975,1183.8,40.8
+India,Odisha,21.6483,86.3592,1180.8,838.8
+Namibia,Omaheke,-21.1133,20.7025,1180.8,35.1
+Brazil,Bahia,-14.63,-40.1908,1180.8,364.8
+India,Madhya Pradesh,22.9917,81.655,1172.9,652.0
+Zambia,Western Province,-15.9067,24.445,1172.9,32.0
+Angola,Cuando Cubango Province,-15.98,21.0017,1172.0,34.1
+Zambia,Southern Province,-16.4358,25.1467,1170.7,43.0
+Russia,Sakha Republic,66.4233,153.6983,1170.7,748.0
+Angola,Cuando Cubango Province,-16.3333,20.5725,1164.9,32.0
+Angola,Lunda Sul Province,-10.9967,20.9817,1161.9,42.1
+Australia,Victoria,-37.2933,142.6017,1161.0,885.1
+Botswana,Kgalagadi District,-23.9942,22.6417,1155.8,36.9
+Botswana,Kgalagadi District,-24.055,21.9283,1147.9,31.1
+Australia,South Australia,-31.5333,138.5175,1145.7,1001.9
+China,Inner Mongolia,43.1592,112.7167,1144.8,49.1
+Germany,Saxony-Anhalt,51.8,10.615,1144.8,859.8
+Democratic Republic of the Congo,Haut-Lomami,-8.685,24.7483,1143.9,128.0
+Canada,Quebec,52.3219,-70.4461,1143.0,692.2
+Angola,Cuando Cubango Province,-17.4467,20.0542,1141.8,35.1
+Russia,Krasnoyarsk Krai,75.895,107.7042,1140.9,1111.0
+Mali,Mopti,15.26,-1.6658,1140.9,844.9
+Democratic Republic of the Congo,Haut-Lomami,-8.6742,23.6675,1138.7,128.0
+Guyana,Upper Takutu-Upper Essequibo,1.5283,-59.2392,1137.8,880.9
+Namibia,Hardap,-25.1883,19.045,1136.9,32.9
+Angola,Moxico Province,-11.0075,21.84,1136.0,37.2
+Namibia,Oshana,-17.8883,15.9633,1133.9,35.1
+Brazil,Ceará,-4.7667,-40.1317,1133.9,709.0
+Zambia,Western Province,-15.6375,23.8575,1131.7,48.8
+Namibia,Oshikoto,-18.5133,16.2892,1129.9,39.0
+,,-73.3592,-14.1075,1126.8,417.0
+Sudan,North Kordofan State,15.06,30.415,1126.8,633.1
+,,-78.2,-33.5417,1125.9,96.0
+Zambia,Western Province,-15.3525,23.2842,1125.9,49.1
+Kazakhstan,Karaganda Region,47.1608,72.675,1124.7,399.0
+Russia,Krasnoyarsk Krai,59.825,92.8542,1123.8,801.0
+Yemen,Hadramaut Governorate,16.4,48.7342,1119.8,36.9
+Kazakhstan,Ulytau Region,48.6442,66.9458,1116.8,656.8
+Democratic Republic of the Congo,Lualaba,-9.0417,22.7483,1115.0,31.1
+Cuba,Cienfuegos,21.99,-80.1475,1115.0,1082.0
+Democratic Republic of the Congo,Lualaba,-9.3992,22.1342,1115.0,97.2
+Zambia,Western Province,-16.525,24.1358,1112.8,32.9
+Saudi Arabia,Northern Borders Province,31.225,38.5317,1112.8,371.9
+Democratic Republic of the Congo,Upper Uele,2.105,27.5175,1111.0,347.2
+Brazil,Rondônia,-10.8317,-63.5775,1106.7,837.0
+Libya,Wadi al Shatii,28.2208,13.9492,1104.9,576.1
+Botswana,Chobe District,-18.425,24.2308,1101.9,136.9
+Democratic Republic of the Congo,Haut-Lomami,-7.9683,25.0183,1100.9,33.2
+Yemen,Hadramaut Governorate,17.1358,51.0583,1099.7,169.8
+Canada,Quebec,51.6575,-67.7539,1099.4,571.5
+United States,Montana,47.0532,-105.7296,1098.5,182.3
+Namibia,Hardap,-25.0867,19.6242,1097.9,32.0
+,,-77.6308,-153.6808,1097.9,335.9
+,,-79.2075,-28.7542,1097.0,315.2
+Russia,Chukotka Autonomous Okrug,71.0958,-179.3558,1094.8,1094.8
+Zambia,Western Province,-15.3608,22.5283,1093.9,39.9
+Indonesia,Riau Islands,-0.1958,104.55,1091.8,1091.8
+Canada,Alberta,51.5278,-112.3589,1090.0,295.0
+China,Shandong,36.175,120.6258,1086.9,1075.9
+Australia,Western Australia,-34.375,118.2558,1083.0,839.1
+Libya,District of Al-Jufra,27.3233,17.2133,1076.9,554.1
+Botswana,Central District,-21.5125,25.6817,1074.7,54.9
+Australia,Queensland,-19.6042,144.055,1072.9,532.2
+Zambia,Western Province,-16.1033,23.0492,1069.8,38.1
+Vanuatu,Tafea,-19.5767,169.3875,1068.9,1068.9
+Democratic Republic of the Congo,Lualaba,-10.4092,22.3658,1067.7,32.9
+Angola,Lunda Sul Province,-9.1675,21.06,1067.7,30.8
+Gabon,Ogooué-Ivindo,0.9558,13.6858,1066.8,541.0
+Democratic Republic of the Congo,Lualaba,-9.5667,22.9825,1065.9,35.1
+Australia,Western Australia,-24.3258,116.8425,1065.9,662.0
+Somalia,Sool,8.99,47.78,1065.0,304.2
+Botswana,Central District,-20.6583,26.5608,1061.9,66.1
+Botswana,Kgalagadi District,-25.7392,22.6125,1060.7,45.7
+United Kingdom,Wales,53.1608,-3.9708,1058.9,1008.9
+India,Gujarat,21.5283,70.5275,1052.8,1037.8
+France,French Southern and Antarctic Lands,-46.4175,52.2475,1052.8,1052.8
+Brazil,Mato Grosso do Sul,-19.2017,-57.5925,1051.9,953.1
+Zambia,Western Province,-17.0392,23.9608,1049.7,33.8
+Brazil,Goiás,-17.2367,-51.7767,1047.9,422.1
+Brazil,Goiás,-17.7842,-48.685,1047.0,305.1
+India,Maharashtra,15.9242,74.1258,1045.8,438.0
+Angola,Lunda Sul Province,-9.0983,20.45,1040.9,32.9
+India,Rajasthan,27.6583,75.3925,1040.9,641.0
+Democratic Republic of the Congo,Kwango,-7.6358,19.2492,1040.9,36.0
+United States,Texas,31.9909,-102.8615,1037.5,34.1
+Gabon,Ngounié Province,-1.6167,11.765,1031.7,563.0
+Botswana,Chobe District,-18.7858,24.8142,1029.9,35.1
+South Africa,Northern Cape,-29.6542,20.2492,1026.9,53.9
+Namibia,Zambezi,-17.7558,23.325,1020.8,35.1
+Zimbabwe,Matabeleland North Province,-17.8567,25.355,1019.9,46.0
+Ireland,,51.9992,-9.7433,1019.9,1019.9
+Mozambique,Cabo Delgado Province,-11.5517,39.3858,1015.0,590.1
+Tonga,Haʻapai,-19.6683,-175.0158,1011.9,1011.9
+China,Inner Mongolia,48.8375,116.1783,1005.8,274.0
+Democratic Republic of the Congo,Kwango,-7.1683,19.2783,1004.9,36.0
+Canada,Alberta,59.1928,-115.5914,1000.0,669.3
+Angola,Lunda Norte Province,-7.5633,19.8117,994.0,39.0
+Togo,Plateaux Region,7.3292,0.7092,990.0,721.2
+Indonesia,Riau Islands,3.9758,108.3358,983.9,983.9
+South Sudan,Western Bahr el Ghazal,7.65,25.4092,981.8,182.9
+United States,Kansas,38.7878,-101.2087,980.8,31.7
+Australia,Western Australia,-17.4358,127.2358,979.9,614.2
+Cameroon,East,3.715,13.745,977.8,288.0
+Russia,Irkutsk Oblast,55.9817,100.9783,973.8,459.9
+Russia,Krasnoyarsk Krai,79.5892,99.15,965.0,965.0
+Libya,Bani Walid,31.9758,13.32,959.8,388.9
+Australia,Queensland,-24.3567,150.9392,958.0,607.2
+Algeria,In Guezzam,20.895,3.7633,955.9,292.9
+Brazil,Tocantins,-11.4433,-47.3883,952.8,467.9
+United States,Texas,33.8805,-101.3309,950.7,37.2
+Democratic Republic of the Congo,Lower Uele,3.6925,26.9458,949.8,281.0
+United States,American Samoa,-14.2325,-169.4583,947.9,947.9
+Russia,Sakha Republic,66.7317,109.3892,944.9,516.0
+United States,Northern Mariana Islands,18.7683,145.675,944.0,944.0
+Brazil,Mato Grosso,-15.8717,-57.2175,940.9,655.0
+Australia,Western Australia,-17.3217,125.5608,938.8,609.0
+Central African Republic,Haute-Kotto,7.0083,24.1467,937.0,228.0
+Sudan,River Nile,18.3367,32.7408,935.7,504.7
+United States,Alaska,52.8933,172.98,934.8,934.8
+United States,Texas,35.9915,-101.1214,934.5,35.4
+United States,Texas,33.4555,-101.5785,929.0,33.2
+Mali,Kidal,20.025,2.4308,926.9,271.0
+Russia,Sakha Republic,66.9442,105.855,926.9,395.9
+Gabon,Nyanga Province,-3.3258,11.1933,924.8,751.0
+Niger,,22.2775,13.3867,924.8,46.0
+Canada,Quebec,46.2492,-74.5597,923.8,534.0
+Canada,Newfoundland and Labrador,53.8711,-66.0569,918.1,416.4
+Kazakhstan,Akmola Region,53.08,70.1883,915.9,561.1
+Democratic Republic of the Congo,Kwango,-6.2367,18.4867,914.7,34.7
+Canada,Alberta,52.1561,-111.1353,913.2,135.3
+Russia,Irkutsk Oblast,58.4225,104.835,912.0,472.1
+Brazil,Mato Grosso,-15.8933,-55.4483,912.0,415.1
+United States,Texas,36.3951,-101.1341,909.2,32.3
+Australia,Western Australia,-24.9933,120.49,908.9,310.0
+Mauritania,Tiris Zemmour,22.6508,-12.5742,908.0,596.2
+Russia,Sakha Republic,69.965,109.6158,908.0,673.3
+Algeria,Beni Abbes,29.9342,-3.0633,905.0,254.2
+Russia,Krasnoyarsk Krai,63.1267,97.79,905.0,517.2
+"Saint Helena, Ascension and Tristan da Cunha",,-40.3017,-9.9633,902.8,902.8
+Brazil,Pará,-6.4025,-50.3325,902.8,627.9
+Chad,East Ennedi,15.95,23.9475,901.9,69.2
+Nigeria,Ondo State,7.1,5.0825,901.0,577.3
+Seychelles,,-4.645,55.4392,897.9,897.9
+Sudan,West Kurdufan,13.935,27.7825,896.7,208.8
+Portugal,,37.315,-8.5958,895.8,733.0
+Canada,Quebec,55.3339,-67.7044,891.8,360.9
+United States,Texas,32.8081,-101.5255,888.2,38.7
+Russia,Krasnoyarsk Krai,63.7225,104.5442,887.9,509.9
+Brazil,Goiás,-18.2683,-50.78,884.8,81.1
+Kazakhstan,Karaganda Region,51.2167,73.2867,883.9,354.2
+Canada,Newfoundland and Labrador,53.9156,-62.0025,883.0,411.2
+Faroe Islands,Eysturoy region,62.2975,-7.0142,880.0,880.0
+Bolivia,Santa Cruz,-16.2442,-62.6233,880.0,564.2
+Angola,Cabinda Province,-4.4142,12.7642,880.0,567.2
+Canada,Saskatchewan,57.6678,-105.2761,879.3,450.5
+Libya,Jabal al Akhdar,32.6392,21.84,878.7,770.8
+Australia,New South Wales,-31.585,159.0733,873.9,873.9
+Brazil,Mato Grosso do Sul,-18.6708,-52.8983,873.9,74.1
+South Sudan,Western Equatoria,6.1683,26.5892,872.9,192.0
+Congo-Brazzaville,Plateaux Department,-2.4192,14.3758,871.7,286.8
+Central African Republic,Bamingui-Bangoran,8.6342,20.0825,871.7,378.9
+Brazil,Ceará,-7.3208,-40.2292,871.7,44.8
+Canada,Northwest Territories,69.2433,-121.5389,869.9,580.9
+Canada,Alberta,57.42,-113.6039,868.1,366.4
+China,Heilongjiang,50.2258,126.5092,866.9,466.0
+Canada,Alberta,54.9158,-111.3406,865.0,310.0
+France,French Southern and Antarctic Lands,-37.8492,77.5492,862.0,862.0
+Algeria,Beni Abbes,29.0775,-3.895,858.9,315.2
+Indonesia,Moluccas,-7.1217,128.6733,856.8,856.8
+Democratic Republic of the Congo,Lower Uele,3.9492,25.7875,855.9,231.0
+Nigeria,Zamfara State,11.6933,6.7792,844.9,198.1
+Brazil,Bahia,-12.815,-44.1542,844.9,44.2
+Brazil,Pará,-1.0358,-53.9017,842.8,500.8
+United States,Arkansas,35.1671,-93.6447,839.1,651.1
+"Saint Helena, Ascension and Tristan da Cunha",,-7.9517,-14.3425,838.8,838.8
+United States,Texas,31.2562,-101.1264,838.8,34.1
+Japan,,24.2342,141.4633,834.8,834.8
+Libya,Murzuq,25.8033,16.6683,833.9,293.2
+Canada,Manitoba,51.47,-100.7206,833.9,392.3
+Canada,Saskatchewan,49.7703,-102.5964,833.0,256.0
+Cameroon,East,3.615,15.2742,832.7,203.9
+France,French Guiana,3.5433,-53.5742,830.0,643.1
+Paraguay,Guairá,-25.9025,-56.1592,830.0,563.3
+Jordan,Mafraq,33.0742,38.4642,825.7,45.7
+Canada,Saskatchewan,53.4233,-102.2908,825.7,342.0
+Central African Republic,Bamingui-Bangoran,8.03,21.2083,824.8,89.0
+Mali,Kidal,18.94,1.0283,824.8,299.9
+Sudan,North Darfur State,17.96,27.225,824.8,240.8
+United States,Oklahoma,36.8922,-100.4498,824.5,60.4
+Brazil,Bahia,-10.45,-45.3942,823.9,209.1
+Canada,Saskatchewan,53.1508,-107.4747,823.0,267.0
+,,-79.8258,-46.3425,821.7,703.8
+Libya,Murzuq,25.0142,15.5608,816.9,274.9
+Central African Republic,Ouaka,6.7008,21.425,815.9,181.1
+Iraq,Al-Anbar Governorate,32.4833,40.1275,813.8,32.0
+Australia,Queensland,-13.7733,143.3217,812.9,671.2
+Canada,Newfoundland and Labrador,48.8331,-58.4847,812.0,812.0
+Central African Republic,Haute-Kotto,7.6267,22.5983,809.9,45.1
+Brazil,Bahia,-11.3692,-45.0033,806.8,114.9
+Algeria,Ghardaia,32.9867,3.3833,806.8,61.9
+Central African Republic,Haut-Mbomou,5.7242,25.5217,803.8,146.0
+South Sudan,Western Equatoria,5.1783,28.2817,802.8,129.8
+Solomon Islands,Temotu,-11.6458,166.8867,800.7,800.7
+Libya,Kufra,20.0325,23.6283,799.8,90.8
+Democratic Republic of the Congo,Lower Uele,4.6742,26.3292,798.0,136.2
+Central African Republic,Ouaka,6.305,20.5767,798.0,219.2
+Canada,Nunavut,67.9917,-119.7828,797.4,203.3
+United States,Texas,32.3285,-100.4919,795.2,67.7
+Mauritania,Adrar,20.5708,-12.8092,794.9,480.1
+Brazil,Bahia,-13.7942,-45.4675,792.8,43.9
+"Saint Helena, Ascension and Tristan da Cunha",Saint Helena,-15.9733,-5.7,788.8,788.8
+United States,Kansas,38.8571,-100.1702,788.2,36.6
+Ghana,Ashanti Region,7.1308,-1.89,787.9,473.0
+Sudan,North Darfur State,16.7642,27.0367,783.9,39.0
+United States,North Dakota,48.9989,-100.4368,783.6,32.3
+Federated States of Micronesia,Pohnpei,6.8633,158.2358,781.8,781.8
+Canada,Saskatchewan,51.6814,-108.5142,780.9,98.1
+United States,Northern Mariana Islands,16.355,145.6567,777.8,777.8
+Central African Republic,Mbomou,5.5983,22.6325,775.7,111.9
+Iraq,Al-Anbar Governorate,33.1133,40.0375,774.8,32.0
+New Zealand,Northland,-35.525,173.5108,773.9,758.0
+Sudan,North Darfur State,19.0575,27.12,773.9,149.0
+Brazil,Bahia,-13.1508,-44.8067,773.0,32.0
+Canada,Alberta,56.3839,-111.2483,772.1,117.0
+Brazil,Bahia,-13.5125,-44.9892,770.8,36.9
+Central African Republic,Mbomou,5.0383,22.1125,766.9,145.1
+Canada,Alberta,55.9581,-116.5422,766.9,97.8
+Brazil,Mato Grosso do Sul,-19.5667,-54.4825,764.7,247.8
+,,-72.1742,-99.2983,764.7,728.8
+Russia,Krasnoyarsk Krai,58.5433,100.1292,763.8,463.0
+Brazil,Pará,-8.4633,-55.6025,763.8,406.0
+Libya,Wadi al Shatii,28.6675,11.6567,762.9,163.1
+Canada,Saskatchewan,54.78,-108.7328,762.9,134.1
+Canada,Northwest Territories,75.3697,-115.0833,762.0,762.0
+Canada,Saskatchewan,54.7489,-104.3394,760.5,262.4
+United States,Texas,31.1963,-100.2297,759.9,41.5
+United States,Texas,30.546,-100.2103,758.0,35.4
+Iraq,Al-Anbar Governorate,32.8642,40.4592,757.7,46.0
+Burkina Faso,,10.7592,-5.4192,756.8,402.0
+Russia,Sakha Republic,69.4733,149.075,756.8,697.1
+Paraguay,Amambay,-22.7808,-56.2025,756.8,382.8
+United States,Oklahoma,34.8397,-98.8035,756.2,289.0
+Canada,Nunavut,66.9117,-116.1464,751.9,391.1
+Niger,Tahoua Region,14.98,6.2142,751.9,291.1
+Canada,Saskatchewan,51.2578,-104.2442,751.0,228.3
+Norway,,-54.4083,3.3492,750.7,750.7
+Democratic Republic of the Congo,Maniema,-2.0733,24.7217,748.0,242.0
+Central African Republic,Ombella-M'Poko,4.635,17.6067,748.0,73.2
+Somalia,Bay,3.8008,43.8217,746.8,286.8
+Canada,Northwest Territories,63.8064,-118.7864,746.8,418.8
+United States,Kansas,37.2787,-99.8963,745.2,31.4
+United States,South Dakota,45.0218,-100.8924,739.1,33.2
+Brazil,Piauí,-9.2242,-43.4558,738.8,257.9
+United States,Texas,29.9231,-99.6863,738.2,43.9
+Algeria,Illizi,28.5017,9.705,736.7,80.8
+Niger,,20.9658,13.6167,734.9,32.0
+Canada,Quebec,48.8047,-73.59,734.0,324.0
+United States,Alabama,33.4856,-85.8087,733.7,447.1
+United States,Texas,29.9293,-100.5166,732.7,42.1
+Russia,Kamchatka Krai,54.9442,166.34,730.9,730.9
+India,Maharashtra,18.5342,76.7808,730.0,108.2
+Afghanistan,Nimruz Province,30.6125,62.3583,730.0,83.2
+India,Andaman and Nicobar Islands,13.1583,93.0058,730.0,730.0
+Australia,Western Australia,-26.8975,117.7158,728.8,249.9
+Brazil,Tocantins,-8.5825,-48.6567,728.8,455.1
+Saudi Arabia,Al-Qassim Province,27.4567,43.5858,726.9,55.2
+Kazakhstan,North Kazakhstan Region,52.5975,68.11,726.9,331.0
+India,Telangana,17.2375,77.9308,725.7,122.8
+Central African Republic,Lobaye,4.1642,16.9417,724.8,96.0
+Libya,Wadi al Shatii,28.6775,10.2825,723.0,35.1
+Canada,Northwest Territories,71.1361,-122.9542,723.0,723.0
+Canada,Saskatchewan,50.3494,-103.4619,722.1,54.3
+Libya,Nalut,31.815,11.1683,714.8,100.0
+Australia,South Australia,-34.9742,138.7092,713.8,331.9
+United States,Oklahoma,36.6982,-99.7151,713.8,58.5
+United States,North Dakota,47.313,-99.8816,707.7,119.8
+,,-78.3075,-46.3033,707.7,165.8
+Brazil,Pará,-9.1017,-54.6042,707.7,183.8
+Sudan,Al Qadarif,14.1533,34.3117,706.8,262.1
+South Sudan,Western Bahr el Ghazal,7.9525,26.9867,705.9,93.0
+Canada,Saskatchewan,51.6078,-106.0333,702.3,149.0
+Algeria,Tinduf,26.685,-4.8592,702.0,312.1
+Democratic Republic of the Congo,Sankuru,-3.58,23.3083,702.0,159.1
+Falkland Islands,,-51.6917,-58.8342,702.0,702.0
+United States,Minnesota,47.8975,-90.5606,702.0,402.3
+United States,North Dakota,47.814,-100.7621,700.4,82.0
+Morocco,,22.5658,-14.2767,698.0,407.2
+Brazil,Mato Grosso,-13.7958,-59.6875,696.8,97.8
+Papua New Guinea,Manus,-2.1433,146.9392,695.9,695.9
+Algeria,El Menia,31.8808,3.0,694.9,133.2
+Cuba,Artemisa,22.7875,-83.3683,693.7,664.8
+Niger,,16.0667,11.385,693.7,271.9
+United States,North Dakota,46.2563,-99.7378,692.8,136.9
+Australia,Western Australia,-30.36,119.6725,691.9,228.0
+Chad,Mandoul,9.1225,17.8258,691.0,308.2
+Canada,Northwest Territories,66.7964,-122.3847,688.8,300.8
+Australia,Western Australia,-19.1908,128.835,687.9,304.2
+Canada,Ontario,47.3169,-80.7494,687.3,389.2
+Sudan,North Darfur State,17.3383,24.445,686.7,30.8
+Canada,Quebec,61.6367,-72.7431,686.1,546.2
+Brazil,Maranhão,-6.5392,-46.2575,685.8,345.9
+Colombia,Vaupés,0.0867,-70.8625,685.8,470.0
+Libya,Kufra,22.0917,22.1725,684.0,172.2
+Australia,Western Australia,-29.4658,117.2992,682.8,333.8
+Australia,Western Australia,-26.5117,119.065,682.8,118.9
+United States,Kansas,38.5599,-99.4221,681.2,31.1
+Indonesia,Bangka-Belitung Islands,-1.8642,105.8492,680.9,680.9
+Libya,Kufra,25.6933,23.5767,680.9,262.1
+Democratic Republic of the Congo,Nord-Ubangi,4.4867,19.5217,677.9,284.1
+Australia,Western Australia,-25.9825,119.8025,675.7,78.0
+India,Telangana,18.2667,78.1875,675.7,108.8
+Algeria,El Bayadh,31.1358,0.34,674.8,68.0
+Canada,Saskatchewan,52.4644,-103.4503,672.1,140.2
+Russia,Krasnoyarsk Krai,74.0275,96.2383,671.8,652.0
+Libya,Kufra,24.2692,22.7517,670.9,160.9
+United States,Texas,30.9902,-99.6515,670.3,31.4
+Ethiopia,Somali Region,7.8,46.7708,668.7,53.0
+,,-81.6533,-148.8392,667.8,278.0
+India,Telangana,19.2275,79.0042,666.0,233.2
+Mauritania,Assaba,18.0767,-11.3892,666.0,280.1
+Bolivia,Beni,-13.6125,-62.0067,664.8,452.9
+Côte d'Ivoire,Vallée du Bandama,8.1242,-4.6642,664.8,366.1
+Algeria,El Bayadh,31.7925,1.0,662.9,39.0
+Australia,Western Australia,-26.3717,120.2,662.9,38.1
+Brazil,Maranhão,-8.27,-46.0992,662.9,171.0
+Australia,Western Australia,-23.4317,120.9533,660.8,79.9
+Saudi Arabia,Ḥa'il Province,28.0083,43.7658,660.8,40.8
+Russia,Sakha Republic,60.1242,126.0392,659.9,125.0
+Australia,Western Australia,-27.1425,119.4983,659.0,87.2
+Saudi Arabia,Eastern Province,26.595,45.9542,656.8,102.1
+Brazil,Pará,0.8583,-53.6692,656.8,338.0
+Canada,Nunavut,65.9353,-109.7414,656.8,288.0
+New Zealand,,-50.8967,166.0217,654.7,654.7
+Sudan,White Nile State,14.3558,31.6542,654.7,236.8
+Canada,Ontario,46.9936,-83.9819,654.1,274.3
+Democratic Republic of the Congo,Sankuru,-3.165,24.3875,653.8,143.0
+,,-82.9133,-140.05,653.8,132.9
+Niger,,13.8208,9.3917,652.9,202.1
+Canada,Nunavut,66.3444,-113.1011,651.1,241.1
+Canada,Northwest Territories,71.8514,-112.605,651.1,651.1
+Canada,Saskatchewan,57.7383,-107.5783,650.7,147.8
+United States,South Dakota,45.4707,-97.1053,650.7,254.8
+Côte d'Ivoire,Sassandra-Marahoué,6.6575,-5.5383,649.8,431.0
+Kazakhstan,Aqtöbe region,48.47,58.4883,649.8,338.9
+Libya,Jabal al Gharbi,31.1967,11.8267,649.8,42.1
+Brazil,Piauí,-8.6208,-44.38,647.7,69.8
+Nigeria,Kano State,12.0225,7.9408,643.7,36.0
+Canada,Ontario,48.2733,-86.0039,642.2,304.2
+Canada,Saskatchewan,52.4461,-105.36,640.1,86.3
+Australia,Western Australia,-27.8342,117.1058,639.8,214.9
+United States,Kansas,39.0571,-99.1484,635.2,33.8
+Canada,Nunavut,70.1117,-84.3603,635.2,583.4
+Brazil,Rondônia,-12.8033,-60.0725,634.9,100.0
+Australia,,-20.6942,134.7083,634.0,222.2
+Mauritania,Tiris Zemmour,21.4525,-11.6125,631.9,107.0
+Australia,Western Australia,-32.8825,121.1625,631.9,345.0
+Saudi Arabia,Riyadh Region,24.5683,47.6025,629.7,36.9
+United States,Kansas,39.5212,-99.2663,629.1,31.1
+Brazil,Paraná,-22.7825,-52.6508,628.8,171.9
+Democratic Republic of the Congo,Kasai,-2.9958,22.1142,628.8,103.9
+Saudi Arabia,Northern Borders Province,28.6042,43.5892,627.9,31.1
+Canada,Nunavut,66.0992,-90.4042,627.0,496.5
+Sudan,North Darfur State,19.2208,24.9383,627.0,34.1
+Australia,Western Australia,-27.1358,121.5483,625.8,103.0
+Algeria,Ouargla,29.1467,4.3825,625.8,246.0
+Niger,,14.6275,8.47,624.8,143.0
+India,Andaman and Nicobar Islands,7.1517,93.8258,623.9,623.9
+Brazil,Mato Grosso,-10.3917,-57.9708,622.7,285.0
+Iraq,Al-Anbar Governorate,32.1183,40.9442,622.7,32.0
+Russia,Arkhangelsk Oblast,80.8008,58.495,620.9,620.9
+Sahrawi Arab Democratic Republic,,26.2342,-10.815,620.0,146.0
+Canada,Quebec,50.6256,-74.9697,620.0,230.1
+Côte d'Ivoire,Lacs,6.9475,-4.0742,618.7,390.8
+South Sudan,Western Bahr el Ghazal,7.11,27.8192,613.9,66.1
+Australia,Western Australia,-27.9167,119.9692,613.9,99.1
+Nigeria,Oyo State,8.7683,3.6008,613.9,232.0
+Algeria,In Salah,27.4825,1.7633,613.0,91.1
+Sudan,North Darfur State,17.8025,25.835,611.7,39.0
+United States,Minnesota,47.2321,-95.5031,611.7,208.8
+South Sudan,Western Bahr el Ghazal,7.3275,27.23,610.8,31.1
+Brazil,São Paulo,-20.7092,-49.6,610.8,90.8
+Colombia,Guaviare,2.1292,-71.1742,609.9,372.2
+Australia,Queensland,-20.8875,139.8842,609.0,372.2
+Canada,Nunavut,64.8314,-83.6039,609.0,609.0
+Nigeria,Jigawa State,12.6758,8.4108,607.8,146.0
+Libya,Murzuq,23.6125,17.4525,606.9,78.0
+Australia,Western Australia,-27.8533,118.9883,606.9,64.0
+Russia,Krasnoyarsk Krai,60.91,101.4683,605.9,226.2
+Democratic Republic of the Congo,Tshopo,0.1542,23.2775,604.7,172.8
+Russia,Irkutsk Oblast,60.9325,105.4367,603.8,214.0
+Sudan,North Darfur State,19.9258,26.0975,603.8,39.9
+Canada,Nunavut,70.695,-93.7414,602.9,583.1
+Russia,Irkutsk Oblast,62.7925,108.5942,602.9,247.2
+Sudan,River Nile,16.9583,32.4883,602.0,168.2
+Libya,Murzuq,24.6625,13.935,600.8,35.1
+Niger,,16.455,9.1825,599.8,39.0
+Democratic Republic of the Congo,Lower Uele,3.13,23.5533,598.9,69.2
+Egypt,New Valley,25.3925,29.6617,597.7,267.9
+,,-71.3875,-9.9092,597.7,203.9
+Australia,Western Australia,-27.7842,122.8175,596.8,51.8
+Federated States of Micronesia,Kosrae,5.3108,162.9917,596.8,596.8
+Australia,Western Australia,-28.7417,119.9458,596.8,132.9
+United States,Michigan,46.7475,-89.7717,596.2,190.2
+Saudi Arabia,Al Jawf Region,30.1225,38.7008,595.9,32.0
+Australia,Western Australia,-27.7492,121.9908,595.0,48.2
+Sudan,North Darfur State,19.1683,25.5383,595.0,32.0
+Brazil,Piauí,-8.2392,-45.2675,595.0,109.1
+United States,Wisconsin,45.4479,-90.1792,595.0,131.7
+Australia,Western Australia,-21.8758,119.8425,595.0,140.2
+Sudan,Northern State,20.1342,27.9225,595.0,85.0
+Libya,Kufra,21.095,21.4083,593.8,44.8
+Libya,Nalut,29.705,10.3625,592.8,67.1
+Libya,Murzuq,23.9125,16.6092,592.8,31.1
+Mauritania,Tiris Zemmour,25.185,-11.455,592.8,224.9
+Australia,Western Australia,-32.9658,116.45,591.9,302.1
+United States,Wisconsin,45.5578,-88.8141,591.0,109.1
+Chad,Ennedi-Ouest,20.4342,21.1075,588.9,48.2
+,,-68.6092,154.0233,588.9,130.1
+Russia,Krasnoyarsk Krai,59.21,102.565,588.9,228.0
+Democratic Republic of the Congo,Nord-Ubangi,3.3608,22.3392,588.0,74.1
+United States,Nebraska,42.5812,-97.5365,587.3,64.6
+Algeria,Timimoun Province,28.5217,1.9525,586.7,44.8
+Sudan,North Darfur State,18.805,25.21,586.7,32.9
+Australia,Western Australia,-24.2867,121.9367,585.8,32.9
+Niger,,16.1708,8.1858,585.8,75.0
+Canada,Ontario,48.98,-87.3103,585.2,265.5
+Democratic Republic of the Congo,Tshopo,0.9733,24.895,584.0,111.3
+Algeria,Timimoun Province,29.7025,1.9225,581.9,143.0
+United States,South Dakota,44.6056,-97.422,581.3,38.1
+Brazil,Espírito Santo,-20.5117,-29.325,580.9,580.9
+France,French Polynesia,-27.595,-144.3733,579.7,579.7
+Russia,Sakha Republic,63.94,112.5833,577.9,146.9
+Ethiopia,Somali Region,6.93,45.8083,577.9,63.1
+Canada,Northwest Territories,70.9289,-116.4342,577.9,334.1
+Niger,,18.1958,11.6342,577.0,137.2
+Canada,Ontario,45.6483,-78.2572,576.1,366.4
+Argentina,La Pampa,-38.0092,-65.605,574.9,306.9
+Canada,Northwest Territories,60.1389,-107.4003,574.9,178.9
+Burkina Faso,,10.2367,-3.0558,574.9,260.9
+Canada,Ontario,49.3356,-90.5533,574.2,114.3
+Niger,,18.245,13.0767,573.9,121.0
+Australia,Western Australia,-28.2858,123.1417,573.9,62.2
+Libya,Nalut,30.1908,11.1775,572.7,32.9
+Australia,Western Australia,-32.03,122.8092,572.7,276.8
+United States,North Dakota,48.1975,-99.5005,572.7,81.7
+Niger,,16.7142,6.8633,572.7,71.0
+United States,South Dakota,44.0531,-97.2497,572.1,51.5
+Niger,,16.0808,7.1658,571.8,60.0
+Burkina Faso,,11.9725,-3.3642,570.9,247.2
+Mauritania,Tiris Zemmour,23.7983,-10.6417,570.9,327.1
+Australia,Western Australia,-33.445,123.4758,570.0,421.2
+India,Madhya Pradesh,24.5933,77.2775,568.8,86.0
+Brazil,Rondônia,-11.135,-61.575,568.8,327.1
+Canada,Quebec,48.4856,-78.7731,568.8,268.8
+Costa Rica,,5.525,-87.08,568.8,568.8
+Australia,Western Australia,-27.0742,122.5958,567.8,43.9
+Australia,New South Wales,-32.48,146.8275,566.9,285.0
+Democratic Republic of the Congo,Tshopo,-0.1942,24.7442,565.7,104.9
+Australia,Western Australia,-27.1792,123.8458,565.7,64.9
+South Sudan,Western Equatoria,6.1667,29.8458,564.8,57.0
+Vietnam,Bà Rịa - Vũng Tàu Province,8.6675,106.5783,564.8,564.8
+Australia,Western Australia,-28.535,122.5275,564.8,54.9
+Australia,Western Australia,-28.5642,121.6067,563.9,73.2
+Sahrawi Arab Democratic Republic,,26.0783,-9.0917,563.9,144.2
+Australia,Western Australia,-28.1392,120.7367,563.0,57.0
+United States,Ohio,38.6764,-83.4407,561.4,330.1
+Brazil,Piauí,-8.0217,-44.3675,560.8,33.8
+Canada,Quebec,55.5022,-72.6436,559.3,157.3
+Australia,Western Australia,-25.0425,125.065,558.7,100.9
+Chad,Tandjilé,9.1283,16.6675,557.8,163.1
+Algeria,El Menia,29.345,2.485,556.9,38.1
+,,-67.4283,46.6483,556.9,234.1
+South Sudan,Warrap,6.6883,28.8575,556.0,32.0
+Sahrawi Arab Democratic Republic,,26.6742,-9.985,554.7,39.0
+Niger,,15.6942,6.885,553.8,46.9
+Mauritania,Tiris Zemmour,25.065,-8.2967,553.8,175.0
+Benin,Borgou Department,10.2408,2.6633,552.0,179.2
+Australia,Western Australia,-30.835,121.0967,552.0,145.1
+Australia,,-13.0417,133.08,552.0,375.2
+Tonga,Ongo Niua,-15.8533,-173.7475,550.8,550.8
+Mali,Ménaka,16.9992,2.7225,549.9,177.1
+Australia,Western Australia,-22.355,121.9108,549.9,143.9
+Saudi Arabia,Riyadh Region,22.355,47.2117,549.9,43.0
+Canada,Ontario,49.185,-89.5358,549.6,70.4
+India,Rajasthan,25.1867,77.0933,548.9,96.0
+United States,Wisconsin,45.6883,-91.3969,548.9,153.0
+Canada,Northwest Territories,60.2172,-103.825,548.6,152.4
+Canada,Alberta,56.6386,-112.3525,547.1,33.2
+Chad,,8.2217,17.0258,546.8,79.9
+Mali,,16.8608,-3.6967,546.8,268.8
+Somalia,Bari,9.035,49.7575,546.8,56.1
+Mali,Kayes,14.0117,-10.21,545.9,274.0
+Brazil,Pará,-4.7458,-53.1767,545.0,336.2
+Australia,Western Australia,-25.5208,124.3908,543.8,75.0
+Indonesia,Riau Islands,3.1658,106.2192,543.8,543.8
+Burkina Faso,,12.7575,-2.3017,543.8,271.0
+Iraq,Al-Anbar Governorate,33.3483,40.9958,543.8,32.0
+Canada,Ontario,44.37,-80.2614,541.9,283.2
+Niger,,17.5492,7.0033,541.9,149.0
+Canada,Nunavut,68.2978,-85.2775,541.9,469.1
+Brazil,Rio Grande do Sul,-28.94,-54.1008,541.9,110.9
+Australia,Western Australia,-25.0992,126.6375,541.9,33.2
+Niger,Diffa Region,17.61,13.1033,540.7,75.9
+New Zealand,,-52.5708,169.1667,540.7,540.7
+United States,Missouri,37.5713,-90.7291,540.1,157.6
+United States,Kansas,39.8568,-97.9938,540.1,47.9
+Australia,Western Australia,-22.8517,127.555,539.8,100.0
+Mali,Kidal,19.315,-0.2625,539.8,118.0
+Sudan,Northern State,17.85,28.9667,538.9,94.2
+South Sudan,Lakes,6.4133,29.3967,538.0,31.1
+Niger,,15.5283,7.6917,538.0,49.1
+Sudan,Northern State,17.2708,30.0042,538.0,39.0
+Australia,Western Australia,-24.8283,125.9017,538.0,96.0
+Canada,Manitoba,49.4994,-98.8675,537.7,122.5
+Brazil,Mato Grosso,-11.2575,-59.83,536.8,162.8
+Australia,Western Australia,-30.3208,118.3675,536.8,90.8
+Ethiopia,Somali Region,5.3542,45.2175,536.8,75.0
+Guinea,Kankan Region,10.7067,-8.5,536.8,110.9
+Niger,,20.905,10.2608,536.8,32.9
+Kazakhstan,Mangystau Region,44.0725,52.5608,535.8,434.0
+Niger,,19.9275,10.26,535.8,35.1
+Russia,Sakha Republic,72.6992,123.2175,535.8,388.0
+United States,Minnesota,47.1226,-93.6762,534.9,135.3
+Canada,Nova Scotia,46.7022,-60.5997,534.9,534.9
+Canada,Ontario,49.3161,-92.6761,534.3,126.2
+,,-73.3008,-75.3433,533.7,484.9
+Australia,Western Australia,-23.0075,122.4517,533.7,134.7
+Australia,Western Australia,-25.7208,126.1808,532.8,47.9
+Canada,Saskatchewan,58.0542,-102.9492,532.8,126.8
+Russia,Sakha Republic,72.1092,140.8633,532.8,524.9
+Canada,Manitoba,59.7669,-101.9494,532.2,115.2
+United States,Missouri,37.1013,-92.6379,531.9,143.6
+United States,North Dakota,48.5895,-98.3567,531.6,63.7
+Australia,Western Australia,-26.1008,125.7983,531.0,54.3
+Saudi Arabia,Riyadh Region,23.8625,47.8017,531.0,31.1
+United States,Texas,33.1258,-99.3749,529.7,75.9
+Algeria,In Guezzam,19.2817,3.6942,529.7,50.9
+Niger,Diffa Region,16.8875,13.3,528.8,84.1
+Australia,,-18.9675,129.955,528.8,99.1
+Chad,Hadjer-Lamis,12.5958,16.5742,527.9,234.1
+Ghana,North East Region,10.6767,-0.0942,527.9,284.1
+Democratic Republic of the Congo,Maniema,-2.3933,25.4233,527.9,31.1
+Egypt,New Valley,24.3325,29.2392,527.0,177.1
+United States,Nebraska,41.2604,-97.0366,526.4,36.0
+Australia,Western Australia,-23.7767,122.4817,525.8,89.9
+United States,Wisconsin,43.0282,-89.8526,524.0,285.0
+Mali,Koulikoro,13.9733,-8.1025,524.0,114.0
+Brazil,Mato Grosso,-10.9358,-55.1892,524.0,154.2
+Canada,Northwest Territories,63.6067,-112.5192,523.0,101.2
+Japan,,24.4267,124.1833,522.7,522.7
+Niger,,13.4633,8.2975,521.8,56.1
+Mali,Kidal,20.8367,0.355,520.9,107.0
+United States,Michigan,44.3662,-85.6794,520.6,319.7
+,,-67.1067,144.3058,520.0,120.1
+Norway,,74.4133,19.1858,520.0,520.0
+Australia,Western Australia,-24.6108,124.2633,520.0,85.0
+South Sudan,Lakes,6.5158,30.875,518.8,82.0
+Argentina,Buenos Aires,-37.6008,-59.3033,518.8,313.0
+United States,Kansas,39.4028,-97.5162,518.2,51.5
+Australia,Western Australia,-20.26,128.72,517.9,111.9
+Brazil,São Paulo,-21.0908,-51.1625,517.9,85.0
+Australia,Queensland,-21.7775,146.1208,517.9,187.1
+Cook Islands,Rarotonga,-21.24,-159.7742,516.9,516.9
+Niger,,20.5042,10.92,514.8,64.0
+Canada,Ontario,50.4931,-90.6728,513.0,108.5
+Canada,Manitoba,50.1319,-100.8781,513.0,32.9
+Brazil,Mato Grosso do Sul,-20.6233,-52.265,513.0,90.2
+Australia,Western Australia,-31.4758,121.0525,513.0,43.3
+Libya,Sabha,27.2492,15.0575,513.0,49.1
+United States,Kansas,37.5924,-96.538,512.4,73.8
+Niger,,15.0267,9.6708,511.8,37.8
+France,Wallis and Futuna,-14.27,-178.1392,511.8,511.8
+Algeria,Illizi,29.8417,8.0925,510.8,224.9
+Brazil,Mato Grosso,-13.9042,-51.3075,510.8,273.1
+Niger,Diffa Region,17.5767,14.0908,509.9,40.2
+Australia,Western Australia,-29.7092,122.8042,508.7,96.0
+Australia,Western Australia,-27.5683,127.1375,507.8,32.0
+Uruguay,Maldonado,-34.3825,-54.6742,507.8,373.1
+United States,Kansas,38.0939,-96.3489,507.5,46.3
+Australia,Western Australia,-31.7225,120.5142,506.9,81.1
+Mali,Ménaka,16.96,1.755,506.0,116.1
+Brazil,Mato Grosso,-13.6783,-57.2392,506.0,52.1
+Canada,Nunavut,69.5556,-112.6694,504.7,408.7
+Nigeria,Niger State,10.41,4.1242,504.7,221.0
+Algeria,Tinduf,26.6975,-7.3517,504.7,100.0
+Brazil,Mato Grosso do Sul,-22.6258,-54.7083,504.7,44.8
+Niger,,20.9575,10.9558,504.7,30.8
+Brazil,Mato Grosso,-9.5258,-59.9808,503.8,321.0
+Russia,Sakha Republic,69.2392,113.6258,503.8,164.0
+United States,Alaska,60.03,-166.26,502.9,502.9
+Sudan,North Kordofan State,15.2833,32.1625,502.9,63.1
+Brazil,Maranhão,-6.4667,-43.7908,501.7,216.7
+Chile,Valparaiso Region,-27.085,-109.38,501.7,501.7
+Australia,,-17.6833,129.585,500.8,92.0
+Australia,,-21.4133,130.1333,500.8,36.9
+New Zealand,,-29.2675,-177.9075,500.8,500.8
+Niger,Tahoua Region,16.0708,6.085,499.9,32.0
+Australia,Western Australia,-32.6783,119.7767,499.0,90.2
+United States,Alaska,60.665,-173.0875,497.7,497.7
+Australia,Western Australia,-29.2458,122.1317,497.7,53.9
+Syria,Homs Governorate,34.2867,39.8417,496.8,32.9
+Canada,Ontario,49.7597,-93.8575,496.2,118.0
+Brazil,Mato Grosso,-13.26,-57.695,495.9,32.0
+United States,Northern Mariana Islands,14.145,145.1875,495.0,495.0
+Canada,Nunavut,60.455,-101.4386,493.2,104.9
+Australia,New South Wales,-30.5942,145.6858,492.9,315.2
+Australia,Western Australia,-31.7925,119.2233,492.9,68.9
+United States,Minnesota,46.8341,-92.715,491.9,107.6
+Australia,,-21.6383,129.3933,491.9,59.1
+Ghana,Savannah Region,9.8433,-1.6733,491.9,222.2
+Australia,Western Australia,-29.11,124.0333,491.9,84.1
+Australia,Western Australia,-26.7292,125.085,490.7,40.8
+Australia,Western Australia,-27.78,124.3125,490.7,41.8
+Canada,Ontario,51.1872,-93.4989,490.1,116.1
+Canada,Northwest Territories,67.0192,-131.1708,488.9,368.2
+Australia,Western Australia,-21.5317,126.9958,488.9,64.0
+Canada,Nunavut,73.2372,-94.6817,488.9,488.9
+United States,Kansas,38.8198,-96.2253,488.6,51.2
+Australia,South Australia,-33.2825,136.1825,488.0,350.2
+Paraguay,Canindeyú,-24.4567,-54.7175,488.0,145.1
+Australia,Western Australia,-27.9842,127.3442,486.8,36.0
+Australia,Western Australia,-30.4817,122.6183,486.8,89.0
+Democratic Republic of the Congo,Sud-Ubangi,2.7933,19.0733,485.9,98.1
+Brazil,Mato Grosso,-11.1817,-56.0825,484.9,109.1
+Brazil,Pará,-4.3433,-51.6308,484.9,262.1
+United States,Iowa,43.3694,-95.079,484.9,52.7
+Libya,Murzuq,24.3108,18.255,483.7,36.9
+Australia,Western Australia,-27.3542,125.0633,481.9,39.0
+Canada,Ontario,51.0069,-92.0606,481.9,82.0
+Niger,,14.4017,7.6633,481.0,38.1
+Russia,Sakha Republic,61.8608,111.9033,481.0,87.2
+Australia,Queensland,-25.5817,145.8783,479.8,89.0
+Egypt,New Valley,25.1083,28.115,478.8,91.1
+Algeria,Tinduf,28.2292,-6.3575,478.8,35.1
+South Sudan,Greater Pibor Administrative Area,6.7242,33.0008,476.7,53.9
+United States,Kansas,39.5062,-96.3879,476.7,84.1
+Australia,Western Australia,-22.33,127.1367,476.7,45.7
+United States,Michigan,45.1713,-84.7518,476.1,127.1
+Democratic Republic of the Congo,Mai-Ndombe,-3.2108,17.8942,475.8,117.0
+Australia,Western Australia,-22.035,128.7,474.9,95.1
+Niger,Diffa Region,16.4525,12.4317,474.9,46.0
+Mauritania,Adrar,21.6808,-10.4842,474.9,50.0
+Australia,Western Australia,-24.0467,124.4675,474.0,68.0
+Canada,Northwest Territories,63.9025,-115.9175,474.0,215.5
+Russia,Sakha Republic,60.5625,132.8475,472.7,169.8
+Canada,Ontario,51.5789,-92.3789,472.7,64.9
+United States,Ohio,40.3703,-83.7201,472.1,195.7
+United States,Iowa,42.8406,-95.3364,472.1,50.3
+Canada,Ontario,51.6089,-90.1636,471.8,96.0
+Australia,Queensland,-24.6825,144.6275,471.8,132.9
+United States,Nebraska,40.2352,-96.4998,471.8,41.5
+Canada,Northwest Territories,61.1983,-104.2758,471.5,99.7
+Russia,Arkhangelsk Oblast,64.6017,50.3467,470.9,360.0
+Australia,Western Australia,-20.94,127.215,470.9,89.9
+Mauritania,Tagant,19.11,-10.67,468.8,33.8
+Canada,Northwest Territories,62.9664,-107.1033,467.3,93.3
+Australia,Western Australia,-23.9983,125.7225,467.0,34.1
+Mali,Kidal,18.6617,3.4,467.0,36.0
+United States,Nebraska,40.5312,-96.8645,464.8,33.2
+United States,Texas,33.217,-98.425,464.5,102.4
+Mali,,17.385,-2.7942,463.9,190.2
+Mali,Kayes,15.2667,-10.4425,463.9,188.1
+South Sudan,Upper Nile,10.9933,32.6708,463.0,71.0
+Canada,Ontario,51.8117,-91.3275,462.1,48.2
+,,-79.1767,-162.6675,461.8,399.9
+Brazil,Mato Grosso,-11.9158,-51.4208,461.8,133.8
+Russia,Perm Krai,57.3917,56.23,461.8,239.0
+Mauritania,Hodh El Gharbi,16.7733,-10.3217,461.8,220.1
+Brazil,Rio Grande do Sul,-29.2125,-54.84,460.9,117.0
+Saudi Arabia,Northern Borders Province,29.8158,43.8192,460.9,53.9
+Australia,Western Australia,-27.9767,126.4442,460.9,70.1
+Canada,Northwest Territories,63.5967,-108.0806,460.6,73.2
+Canada,Northwest Territories,61.8092,-103.9903,460.2,73.5
+United States,Ohio,40.7273,-82.6176,460.2,181.4
+Canada,Quebec,57.3442,-76.4722,460.2,280.4
+Canada,Northwest Territories,62.8567,-103.6092,459.9,155.1
+Canada,Northwest Territories,73.7081,-118.9269,459.9,365.8
+Australia,South Australia,-28.4392,129.7808,459.9,35.1
+Kazakhstan,Ulytau Region,46.9275,69.2092,459.9,109.1
+Canada,Manitoba,56.6125,-101.3394,458.1,92.4
+Australia,Western Australia,-28.3208,124.5842,457.8,40.8
+Uzbekistan,Republic of Karakalpakstan,42.14,60.4217,457.8,366.1
+Australia,Western Australia,-29.4175,124.6783,456.9,74.1
+Democratic Republic of the Congo,Équateur,-1.6008,17.205,456.0,99.1
+Sudan,Northern State,20.5125,28.7742,456.0,37.2
+Australia,,-21.1858,129.7167,456.0,33.2
+Niger,Tahoua Region,18.5433,4.8017,454.8,83.8
+Mauritania,Adrar,20.5733,-8.7533,454.8,58.8
+Canada,Ontario,51.4736,-89.0461,454.2,120.4
+Burkina Faso,,13.7725,-0.1442,453.8,153.9
+Democratic Republic of the Congo,Tshuapa,-1.005,21.2725,453.8,46.9
+Mauritania,Adrar,20.145,-9.07,452.9,53.9
+Australia,,-20.6858,130.995,452.9,44.2
+Canada,Manitoba,58.2714,-99.4475,452.0,122.2
+Somalia,Mudug,5.2242,48.1817,451.7,280.7
+Niger,Tahoua Region,16.1,4.745,451.7,66.8
+Russia,Sakha Republic,60.1342,130.7658,450.8,96.0
+Mauritania,Adrar,21.8217,-9.0892,449.9,85.0
+Chile,Valparaiso Region,-26.3458,-79.8942,449.9,449.9
+Australia,Western Australia,-27.34,124.4575,449.9,32.9
+Algeria,Tinduf,27.0917,-7.9333,447.8,37.8
+Algeria,Bordj Badji Mokhtar,21.6092,1.1233,447.8,46.9
+South Sudan,Jonglei,9.29,31.1408,447.8,46.0
+Australia,Western Australia,-27.9858,125.6208,446.8,45.1
+Australia,,-20.4117,132.2767,445.9,35.1
+,,-66.1417,96.6508,444.7,392.0
+India,Gujarat,23.9358,69.8233,444.7,440.7
+South Sudan,Upper Nile,8.5608,33.0992,444.7,39.9
+Canada,Quebec,56.1044,-76.5492,444.4,364.5
+Chad,Tibesti,18.4267,16.1333,443.8,32.0
+Canada,Northwest Territories,62.7989,-105.7661,442.9,83.8
+Federated States of Micronesia,Chuuk,7.3408,151.6233,442.9,442.9
+Australia,South Australia,-27.9183,132.1033,442.9,32.9
+United States,Iowa,43.2526,-93.5529,442.9,98.5
+United States,Wisconsin,43.8842,-90.5434,442.0,93.3
+Mauritania,Tagant,19.6392,-9.9092,440.7,40.8
+United Kingdom,Scotland,60.535,-1.4442,439.8,439.8
+Australia,New South Wales,-30.8883,142.6175,439.8,289.9
+Canada,Manitoba,57.3606,-101.6406,438.9,66.1
+United States,Minnesota,43.6222,-92.6293,438.9,66.8
+Canada,Manitoba,57.8194,-100.4381,437.1,48.8
+Libya,Kufra,26.1908,20.2725,436.8,172.8
+United States,Kansas,37.7626,-97.3947,436.8,30.8
+Russia,Sakha Republic,62.2592,121.0733,436.8,106.1
+Chad,Borkou,17.2067,20.0158,436.8,68.0
+Australia,Western Australia,-22.37,126.2892,435.9,43.0
+Canada,Ontario,43.5275,-80.7239,435.9,41.1
+Australia,Western Australia,-30.8058,116.6317,433.7,110.0
+Australia,,-18.6208,137.5025,433.7,167.9
+Australia,Western Australia,-23.2583,124.7225,433.7,30.8
+United States,Oklahoma,34.4569,-97.2543,433.1,123.4
+France,Normandy,48.5208,0.0275,432.8,309.1
+Brazil,Amazonas,-9.2667,-65.28,432.8,281.9
+Saudi Arabia,Northern Borders Province,29.9792,43.2417,431.9,32.9
+Australia,,-19.285,133.96,431.9,95.1
+Canada,Nunavut,60.7603,-99.7811,431.6,90.8
+Mali,Ménaka,17.7125,2.3408,431.0,32.0
+Canada,Nunavut,75.8853,-106.3842,430.4,400.5
+Australia,Queensland,-19.3083,139.1333,429.8,107.0
+Australia,Queensland,-27.3083,149.2725,428.9,134.1
+Argentina,San Luis,-35.06,-66.1283,427.9,32.0
+Sudan,Northern State,18.6567,31.0375,427.9,137.2
+Mauritania,Adrar,21.4708,-7.9692,426.7,58.8
+Mali,,24.0817,-5.535,425.8,115.8
+United States,Ohio,41.3997,-81.1039,425.5,99.1
+Russia,Nenets Autonomous Okrug,69.4267,62.2083,424.9,303.0
+Mauritania,Hodh Ech Chargui,16.5767,-7.2358,424.0,122.2
+Mali,Gao,17.5508,1.2825,424.0,31.1
+Niger,,17.2067,5.7367,421.8,36.9
+Brazil,Mato Grosso,-12.4275,-58.2925,421.8,32.9
+Russia,Orenburg Oblast,50.9733,59.9342,421.8,68.0
+Argentina,La Pampa,-36.9917,-65.35,420.9,101.2
+Uruguay,Tacuarembó,-31.3225,-56.1692,419.7,240.8
+Australia,South Australia,-28.4883,136.0225,418.8,306.9
+Burkina Faso,,11.0875,-1.75,418.8,93.9
+Saudi Arabia,Riyadh Region,21.4683,47.5517,417.9,34.1
+Australia,South Australia,-34.4308,135.4925,417.9,358.1
+Egypt,New Valley,24.7442,31.0883,417.0,68.0
+Australia,Western Australia,-20.4867,126.6108,417.0,38.1
+Australia,,-16.45,130.0267,417.0,87.2
+Russia,Republic of Karelia,63.0733,32.6242,417.0,245.1
+Australia,Western Australia,-28.115,115.6233,417.0,132.0
+Canada,Manitoba,56.04,-100.9278,416.1,89.3
+Niger,Diffa Region,15.4433,13.0967,415.7,61.0
+Niger,Tahoua Region,18.5975,4.2875,415.7,32.0
+Russia,Krasnoyarsk Krai,73.1067,82.79,415.7,395.0
+Democratic Republic of the Congo,Tshuapa,-1.1658,20.4442,415.7,36.9
+Russia,Sakha Republic,71.8167,112.8742,414.8,295.0
+United States,Oklahoma,36.9295,-96.4944,414.8,42.4
+Russia,Sakha Republic,76.6525,148.5883,414.8,414.8
+Australia,Western Australia,-32.17,117.8442,414.8,75.0
+Brazil,Mato Grosso,-11.8158,-56.5617,414.8,46.9
+Chad,Kanem,15.3433,14.6058,413.9,67.1
+Kazakhstan,Ulytau Region,46.665,69.9708,412.7,33.8
+Niger,,17.7217,5.4308,412.7,44.8
+Russia,Orenburg Oblast,51.2417,60.6008,411.8,47.9
+Brazil,Mato Grosso,-12.8017,-55.655,411.8,30.8
+Algeria,Bordj Badji Mokhtar,22.0642,0.9883,411.8,36.0
+Libya,District of Al-Jufra,27.9708,18.6625,411.8,139.9
+Australia,Queensland,-26.3583,145.3892,411.8,68.0
+Mali,,24.035,-4.5725,411.8,82.0
+Algeria,Tinduf,27.3125,-7.11,410.9,39.0
+Australia,Western Australia,-22.13,125.7842,410.9,41.1
+Algeria,Bordj Badji Mokhtar,22.8308,0.535,410.9,41.1
+Mauritania,Hodh Ech Chargui,19.3075,-8.1392,410.9,52.1
+Mauritania,Tiris Zemmour,24.3542,-7.1617,410.9,36.0
+Canada,Nunavut,61.6178,-99.8122,410.6,112.8
+Australia,Western Australia,-31.5,117.7192,410.0,75.0
+Mali,Ménaka,16.2808,3.7558,410.0,70.1
+Norway,,80.1883,32.6183,410.0,410.0
+Canada,Quebec,57.1056,-73.5983,410.0,80.2
+Australia,Western Australia,-21.2717,126.1825,410.0,51.2
+United States,Iowa,43.3021,-91.4624,409.0,40.8
+Algeria,Adrar,26.3758,0.7725,408.7,172.8
+Russia,Sakha Republic,65.5233,117.1217,407.8,95.1
+Canada,Ontario,53.3764,-92.7472,407.8,118.0
+Chad,Kanem,14.9383,15.2142,407.8,50.9
+Democratic Republic of the Congo,Équateur,0.165,20.4,407.8,33.8
+Democratic Republic of the Congo,Équateur,0.775,20.0217,407.8,36.0
+Burkina Faso,,12.8783,0.4033,407.8,115.8
+United States,Wisconsin,43.2443,-88.328,407.2,136.2
+Somalia,Mudug,4.5033,47.5467,406.9,67.1
+Niger,,18.8117,6.0025,406.0,37.2
+Brazil,Mato Grosso,-12.3142,-55.0308,406.0,31.1
+Brazil,Amazonas,-0.7225,-59.8892,406.0,280.1
+Sudan,River Nile,17.2108,34.5675,404.8,39.9
+Mali,,18.6617,-1.2933,404.8,42.1
+Brazil,Mato Grosso,-12.675,-54.7133,403.9,41.1
+United States,Texas,33.6757,-97.6213,402.9,85.0
+United States,Minnesota,48.5962,-95.2255,401.7,38.1
+France,French Polynesia,-23.3683,-149.4683,401.7,401.7
+Mali,,23.7942,-3.6408,401.7,96.0
+Somalia,Gedo,3.1333,42.8958,401.7,39.0
+Democratic Republic of the Congo,Équateur,-1.1467,19.9892,401.7,37.8
+Egypt,New Valley,26.6208,25.3533,400.8,125.0
+Niger,Diffa Region,13.5875,11.5158,399.9,60.0
+Niger,,17.8467,6.0358,399.9,37.2
+Brazil,Mato Grosso,-12.1433,-57.3775,399.9,46.0
+Brazil,Mato Grosso,-12.5642,-56.6592,399.9,37.2
+Niger,Tahoua Region,15.2608,4.7067,399.9,53.0
+Canada,Northwest Territories,69.4331,-126.16,399.9,158.8
+United States,Iowa,42.6266,-93.272,399.3,34.4
+Australia,Western Australia,-21.9383,124.8517,399.0,40.2
+Mauritania,Hodh Ech Chargui,19.7108,-7.3708,399.0,56.1
+Libya,Sirte,28.8175,18.0525,399.0,149.0
+Australia,Western Australia,-22.8642,123.7375,399.0,36.3
+Argentina,San Luis,-35.985,-65.6,397.8,57.0
+Australia,Western Australia,-28.7442,126.8217,397.8,32.9
+Canada,Manitoba,49.3211,-96.17,397.5,69.2
+Kazakhstan,Akmola Region,51.1933,68.9475,396.8,41.1
+Mali,Gao,17.5125,0.3825,396.8,74.1
+Ukraine,Khmelnytskyi Oblast,49.21,27.4267,395.9,78.9
+Australia,Western Australia,-30.39,115.6367,395.9,135.0
+Australia,Queensland,-22.75,143.29,395.9,143.0
+Congo-Brazzaville,Cuvette Department,-0.1883,17.0825,394.7,75.9
+Mali,,15.8308,-5.195,394.7,111.9
+Nigeria,Sokoto State,12.7942,5.55,394.7,91.7
+Mali,,22.3067,-5.8533,394.7,73.8
+Australia,Western Australia,-28.8658,128.8617,392.9,82.0
+Russia,Orenburg Oblast,52.0683,54.385,392.9,139.0
+United States,Michigan,42.7435,-83.3696,392.3,161.5
+Mauritania,Adrar,22.9108,-7.545,392.0,68.3
+Algeria,Bordj Badji Mokhtar,24.56,-3.0967,392.0,86.3
+United States,Michigan,41.8872,-84.6203,391.4,111.9
+Australia,Tasmania,-54.7292,158.82,390.8,390.8
+Libya,Sirte,29.5175,17.7608,390.8,41.8
+France,French Polynesia,-23.1283,-134.9733,390.8,390.8
+France,French Polynesia,-23.8575,-147.6483,390.8,390.8
+United States,Iowa,40.9923,-94.8921,390.1,32.0
+Mali,Ménaka,17.5042,3.5175,389.8,31.1
+Democratic Republic of the Congo,Équateur,0.9075,19.3142,389.8,34.1
+Iraq,Al-Najaf Governorate,30.68,43.0983,389.8,32.0
+Niger,Tahoua Region,16.935,4.2208,389.8,40.8
+Brazil,Mato Grosso,-10.9467,-52.3025,388.9,53.9
+United States,Iowa,42.6957,-91.437,388.0,44.5
+United States,Oklahoma,36.2325,-97.4667,388.0,39.6
+Brazil,Mato Grosso,-11.8808,-55.0658,387.7,30.8
+Niger,,14.8683,0.4075,386.8,110.9
+Mali,Ménaka,15.8017,2.0725,386.8,53.9
+Mali,Timbuktu,16.4525,-0.7342,386.8,65.8
+Australia,,-17.7233,137.7375,386.8,122.8
+Uruguay,Treinta y Tres,-32.8308,-54.5208,385.9,184.1
+Mauritania,Hodh Ech Chargui,18.9917,-7.4267,385.9,42.1
+Algeria,Ouled Djellal,33.6542,4.9233,385.9,31.1
+Australia,Western Australia,-20.7217,124.8133,385.9,84.1
+Canada,Quebec,59.2981,-70.2167,385.9,196.0
+Finland,,64.6467,28.2033,385.0,176.2
+Iraq,Al-Anbar Governorate,34.8742,41.8425,383.7,100.9
+Argentina,San Luis,-35.1025,-65.445,383.7,44.8
+Mauritania,Adrar,23.29,-6.5383,383.7,58.8
+United States,Indiana,40.0003,-84.8509,383.1,92.4
+Australia,Western Australia,-24.5383,115.1192,382.8,125.9
+Brazil,Pará,-4.7433,-48.8533,381.9,165.2
+Canada,Manitoba,56.2222,-97.9072,381.9,124.1
+Democratic Republic of the Congo,Équateur,0.0667,19.195,381.0,31.1
+United States,Nebraska,40.2449,-95.5251,381.0,55.8
+Kazakhstan,Aqtöbe region,50.3058,56.4825,381.0,78.0
+United States,Iowa,42.1858,-93.8961,381.0,49.7
+Iraq,Al-Anbar Governorate,31.0575,42.5883,381.0,38.1
+Mauritania,Adrar,22.795,-8.2125,381.0,59.1
+Australia,Queensland,-25.5267,143.85,379.8,118.9
+Mauritius,,-19.7067,63.4467,379.8,379.8
+Australia,,-19.6117,132.1858,379.8,72.8
+Mali,,22.0642,-1.9442,378.9,43.0
+France,Brittany,48.3725,-3.9533,378.9,306.9
+Australia,Western Australia,-33.9125,115.8992,378.9,116.1
+Sweden,,57.5075,14.5,378.9,278.0
+Australia,Queensland,-22.525,140.28,378.9,125.0
+Kazakhstan,Turkistan Region,42.2792,67.7567,378.9,135.9
+Algeria,Adrar,28.3942,0.4758,378.0,35.1
+Australia,,-19.19,131.1183,378.0,59.1
+Argentina,Chubut Province,-44.4033,-65.6558,378.0,60.0
+Algeria,Ghardaia,32.7983,4.4425,378.0,32.0
+Australia,Western Australia,-22.3125,123.515,378.0,68.0
+Mali,,21.3625,-0.9358,378.0,42.1
+Australia,Western Australia,-20.8108,125.4183,378.0,42.1
+Russia,Samara Oblast,53.4317,49.8317,376.7,306.0
+Niger,Diffa Region,17.0025,14.9667,376.7,34.7
+Cuba,Mayabeque,23.0325,-81.6908,376.7,285.9
+Mali,,17.7417,-5.4067,376.7,83.8
+Solomon Islands,Temotu,-12.2892,168.8358,375.8,375.8
+Russia,Saratov Oblast,52.4767,48.0183,375.8,257.9
+Mali,,22.695,-2.5817,375.8,61.9
+United States,Minnesota,44.5606,-93.3209,375.5,63.1
+Iraq,Al-Anbar Governorate,34.2067,41.3317,374.9,32.9
+Mauritania,Tiris Zemmour,23.8692,-8.2917,374.0,39.0
+Democratic Republic of the Congo,Équateur,0.1492,18.8258,374.0,32.0
+Russia,Sakha Republic,62.5042,125.72,372.8,92.0
+Democratic Republic of the Congo,Mai-Ndombe,-2.5633,18.06,371.9,53.9
+Mauritania,Hodh Ech Chargui,22.0642,-6.6633,371.9,46.0
+Mauritania,Tiris Zemmour,25.0142,-5.5308,371.9,50.9
+Kazakhstan,Jambyl Region,45.6267,70.4925,371.9,46.0
+United States,Kansas,38.2487,-95.1646,371.9,50.9
+Canada,Nunavut,67.9514,-107.4719,371.9,267.0
+Niger,Diffa Region,16.5533,14.855,370.9,38.1
+Mali,Gao,15.8308,-0.0558,370.9,58.2
+United States,Missouri,40.5372,-94.5687,370.0,34.7
+Canada,Nunavut,63.7778,-94.3967,369.4,289.6
+Egypt,New Valley,23.2975,29.3042,368.8,95.1
+Japan,,30.4833,140.3033,368.8,368.8
+Argentina,Río Negro Province,-38.9492,-67.0983,368.8,45.1
+Kazakhstan,Ulytau Region,46.8117,66.8783,367.9,57.9
+Mali,,23.345,-5.6333,367.9,50.9
+Mali,,21.2492,-2.9583,367.9,38.1
+Brazil,Rondônia,-9.365,-63.8292,367.9,221.0
+Russia,Sakha Republic,62.1908,127.5092,367.0,83.2
+United States,Kansas,39.8174,-95.0475,366.4,54.3
+Brazil,Mato Grosso,-11.3083,-53.5667,365.8,32.9
+Chad,Bahr el Gazel,15.8283,17.495,364.8,78.0
+United States,Michigan,46.5177,-85.854,364.8,125.0
+Mauritania,Hodh Ech Chargui,18.4108,-5.9608,364.8,41.1
+Brazil,Mato Grosso,-12.9017,-53.3475,364.8,46.0
+Ukraine,Luhansk Oblast,48.2283,38.9158,363.9,216.1
+Canada,Ontario,49.9472,-79.9461,363.6,66.1
+Algeria,Bordj Badji Mokhtar,23.1892,-0.3008,362.7,30.8
+Mauritania,Tiris Zemmour,24.2567,-8.4358,362.7,32.0
+Canada,Ontario,52.9914,-90.3058,362.1,62.2
+Canada,Nunavut,75.11,-98.2933,362.1,337.1
+Canada,Ontario,51.6978,-87.7581,361.8,75.9
+Algeria,Bordj Badji Mokhtar,23.78,-0.0567,361.8,39.9
+Russia,Sakha Republic,66.2892,116.7383,361.8,32.0
+Australia,,-10.4833,105.5808,361.8,361.8
+Australia,,-18.2492,136.8142,361.8,65.8
+Mauritania,Adrar,22.4267,-7.2517,361.8,33.8
+Niger,Diffa Region,13.4233,12.0183,361.8,32.0
+Australia,Western Australia,-21.18,124.2967,360.9,38.1
+Russia,Sakha Republic,74.8733,138.7583,360.9,360.9
+Australia,South Australia,-30.9242,134.0067,360.9,223.1
+New Zealand,,-49.6842,178.7808,360.9,360.9
+Mali,,21.9642,-4.5633,360.9,42.1
+United States,Missouri,38.3684,-92.9813,360.3,97.5
+Egypt,Giza,28.1017,28.9467,360.0,125.3
+Australia,,-13.2367,135.445,360.0,255.1
+Russia,Komi Republic,61.7475,54.2367,360.0,221.0
+United States,Oklahoma,35.2784,-96.5229,359.7,60.7
+Mali,,23.0517,-3.5108,358.7,54.9
+Australia,Queensland,-10.1475,142.3208,358.7,358.7
+Burkina Faso,,12.1225,0.3233,358.7,39.9
+Mali,,21.4108,-2.0417,357.8,32.9
+Australia,,-17.5283,136.6433,357.8,75.0
+United States,Iowa,42.2472,-93.2421,357.5,32.9
+Australia,Western Australia,-21.8342,124.1583,356.9,34.1
+Mali,,20.2367,-2.2917,356.9,55.2
+Canada,Northwest Territories,69.1414,-129.2069,356.0,218.8
+Mali,,22.1842,-3.9083,355.7,104.9
+Russia,Tver Oblast,57.2883,33.9517,355.7,207.9
+Mali,Ménaka,15.3058,1.55,355.7,32.0
+Russia,Sakha Republic,67.5133,119.5883,355.7,43.9
+Libya,Kufra,25.4275,20.07,355.7,30.8
+Sudan,Northern State,19.0417,30.2742,355.7,105.8
+France,French Polynesia,-22.4633,-151.3608,355.7,355.7
+Russia,Sakha Republic,76.785,158.1025,355.7,355.7
+Chad,Hadjer-Lamis,12.865,14.8367,354.8,68.0
+Uzbekistan,Qashqadaryo Region,38.9883,64.5425,354.8,75.0
+Somalia,Bari,9.8758,50.7325,353.9,31.1
+Russia,Volgograd Oblast,50.5683,45.14,353.9,173.1
+Belarus,Minsk Region,53.8508,27.0642,353.9,192.0
+Australia,,-20.0242,132.565,353.9,41.1
+Saudi Arabia,Eastern Province,27.3258,47.0458,353.9,32.9
+United States,Kansas,38.8057,-95.186,353.6,30.8
+Canada,Manitoba,57.3825,-96.7942,353.3,74.4
+Niger,,15.1225,2.4683,353.0,53.0
+Kazakhstan,Abay Region,51.1533,79.5867,353.0,115.2
+Australia,,-19.775,131.6925,353.0,44.2
+,,-65.5083,100.8775,353.0,327.1
+United States,Kansas,38.5869,-94.619,352.3,38.4
+Mauritania,Hodh Ech Chargui,21.5125,-6.6092,351.7,37.8
+Mauritania,Hodh Ech Chargui,15.8942,-6.3408,351.7,53.0
+Mali,,21.8058,-3.24,350.8,46.0
+Algeria,Bordj Badji Mokhtar,22.7083,-0.4317,350.8,32.0
+Canada,Ontario,43.8914,-81.4131,350.8,38.1
+United States,Michigan,41.9455,-85.8306,350.5,88.7
+Burkina Faso,,12.3392,0.9958,349.9,59.1
+Mauritania,Tiris Zemmour,22.9233,-10.4142,349.9,89.9
+Egypt,Giza,29.665,30.6217,349.9,173.1
+United States,Alabama,34.4505,-87.5465,349.9,81.4
+Russia,Kirov Oblast,58.8867,53.7808,349.0,218.2
+Australia,,-19.9258,133.1667,349.0,33.2
+Australia,Queensland,-26.3775,142.7575,349.0,185.0
+United States,Iowa,42.8241,-92.334,348.4,31.1
+Russia,Tver Oblast,56.4858,33.3167,347.8,128.0
+Indonesia,Moluccas,-7.235,131.3758,347.8,347.8
+United States,Oklahoma,36.2244,-96.7482,347.2,44.5
+United States,Michigan,42.6191,-85.4359,346.9,81.1
+Kazakhstan,Akmola Region,51.7692,68.5283,346.9,34.1
+Kazakhstan,Akmola Region,51.4067,68.1683,346.9,39.9
+Australia,Western Australia,-21.7108,122.8408,345.9,69.2
+Finland,,63.0942,29.8083,345.9,226.2
+Australia,South Australia,-28.8558,130.9908,345.9,31.1
+Saudi Arabia,Eastern Province,26.2558,47.9558,345.9,32.0
+Australia,,-17.3575,135.5883,345.9,91.1
+Mali,Ségou Region,14.9908,-5.9092,344.7,36.0
+Algeria,Adrar,27.135,0.6217,344.7,44.8
+Colombia,San Andrés and Providencia,13.345,-81.3658,344.7,344.7
+Saudi Arabia,Eastern Province,22.7258,48.1725,344.7,32.0
+United States,Minnesota,45.4107,-93.4855,344.1,49.7
+Russia,Sakha Republic,67.6042,116.4,343.8,36.0
+Kazakhstan,Akmola Region,52.1717,66.4783,343.8,51.8
+Niger,,14.4392,4.0025,343.8,46.9
+Australia,Western Australia,-21.4225,123.4325,343.8,31.1
+Mali,,19.7375,-5.4983,343.8,32.0
+Russia,Arkhangelsk Oblast,63.4117,37.0108,343.8,242.9
+Australia,Queensland,-24.1633,142.8075,342.9,110.9
+Mali,,18.5867,-1.8425,342.9,32.0
+Democratic Republic of the Congo,Équateur,1.2542,17.9658,342.9,32.9
+Australia,Western Australia,-18.0292,124.0308,342.9,273.1
+Australia,,-22.7008,137.8925,342.0,90.2
+Saudi Arabia,Eastern Province,25.2108,49.1608,342.0,41.1
+Australia,,-20.1567,136.6142,342.0,68.3
+Kazakhstan,Aqtöbe region,46.8533,59.5592,342.0,151.2
+Canada,Alberta,59.5244,-112.8972,341.1,42.1
+Canada,Manitoba,54.1456,-101.2636,341.1,53.3
+Niger,,14.8808,3.0117,340.8,51.8
+Niger,,13.9458,4.4417,340.8,50.0
+Mali,Koulikoro,15.2225,-6.7342,340.8,53.9
+Brazil,Maranhão,-3.8233,-46.4675,339.9,128.0
+Kazakhstan,Mangystau Region,43.1267,54.9275,339.9,153.9
+Mali,Ségou Region,13.1817,-5.1583,338.9,45.1
+Mali,,20.2725,-4.4392,338.9,55.2
+Australia,,-17.14,130.5342,337.7,47.9
+Russia,Saratov Oblast,52.3883,46.1708,337.7,93.0
+Democratic Republic of the Congo,Équateur,0.1517,17.7933,336.8,31.1
+Mali,,20.0167,-5.0133,335.9,38.1
+Russia,Pskov Oblast,56.8508,29.3833,335.9,180.1
+Egypt,New Valley,27.06,29.3225,335.9,46.0
+Canada,Nunavut,59.8256,-80.0139,335.9,335.9
+Chad,Bahr el Gazel,15.8017,16.89,335.9,48.2
+Saudi Arabia,Eastern Province,26.1375,48.5067,335.9,41.1
+Russia,Sakha Republic,68.3067,119.6875,335.9,55.2
+Australia,Western Australia,-18.7525,125.0625,335.9,176.2
+Australia,Queensland,-21.3725,143.6242,335.0,32.0
+Algeria,Bordj Badji Mokhtar,24.2825,-0.4067,335.0,33.2
+Kazakhstan,Ulytau Region,46.8758,68.0525,333.8,39.9
+Mali,,21.1808,-3.4975,333.8,32.9
+Mali,,17.9708,-1.4125,332.8,31.1
+Australia,South Australia,-28.5475,132.3975,332.8,46.0
+Ukraine,Zhytomyr Oblast,51.3433,28.23,332.8,143.9
+Australia,Western Australia,-23.5992,114.7383,332.8,136.9
+Mali,,20.3533,-2.94,332.8,39.0
+Australia,Queensland,-26.3133,143.9883,331.9,76.2
+Poland,Pomeranian Voivodeship,54.2233,18.1233,331.9,274.9
+Egypt,New Valley,26.8392,28.8025,331.9,36.0
+Kazakhstan,Aqtöbe region,47.6092,60.0975,331.9,124.1
+Canada,Nunavut,63.1675,-91.5914,331.0,281.0
+United States,Tennessee,35.2184,-87.7105,331.0,43.6
+Australia,Western Australia,-21.1883,123.0675,330.7,34.7
+Kazakhstan,Mangystau Region,43.6708,54.0267,330.7,105.8
+Mali,,19.1975,-4.485,330.7,34.7
+Egypt,New Valley,22.9058,28.435,330.7,58.8
+Algeria,Bordj Badji Mokhtar,23.6492,-1.9983,330.7,32.0
+Australia,Western Australia,-20.385,123.9367,329.8,60.0
+United States,Missouri,39.9008,-94.1457,329.5,33.5
+Mali,,19.735,-4.125,328.9,39.0
+Australia,Western Australia,-28.99,127.9125,328.9,36.9
+Brazil,Acre,-10.3467,-69.9308,328.9,31.1
+Saudi Arabia,Eastern Province,21.5658,48.7033,328.9,50.0
+Russia,Altai Krai,52.0625,80.8133,328.0,105.2
+Australia,Western Australia,-28.905,127.3475,328.0,33.2
+,,-79.1992,-70.7667,328.0,208.2
+Russia,Penza Oblast,53.2275,45.4675,326.7,65.8
+Kenya,Wajir County,1.1958,39.5625,326.7,32.0
+Mauritania,Hodh Ech Chargui,17.08,-6.265,326.7,32.0
+Australia,South Australia,-29.8233,131.0225,325.8,109.1
+Mali,,19.1583,-2.2042,325.8,32.0
+Mali,,21.6808,-5.0983,325.8,31.1
+Mali,Gao,16.28,0.6792,325.8,32.9
+Russia,Udmurtia,57.4642,54.0417,325.8,114.9
+Russia,Smolensk Oblast,55.125,34.1525,324.9,106.1
+Australia,,-16.52,132.2058,324.9,85.0
+Mali,Koulikoro,14.3583,-6.7875,324.9,31.1
+United States,Illinois,37.5824,-88.4757,324.3,192.9
+Mali,,20.6475,-6.055,323.7,31.7
+Chad,Kanem,16.3742,16.1025,323.7,52.7
+Libya,Al Wahat,28.7767,19.3917,323.7,146.9
+United States,Indiana,39.1693,-86.2212,322.8,81.7
+Chad,Borkou,16.2892,18.4442,322.8,71.0
+Mauritania,Tiris Zemmour,24.7842,-9.8008,321.9,35.1
+Somalia,Gedo,4.0208,42.87,321.9,38.1
+Algeria,In Salah,26.08,2.1283,321.9,48.2
+Estonia,,57.7142,27.06,321.0,217.0
+,,25.7425,123.4708,321.0,321.0
+Australia,Western Australia,-22.1092,114.005,321.0,286.2
+Burkina Faso,,12.71,1.4558,321.0,43.0
+United States,Iowa,42.2906,-91.8847,320.6,33.5
+United States,Minnesota,45.0341,-95.849,319.7,32.9
+Australia,,-16.0858,135.7483,319.7,182.0
+Russia,Republic of Karelia,61.5408,33.7358,319.7,204.8
+Australia,,-23.3258,136.3117,319.7,40.8
+Australia,,-16.4708,134.2867,319.7,75.9
+Australia,,-20.8042,136.2658,318.8,39.0
+Pitcairn Islands,,-25.0683,-130.1133,318.8,318.8
+Russia,Novosibirsk Oblast,53.9642,81.8308,318.8,46.0
+Australia,Western Australia,-28.8075,125.9017,317.9,46.0
+Australia,South Australia,-27.89,134.4092,317.9,56.1
+Russia,Novosibirsk Oblast,54.2317,82.7983,317.9,32.0
+Egypt,New Valley,27.3717,28.6342,317.9,45.1
+Russia,Moscow Oblast,55.5117,35.4775,317.9,95.1
+Russia,Moscow Oblast,55.9958,36.4208,317.0,103.0
+Australia,South Australia,-29.2867,131.2575,317.0,36.3
+United States,Indiana,39.7999,-86.5719,317.0,53.6
+Mali,,21.0692,-4.1983,317.0,41.1
+Kazakhstan,Turkistan Region,45.1542,69.5375,317.0,58.2
+Canada,Northwest Territories,60.3728,-114.5742,316.1,39.3
+Ukraine,Zaporizhia Oblast,47.3208,36.5958,315.8,131.1
+Australia,South Australia,-35.7783,136.8717,315.8,315.8
+United States,Missouri,38.9972,-93.9664,315.5,38.7
+Russia,Sakha Republic,69.5058,118.9942,314.9,31.1
+Mali,,19.2375,-3.8392,313.9,34.1
+Saudi Arabia,Eastern Province,26.875,47.6667,313.9,33.2
+Poland,Warmian-Masurian Voivodeship,53.5492,19.94,313.9,194.2
+Mali,,19.1408,-2.7733,312.7,39.0
+Kazakhstan,Aqtöbe region,48.4317,56.8133,312.7,57.9
+Algeria,Adrar,25.1,-0.9675,312.7,43.0
+Canada,Nunavut,65.0844,-101.3114,312.1,95.4
+Canada,Manitoba,52.9078,-99.4553,312.1,46.3
+Poland,Warmian-Masurian Voivodeship,54.2442,22.3242,311.8,192.0
+Australia,Queensland,-27.695,144.8392,311.8,85.0
+Canada,Manitoba,51.4589,-98.173,311.8,61.9
+Australia,New South Wales,-29.08,141.805,310.9,126.2
+Latvia,Vidzeme,56.8708,25.9592,310.9,184.1
+Somalia,Bari,8.6067,50.1617,310.0,33.2
+Mali,Koulikoro,15.0767,-7.3817,310.0,34.1
+Mali,,18.3667,-3.3433,310.0,31.1
+Mali,,21.01,-5.25,310.0,40.2
+Chad,Batha,15.1433,17.9675,310.0,31.1
+Australia,Western Australia,-19.9367,124.4608,310.0,37.2
+Kazakhstan,Turkistan Region,45.8775,68.085,308.8,43.9
+Kazakhstan,Kostanay Region,50.8558,63.4133,307.8,54.9
+Australia,Queensland,-24.9242,142.495,307.8,113.1
+Tonga,ʻEua,-21.4208,-174.9108,306.9,306.9
+Egypt,New Valley,22.3575,28.9833,306.9,46.9
+Turkmenistan,Dashoguz Region,41.1017,56.6742,306.9,143.0
+Canada,Manitoba,50.3728,-96.2136,306.3,50.0
+United States,Missouri,39.2829,-91.0578,306.3,75.0
+Algeria,Bordj Badji Mokhtar,24.375,-1.535,305.7,33.8
+Egypt,Giza,29.2975,29.4392,305.7,45.7
+United States,Illinois,41.7031,-89.0815,305.1,41.8
+,,-69.8233,15.9725,304.8,246.0
+Saudi Arabia,Eastern Province,27.2792,47.5492,304.8,32.0
+Australia,Queensland,-22.4433,144.3667,304.8,68.0
+Australia,South Australia,-29.9433,132.4125,304.8,88.1
+United States,Missouri,39.6106,-93.5717,304.2,63.1
+Libya,Kufra,25.5642,21.065,303.9,35.1
+,,-65.7525,92.4542,303.9,303.9
+Australia,,-29.0158,167.9367,303.9,303.9
+Australia,,-21.6925,137.5908,303.9,45.1
+Russia,Vologda Oblast,59.8358,44.61,303.9,155.1
+Somalia,Galgaduud,4.0717,47.0708,303.0,34.1
+Canada,Ontario,49.8192,-82.3408,303.0,83.2
+Russia,Sakha Republic,68.3192,117.7558,303.0,31.1
+Russia,Vologda Oblast,60.6767,35.3758,301.8,140.8
+Russia,Nenets Autonomous Okrug,67.0983,48.9458,301.8,190.8
+United States,Iowa,42.0217,-92.8036,301.4,35.1
+Canada,Manitoba,52.6369,-96.0525,301.1,33.2
+Argentina,Córdoba,-33.6283,-64.01,300.8,32.0
+Colombia,Valle del Cauca,4.0042,-81.6075,299.9,299.9
+Russia,Udmurtia,57.2383,52.7075,299.9,80.2
+Russia,Tula Oblast,54.105,36.8583,299.9,122.2
+Somalia,Middle Shebelle,3.1058,46.1558,299.9,109.1
+Canada,Manitoba,51.0944,-95.7525,299.3,33.5
+Canada,Manitoba,53.6461,-99.545,299.0,33.2
+Algeria,Ouargla,33.0217,5.0125,298.7,37.8
+Australia,South Australia,-30.185,131.5967,298.7,46.9
+Russia,Smolensk Oblast,55.2125,32.0342,298.7,102.7
+Canada,Ontario,54.4489,-92.1267,298.1,52.7
+Russia,Vologda Oblast,61.5042,37.2458,297.8,171.0
+Russia,Vologda Oblast,59.655,37.325,297.8,145.1
+Russia,Republic of Mordovia,53.6883,44.4442,297.8,89.9
+Russia,Kostroma Oblast,58.7917,42.2,296.9,128.9
+Russia,Moscow Oblast,56.4658,38.025,296.9,135.0
+Australia,Western Australia,-31.1142,123.7492,296.9,43.9
+United States,Indiana,41.0207,-85.1955,296.6,62.8
+China,Jilin,44.815,125.0383,296.0,90.2
+Russia,Yaroslavl Oblast,57.2242,38.49,294.7,130.8
+Tonga,Tongatapu,-22.3408,-176.21,294.7,294.7
+New Zealand,,-44.1242,-176.5833,294.7,294.7
+United States,Kentucky,36.9211,-87.2864,294.4,94.8
+Australia,Queensland,-22.67,144.8742,293.8,49.1
+Australia,,-19.4008,132.7792,293.8,31.1
+Mauritania,Tiris Zemmour,24.2467,-9.6467,293.8,38.1
+Belarus,Vitsebsk Region,55.16,30.7508,293.8,121.9
+United States,Missouri,39.0436,-92.0917,293.8,34.1
+Russia,Krasnoyarsk Krai,80.9125,79.7917,293.8,293.8
+Vietnam,Cà Mau Province,8.4275,104.8283,293.8,293.8
+Australia,,-21.49,136.9042,293.8,32.0
+United States,Missouri,39.7409,-92.5351,293.8,41.8
+Australia,,-17.6508,134.5292,292.9,53.0
+Russia,Tula Oblast,53.4442,37.4658,292.9,110.0
+Russia,Sakha Republic,63.275,117.1167,292.0,102.1
+Russia,Krasnoyarsk Krai,62.38,88.1767,292.0,176.2
+Australia,,-16.8925,134.6975,292.0,42.1
+Kazakhstan,Kostanay Region,50.925,62.5042,292.0,33.2
+Russia,Kirov Oblast,57.8567,49.4208,292.0,106.1
+United States,Illinois,41.2409,-89.5666,291.7,96.3
+United States,Illinois,40.4701,-88.5645,291.4,85.0
+United States,Missouri,40.1316,-93.199,291.4,35.7
+Nigeria,Kebbi State,12.175,3.7683,290.8,43.0
+Kazakhstan,Kostanay Region,53.0583,63.1392,290.8,93.0
+United States,Indiana,41.696,-86.6751,290.5,71.9
+Belarus,Vitsebsk Region,54.635,29.745,289.9,118.0
+Russia,Penza Oblast,53.4217,43.2517,289.9,71.0
+Brazil,Acre,-7.69,-72.1567,289.9,56.1
+Russia,Komi Republic,62.5792,54.9883,289.9,135.9
+Russia,Smolensk Oblast,53.89,33.2342,289.9,74.1
+,,-73.2008,-105.0217,289.0,289.0
+Uzbekistan,Republic of Karakalpakstan,43.0283,56.81,289.0,50.0
+Australia,Queensland,-27.6733,147.0925,289.0,47.2
+United States,Alaska,56.6033,-169.6783,289.0,289.0
+Chad,Borkou,17.6658,18.6983,287.7,39.9
+Kazakhstan,Ulytau Region,48.55,65.4083,287.7,32.9
+United States,Iowa,41.4185,-93.1383,287.4,40.2
+United States,Texas,27.5261,-98.9652,287.4,107.9
+Colombia,Meta,3.3983,-71.6467,286.8,64.9
+France,Pays de la Loire,46.7892,-0.8425,286.8,157.9
+Russia,Sakha Republic,62.4642,129.6292,286.8,77.1
+Brazil,Acre,-8.5933,-69.3417,286.8,61.0
+Russia,Tomsk Oblast,56.6092,85.6525,286.8,64.0
+Brazil,Amazonas,-6.8533,-72.5817,285.9,64.9
+Australia,Western Australia,-26.9058,113.7808,285.9,165.2
+Canada,Nunavut,73.5906,-105.1831,285.3,285.3
+Russia,Kaluga Oblast,54.57,34.5525,285.0,67.1
+Kazakhstan,Aqtöbe region,50.3442,54.7917,285.0,93.3
+Russia,Arkhangelsk Oblast,61.7442,40.2942,285.0,152.1
+Russia,Altai Krai,53.0983,82.0583,285.0,56.1
+Australia,Queensland,-28.4242,142.2967,285.0,133.2
+Australia,Western Australia,-20.59,122.8058,285.0,32.0
+Russia,Oryol Oblast,52.6667,35.2158,283.8,61.0
+Australia,,-18.13,132.5317,283.8,62.8
+Australia,,-16.5683,133.3608,283.8,37.8
+Brazil,Acre,-8.9775,-69.88,282.9,36.9
+Russia,Perm Krai,59.7217,53.8275,282.9,57.9
+Saudi Arabia,Eastern Province,20.6783,53.7092,282.9,173.1
+Canada,Nunavut,66.8589,-105.3692,281.9,32.0
+Canada,Manitoba,55.2486,-96.7842,281.9,73.5
+Australia,,-18.4558,133.13,281.9,46.0
+Colombia,Putumayo,-0.1933,-74.4833,281.9,83.2
+Canada,Nunavut,60.425,-68.0819,281.6,281.6
+Canada,Ontario,49.7,-83.5303,281.3,34.4
+Canada,Nunavut,65.5119,-97.3925,281.0,124.1
+Russia,Sakha Republic,62.4583,133.935,280.7,43.0
+Morocco,,23.0308,-15.4275,280.7,48.8
+Russia,,51.1192,37.2667,280.7,58.8
+Solomon Islands,Temotu,-9.8842,167.1833,280.7,280.7
+Chad,Borkou,17.5975,17.1758,280.7,36.0
+Canada,Manitoba,49.9792,-96.8797,280.4,38.1
+Mexico,Colima,18.3619,-114.6983,279.8,279.8
+Russia,Smolensk Oblast,54.7083,33.3183,279.8,60.0
+Ukraine,Zhytomyr Oblast,50.2017,28.07,279.8,32.9
+United States,Indiana,40.5716,-87.4047,278.9,62.8
+Russia,Kirov Oblast,59.8725,51.6967,278.9,110.9
+Ukraine,Kirovohrad Oblast,48.1467,31.6842,278.9,128.9
+Russia,Amur Oblast,50.66,128.8717,278.9,49.1
+Kazakhstan,Kyzylorda Region,46.425,64.1917,278.9,110.0
+Mauritania,Hodh Ech Chargui,15.9067,-7.8908,278.0,36.3
+Australia,Queensland,-23.015,142.3117,278.0,66.1
+Russia,Yamalo-Nenets Autonomous Okrug,63.3133,82.3092,278.0,147.2
+Russia,Kaluga Oblast,53.6283,35.7783,278.0,81.1
+United States,Missouri,39.1905,-92.7483,277.7,32.9
+Australia,,-18.6142,132.3242,275.8,36.9
+Australia,Western Australia,-19.6725,124.0317,275.8,35.1
+Australia,Queensland,-27.3458,141.08,274.9,171.0
+Belarus,Minsk Region,52.8325,27.5717,274.9,116.1
+Australia,Queensland,-28.4725,143.7308,274.9,124.1
+Russia,Mari El Republic,56.5142,49.0042,274.9,144.2
+Canada,Manitoba,54.0986,-98.6158,274.6,39.9
+United States,Michigan,43.6728,-82.7902,274.3,38.7
+Russia,Oryol Oblast,52.6058,36.6325,273.7,36.9
+Australia,New South Wales,-31.0175,144.015,273.7,186.8
+Uzbekistan,Republic of Karakalpakstan,42.6792,57.8217,273.7,91.7
+Russia,Kursk Oblast,52.0958,36.5375,273.7,39.9
+Russia,Altai Krai,53.5775,80.485,273.7,141.7
+United States,Georgia,33.742,-82.5244,273.1,112.5
+Canada,Manitoba,51.1853,-96.4997,273.1,55.2
+Australia,,-17.9858,131.31,272.8,38.1
+Russia,Sakha Republic,64.0508,120.51,272.8,82.9
+India,Haryana,29.46,76.8908,272.8,33.8
+Russia,Sakha Republic,70.835,160.6075,272.8,272.8
+Saudi Arabia,Eastern Province,24.5292,49.51,271.9,32.0
+Canada,Manitoba,57.0539,-94.9581,271.9,82.0
+Russia,Kaluga Oblast,54.7817,36.4817,271.9,94.2
+Russia,Kursk Oblast,51.3175,35.8375,271.9,50.0
+Iraq,Al-Muthanna Governorate,29.9117,45.2658,271.0,35.1
+Russia,Udmurtia,56.4792,52.4975,271.0,96.0
+Russia,Sakha Republic,70.6758,116.4208,271.0,113.1
+Canada,Ontario,52.94,-88.4272,270.1,32.3
+Russia,Sakha Republic,73.3792,116.2808,269.7,232.9
+Australia,Queensland,-23.2025,144.3175,269.7,50.0
+Russia,Tver Oblast,58.3325,37.19,269.7,118.9
+Bolivia,Pando,-12.0858,-68.6292,269.7,43.9
+Russia,Perm Krai,60.8317,53.7292,269.7,89.9
+Russia,Kirov Oblast,57.795,51.405,269.7,61.9
+United States,Illinois,39.9903,-87.6779,269.4,65.8
+Argentina,Santa Cruz Province,-47.9442,-66.8683,268.8,139.9
+Finland,,62.5017,25.1525,268.8,145.1
+Russia,Perm Krai,59.5233,55.545,268.8,72.8
+United States,Texas,28.0069,-99.5254,268.5,58.8
+Russia,Sakha Republic,66.2292,120.5433,267.9,31.1
+Russia,Kirov Oblast,59.5817,48.8558,267.9,102.1
+Russia,Sakha Republic,62.0517,131.5925,267.9,48.2
+Australia,Western Australia,-18.6283,123.3925,267.9,76.2
+Ghana,Savannah Region,8.66,-1.0775,267.9,149.0
+Russia,Saratov Oblast,51.6125,44.4533,266.7,57.9
+Russia,Kursk Oblast,51.6967,38.2917,266.7,41.8
+Turkmenistan,Lebap Region,39.9108,62.5533,266.7,89.0
+Burkina Faso,,12.7033,2.0442,266.7,32.0
+Australia,,-17.7508,133.6417,266.7,32.9
+Kazakhstan,Aqtöbe region,48.9758,61.5358,266.7,94.8
+Russia,Kursk Oblast,51.7258,35.4442,266.7,39.9
+Canada,Ontario,51.6733,-86.6042,266.4,51.8
+Canada,Northwest Territories,61.5942,-115.9119,266.1,57.3
+Russia,Arkhangelsk Oblast,63.4058,45.565,265.8,135.0
+Egypt,Bani Sweif,28.7975,30.2083,265.8,72.8
+Brazil,Amazonas,-6.9292,-71.8975,264.9,63.1
+Australia,South Australia,-29.075,132.6625,264.0,34.1
+Saudi Arabia,Eastern Province,21.6367,49.9042,264.0,41.1
+Mauritania,Hodh Ech Chargui,16.765,-8.0617,262.7,36.9
+Russia,Moscow,55.6167,37.5175,262.7,83.8
+Belarus,Vitsebsk Region,55.7042,29.9583,262.7,93.9
+Russia,Yamalo-Nenets Autonomous Okrug,63.1275,84.9492,262.7,122.8
+Australia,South Australia,-30.5992,132.9433,261.8,64.9
+Australia,,-17.845,133.0908,261.8,33.8
+Russia,Arkhangelsk Oblast,63.2467,43.8533,261.8,85.0
+Saudi Arabia,Eastern Province,20.6125,50.535,261.8,38.1
+Russia,Sakha Republic,64.9525,117.8275,261.8,42.1
+Belarus,Hrodna Region,52.99,24.295,260.9,116.1
+India,Rajasthan,27.8875,72.97,260.0,40.2
+Lithuania,Vilnius County,54.61,24.4875,260.0,130.1
+United States,Illinois,40.6513,-89.4151,260.0,39.9
+Russia,Vologda Oblast,59.095,38.595,260.0,121.0
+Canada,Manitoba,55.5186,-93.6789,259.4,110.6
+Canada,Nunavut,68.9794,-109.4831,259.4,151.5
+Algeria,Ouargla,32.0875,5.1442,258.8,62.8
+Saudi Arabia,Eastern Province,20.9375,50.2258,258.8,32.0
+Australia,New South Wales,-31.2317,147.6317,257.9,86.9
+Australia,South Australia,-37.6025,140.4825,257.9,187.1
+Ukraine,Sumy Oblast,50.7292,35.4675,257.9,45.1
+India,Rajasthan,28.7392,74.9983,257.9,34.1
+Saudi Arabia,Eastern Province,24.1717,49.6125,256.9,33.2
+Pakistan,Punjab,31.6208,74.3167,256.9,50.0
+Russia,Sakha Republic,66.7225,121.3817,256.9,32.0
+Canada,Ontario,51.0564,-85.2594,256.9,85.0
+Russia,Kirov Oblast,58.2567,50.33,256.9,62.2
+Australia,Queensland,-23.9958,142.13,256.9,55.2
+United States,Iowa,41.056,-91.2909,256.0,47.2
+Ukraine,Zhytomyr Oblast,50.6133,27.6842,255.7,30.8
+France,Normandy,49.6717,1.6517,255.7,178.9
+India,Punjab,29.9825,75.435,255.7,34.7
+Russia,Republic of Karelia,62.995,35.4242,254.8,96.0
+Peru,Loreto,-2.73,-74.6808,254.8,61.9
+Russia,Komi Republic,60.0292,50.1058,254.8,51.8
+Ukraine,Zhytomyr Oblast,50.0275,29.305,254.8,31.1
+Uzbekistan,Republic of Karakalpakstan,44.735,58.2075,254.8,103.0
+Kazakhstan,Aqtöbe region,47.6458,55.3058,254.8,128.0
+Russia,Vologda Oblast,60.2983,40.6433,254.8,95.1
+Russia,Arkhangelsk Oblast,61.6208,43.3633,254.8,135.9
+Russia,Arkhangelsk Oblast,64.395,47.3475,254.8,125.0
+Canada,Manitoba,54.3639,-96.8647,253.9,32.0
+Russia,Vologda Oblast,58.6017,40.2058,253.9,103.0
+Russia,Altai Krai,51.2958,80.8308,253.9,31.1
+United States,Iowa,41.5144,-90.8444,253.3,38.1
+Kazakhstan,West Kazakhstan Region,50.9158,53.4758,253.0,93.3
+Russia,Altai Krai,53.3358,83.6117,253.0,38.1
+Russia,Vologda Oblast,59.9925,42.0258,253.0,93.3
+Australia,South Australia,-29.1733,129.93,251.8,30.8
+Russia,Krasnoyarsk Krai,61.6967,87.2792,251.8,78.9
+Ukraine,Kharkiv Oblast,49.005,37.3167,251.8,79.9
+Russia,Sakha Republic,63.1533,122.7883,251.8,36.9
+Canada,Ontario,54.3017,-84.4894,251.2,149.4
+Brazil,Amazonas,-6.5558,-70.4375,250.9,53.0
+Kazakhstan,West Kazakhstan Region,51.205,50.2525,250.9,135.9
+Russia,Altai Krai,53.245,84.2558,250.9,32.0
+Egypt,Matruh,30.9258,26.9492,249.9,38.1
+Russia,Arkhangelsk Oblast,61.2433,45.7775,249.9,106.1
+Libya,Al Wahat,27.0542,24.1933,249.9,33.2
+Egypt,Matruh,31.2333,25.685,249.9,40.2
+Russia,Volgograd Oblast,49.1558,43.8442,249.9,86.0
+United States,Illinois,39.301,-88.9363,249.9,61.0
+Bolivia,Pando,-11.6692,-68.0808,248.7,45.7
+Russia,Tatarstan,55.7108,52.6967,248.7,47.9
+United States,South Carolina,34.1865,-81.4137,248.1,94.2
+Russia,Nizhny Novgorod Oblast,55.7058,44.0733,247.8,107.9
+Australia,Western Australia,-17.4658,122.465,247.8,182.0
+Australia,South Australia,-29.7442,135.2492,247.8,68.0
+Ukraine,Cherkasy Oblast,49.1467,32.2467,247.8,86.9
+Russia,Krasnoyarsk Krai,72.6592,96.8725,246.9,177.1
+Saudi Arabia,Eastern Province,22.6283,49.2717,246.9,43.0
+Russia,Novosibirsk Oblast,54.2592,81.1992,246.0,62.2
+Russia,Kostroma Oblast,58.7492,43.7092,246.0,98.1
+Canada,Manitoba,54.7692,-98.3706,245.1,39.3
+Australia,,-14.1608,134.87,244.8,111.9
+Russia,Komi Republic,61.6333,52.57,244.8,75.9
+Turkmenistan,Mary Region,37.9475,62.655,244.8,36.9
+Brazil,Amazonas,-7.1208,-69.3867,243.8,61.0
+Russia,Arkhangelsk Oblast,62.2608,46.5242,243.8,74.1
+Saudi Arabia,Eastern Province,23.66,49.7092,243.8,34.1
+Oman,Ash Sharqiyah South,20.49,58.8617,242.9,242.9
+Russia,Rostov Oblast,49.62,40.1433,242.9,55.2
+Russia,Sakha Republic,65.5842,120.9258,242.9,43.0
+Russia,Sakha Republic,65.265,121.6892,242.9,43.0
+Canada,Manitoba,55.9125,-96.23,242.6,43.9
+Australia,South Australia,-30.035,133.8708,241.7,55.8
+Kazakhstan,Aqtöbe region,48.4358,62.8008,241.7,134.7
+Russia,Volgograd Oblast,50.5283,41.7667,241.7,90.8
+Russia,Tver Oblast,58.1758,35.0392,241.7,76.8
+Canada,Nunavut,70.2781,-105.3114,241.7,111.9
+Canada,Nunavut,70.2356,-107.5594,241.1,101.2
+Canada,Northwest Territories,61.6942,-116.9861,241.1,32.0
+Saudi Arabia,Eastern Province,23.3525,48.9392,240.8,32.0
+Argentina,Santa Cruz Province,-47.2608,-66.8817,240.8,64.9
+Chad,Borkou,17.1467,18.9208,240.8,33.8
+Fiji,Rotuma,-12.5,177.0725,240.8,240.8
+Russia,Nenets Autonomous Okrug,68.2833,44.8567,240.8,239.0
+Russia,Bryansk Oblast,52.7358,32.7492,239.9,52.1
+Australia,South Australia,-30.0742,135.8117,239.9,85.0
+Russia,Tver Oblast,57.5342,36.4575,239.9,68.9
+Australia,South Australia,-29.115,134.9275,239.9,39.0
+India,Uttar Pradesh,27.9908,78.095,239.0,50.0
+Oman,Dhofar,18.86,55.0583,239.0,33.2
+,,-66.8042,85.4683,239.0,172.2
+Australia,South Australia,-29.4075,133.4008,237.7,53.9
+Australia,Queensland,-23.2583,139.2408,237.7,96.0
+Brazil,Amazonas,-7.9358,-69.7875,237.7,33.8
+Algeria,Ouargla,31.5192,4.7658,236.8,32.9
+United States,Texas,31.9254,-95.7165,236.2,94.2
+United States,Illinois,40.0157,-89.4746,235.0,53.9
+United States,Illinois,39.0303,-89.7596,235.0,43.3
+Mozambique,Inhambane Province,-23.7617,34.9833,234.7,121.9
+China,Heilongjiang,45.9592,125.5508,234.7,84.7
+Argentina,La Pampa,-38.4917,-64.4892,234.7,33.8
+Mauritania,Hodh El Gharbi,16.4383,-8.8567,234.7,31.7
+,,-67.2975,59.3717,234.7,234.7
+Poland,Lubusz Voivodeship,52.3792,15.3208,233.8,172.8
+Russia,Bryansk Oblast,52.8083,33.7642,233.8,46.0
+Palau,Ngeremlengui,7.5625,134.5717,233.8,233.8
+Canada,Northwest Territories,60.5594,-113.2342,233.2,35.4
+Russia,Sakha Republic,67.8983,121.9917,232.9,46.0
+Australia,Queensland,-28.5958,148.5217,232.9,53.0
+Russia,Sakha Republic,67.0317,122.1425,232.9,42.1
+Australia,,-25.0275,135.4458,232.9,36.0
+India,Rajasthan,28.8833,73.7717,232.9,31.1
+Turkmenistan,Lebap Region,39.3633,61.7633,232.0,57.0
+Ukraine,Kharkiv Oblast,50.2917,37.4475,232.0,37.2
+United States,Illinois,40.2346,-91.3504,232.0,35.1
+Russia,Sakha Republic,64.99,119.5858,232.0,36.0
+Russia,Rostov Oblast,49.025,40.4733,232.0,53.0
+Canada,Manitoba,56.2606,-91.0764,232.0,124.1
+Russia,Rostov Oblast,49.3325,41.1692,230.7,50.0
+Ukraine,Chernihiv Oblast,51.9508,32.9617,230.7,58.8
+Canada,Ontario,52.6175,-86.355,230.4,54.6
+Sweden,,56.3742,13.0433,229.8,115.8
+France,,-22.3942,172.0858,229.8,229.8
+Algeria,Ouargla,31.8958,5.9875,229.8,67.1
+Kazakhstan,Kostanay Region,52.3158,62.6083,229.8,31.1
+China,Heilongjiang,46.5967,126.1425,229.8,42.1
+Egypt,New Valley,27.2892,29.8725,229.8,56.1
+Russia,Arkhangelsk Oblast,62.2608,38.5975,229.8,100.0
+Finland,,62.1517,22.1742,229.8,110.0
+Poland,Podlaskie Voivodeship,53.0825,22.095,229.8,103.9
+China,Inner Mongolia,43.3042,122.6225,228.9,38.1
+Morocco,,25.8983,-13.4692,228.0,70.1
+Russia,Vologda Oblast,60.1825,46.2058,228.0,65.2
+Ukraine,Dnipropetrovsk Oblast,48.155,33.5117,228.0,97.2
+Ukraine,Volyn Oblast,51.31,25.7442,228.0,55.2
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,62.5817,66.0708,228.0,125.3
+,,-80.7125,-61.2992,228.0,115.2
+Australia,Queensland,-28.9025,145.1342,226.8,43.0
+Australia,Queensland,-22.7325,138.9892,226.8,30.8
+Russia,Altai Krai,52.7417,80.5425,226.8,57.9
+Kazakhstan,Mangystau Region,42.1617,55.2483,226.8,36.0
+Canada,Ontario,52.1486,-85.5539,225.9,42.1
+Russia,Chuvashia,55.5992,47.8217,225.9,53.0
+Libya,Al Wahat,28.1075,24.2783,225.9,79.9
+Mozambique,Inhambane Province,-22.2258,33.8217,225.9,89.9
+Russia,Kostroma Oblast,57.9617,41.8558,225.9,64.9
+Lithuania,Telsiai County,55.6942,22.4717,225.9,182.0
+Ukraine,Kharkiv Oblast,49.6308,36.1108,224.9,40.2
+Argentina,Córdoba,-34.4542,-64.035,224.9,56.1
+Russia,Sakha Republic,65.9667,121.6242,224.9,37.2
+Russia,Tambov Oblast,52.7867,42.3708,224.9,43.0
+Brazil,Amazonas,-6.2833,-69.2717,224.9,60.0
+Australia,Western Australia,-19.4617,123.5833,223.7,57.0
+Poland,Masovian Voivodeship,52.2692,21.7725,223.7,78.9
+China,Inner Mongolia,43.6708,122.155,223.7,43.0
+Bolivia,Beni,-12.4725,-65.4317,222.8,78.9
+Russia,Komi Republic,62.79,48.0475,222.8,68.9
+Ukraine,Kirovohrad Oblast,48.5233,30.99,222.8,31.1
+Canada,Nunavut,66.1289,-99.7453,222.8,50.9
+Bolivia,Pando,-11.785,-67.1925,222.8,50.9
+Brazil,Amazonas,-5.47,-70.71,222.8,64.0
+Iraq,Al-Anbar Governorate,32.6058,42.9308,221.9,37.2
+Brazil,Amazonas,-5.7133,-71.8,221.9,43.0
+Russia,Sakha Republic,73.9692,136.1117,221.9,221.9
+Saudi Arabia,Eastern Province,22.0683,50.47,221.9,50.9
+Canada,Nunavut,66.3831,-98.3053,221.9,73.2
+Finland,,61.0067,25.5258,221.9,113.1
+Kazakhstan,Atyrau Region,46.5033,55.685,221.9,163.1
+Canada,Ontario,50.3353,-85.3611,221.6,35.4
+United States,Mississippi,33.1284,-89.3106,221.3,118.6
+Ukraine,Dnipropetrovsk Oblast,48.0933,36.3017,221.0,58.2
+Saudi Arabia,Eastern Province,21.215,50.75,221.0,33.2
+Russia,Penza Oblast,53.4142,42.28,221.0,31.1
+Bolivia,Pando,-11.4375,-67.5367,221.0,33.2
+Canada,Nunavut,69.5914,-105.1786,220.7,100.9
+Oman,Al Wusta Governorate,19.7625,57.4875,219.8,108.8
+Kazakhstan,Kostanay Region,50.3342,62.7658,219.8,36.9
+Australia,Western Australia,-31.1567,124.4933,219.8,30.8
+Brazil,Pará,-2.1042,-46.4675,219.8,139.9
+,,-0.4633,97.1008,218.8,218.8
+,,-43.0,-77.0,218.8,218.8
+Russia,Nizhny Novgorod Oblast,55.7742,42.8192,218.8,54.9
+Russia,Rostov Oblast,46.3742,43.8633,218.8,138.1
+Mozambique,Inhambane Province,-21.7408,34.0858,218.8,38.1
+France,Hauts-de-France,50.7225,1.9567,218.8,95.1
+Russia,Krasnoyarsk Krai,71.9058,93.4708,217.9,138.1
+Russia,Tambov Oblast,52.5708,40.9467,217.9,56.1
+Peru,Loreto,-5.8325,-73.3608,217.9,46.0
+Russia,Chuvashia,55.9092,46.7458,217.9,67.1
+Kenya,Wajir County,0.4375,40.2083,217.9,56.1
+Ukraine,,50.4758,30.3875,216.7,41.8
+Russia,Kirov Oblast,56.7983,51.0592,216.7,51.8
+Kazakhstan,Aqtöbe region,46.0358,58.5433,216.7,43.9
+India,Rajasthan,28.59,73.095,216.7,32.9
+Brazil,Amazonas,-9.3358,-67.3383,215.8,46.0
+Russia,Nenets Autonomous Okrug,68.485,57.9875,215.8,207.9
+Egypt,Giza,28.425,27.6825,214.9,35.1
+Russia,Arkhangelsk Oblast,65.4325,42.4142,214.9,202.1
+Canada,Nunavut,63.3203,-96.2108,214.9,89.9
+Brazil,Amazonas,-5.2442,-72.39,214.0,45.1
+Russia,Krasnoyarsk Krai,62.0517,85.4675,214.0,74.1
+Papua New Guinea,Manus,-1.5358,145.0583,214.0,214.0
+Russia,Arkhangelsk Oblast,65.39,39.8492,212.8,122.8
+Russia,Republic of Mordovia,54.4667,43.2342,212.8,57.9
+United States,Alabama,31.942,-85.4511,212.8,94.5
+Russia,Komi Republic,62.4358,49.6142,212.8,53.0
+Saudi Arabia,Eastern Province,22.5208,49.9625,212.8,36.9
+Canada,Ontario,43.2419,-81.8372,212.4,32.6
+Russia,Pskov Oblast,58.2725,28.6008,211.8,153.9
+Australia,Western Australia,-19.6158,123.025,211.8,61.9
+Tonga,Ongo Niua,-15.5825,-175.6258,211.8,211.8
+Colombia,Vichada,4.3208,-70.9392,211.8,39.9
+United States,Texas,31.7106,-96.8634,211.2,35.4
+Ukraine,Luhansk Oblast,49.6525,38.58,210.9,33.2
+Ukraine,Luhansk Oblast,49.1883,39.4067,210.9,36.0
+Bolivia,Pando,-10.5992,-66.4083,210.9,38.1
+Libya,Al Wahat,27.7858,24.7567,210.9,53.9
+Mexico,Yucatán,19.9361,-89.3311,210.3,110.3
+Russia,Arkhangelsk Oblast,64.0467,38.8508,209.7,157.9
+Libya,Al Wahat,28.01,23.045,209.7,63.7
+Kazakhstan,Kostanay Region,51.0575,65.0517,209.7,43.0
+Uruguay,San José,-34.0875,-57.01,209.7,78.9
+Russia,Yamalo-Nenets Autonomous Okrug,64.1942,67.0175,209.7,133.8
+Peru,Loreto,-1.1133,-74.0708,209.7,32.0
+Russia,Komi Republic,60.1883,48.9442,209.7,50.0
+Turkmenistan,Lebap Region,39.365,62.3383,209.7,33.8
+Poland,Podlaskie Voivodeship,52.385,23.0617,208.8,53.0
+Ukraine,Kyiv Oblast,51.305,30.0658,208.8,78.0
+Australia,New South Wales,-29.5342,143.9117,208.8,32.0
+United States,Texas,32.7118,-94.9816,208.8,82.3
+Russia,Tambov Oblast,53.4175,41.11,207.9,39.9
+Brazil,Amazonas,-5.2042,-69.62,207.9,32.0
+Ukraine,Zhytomyr Oblast,50.41,29.2758,207.9,36.9
+Kazakhstan,Ulytau Region,46.4792,65.1792,207.9,57.9
+Argentina,Santiago del Estero,-26.5758,-61.8133,207.9,41.1
+Brazil,Pernambuco,-3.845,-32.4225,207.9,207.9
+Australia,Western Australia,-23.0358,114.0817,207.0,137.2
+Russia,Arkhangelsk Oblast,61.1508,47.29,207.0,70.1
+Bolivia,Beni,-15.0217,-65.1183,205.7,46.9
+China,Jilin,44.4308,124.0208,205.7,30.8
+Peru,Loreto,-4.8892,-73.11,205.7,71.9
+Russia,Yamalo-Nenets Autonomous Okrug,64.5642,82.445,205.7,118.0
+Russia,Tatarstan,55.0675,50.115,205.7,61.9
+Brazil,Amazonas,-8.8658,-67.775,205.7,39.0
+Kazakhstan,Kostanay Region,49.0533,64.6267,204.8,31.1
+Russia,Komi Republic,66.9408,60.345,204.8,79.9
+Russia,Krasnoyarsk Krai,61.3567,85.8283,204.8,36.0
+Kazakhstan,Kostanay Region,50.3225,63.8217,204.8,43.9
+Ukraine,Sumy Oblast,50.88,33.6525,203.9,55.2
+Colombia,Amazonas,-2.3217,-69.8983,203.9,74.1
+Kazakhstan,Kostanay Region,50.8533,64.41,203.9,36.0
+Russia,Nizhny Novgorod Oblast,57.6933,46.7792,203.0,71.0
+Egypt,Giza,28.5775,28.1567,203.0,32.0
+Russia,Leningrad oblast,60.4875,30.1975,203.0,187.1
+Australia,Queensland,-23.8208,140.4483,201.8,42.1
+Turkmenistan,Dashoguz Region,40.305,57.1142,201.8,39.0
+Russia,Kirov Oblast,58.5325,46.665,200.9,39.0
+Russia,Arkhangelsk Oblast,64.6492,37.0175,200.9,189.0
+Russia,Nizhny Novgorod Oblast,57.8342,45.0233,200.9,67.1
+Belarus,Mahilyow Region,53.36,29.5375,200.9,34.1
+Canada,Nunavut,71.2517,-107.7397,200.3,91.7
+Peru,Loreto,-5.4642,-73.5858,199.9,43.0
+Colombia,Amazonas,-3.2908,-69.9358,199.9,69.2
+,,-68.0,147.0383,199.9,138.1
+Russia,Kurgan Oblast,55.3508,64.08,199.9,47.2
+Ukraine,Poltava Oblast,50.4458,33.1892,199.9,63.1
+Peru,Loreto,-3.8525,-74.2175,199.9,59.1
+United States,Texas,33.1388,-95.8442,199.3,32.3
+Russia,Vladimir Oblast,55.6933,41.2525,197.8,77.1
+Peru,Loreto,-1.5208,-73.8175,197.8,32.9
+Somalia,Lower Shabelle,1.1083,43.9892,196.9,119.2
+Argentina,Córdoba,-32.8717,-63.1442,196.9,41.1
+Australia,South Australia,-31.5692,131.8792,196.9,121.0
+Kazakhstan,West Kazakhstan Region,51.0092,52.3125,196.9,76.2
+Russia,Yamalo-Nenets Autonomous Okrug,64.6825,85.4925,196.9,100.0
+Mozambique,Inhambane Province,-24.6258,34.9933,196.9,128.9
+United States,Illinois,38.4902,-88.9007,196.0,37.8
+Russia,Nizhny Novgorod Oblast,57.3767,44.7608,196.0,41.1
+Russia,Krasnoyarsk Krai,59.9908,86.3892,196.0,52.1
+Oman,Al Wusta Governorate,19.0542,57.8083,196.0,113.1
+Australia,,-13.9583,136.6417,194.8,194.8
+Bolivia,Beni,-11.7058,-66.2708,194.8,32.0
+Russia,Krasnoyarsk Krai,59.51,87.7275,194.8,39.0
+Madagascar,Atsimo-Andrefana,-24.28,43.8633,194.8,65.8
+Bolivia,Beni,-14.7258,-65.6942,194.8,37.8
+Peru,Loreto,-2.4075,-74.1308,194.8,37.8
+Poland,Greater Poland Voivodeship,52.1725,18.325,194.8,79.9
+Australia,New South Wales,-29.0517,148.0167,194.8,39.0
+Canada,Nunavut,62.8922,-82.0028,194.2,194.2
+Peru,Loreto,-2.7367,-73.1025,193.9,31.1
+China,Heilongjiang,46.495,123.9433,193.9,53.9
+Russia,Tomsk Oblast,58.3908,87.495,193.9,42.1
+Peru,Loreto,-4.1158,-73.6775,192.9,39.0
+Ukraine,Dnipropetrovsk Oblast,48.4367,34.9992,192.9,41.1
+Colombia,Amazonas,-2.1392,-72.7175,192.9,31.1
+United States,Texas,31.1447,-96.1556,192.0,54.6
+Russia,Saratov Oblast,52.2125,43.3375,191.7,39.0
+Argentina,La Pampa,-35.4458,-64.1075,191.7,30.8
+Kazakhstan,Aqtöbe region,48.2383,63.6983,191.7,39.9
+Turkmenistan,Ahal Region,39.4317,60.6392,191.7,32.9
+Canada,Nunavut,63.5744,-84.9892,191.1,129.2
+Bolivia,Beni,-13.0183,-65.7258,190.8,39.9
+Russia,Novosibirsk Oblast,55.0817,82.225,190.8,32.0
+India,Rajasthan,29.0683,73.2033,190.8,36.0
+Australia,New South Wales,-29.3675,148.585,190.8,32.9
+Australia,Queensland,-11.4867,142.4992,190.8,100.0
+Russia,Krasnoyarsk Krai,68.7142,83.1058,190.8,132.0
+Indonesia,Central Kalimantan,-2.91,113.4608,189.9,167.0
+France,Normandy,49.6783,-1.8792,189.9,171.9
+Russia,Krasnoyarsk Krai,59.8667,87.9875,189.0,31.1
+Russia,Rostov Oblast,48.7167,41.8975,189.0,36.3
+Russia,Omsk Oblast,54.8917,71.2242,189.0,65.2
+Russia,Ryazan Oblast,53.71,40.6625,187.8,33.8
+Russia,Rostov Oblast,48.0933,41.4008,187.8,50.0
+Thailand,Surin Province,15.26,103.8108,187.8,36.9
+Russia,Voronezh Oblast,51.3725,41.905,187.8,30.8
+Australia,South Australia,-29.3575,134.5408,186.8,36.0
+Somalia,Hiiraan,3.4117,45.6392,186.8,46.0
+Australia,Queensland,-23.7233,141.6625,186.8,39.9
+Russia,Voronezh Oblast,51.6158,39.9658,186.8,39.9
+Belarus,Brest Region,52.2092,25.7233,185.9,39.9
+Somalia,Lower Shabelle,2.0192,45.1467,185.9,68.0
+Peru,Loreto,-2.6533,-71.6933,185.9,44.2
+Uruguay,Florida,-33.9575,-56.4375,184.7,40.8
+Russia,Leningrad oblast,59.5375,29.2842,184.7,125.0
+,,-69.6308,38.28,184.7,184.7
+China,Heilongjiang,46.505,125.13,184.7,39.9
+Russia,Nizhny Novgorod Oblast,57.2958,43.7408,184.7,34.7
+Egypt,The Lake,30.3717,29.74,184.7,48.8
+Peru,Loreto,-2.3542,-73.2883,183.8,39.0
+Morocco,,25.0842,-14.8308,183.8,58.8
+United States,Texas,31.0831,-93.8393,183.5,101.8
+Russia,Ivanovo Oblast,57.19,42.0875,182.9,62.2
+Bolivia,La Paz,-12.8392,-66.985,182.9,31.1
+Peru,Loreto,-2.5433,-72.7325,182.9,38.1
+Egypt,Matruh,28.8408,25.78,182.9,87.2
+Australia,New South Wales,-29.4408,146.1192,182.9,43.0
+Australia,Queensland,-9.9208,144.0433,182.9,182.9
+Russia,Samara Oblast,52.5467,49.7033,182.9,55.2
+Russia,Volgograd Oblast,48.2417,44.0725,182.0,68.0
+Brazil,Amazonas,-4.8283,-70.5975,182.0,42.1
+Denmark,,55.9925,9.7967,182.0,175.3
+Russia,Tomsk Oblast,58.1317,86.815,182.0,34.1
+China,Heilongjiang,47.5017,123.9767,182.0,37.2
+Australia,South Australia,-36.5875,140.5833,182.0,105.2
+Russia,Tomsk Oblast,57.2725,84.7525,182.0,42.1
+Morocco,,22.9217,-15.9117,180.7,37.8
+Finland,,64.185,25.5375,180.7,82.0
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,63.1575,68.5925,180.7,53.9
+Oman,Al Wusta Governorate,20.7592,56.8583,180.7,50.9
+Peru,Loreto,-3.2892,-71.4883,180.7,33.8
+Mozambique,Gaza Province,-23.4583,32.3575,179.8,32.0
+Belarus,Homyel Region,52.4617,30.0733,179.8,52.1
+Uruguay,Artigas,-30.7533,-57.0983,179.8,32.0
+Russia,Leningrad oblast,60.0267,26.995,179.8,179.8
+Kazakhstan,Mangystau Region,42.2975,53.2083,179.8,43.9
+Russia,Arkhangelsk Oblast,64.6717,43.1175,179.8,96.0
+Latvia,Courland,57.2117,22.645,179.8,128.0
+Kazakhstan,Kyzylorda Region,43.8542,65.7925,179.8,31.1
+Australia,New South Wales,-29.7367,147.785,178.9,39.9
+Libya,Al Wahat,29.3758,22.6567,178.9,71.0
+Brazil,Pará,-1.2333,-46.2983,178.9,151.2
+Australia,New South Wales,-30.1867,148.4783,177.7,33.8
+Colombia,Amazonas,-3.5292,-70.4417,177.7,43.0
+Peru,Loreto,-2.6017,-71.255,177.7,37.8
+Germany,Mecklenburg-Vorpommern,53.2975,11.905,177.7,133.8
+Australia,New South Wales,-29.5492,145.2933,177.7,44.8
+Russia,Komi Republic,66.2617,53.9925,176.8,160.0
+Russia,Krasnoyarsk Krai,69.6708,83.2233,176.8,117.0
+Germany,Mecklenburg-Vorpommern,53.4867,13.6092,176.8,118.0
+Russia,Ryazan Oblast,54.155,40.7667,176.8,33.8
+Argentina,Corrientes,-29.11,-56.9317,175.9,105.2
+Uruguay,Durazno,-33.24,-55.9475,175.9,32.9
+Cook Islands,Mangaia,-21.9283,-157.9292,175.9,175.9
+Colombia,Vichada,4.4508,-69.205,175.0,53.0
+Russia,Rostov Oblast,46.7258,42.1892,175.0,48.2
+Bolivia,Beni,-11.285,-66.1933,175.0,31.1
+Australia,South Australia,-35.675,139.6508,175.0,136.2
+United States,Mississippi,31.3922,-90.2919,173.7,76.5
+Turkmenistan,Ahal Region,39.73,59.5367,173.7,53.9
+Brazil,Amazonas,-2.1142,-69.42,173.7,34.7
+Canada,Ontario,53.3078,-84.2258,173.1,64.3
+Canada,Ontario,54.395,-88.0886,173.1,39.6
+Federated States of Micronesia,Yap,9.5475,138.1142,172.8,172.8
+Kazakhstan,Kyzylorda Region,45.835,65.8617,172.8,36.0
+Germany,Mecklenburg-Vorpommern,54.5542,13.63,171.9,171.9
+Russia,Ryazan Oblast,54.7342,42.0958,171.9,32.9
+Russia,Ryazan Oblast,54.9258,41.5317,171.9,32.9
+India,Rajasthan,27.7875,70.6358,171.9,43.0
+Peru,Loreto,-4.6933,-74.4117,171.0,64.0
+Peru,Loreto,-3.2708,-72.6392,171.0,33.2
+Estonia,,58.9383,26.3742,171.0,124.1
+Russia,Novosibirsk Oblast,55.3483,79.0292,171.0,37.2
+Morocco,,24.4067,-14.6858,171.0,31.1
+Canada,Nunavut,66.8939,-99.6217,171.0,38.1
+Russia,Nenets Autonomous Okrug,68.1492,51.8908,171.0,170.1
+Brazil,Maranhão,-2.7067,-45.2892,169.8,132.9
+Pakistan,Punjab,29.9575,71.8375,169.8,46.9
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,63.3783,70.1683,168.9,50.0
+Peru,Loreto,-3.225,-73.1092,168.9,32.9
+Germany,Lower Saxony,53.1675,9.9458,168.9,110.9
+Canada,Nunavut,68.8336,-117.5175,168.9,32.0
+Brazil,Amazonas,-2.5917,-59.0458,167.9,61.0
+Libya,Al Wahat,30.5783,20.3483,167.9,89.0
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,61.7058,68.3517,166.7,83.8
+Kazakhstan,Kostanay Region,49.5242,62.3583,166.7,37.8
+Belarus,Brest Region,51.905,26.9042,166.7,36.0
+Canada,Nunavut,56.1853,-78.8172,166.4,166.4
+Russia,Tyumen Oblast,56.1742,66.8125,165.8,31.1
+Australia,South Australia,-29.35,138.9317,165.8,68.0
+Germany,Schleswig-Holstein,54.2092,10.7242,165.8,146.0
+Russia,Yamalo-Nenets Autonomous Okrug,64.6467,68.2508,165.8,75.0
+Kazakhstan,Kyzylorda Region,44.3658,65.035,164.9,42.1
+Russia,Krasnoyarsk Krai,71.1675,93.7683,164.9,101.2
+Russia,Kurgan Oblast,55.335,64.9158,164.9,42.1
+Australia,New South Wales,-29.2033,143.5375,164.0,37.2
+Indonesia,East Java,-5.565,114.4375,164.0,164.0
+Kazakhstan,Kostanay Region,49.49,63.1342,164.0,50.0
+Australia,,-11.5067,132.0767,164.0,152.1
+United States,Louisiana,32.4249,-92.8967,163.1,69.5
+Australia,,-12.5725,136.6033,161.8,114.0
+Argentina,Córdoba,-33.9267,-62.8367,161.8,32.0
+United States,Florida,30.1438,-85.4847,161.8,160.0
+Russia,Sakha Republic,71.8083,119.2933,160.9,76.2
+Kazakhstan,Kostanay Region,50.1975,64.5925,160.9,31.1
+Kazakhstan,Aqtöbe region,47.8558,61.9608,160.9,64.0
+Pakistan,Sindh,27.3942,68.8267,160.9,99.1
+Mozambique,Gaza Province,-24.6725,33.5925,160.9,83.2
+United States,Tennessee,35.8332,-89.4795,160.3,57.0
+United States,Mississippi,31.6522,-90.8419,160.0,38.1
+Canada,Ontario,55.3244,-89.5869,160.0,44.2
+Russia,Omsk Oblast,56.665,74.9575,159.7,30.8
+Iraq,Al-Anbar Governorate,33.705,42.6058,159.7,36.0
+Russia,Sverdlovsk Oblast,59.3933,62.4467,158.8,65.8
+Australia,Queensland,-24.5192,140.3708,158.8,39.9
+United States,Arkansas,33.6258,-93.3735,158.5,57.9
+United States,Arkansas,35.1838,-90.7269,158.2,69.5
+Kazakhstan,Ulytau Region,47.1767,63.91,157.9,41.1
+Australia,Western Australia,-19.7758,122.2042,157.9,62.2
+Russia,Ivanovo Oblast,56.7833,42.8008,157.9,37.2
+Mozambique,Inhambane Province,-23.21,34.3308,157.9,35.1
+Australia,New South Wales,-30.1067,147.6333,157.9,31.1
+Somalia,Lower Shabelle,1.6417,44.6425,157.0,63.1
+Russia,Nenets Autonomous Okrug,70.2642,59.0775,157.0,157.0
+Colombia,Vichada,4.9692,-69.3042,157.0,31.1
+Canada,Quebec,51.7681,-78.9628,156.7,146.9
+Turkmenistan,Dashoguz Region,40.1025,59.0533,155.8,40.8
+Russia,Kurgan Oblast,54.4542,64.3608,155.8,53.9
+Argentina,Buenos Aires,-36.7875,-62.6525,155.8,32.0
+Russia,Sverdlovsk Oblast,58.0625,62.8017,155.8,32.9
+Russia,Yamalo-Nenets Autonomous Okrug,63.8742,73.9608,155.8,57.0
+Kazakhstan,Pavlodar Region,53.015,73.8475,154.8,40.8
+Russia,Yamalo-Nenets Autonomous Okrug,62.9,77.3633,154.8,43.0
+Morocco,,24.9983,-14.2225,154.8,39.0
+Ukraine,Chernihiv Oblast,51.2708,32.1225,154.8,31.1
+Russia,Tomsk Oblast,58.2,84.1225,153.9,38.1
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,62.4458,81.82,153.9,31.1
+Egypt,Matruh,29.3967,25.9817,153.9,41.1
+United States,Texas,30.7022,-95.5411,153.6,56.4
+United States,Texas,30.8594,-94.638,153.0,63.1
+Oman,Ad Dakhiliyah Governorate,21.25,56.8817,152.7,50.0
+Argentina,Buenos Aires,-36.5075,-62.1525,152.7,36.9
+Ukraine,Odesa Oblast,47.2225,30.1008,152.7,30.8
+Kazakhstan,Kyzylorda Region,43.7092,63.4867,151.8,32.0
+Argentina,Buenos Aires,-36.6792,-61.6625,151.8,36.9
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,64.2742,70.015,151.8,60.0
+Russia,Omsk Oblast,55.8675,74.7458,150.9,31.1
+Russia,Yamalo-Nenets Autonomous Okrug,62.7542,78.47,150.9,32.0
+United States,Louisiana,32.0126,-93.5718,150.9,58.2
+Russia,Krasnoyarsk Krai,60.3058,88.32,150.9,32.0
+Kazakhstan,Pavlodar Region,52.6617,74.7458,150.0,38.1
+United States,Tennessee,34.9982,-89.9095,149.7,43.6
+Russia,Tambov Oblast,51.8233,42.3733,148.7,39.9
+Kenya,Lamu,-1.8292,41.2592,148.7,122.8
+Argentina,Chaco,-25.6583,-60.185,148.7,37.8
+Russia,Novosibirsk Oblast,55.2108,76.8542,148.7,40.8
+United Arab Emirates,Abu Dhabi Emirate,24.885,53.0692,147.8,147.8
+Uzbekistan,Republic of Karakalpakstan,43.2683,60.4092,147.8,86.0
+France,Wallis and Futuna,-13.275,-176.2067,147.8,147.8
+Russia,Omsk Oblast,54.66,73.2983,146.9,41.1
+Australia,New South Wales,-33.7667,143.4675,146.0,65.2
+Russia,Ryazan Oblast,53.9908,42.0225,146.0,31.1
+Russia,Sverdlovsk Oblast,56.7383,62.5192,146.0,32.0
+Russia,Omsk Oblast,55.0683,73.2617,146.0,36.3
+Argentina,Santa Fe,-33.8167,-61.7892,146.0,38.1
+Canada,Ontario,55.2772,-87.4858,144.8,39.0
+Australia,South Australia,-30.5592,137.09,144.8,36.0
+Iraq,Al-Basra Governorate,30.1267,47.6258,143.9,114.0
+Canada,Nunavut,62.76,-94.1369,143.6,40.8
+Argentina,Corrientes,-29.2925,-58.1008,143.0,76.2
+Australia,New South Wales,-33.8242,142.6692,143.0,56.1
+Australia,New South Wales,-33.435,142.985,143.0,46.0
+Russia,Tyumen Oblast,56.6308,71.0208,143.0,34.1
+Kazakhstan,Kyzylorda Region,44.8967,63.1142,143.0,54.3
+Libya,Al Wahat,27.9483,21.9575,143.0,36.0
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.3508,67.0017,141.7,57.0
+Brazil,Amazonas,-5.9158,-67.9367,141.7,30.8
+Oman,Al Wusta Governorate,18.7142,56.5433,141.7,47.9
+Australia,Victoria,-34.6217,141.6267,141.7,68.9
+United States,Arkansas,33.9022,-92.5694,140.8,44.5
+Russia,Sverdlovsk Oblast,57.3667,64.3792,140.8,42.1
+Kazakhstan,Mangystau Region,45.005,54.1742,140.8,157.6
+Uzbekistan,Republic of Karakalpakstan,43.1117,59.4342,140.8,78.9
+Brazil,Piauí,-3.7342,-42.5383,140.8,46.0
+Russia,Yamalo-Nenets Autonomous Okrug,63.495,75.7892,140.8,31.1
+Canada,Nunavut,62.2347,-94.2478,140.5,81.4
+Argentina,Santa Fe,-32.9992,-61.6908,139.9,35.1
+Russia,Arkhangelsk Oblast,64.1217,40.5025,139.9,88.1
+Senegal,,14.84,-17.0,139.9,99.1
+Russia,Novosibirsk Oblast,55.1983,76.035,139.0,33.2
+Russia,Novosibirsk Oblast,55.3817,77.5117,139.0,33.2
+Turkmenistan,Dashoguz Region,41.2483,60.8658,139.0,33.2
+Turkmenistan,Dashoguz Region,41.1842,59.7,139.0,32.0
+Russia,Sverdlovsk Oblast,56.9283,64.8425,139.0,36.3
+Russia,Tomsk Oblast,57.68,84.4158,137.8,37.8
+United Arab Emirates,Abu Dhabi Emirate,23.6892,52.5858,137.8,61.9
+Russia,Omsk Oblast,55.0775,74.6033,136.9,36.9
+Canada,Nunavut,68.9461,-97.4008,136.9,136.9
+Kazakhstan,Kyzylorda Region,46.1275,62.0425,136.9,73.2
+Canada,Nunavut,66.8681,-71.8772,136.9,71.9
+Denmark,North Denmark Region,57.195,10.2925,135.9,135.9
+Saudi Arabia,Eastern Province,26.3208,50.1308,135.9,130.1
+Russia,Yamalo-Nenets Autonomous Okrug,70.0283,76.2925,135.9,96.0
+United States,Mississippi,31.0771,-91.5056,135.3,36.3
+Kazakhstan,Kyzylorda Region,44.3942,63.2717,134.7,43.0
+Russia,Yamalo-Nenets Autonomous Okrug,65.6142,75.3583,134.7,65.8
+Peru,Loreto,-5.5583,-74.1967,134.7,32.0
+Uzbekistan,Republic of Karakalpakstan,42.8825,61.3,134.7,62.8
+Russia,Saratov Oblast,51.7158,48.6608,134.7,32.0
+Argentina,Buenos Aires,-36.35,-61.2183,134.7,36.0
+Brazil,Amazonas,-1.3267,-68.0558,133.8,32.9
+Russia,Astrakhan Oblast,48.1425,46.855,133.8,114.9
+Australia,New South Wales,-34.1767,142.3833,133.8,31.1
+Russia,Nenets Autonomous Okrug,66.0375,46.4017,133.8,64.0
+United States,Arkansas,34.564,-90.6263,133.8,72.8
+Morocco,,23.7392,-15.6025,132.9,39.0
+Mozambique,Manica Province,-21.1392,34.0408,132.9,48.2
+Denmark,,55.155,10.2525,132.0,132.0
+Finland,,60.3283,20.1208,132.0,132.0
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,61.6058,77.5925,132.0,45.1
+Russia,Sakha Republic,63.9525,123.3217,130.8,33.8
+Russia,Tyumen Oblast,58.2375,68.4383,130.8,36.9
+Peru,Loreto,-5.0775,-74.0958,130.8,30.8
+Brazil,Maranhão,-3.4633,-42.9367,130.8,33.8
+Saudi Arabia,Eastern Province,23.0175,52.4192,130.8,39.9
+Oman,Ad Dakhiliyah Governorate,21.1667,57.9675,129.8,39.9
+Australia,Victoria,-35.6175,143.4525,128.9,32.0
+Saudi Arabia,Eastern Province,22.5217,51.565,128.9,37.2
+Russia,Tomsk Oblast,59.7908,76.8042,128.9,40.2
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,59.2292,72.9858,128.9,42.1
+United States,Arkansas,33.6103,-91.7819,128.0,51.8
+Brazil,Amazonas,-7.5358,-66.3808,127.7,36.0
+Uruguay,Colonia,-34.175,-57.9483,127.7,43.9
+Russia,Rostov Oblast,46.2767,41.1433,127.7,43.0
+Colombia,Amazonas,-2.4692,-72.2975,127.7,33.8
+Kenya,Garissa,-1.0758,40.83,126.8,31.1
+Australia,South Australia,-27.4675,139.095,125.9,89.0
+Argentina,Entre Ríos Province,-32.1633,-60.2217,125.9,57.0
+United States,Mississippi,31.1651,-89.284,125.0,30.8
+Canada,Nunavut,62.2083,-79.6417,125.0,125.0
+Brazil,Maranhão,-3.2125,-43.65,125.0,41.1
+Brazil,Amazonas,-8.1392,-67.2842,123.7,33.8
+Australia,Queensland,-25.0433,139.4108,123.7,39.9
+Russia,Yamalo-Nenets Autonomous Okrug,69.5958,74.0567,121.9,82.0
+Russia,Yamalo-Nenets Autonomous Okrug,65.3,68.215,121.9,46.9
+Uruguay,Paysandú,-32.3842,-57.6225,121.9,31.1
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,61.4167,76.6942,121.9,32.0
+Argentina,Corrientes,-27.8833,-57.3917,121.9,50.0
+Australia,Victoria,-35.5192,142.4667,121.9,33.2
+Canada,Nunavut,67.5703,-103.6658,120.7,33.5
+Argentina,Río Negro Province,-39.6242,-65.045,120.7,32.0
+Mozambique,Gaza Province,-22.9583,33.6583,119.8,46.9
+Russia,Saratov Oblast,50.7575,48.695,118.9,34.1
+Australia,Queensland,-25.7592,140.07,118.9,50.9
+Argentina,Buenos Aires,-35.9658,-61.5942,118.9,31.1
+Australia,Victoria,-34.6575,142.7825,118.0,53.0
+Netherlands,Gelderland,52.2258,5.845,118.0,109.1
+Australia,Queensland,-19.6125,141.1533,118.0,40.2
+Argentina,Corrientes,-28.0892,-58.3325,118.0,47.2
+Brazil,Amazonas,-4.4775,-66.7858,118.0,32.0
+Australia,Western Australia,-19.6408,121.7108,116.7,32.0
+Russia,Tomsk Oblast,58.3692,76.3933,115.8,39.9
+Pakistan,Sindh,26.6567,69.2317,114.9,60.0
+Russia,Yamalo-Nenets Autonomous Okrug,65.2792,70.6733,114.9,35.1
+Morocco,,26.3167,-14.1525,114.9,36.0
+China,Guangxi,20.91,109.21,114.0,114.0
+Russia,Yamalo-Nenets Autonomous Okrug,69.1167,79.3258,114.0,64.0
+Australia,South Australia,-28.1008,138.7525,114.0,57.0
+Somalia,Mudug,5.925,48.7792,114.0,36.3
+Iraq,Al-Anbar Governorate,33.4508,43.1467,114.0,35.1
+United States,Florida,27.8181,-82.0327,113.4,92.4
+Argentina,Corrientes,-28.8475,-57.6025,112.8,39.0
+Russia,Leningrad oblast,59.6417,31.1883,112.8,58.8
+Japan,,24.7792,125.3833,112.8,112.8
+Russia,Tyumen Oblast,59.1417,69.5083,112.8,32.0
+Argentina,Río Negro Province,-40.1783,-64.0958,112.8,39.0
+Russia,Sakha Republic,76.1683,152.7533,112.8,112.8
+Argentina,Corrientes,-29.7717,-57.4942,112.8,46.0
+Australia,Western Australia,-24.045,113.4283,112.8,103.0
+Argentina,Buenos Aires,-34.6642,-60.9308,112.8,33.8
+Argentina,Río Negro Province,-41.1192,-63.8958,111.9,31.1
+Australia,,-12.48,134.7883,111.9,46.9
+Russia,Yamalo-Nenets Autonomous Okrug,63.3792,77.7267,110.9,34.1
+Libya,Sirte,30.2942,18.5675,110.9,47.2
+Brazil,Maranhão,-3.5217,-44.5483,110.9,69.2
+Sweden,,59.1375,18.0158,110.9,98.1
+Argentina,Entre Ríos Province,-31.7892,-60.5108,110.9,31.1
+United States,Alabama,31.0861,-88.2691,110.3,52.4
+Russia,Tyumen Oblast,57.44,67.7808,109.7,33.8
+United Kingdom,England,52.8692,0.9667,109.7,82.0
+Mozambique,Inhambane Province,-21.725,35.4642,108.8,108.8
+Uruguay,Salto,-30.8625,-57.6267,108.8,36.9
+Venezuela,Apure State,6.7542,-67.965,108.8,36.9
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.2208,70.0233,107.9,49.1
+Turkmenistan,Dashoguz Region,42.27,58.6333,107.9,36.0
+Australia,Queensland,-25.8167,139.22,107.9,34.1
+Argentina,Buenos Aires,-35.3233,-60.9925,107.9,32.0
+Argentina,Chubut Province,-42.9558,-64.3633,107.9,35.1
+Uzbekistan,Republic of Karakalpakstan,43.4542,57.6183,107.9,44.2
+Russia,Tyumen Oblast,57.0883,65.63,107.0,31.1
+Brazil,Amazonas,-3.0408,-60.83,105.8,60.0
+Russia,Nenets Autonomous Okrug,66.2792,45.2067,105.8,46.0
+France,French Polynesia,-15.81,-148.2683,105.8,105.8
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.2367,72.665,104.9,43.0
+Indonesia,Moluccas,-6.78,134.1058,104.9,104.9
+United States,South Carolina,33.1602,-81.5596,103.9,30.5
+Australia,New South Wales,-33.2492,141.625,103.9,46.9
+Russia,Tyumen Oblast,57.9625,67.7125,102.7,52.7
+Russia,Yamalo-Nenets Autonomous Okrug,68.4475,79.8525,102.7,62.8
+Australia,Queensland,-18.32,140.425,102.7,55.8
+Russia,Yamalo-Nenets Autonomous Okrug,68.3083,70.7942,101.8,61.9
+Turkmenistan,Dashoguz Region,42.0483,57.9625,101.8,43.0
+Russia,Yamalo-Nenets Autonomous Okrug,64.565,79.875,101.8,51.8
+Somalia,Lower Juba,-0.1492,42.7,101.8,79.9
+Mauritania,Trarza,17.9258,-14.3817,100.9,42.1
+Russia,Tomsk Oblast,59.7542,81.5792,100.9,31.1
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,62.4308,68.08,100.9,32.0
+Australia,New South Wales,-35.2367,143.6467,100.9,31.1
+Cook Islands,Aitutaki,-18.8383,-159.78,100.9,100.9
+Iraq,Al-Muthanna Governorate,30.445,46.2675,100.9,31.1
+United States,Louisiana,31.8537,-92.0221,100.0,48.8
+Morocco,,22.0817,-16.3725,98.8,37.8
+France,Nouvelle-Aquitaine,44.5883,-1.215,98.8,67.1
+Russia,Yamalo-Nenets Autonomous Okrug,65.1608,74.0392,98.8,30.8
+Argentina,Buenos Aires,-34.9775,-60.6275,98.8,30.8
+Australia,South Australia,-34.2333,140.1717,98.8,30.8
+Argentina,La Pampa,-39.2483,-63.5783,98.8,39.9
+Argentina,Santa Fe,-31.9692,-61.2425,97.8,43.0
+Indonesia,Moluccas,-5.9042,134.3725,97.8,97.8
+Argentina,Buenos Aires,-34.2367,-60.2542,97.8,35.1
+Mauritania,Trarza,17.5717,-14.6792,97.8,39.9
+Somalia,Lower Juba,-0.965,41.4742,97.8,39.9
+Russia,Yamalo-Nenets Autonomous Okrug,66.6742,74.8717,96.9,45.1
+Russia,Tyumen Oblast,59.6317,69.34,96.9,33.2
+Russia,Tyumen Oblast,59.2258,71.2483,96.9,32.0
+Russia,Yamalo-Nenets Autonomous Okrug,63.9733,77.2192,96.9,34.1
+Australia,Queensland,-18.8283,140.0208,96.9,42.1
+United States,Florida,30.4458,-82.8715,96.6,57.3
+Canada,Nunavut,68.0864,-97.0542,96.6,82.9
+Australia,Queensland,-25.1325,138.7425,95.7,30.8
+Australia,Queensland,-25.1217,140.1333,95.7,30.8
+Morocco,,24.1358,-15.1358,95.7,32.9
+Russia,Khabarovsk Krai,56.405,143.3858,95.7,95.7
+Brazil,Amazonas,-6.2417,-60.845,95.7,32.9
+Canada,Nunavut,67.8161,-76.6942,95.1,95.1
+Argentina,Buenos Aires,-35.2175,-60.2783,94.8,35.1
+Russia,Tyumen Oblast,57.8892,68.885,94.8,39.0
+Russia,Yamalo-Nenets Autonomous Okrug,65.2,79.0717,94.8,46.9
+Australia,New South Wales,-33.5033,142.09,94.8,36.9
+Niue,,-19.0808,-169.9408,94.8,94.8
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.1317,74.2492,93.9,35.1
+Canada,Nunavut,69.2094,-102.5061,93.0,47.2
+Argentina,Chaco,-26.8358,-58.6492,93.0,34.1
+United States,Texas,28.4198,-96.752,92.0,92.0
+Uzbekistan,Republic of Karakalpakstan,45.1017,59.3133,91.7,62.8
+Russia,Tyumen Oblast,57.7125,69.8392,91.7,32.0
+Argentina,Chubut Province,-42.225,-64.31,91.7,66.8
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.02,73.4642,91.7,32.9
+Australia,South Australia,-26.4958,139.9525,91.7,36.9
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,61.1625,73.4908,91.7,64.0
+Russia,Yamalo-Nenets Autonomous Okrug,65.9217,79.9392,91.7,41.8
+Russia,Yamalo-Nenets Autonomous Okrug,66.4458,79.8658,90.8,31.1
+Saudi Arabia,Eastern Province,26.9142,49.6367,90.8,78.0
+Kazakhstan,West Kazakhstan Region,50.4575,51.6908,90.8,64.9
+Russia,Yamalo-Nenets Autonomous Okrug,69.7058,68.3958,90.8,71.0
+Brazil,Amazonas,-6.7283,-63.1342,89.9,34.1
+United States,Virginia,37.4335,-77.1214,89.9,53.3
+Nicaragua,,12.1733,-83.0475,88.7,88.7
+Russia,Tyumen Oblast,58.7533,68.7575,88.7,34.7
+Sweden,,57.3342,18.34,88.7,88.7
+Russia,Yamalo-Nenets Autonomous Okrug,68.5975,75.6408,88.7,57.9
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,61.4575,70.3242,88.7,32.9
+Australia,,-25.7317,137.72,88.7,36.9
+United States,Florida,29.9183,-82.0417,87.8,51.2
+Russia,Yamalo-Nenets Autonomous Okrug,69.1233,70.3133,87.8,58.8
+Mauritania,Trarza,17.145,-14.385,86.9,36.0
+Brazil,Amazonas,-3.3042,-68.5608,86.9,35.1
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.3142,64.1367,86.9,31.1
+Russia,Yamalo-Nenets Autonomous Okrug,70.9858,74.845,86.9,67.1
+Uruguay,Salto,-31.2225,-57.78,86.9,31.1
+Brazil,Maranhão,-2.5042,-43.83,86.0,83.2
+Russia,Yamalo-Nenets Autonomous Okrug,68.175,72.035,86.0,46.0
+Australia,,-15.7083,136.6775,86.0,86.0
+Russia,Yamalo-Nenets Autonomous Okrug,66.9675,79.0,86.0,37.2
+Indonesia,South Papua,-6.905,140.8275,86.0,38.1
+United States,Florida,30.5994,-84.3039,85.0,40.2
+Uzbekistan,Republic of Karakalpakstan,43.7983,59.015,84.7,33.8
+Fiji,Eastern,-20.6433,-178.7392,84.7,84.7
+Russia,Krasnoyarsk Krai,72.1808,79.6825,83.8,64.0
+Russia,Krasnodar Krai,46.465,38.5558,83.8,57.9
+Libya,Al Wahat,30.3242,21.4517,82.9,39.9
+Russia,Yamalo-Nenets Autonomous Okrug,71.6333,74.0358,82.9,43.0
+Papua New Guinea,Western,-8.6167,143.0308,82.9,46.9
+France,French Polynesia,-22.65,-152.8058,82.9,82.9
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.1233,71.5067,82.9,32.0
+Brazil,Amazonas,-3.21,-67.9058,82.0,33.2
+Somalia,Lower Juba,-0.6642,42.2125,82.0,72.2
+United States,Louisiana,32.7868,-92.3421,82.0,31.1
+Argentina,Buenos Aires,-39.795,-63.1542,82.0,37.2
+Russia,Yamalo-Nenets Autonomous Okrug,64.9492,67.0175,82.0,35.1
+Mozambique,Gaza Province,-24.4042,32.8892,82.0,34.1
+Turkmenistan,Balkan Region,41.45,52.72,82.0,90.8
+Falkland Islands,,-52.8992,-59.1833,80.8,80.8
+Indonesia,South Papua,-6.6408,140.5275,80.8,32.9
+Russia,Yamalo-Nenets Autonomous Okrug,66.47,82.4458,80.8,37.8
+Cook Islands,Atiu,-19.9958,-158.1167,80.8,80.8
+Argentina,Corrientes,-29.6533,-58.9908,80.8,37.8
+Russia,Sakha Republic,69.2417,157.6917,80.8,36.9
+Russia,Khanty-Mansiysk Autonomous Okrug – Ugra,60.7367,75.67,79.9,32.0
+Somalia,Middle Shebelle,3.475,46.9533,79.9,56.1
+Brazil,Pará,-1.4142,-51.0167,79.9,59.1
+Russia,Sakha Republic,75.0142,147.1083,78.9,78.9
+India,Andaman and Nicobar Islands,9.1617,92.7833,78.9,78.9
+Brazil,Amazonas,-2.77,-67.4383,78.9,34.1
+United States,North Carolina,34.9664,-78.4495,78.3,33.2
+Australia,South Australia,-34.39,140.6242,77.7,30.8
+Kiribati,Gilbert Islands,-0.8583,169.5342,77.7,77.7
+Ukraine,Mykolaiv Oblast,46.8242,32.2058,77.7,36.9
+Brazil,Pará,-1.6225,-51.4875,76.8,39.0
+Bermuda,,32.3175,-64.7333,76.8,76.8
+Indonesia,Riau Islands,1.5825,106.3225,76.8,76.8
+Brazil,Amazonas,-7.6075,-62.9042,75.9,35.1
+Egypt,Matruh,31.0508,28.3975,75.9,34.1
+Libya,Al Wahat,30.305,22.0033,75.0,32.0
+Brazil,Pará,-2.7933,-48.8692,75.0,34.1
+Russia,Yamalo-Nenets Autonomous Okrug,70.685,76.1033,75.0,55.2
+Uruguay,Río Negro,-32.9842,-57.9758,75.0,39.0
+Estonia,,58.9158,22.2,75.0,75.0
+Brazil,Amazonas,-3.6717,-62.7525,73.8,35.1
+Russia,Yamalo-Nenets Autonomous Okrug,68.2358,74.6767,73.8,32.9
+France,,-22.6083,168.9433,73.8,73.8
+United States,Florida,30.6114,-83.4557,73.5,33.8
+Russia,Yamalo-Nenets Autonomous Okrug,65.2025,65.9675,72.8,38.1
+Brazil,Amazonas,-1.7325,-65.9408,72.8,38.1
+Brazil,Amazonas,-3.94,-63.0875,72.8,34.1
+Solomon Islands,Temotu,-11.6083,169.85,72.8,72.8
+Iraq,Babil Governorate,32.3283,44.9692,71.9,46.9
+Brazil,Pará,-0.9658,-47.8683,71.9,35.1
+Russia,Yamalo-Nenets Autonomous Okrug,69.7942,70.6525,71.9,50.0
+Kenya,Tana River County,-2.4733,40.6408,71.9,56.1
+Qatar,Al Shahaniya,25.4233,50.7867,70.7,34.7
+Russia,Yamalo-Nenets Autonomous Okrug,71.2392,70.2117,70.7,50.9
+Australia,South Australia,-26.8883,137.2717,70.7,34.7
+Mauritania,Gorgol,16.2358,-13.3858,69.8,36.0
+Brazil,Amazonas,-6.995,-62.7025,69.8,32.0
+Brazil,Maranhão,-2.6267,-42.985,69.8,31.1
+Iraq,Babil Governorate,32.5433,44.4175,69.8,36.9
+United States,Florida,26.2831,-80.1594,69.8,66.1
+Australia,Western Australia,-32.17,126.3533,69.8,46.9
+Iraq,Baghdad Governorate,33.3175,44.2692,68.9,31.1
+United Arab Emirates,Sharjah Emirate,25.2325,54.2142,68.0,68.0
+Argentina,Corrientes,-30.3167,-59.4633,68.0,34.1
+Brazil,Pará,-2.9033,-49.7608,68.0,36.3
+Bangladesh,Rajshahi Division,24.1,89.0267,68.0,52.1
+Brazil,Amazonas,-6.1208,-61.8242,68.0,42.1
+Argentina,Buenos Aires,-34.8517,-59.0683,66.8,30.8
+Myanmar,Yangon,14.8825,93.6308,66.8,66.8
+Brazil,Amazonas,-3.56,-59.7317,66.8,43.0
+Indonesia,Riau,1.8167,101.0417,66.8,55.8
+Japan,,25.9492,131.2942,66.8,66.8
+Russia,Yamalo-Nenets Autonomous Okrug,67.2817,77.9892,66.8,36.9
+Russia,Yamalo-Nenets Autonomous Okrug,68.9733,76.48,66.8,46.9
+Russia,Yamalo-Nenets Autonomous Okrug,70.3008,69.9892,65.8,45.1
+Brazil,Amazonas,-3.8783,-58.8158,65.8,39.0
+United States,Florida,30.5748,-87.3952,65.8,43.0
+Brazil,Amazonas,-3.3058,-58.0208,65.8,46.9
+Brazil,Amazonas,-3.1125,-64.86,65.8,40.8
+Kazakhstan,Kyzylorda Region,44.9875,60.5075,64.9,32.0
+Indonesia,South Sumatra,-3.1083,105.1283,64.9,51.2
+Russia,Sakha Republic,71.5933,132.9442,64.9,45.1
+Australia,Queensland,-17.475,140.7983,64.9,64.0
+Estonia,,58.2908,22.1033,64.9,64.9
+United States,Florida,27.1836,-81.3388,64.9,30.5
+Canada,Nunavut,63.7958,-86.8711,64.9,44.2
+United States,Florida,29.4457,-82.2677,64.3,41.1
+Russia,Volgograd Oblast,49.1667,46.8708,63.7,41.8
+The Bahamas,,24.2392,-75.3742,63.7,63.7
+,,60.0,157.4533,63.7,63.7
+Canada,Ontario,51.9225,-82.6281,63.7,32.9
+Brazil,Amazonas,-1.9742,-65.2825,63.7,30.8
+Nauru,Aiwo,-0.5308,166.9167,63.7,63.7
+Russia,Yamalo-Nenets Autonomous Okrug,65.9233,71.8433,63.7,39.9
+Russia,Sakha Republic,75.8858,142.3308,63.7,61.0
+Canada,Nunavut,70.0464,-102.0711,63.1,40.2
+Brazil,Amazonas,-6.4858,-62.2967,62.8,33.8
+Libya,Bani Walid,31.935,15.12,62.8,64.6
+Russia,Yamalo-Nenets Autonomous Okrug,66.885,80.1725,62.8,32.0
+Saudi Arabia,Jazan Province,16.715,41.7892,62.8,62.8
+Canada,Nunavut,68.8272,-95.29,61.9,46.9
+Brazil,Pará,-1.4067,-48.1792,61.9,36.0
+Australia,South Australia,-26.7517,138.3383,61.9,39.0
+Brazil,Amazonas,-3.7625,-64.0308,61.9,41.1
+Indonesia,South Sumatra,-1.8458,104.1708,61.9,45.1
+Brazil,Amazonas,-1.1642,-62.2942,61.9,46.9
+Estonia,,59.4367,24.7392,61.9,34.1
+The Bahamas,,25.3792,-76.5325,61.9,61.9
+Australia,Western Australia,-20.805,115.39,61.0,61.0
+Senegal,,13.3417,-13.3867,61.0,34.1
+Brazil,Amazonas,-4.3225,-62.3208,59.7,32.9
+Australia,Queensland,-17.545,139.485,59.7,57.9
+Australia,South Australia,-31.1783,140.125,59.7,36.9
+Australia,South Australia,-28.2267,138.145,59.7,57.9
+Brazil,Amazonas,-4.0942,-59.5875,59.7,32.9
+Iraq,Al-Muthanna Governorate,31.2442,45.0675,59.7,39.9
+United States,Georgia,31.4584,-81.9448,59.1,42.7
+United States,Florida,29.0518,-81.6858,59.1,32.9
+Russia,Kaliningrad,55.2275,20.9092,58.8,58.8
+Mauritania,Inchiri,19.0483,-15.0667,58.8,31.1
+Brazil,Amazonas,-2.9108,-57.2617,58.8,36.0
+United States,Texas,29.8283,-95.2387,58.8,46.3
+Libya,Al Wahat,29.9033,21.4792,58.8,32.0
+Brazil,Amazonas,-3.5142,-59.0133,58.8,38.1
+Philippines,Palawan,9.5875,121.1992,58.8,58.8
+Russia,Novgorod Oblast,58.4508,31.655,58.8,31.1
+Egypt,,31.495,31.1283,57.9,56.1
+Brazil,Amazonas,-0.67,-63.0417,57.9,34.1
+Sweden,,57.8633,18.9967,57.9,38.1
+Canada,Prince Edward Island,46.8117,-64.1822,57.0,51.2
+Russia,Sakha Republic,75.2567,143.9758,57.0,48.2
+Russia,Krasnoyarsk Krai,77.19,89.5,57.0,57.0
+Indonesia,South Papua,-6.6983,139.5917,55.8,32.9
+Brazil,Amazonas,-1.0158,-62.7067,55.8,32.9
+Russia,Yamalo-Nenets Autonomous Okrug,71.2308,68.8192,55.8,32.0
+Fiji,Eastern,-19.8167,-178.2392,55.8,55.8
+Indonesia,South Papua,-7.4608,140.29,55.8,42.1
+Brazil,Amazonas,-5.0242,-60.8467,55.8,30.8
+Estonia,,58.4542,23.9175,54.9,32.9
+Argentina,Santa Fe,-31.295,-60.6683,54.9,32.0
+Brazil,Amazonas,-3.8675,-62.1392,54.9,39.0
+Russia,Sakha Republic,69.7733,159.1125,54.9,39.0
+Kazakhstan,Atyrau Region,48.5525,51.9325,53.9,56.7
+Argentina,Santa Fe,-30.8675,-60.0342,53.9,31.1
+Canada,Northwest Territories,77.3567,-118.0275,53.9,34.1
+Senegal,Fatick Region,13.7225,-16.3558,53.9,34.1
+India,West Bengal,22.5408,88.2983,53.9,46.0
+Netherlands,North Holland,52.7083,4.6817,53.9,53.9
+Canada,Nunavut,53.3344,-79.952,53.0,53.0
+Argentina,Buenos Aires,-38.6758,-59.095,52.7,34.7
+Qatar,,25.8675,51.5525,52.7,46.0
+Russia,Yamalo-Nenets Autonomous Okrug,70.69,68.6308,52.7,32.0
+Russia,Sakha Republic,70.6042,155.8883,52.7,30.8
+United States,Louisiana,29.8162,-91.803,52.1,52.1
+Germany,Schleswig-Holstein,54.1817,7.8825,51.8,51.8
+United States,North Carolina,36.1194,-77.0658,51.8,34.1
+Mauritania,Trarza,16.5925,-15.5308,51.8,46.0
+Australia,Queensland,-17.935,140.9117,51.8,33.8
+Egypt,Matruh,31.225,27.8475,51.8,31.1
+Russia,Sakha Republic,71.2917,150.05,51.8,50.9
+United States,Virginia,37.0825,-76.4294,51.2,43.9
+Guinea-Bissau,Tombali Region,11.1808,-15.1142,50.9,32.0
+Canada,Nunavut,70.7392,-100.3117,50.9,50.9
+Cayman Islands,,19.7458,-79.7342,50.9,50.9
+France,,-20.4717,166.6517,50.9,50.9
+The Bahamas,,24.675,-75.7425,50.9,43.0
+Libya,Bani Walid,32.4092,15.095,50.0,35.1
+The Bahamas,,22.9217,-74.8575,50.0,50.0
+India,West Bengal,23.025,88.3592,50.0,38.1
+Australia,South Australia,-27.3867,138.0458,50.0,40.2
+The Bahamas,,24.5408,-78.205,50.0,50.0
+Indonesia,South Sumatra,-3.5767,105.3692,48.8,37.8
+Australia,Western Australia,-25.06,113.1267,48.8,48.8
+Turks and Caicos Islands,,21.5192,-71.4983,48.8,48.8
+Argentina,Entre Ríos Province,-32.8417,-58.4292,48.8,30.8
+China,Shandong,37.6167,118.5408,48.8,39.9
+Russia,Sakha Republic,70.095,156.8983,48.8,32.9
+Guinea-Bissau,Oio Region,11.93,-15.5508,48.8,32.0
+United States,Delaware,38.5875,-75.4432,48.5,48.5
+Brazil,Pará,-2.1508,-49.9525,47.9,32.0
+United States,Hawaii,23.575,-164.7,47.9,47.9
+Saudi Arabia,Eastern Province,28.3483,48.4908,47.9,46.0
+Canada,Nunavut,57.3656,-78.4486,47.9,47.9
+Guinea-Bissau,Bolama Region,11.5592,-16.2908,46.9,46.9
+Argentina,Buenos Aires,-36.0342,-57.8342,46.9,37.2
+Canada,Nunavut,68.9839,-100.4308,46.9,46.9
+United States,South Carolina,32.991,-80.1065,46.6,33.2
+Indonesia,South Papua,-7.5083,139.4742,45.7,34.7
+United States,Alaska,60.7725,-162.9458,45.7,39.0
+Maldives,Gaafu Dhaalu,0.5342,72.9975,45.7,45.7
+United States,New Jersey,39.2396,-74.7868,45.1,34.1
+United States,Delaware,39.0399,-75.7266,45.1,31.4
+Russia,Yamalo-Nenets Autonomous Okrug,67.7675,77.4933,44.8,43.9
+Australia,Queensland,-15.8808,141.4342,44.8,40.8
+Indonesia,South Papua,-7.7542,139.9833,44.8,33.8
+The Bahamas,,23.5808,-75.2558,43.9,35.1
+China,Shandong,38.01,117.6808,43.9,37.2
+Australia,Queensland,-16.5283,139.2733,43.9,43.9
+Russia,Krasnoyarsk Krai,77.6208,92.05,43.9,43.9
+Mauritania,Trarza,18.7658,-15.5042,43.0,37.2
+Denmark,,56.6917,11.5392,43.0,43.0
+,,68.0,-169.0392,43.0,43.0
+Brazil,Pará,0.2725,-50.1842,43.0,43.0
+United States,North Carolina,35.378,-76.7933,42.1,37.5
+Egypt,Alexandria,31.1992,29.9142,41.8,39.9
+Russia,Yamalo-Nenets Autonomous Okrug,70.4983,67.6208,41.8,36.9
+Sweden,,58.3767,19.235,41.8,41.8
+Turks and Caicos Islands,,21.7875,-72.2475,41.8,41.8
+Russia,Krasnoyarsk Krai,75.9625,82.7833,41.8,41.8
+Venezuela,Delta Amacuro State,9.0992,-60.875,41.8,33.8
+The Bahamas,,22.7817,-74.2592,40.8,40.8
+The Bahamas,,24.0217,-74.4867,40.8,40.8
+Senegal,,12.4875,-16.5758,39.9,34.1
+Brazil,Pará,-1.3367,-50.5067,39.9,32.0
+Brazil,Pará,-1.965,-50.8633,39.9,38.1
+Canada,Nunavut,63.275,-83.6842,39.9,39.9
+Argentina,Autonomous City of Buenos Aires,-34.6775,-58.4608,39.9,31.1
+Canada,Nunavut,68.2772,-78.9608,39.9,39.9
+The Bahamas,,22.3858,-72.9017,39.9,39.9
+Netherlands,Frisia,53.2958,5.0567,39.9,39.9
+Brazil,Pará,-1.0067,-50.7725,39.9,39.9
+The Bahamas,,25.87,-77.1875,39.9,39.9
+Brazil,Pará,-1.7108,-50.4167,39.9,39.9
+Brazil,Rio Grande do Sul,-32.6808,-52.4925,38.7,32.9
+The Bahamas,,25.045,-77.3817,38.7,38.7
+Nigeria,Rivers State,4.5708,6.6992,38.7,33.8
+Pitcairn Islands,,-24.3842,-128.3475,38.7,38.7
+Federated States of Micronesia,Chuuk,6.68,149.2975,37.8,37.8
+Australia,Queensland,-17.0083,141.0558,37.8,35.1
+Australia,,-12.0525,134.7633,37.8,32.9
+Nigeria,Delta State,5.8525,5.2208,37.8,37.8
+Ukraine,Odesa Oblast,45.255,30.2025,37.8,37.8
+Brazil,Amapá,0.5683,-50.5917,37.8,32.0
+Bangladesh,Barishal Division,23.0308,90.5267,37.8,37.8
+Qatar,,25.6733,52.4092,37.8,37.8
+Cook Islands,Mauke,-20.1675,-157.3342,36.9,36.9
+The Bahamas,,24.12,-77.6083,36.9,36.9
+The Bahamas,,23.6992,-74.8033,36.9,36.9
+,,-47.7508,179.0242,36.9,36.9
+Canada,Nunavut,52.9103,-81.4914,36.9,36.9
+Australia,Queensland,-14.3683,141.5808,36.9,31.1
+Papua New Guinea,Western,-8.3658,143.5383,36.9,36.9
+The Bahamas,,24.9892,-78.1558,36.9,32.9
+The Bahamas,,22.3225,-74.0358,36.0,36.0
+Netherlands,Zeeland,51.6867,3.6967,36.0,36.0
+Seychelles,,-5.7733,53.3125,36.0,36.0
+Brazil,Amapá,2.085,-50.4575,36.0,36.0
+United States,Florida,26.1635,-81.6606,36.0,33.8
+The Bahamas,,24.0675,-76.3792,36.0,36.0
+British Indian Ocean Territory,,-5.2908,71.7408,34.7,34.7
+Netherlands,North Brabant,51.6267,4.755,34.7,32.9
+Cuba,Pinar del Rio,21.905,-84.8133,34.7,30.8
+Nigeria,Delta State,5.4808,5.4558,34.7,34.7
+Estonia,,58.63,23.2292,34.7,32.9
+Netherlands,Groningen,53.4342,6.8792,34.7,34.7
+United States,Massachusetts,41.2825,-69.9641,34.1,34.1
+Estonia,,57.8017,23.2608,33.8,33.8
+Sahrawi Arab Democratic Republic,,20.8183,-17.0667,32.9,31.1
+Russia,Krasnoyarsk Krai,74.5558,79.4525,32.9,32.9
+Papua New Guinea,Manus,-1.465,143.0508,32.9,32.9
+Malaysia,Sarawak,2.625,111.3208,32.9,32.9
+Mauritania,Dakhlet Nouadhibou,20.6275,-16.5608,32.9,32.0
+Indonesia,South Papua,-6.9925,139.0817,31.7,31.7
+Federated States of Micronesia,Chuuk,6.8925,152.7417,31.7,31.7
+The Bahamas,,21.195,-73.0433,31.7,31.7
+Australia,Western Australia,-20.3808,115.5575,31.7,31.7
+Russia,Krasnoyarsk Krai,72.7917,79.1,31.7,31.7
+Brazil,Pará,-0.1142,-49.4508,31.7,31.7
+France,Pays de la Loire,46.6942,-2.3292,31.7,31.7
+The Bahamas,,22.1892,-75.725,31.7,31.7
+Canada,Nunavut,68.2911,-100.0636,31.1,31.1
+Papua New Guinea,Manus,-1.3142,143.5817,30.8,30.8
+Finland,,65.0642,24.805,30.8,30.8
+Kiribati,Line Islands,4.6842,-160.3625,30.8,30.8
+Indonesia,South Papua,-7.5242,138.8383,30.8,30.8
+Papua New Guinea,Western,-8.9875,143.43,30.8,30.8
+Seychelles,,-9.745,46.5142,30.8,30.8
+Uruguay,Paysandú,-32.1517,-58.1733,30.8,30.8
+Canada,Nunavut,57.54,-79.7572,30.5,30.5
+Russia,Republic of Kalmykia,47.0275,45.4167,29.9,34.7
+Russia,Republic of Kalmykia,46.3675,45.9892,21.9,33.8
+Russia,Astrakhan Oblast,46.67,47.8717,11.9,32.6
+Kazakhstan,Mangystau Region,45.2417,52.9292,4.9,30.8
