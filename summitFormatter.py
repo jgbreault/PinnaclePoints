@@ -15,15 +15,12 @@ def saveSummits(summitsToSave, file):
     print(f'{file} saved')
     
 earthRadius = 6371146 # in m
-feetToMetres = 3.28084
 geod = Geod(ellps='sphere') # ellipsoid is slower
 cwd = os.getcwd()
 
-summits = pd.read_csv('prominence-p100.txt', sep=",", header=None)
+summits = pd.read_csv('all-peaks-sorted-p100.txt', sep=",", header=None)
 summits.columns = ['latitude', 'longitude', 'elevation', 'saddle_lat', 'saddle_lng', 'prominence']
 summits = summits[['latitude', 'longitude', 'elevation', 'prominence']]
-summits.elevation = summits.elevation.divide(feetToMetres).round(1)
-summits.prominence = summits.prominence.divide(feetToMetres).round(1)
 summits['h_distance'] = summits.prominence.apply(horizonDistance).round(1)
 summits = summits.sort_values('elevation', ascending=False)
 
@@ -31,7 +28,7 @@ summits = summits.sort_values('elevation', ascending=False)
 saveSummits(summits, 'summits_all.txt')
 
 # summits around North Pole
-poleLat = 60
+poleLat = 80
 summitsTop = summits.query(f'latitude >= @poleLat')
 saveSummits(summitsTop, 'summits_top.txt')
 

@@ -21,7 +21,7 @@ def saveCheckpoint():
     print('CHECKPOINT SAVED')
     print('\n')
     
-poleLat = 60
+poleLat = 80
 patchSize = 5
 maxLng = 180
 lngBoundaries = np.arange(-maxLng, maxLng+patchSize, patchSize)
