@@ -1,16 +1,17 @@
 # PinnaclePoints
-A **pinnacle point** is a point from which no higher point can be seen.
-
-More specifically, a pinnacle point is a point with zero **inferiority**, where inferiority is defined as the maximum elevation that can be seen in a direct line of sight from a point minus the point's elevation. Since all points can see themselves, the minimum possible inferiority is zero.
 
 Visit https://jgbreault.github.io/PinnaclePoints/.
 
-- Download Andrew Kirmse's list of <a href="https://www.andrewkirmse.com/prominence-update-2023#h.cap6s838fwux">11,866,713 summits</a> and put it into the head directory to set up the base dataset.
-- summitFormatter.py divides Andrew Kirmse's summits into groups based on latitude and longitude. This massively improves the computation time of the pinnaclePointFinder. Also, the horizon distance of each summit of determined, defined as &radic;(2 x R_earth x Prominence).
-- pinnaclePointFinder.py uses an algorithm to find Earth's pinnacle points, in decending order of elevation. I define two summits to be in view if their geospatial distance is less than the sum of their horizon distances.
-- pinnaclePointFormatter.py adds country and state/province information for each pinnacle point.
-- pinnaclePointAnalysis.ipynb is used to visulaize the results, and generate index.html.
-- index.html is a webapp showing all 2933 pinnacle points with their horizon distances.
-- pinnaclePoints.txt is the final result of 2933 pinnacle points in a txt file.
+A **pinnacle point** is a point from which no higher point can be seen in a direct line of sight.
 
-![Image](https://github.com/jgbreault/PinnaclePoints/blob/main/images/pinnaclePoints_world.png)
+More specifically, a pinnacle point is a point with zero **inferiority**, where inferiority is defined as the maximum elevation that can be seen in a direct line of sight from a point minus the point's elevation. Since all points can see themselves, the minimum possible inferiority is zero.
+
+- Download Andrew Kirmse's list of <a href="https://www.andrewkirmse.com/prominence-update-2023#h.cap6s838fwux">11,866,713 summits</a> and put it into the dataSources directory.
+- Download Kai Xu's list of <a href="https://www.andrewkirmse.com/prominence-update-2023#h.cap6s838fwux">6,464 OTOTW mountains</a> and put it into the dataSources directory.
+- summitFormatter.py divides Andrew Kirmse's summits into patches based on latitude and longitude.
+- pinnaclePointFinder.py uses an algorithm to find Earth's pinnacle points, in decending order of elevation.
+- pinnaclePointAnalysis.ipynb is used to generate index.html and pinnaclePoints.txt.
+- index.html is a webapp showing all pinnacle points.
+- pinnaclePoints.txt is the final result of pinnacle points in a txt file.
+
+![Image](https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pinnaclePoints_afroeurasia.png)
