@@ -3,29 +3,43 @@ import pandas as pd
 import commonFunctions as func
 
 '''
-Used to save patches
+Used to save patches.
 '''
 def saveSummits(summitsToSave, file):
     summitsToSave = summitsToSave[['latitude', 'longitude', 'elevation', 'h_distance']]
-    summitsToSave.to_csv(f'{func.cwd}/formattedSummits/{file}', header=False)
+    summitsToSave.to_csv(f'formattedSummits/{file}', header=False)
     print(f'{file} saved')
     
+'''
+Gets the latitude overlap that will be applied to a patch.
+Based on MHD in patch plus MHD in dataset.
+'''
+overlapStep = 0.1
+def getLatOverlap(maxDistance):
+    latOverlap = 0
+    overlapDist = 0
+    while overlapDist < maxDistance:
+        latOverlap += overlapStep
+        overlapDist = func.distanceBetweenPoints(0, latOverlap, 0, 0)
+    
+    return latOverlap
+    
 summits = pd.read_csv('dataSources/all-peaks-sorted-p100.txt', sep=",", header=None)
-summits.columns = ['latitude', 'longitude', 'elevation', 'saddle_lat', 'saddle_lng', 'prominence']
+summits.columns = ['latitude', 'longitude', 'elevation', 'saddle_lat', 'saddle_lng', 'prominence'] # can remove?
 summits = summits[['latitude', 'longitude', 'elevation', 'prominence']]
 summits['h_distance'] = summits.elevation.apply(func.horizonDistance).round(1)
 summits = summits.sort_values('elevation', ascending=False)
+maxHorizon = summits.h_distance.max()
 
 # summits around North Pole
-summitsTop = summits.query(f'latitude >= {func.poleLat}')
+summitsTop = summits.query(f'latitude >= {func.poleLat - 2*getLatOverlap(maxHorizon)}')
 saveSummits(summitsTop, 'summits_top.txt')
 
 # summits around South Pole
-summitsBtm = summits.query(f'latitude < {-func.poleLat}')
+summitsBtm = summits.query(f'latitude < {-func.poleLat + 2*getLatOverlap(maxHorizon)}')
 saveSummits(summitsBtm, 'summits_btm.txt')
 
 # summits between poles
-maxHorizon = summits.h_distance.max()
 for i, lowerLng in enumerate(func.lngBoundaries[:-1]):
     upperLng = func.lngBoundaries[i+1]
     for j, lowerLat in enumerate(func.latBoundaries[:-1]):
@@ -43,19 +57,11 @@ for i, lowerLng in enumerate(func.lngBoundaries[:-1]):
                 latForOverlap = upperLat
 
             lngOverlap = 0
-            lngOverlapStep = 0.1
-            overlapDistance = func.distanceBetweenPoints(latForOverlap, latForOverlap, 0, lngOverlap)
+            overlapDistance = 0
             while overlapDistance < maxSummitDistance:
-                lngOverlap += lngOverlapStep
+                lngOverlap += overlapStep
                 overlapDistance = func.distanceBetweenPoints(latForOverlap, latForOverlap, 0, lngOverlap)
-            
-            latOverlap = 0
-            latOverlapStep = 0.1
-            overlapDistance = func.distanceBetweenPoints(0, latOverlap, 0, 0)
-            while overlapDistance < maxSummitDistance:
-                latOverlap += latOverlapStep
-                overlapDistance = func.distanceBetweenPoints(0, latOverlap, 0, 0)
-
+                        
             # the logic is to account for crossing the 180 lng line
             if lowerLng - lngOverlap < -180:
                 lowerLngWithOverlap = 360 + lowerLng - lngOverlap
@@ -67,6 +73,7 @@ for i, lowerLng in enumerate(func.lngBoundaries[:-1]):
             else:
                 upperLngWithOverlap = upperLng + lngOverlap
                 
+            latOverlap = getLatOverlap(maxSummitDistance)
             lowerLatWithOverlap = lowerLat - latOverlap
             upperLatWithOverlap = upperLat + latOverlap
 

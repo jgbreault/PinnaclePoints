@@ -1,117 +1,17 @@
 import numpy as np
 import pandas as pd
-import requests
-import urllib.request
-import math
 import commonFunctions as func
-import json
+import requests
+import math
 import os
-
-'''
-There are 2 elevation APIs I use. Both are free, so both have drawbacks. 
-
-Open-Meteo has global coverage and is very fast. However, only allows 10,000 calls a day.
-Open-Elevation only works between -60 and 60 lat, is slow, and crashes often. 
-
-I use Open-Elevation between -60 and 60 lat (when I can) and Open-Meteo for the poles.
-'''
-def callElevationApi(lats, lngs):
     
-    if max(lats) > 60 or min(lats) < -60:
-        latStr = ','.join(map(str, lats))
-        lngStr = ','.join(map(str, lngs))
-
-        response = requests.get(f'https://api.open-meteo.com/v1/elevation?latitude={latStr}&longitude={lngStr}')
-        elvs = response.json()['elevation']
-    else:
-        latLngs = [{}]*len(lats)
-        for i in range(len(latLngs)):
-            latLngs[i] = {"latitude":lats[i], "longitude":lngs[i]}
-        location = {"locations":latLngs}
-        locationJson = json.dumps(location, skipkeys=int).encode('utf8')
-
-        url="https://api.open-elevation.com/api/v1/lookup"
-        response = urllib.request.Request(url, locationJson, headers={'Content-Type': 'application/json'})
-        response = urllib.request.urlopen(response)
-
-        responseProc = response.read()
-        responseProc = responseProc.decode("utf8")
-        responseProc = json.loads(responseProc)
-        responseProc = responseProc['results']
-        response.close()
-
-        elvs = []
-        for i in range(len(responseProc)):
-            elvs.append(responseProc[i]['elevation'])
-    
-    return elvs
-
-'''
-Generate a list of lats and lngs between the two input points along the geodesic.
-'''
-def getLatLngsBetweenPoints(lat1, lng1, lat2, lng2, numPoints=100):
-    lngLats = func.geod.npts(lng1, lat1, lng2, lat2, numPoints)
-    lngs = np.array(lngLats)[:,0]
-    lats = np.array(lngLats)[:,1]
-    return lats, lngs
-
-'''
-Generate a list of lats, lngs, dists, and elvs between the two input points along the geodesic.
-Takes curvature into account.
-dists and elvs start at 0.
-'''
-def getElevationProfile(lat1, lng1, elv1, lat2, lng2, elv2=np.nan):
-    
-    if np.isnan(elv2):
-        elv2 = callElevationApi([lat2], [lng2])
-    
-    lats, lngs = getLatLngsBetweenPoints(lat1, lng1, lat2, lng2)  
-    elvs = callElevationApi(lats, lngs)
-
-    # npts doesn't include start/end points, so prepend/append them
-    lngs = np.insert(lngs, 0, lng1)
-    lngs = np.append(lngs, lng2)
-    lats = np.insert(lats, 0, lat1)
-    lats = np.append(lats, lat2)
-    elvs = np.insert(elvs, 0, elv1)
-    elvs = np.append(elvs, elv2)
-
-    dists = []
-    for i in range(len(lats)):
-        lat = lats[i]
-        lon = lngs[i]
-        dist = func.distanceBetweenPoints(lat1, lat, lng1, lon)
-        dists.append(dist)
-    
-    # adjusting for earth's curvature
-    angleBetweenPoints = np.array(dists)/func.earthRadius
-    dists = func.earthRadius * np.sin(angleBetweenPoints)
-    dropFromCurvature = func.earthRadius * (1 - np.cos(angleBetweenPoints))
-    elvs = elvs - dropFromCurvature - elvs[0]
-    
-    return lats, lngs, dists, elvs
-
-'''
-Rotates an elevation profile from getElevationProfile() be an angle.
-'''
-def rotateElevationProfile(dists, elvs, angle):
-    dists = (dists * math.cos(angle)) - (elvs * math.sin(angle))
-    elvs = (dists * math.sin(angle)) + (elvs * math.cos(angle))
-    
-    return dists, elvs
-
 '''
 Determines if 2 points have direct line of sight.
 '''
 def hasDirectLos(p1, p2):
-    
-    lats, lngs, dists, elvs = getElevationProfile(p1[LAT], p1[LNG], p1[ELV], p2[LAT], p2[LNG], p2[ELV])
-    
-    # ROTATING TO MAKE LOS HORIZONTAL
-    angleBelowHorizontal = -np.arctan(elvs[-1]/dists[-1])
-    dists, elvs = rotateElevationProfile(dists, elvs, angleBelowHorizontal)
+    dists, elvs = func.getLosData(p1[LAT], p1[LNG], p1[ELV], p2[LAT], p2[LNG], p2[ELV])
 
-    #REMOVING ENDS SINCE THEY COULD BE SLIGHTLY ABOVE 0 AFTER THE TRANSLATION/ROTATION
+    # removing ends since they could be slightly above 0 after the translation/rotation
     if max(elvs[1:-1]) > 0:
         return False
     return True
@@ -142,12 +42,12 @@ ID  = 0 # ID (ordered by elevation)
 LAT = 1 # latitude
 LNG = 2 # longitude
 ELV = 3 # elevation
-HD  = 4 # horizon distance
+HD  = 4 # max horizon distance
 
-summitsDir = f'{func.cwd}/formattedSummits/'
-dataFormat = '%d, %.4f, %.4f, %.1f, %.1f'
+summitsDir = 'formattedSummits/'
+dataFormat = '%d, %.4f, %.4f, %.2f, %.2f'
 
-ototw = pd.read_csv(f'{func.cwd}/dataSources/ototw_p300m.csv')
+ototw = pd.read_csv('dataSources/ototw_p300m.csv')
 ototw = ototw[['latitude', 'longitude', 'elevation_m']].sort_values(by='elevation_m', ascending=False)
 ototw = ototw.rename(columns={'elevation_m': 'elevation'})
 ototw['horizonDist'] = ototw.elevation.apply(func.horizonDistance).round(2)
@@ -194,10 +94,10 @@ while remainingOtotwNum > 0:
     print(f'OTOTW Remaining: {remainingOtotwNum} ({round(100*(1 - (remainingOtotwNum/ototwNum)), 2)}% complete)')
     print(f'\n')
     
-    distanceBetweenOtotw = [func.distanceBetweenPoints(row[LNG],
-                                                       ppCandidate[LNG],
-                                                       row[LAT],
-                                                       ppCandidate[LAT])
+    distanceBetweenOtotw = [func.distanceBetweenPoints(row[LAT],
+                                                       ppCandidate[LAT],
+                                                       row[LNG],
+                                                       ppCandidate[LNG])
                             for row in remainingOtotw]
     
     mayseenIndices = np.where(distanceBetweenOtotw < remainingOtotw[:,HD] + ppCandidate[HD])[0]
@@ -222,12 +122,13 @@ while remainingOtotwNum > 0:
         # this is for patches holding a single summit
         mayseenHigherSummits = []
     else:
-        distanceBetweenSummits = [func.distanceBetweenPoints(row[LNG],
-                                                             ppCandidate[LNG],
-                                                             row[LAT],
-                                                             ppCandidate[LAT]) 
+        distanceBetweenSummits = [func.distanceBetweenPoints(row[LAT],
+                                                             ppCandidate[LAT],
+                                                             row[LNG],
+                                                             ppCandidate[LNG]) 
                                   for row in patchSummits]      
         
+        # TODO: get self in a better way than "+ 0.1" to elevation
         mayseenHigherIndices = np.where((distanceBetweenSummits < patchSummits[:, HD] + ppCandidate[HD]) 
                                         & (patchSummits[:, ELV] > ppCandidate[ELV] + 0.1))[0]
         mayseenHigherSummits = patchSummits[mayseenHigherIndices]
@@ -254,7 +155,7 @@ while remainingOtotwNum > 0:
         foundPpNum = len(foundPp)
         print(f'PINNACLE POINT {foundPpNum} FOUND!!!')
             
-        if foundPpNum%5 == 0:
+        if foundPpNum%4 == 0:
             saveCheckpoint()
     
     if remainingOtotwNum == 0:
