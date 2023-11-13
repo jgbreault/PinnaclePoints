@@ -1,4 +1,3 @@
-var peaks = 
 {
     "type": "FeatureCollection",
     "features": [

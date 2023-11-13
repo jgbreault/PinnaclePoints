@@ -13,4 +13,4 @@ More specifically, a pinnacle point is a point with zero **inferiority**, where 
 - index.html is a webapp showing all pinnacle points.
 - pinnaclePoints.txt is the final result of pinnacle points in a txt file.
 
-![Image](https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pinnaclePoints_afroeurasia.png)
+![Image](https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pinnaclePoints_globe.png)
