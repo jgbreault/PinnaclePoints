@@ -14,3 +14,4 @@ More specifically, a pinnacle point is a point with zero **inferiority**, where 
 - pinnaclePoints.txt is the final result of pinnacle points in a txt file.
 
 ![Image](https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png)
+![Image](https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/Longest_Unbroken_Light_Path_on_Earth_(538_km).png)
