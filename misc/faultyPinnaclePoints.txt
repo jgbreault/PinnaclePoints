@@ -1,0 +1,23 @@
+Example:
+
+Identified Pinnacle Point
+Actual Pinnacle Point
+Area/Region
+Reason for misidentification
+
+#################################################################
+
+Torngarsoak Mountain
+Mount Caubvick
+Quebec/Labrador
+Incorrect elevation data in mountain database from standard error
+
+Western Barren
+White Hill
+Nova Scotia, Cape Breton Island
+White hill is missing in mountain database
+
+Briar Hill
+Grove Hill
+Michigan
+Incorrect elevation data in mountain database from standard error
