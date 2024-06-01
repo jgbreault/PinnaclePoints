@@ -22,7 +22,7 @@ ID  = 0 # ID (ordered by elevation)
 LAT = 1 # latitude
 LNG = 2 # longitude
 ELV = 3 # elevation
-HD = 4 # max horizon distance
+HD  = 4 # max horizon distance
 
 '''
 Plotting distance vs elevation from persepctive of the direct line of sight.

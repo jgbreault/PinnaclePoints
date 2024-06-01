@@ -23,7 +23,7 @@ def getLatOverlap(maxDistance):
     
     return latOverlap
     
-summits = pd.read_csv('../dataSources/all-peaks-sorted-p100.txt', sep=",", header=None)
+summits = pd.read_csv('../dataSources/all-peaks-sorted-p100.txt', sep=',', header=None)
 summits.columns = ['latitude', 'longitude', 'elevation', 'saddle_lat', 'saddle_lng', 'prominence']
 summits = summits[['latitude', 'longitude', 'elevation', 'prominence']]
 summits['h_distance'] = summits.elevation.apply(func.horizonDistance).round(1)

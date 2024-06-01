@@ -122,10 +122,11 @@ def isPinnaclePoint(summit, patchSummits, plotClosestInfo=False):
                                                     summit[LAT]])
                                   for patchSummit in patchSummits]      
         
+        # TODO: use ~
         mayseenHigherIndices = np.where((distanceBetweenSummits < patchSummits[:, HD] + summit[HD])
                                         & (patchSummits[:, ELV] > summit[ELV])
-                                        & ~((patchSummits[:, LAT] == summit[LAT]) # filtering out self
-                                            & (patchSummits[:, LNG] == summit[LNG])))[0]
+                                        & ((patchSummits[:, LAT] != summit[LAT]) # filtering out self
+                                            & (patchSummits[:, LNG] != summit[LNG])))[0]
         mayseenHigherSummits = patchSummits[mayseenHigherIndices]
         
         # sorting mayseenHigherSummits by distance to summit
