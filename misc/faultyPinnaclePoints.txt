@@ -21,3 +21,8 @@ Briar Hill
 Grove Hill
 Michigan
 Incorrect elevation data in mountain database from standard error
+
+Mount Lidgbird
+Mount Grower
+Remote Island, Australia
+Mount Grower is missing in mountain database
