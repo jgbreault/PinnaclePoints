@@ -26,3 +26,8 @@ Mount Lidgbird
 Mount Grower
 Remote Island, Australia
 Mount Grower is missing in mountain database
+
+Tuchenn Kador
+Roc'h Ruz
+Brittanny, France
+Roc'h Ruz is missing in mountain database
