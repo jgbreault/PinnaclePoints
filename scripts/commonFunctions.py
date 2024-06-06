@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from pyproj import Geod
 import requests
 import math
@@ -110,7 +111,7 @@ def getPatchSummits(lat, lng, summitPatches):
 Determines if a summit is a pinnacle point.
 Must include the patch that contains the summit as input.
 '''
-def isPinnaclePoint(summit, patchSummits, plotClosestInfo=False):
+def isPinnaclePoint(summit, patchSummits, plotClosestInfo=False, testingCustomPoint=False):
 
     if patchSummits.ndim == 1:
         # this is for patches holding a single summit
@@ -120,11 +121,17 @@ def isPinnaclePoint(summit, patchSummits, plotClosestInfo=False):
                                                     summit[LNG]], 
                                                    [patchSummit[LAT], 
                                                     summit[LAT]])
-                                  for patchSummit in patchSummits]      
+                                  for patchSummit in patchSummits]   
         
-        mayseenHigherIndices = np.where((distanceBetweenSummits < patchSummits[:, HD] + summit[HD])
+        if testingCustomPoint == True:
+            minDistBetweenPP = 1000
+        else:
+            minDistBetweenPP = 0
+        
+        mayseenHigherIndices = np.where((np.array(distanceBetweenSummits) > minDistBetweenPP) 
+                                        & (distanceBetweenSummits < patchSummits[:, HD] + summit[HD])
                                         & (patchSummits[:, ELV] > summit[ELV])
-                                        & ~((patchSummits[:, LAT] == summit[LAT]) # filtering out self
+                                        & ~((patchSummits[:, LAT] == summit[LAT]) # filtering out self, could improve?
                                             & (patchSummits[:, LNG] == summit[LNG])))[0]
         mayseenHigherSummits = patchSummits[mayseenHigherIndices]
         
@@ -139,9 +146,14 @@ def isPinnaclePoint(summit, patchSummits, plotClosestInfo=False):
         if hasSight(summit, mayseenHigherSummit):
             candidateIsPp = False
             
+            distanceToClosestHigherSummit = geod.line_length([mayseenHigherSummit[LNG], 
+                                                              summit[LNG]], 
+                                                             [mayseenHigherSummit[LAT], 
+                                                              summit[LAT]])
+            
             print(f'{summit[LAT]}, {summit[LNG]} at {summit[ELV]} m is in view of \n' + 
-                  f'{mayseenHigherSummit[LAT]}, {mayseenHigherSummit[LNG]} at {mayseenHigherSummit[ELV]} m ' + 
-                  f'({i+1} summits tested)')
+                  f'{mayseenHigherSummit[LAT]}, {mayseenHigherSummit[LNG]} at {mayseenHigherSummit[ELV]} m ({i+1} summits tested)\n' +
+                  f'{round(distanceToClosestHigherSummit/1000)} km away')
             
             if plotClosestInfo == True:
                 plotLosElevationProfile(summit[LAT], summit[LNG], 
@@ -174,6 +186,15 @@ def getLatLngsBetweenPoints(lat1, lng1, lat2, lng2, numPoints=100):
     return lats, lngs
 
 '''
+Gets the elevations for points via OpenMeteo API.
+If inputting multiple points, must be comma separately
+Can only make 10,000 requests per day
+'''
+def getElevation(latStr, lngStr):
+    response = requests.get(f'https://api.open-meteo.com/v1/elevation?latitude={latStr}&longitude={lngStr}')
+    return response.json()['elevation']
+
+'''
 Generate a list of lats, lngs, dists, and elvs between the two input points along the geodesic.
 Takes curvature into account.
 dists and elvs start at 0.
@@ -186,8 +207,7 @@ def getElevationProfile(lat1, lng1, elv1, lat2, lng2, elv2):
     lats, lngs = getLatLngsBetweenPoints(lat1, lng1, lat2, lng2)
     latStr = ','.join(map(str, lats))
     lngStr = ','.join(map(str, lngs))
-    response = requests.get(f'https://api.open-meteo.com/v1/elevation?latitude={latStr}&longitude={lngStr}')
-    elvs = response.json()['elevation']
+    elvs = getElevation(latStr, lngStr)
 
     # npts doesn't include start/end points, so prepend/append them
     lngs = np.insert(lngs, 0, lng1)
