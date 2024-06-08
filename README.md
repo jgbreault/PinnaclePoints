@@ -20,7 +20,7 @@ Across the globe, 601 have been found. These are all pinnacle points with more t
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/Longest_Unbroken_Light_Path_on_Earth_(538_km).png"/>
 
 **Taking atmospheric refraction into account:**
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/atmosphericRefraction.png" width="100"/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/atmosphericRefraction.jpg" width="100"/>
 
 **Taking the curvature of the Earth into account:**
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/earthCurvature.png"/>
