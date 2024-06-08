@@ -1,0 +1,8 @@
+country,nameFalse,latFalse,lngFalse,elevationFalse,nameTrue,latTrue,lngTrue,elevationTrue,reason
+USA,Briar Hill,44.3661,-85.6795,519,Grove Hill,44.1376,-85.3446,521,elevation order flipped by error in datasource
+Canada,Western Barren,46.5992,-60.7592,532,White Hill,46.7058,-60.5986,533,missing higher point in datasource
+Canada,Torngarsoak Mountain,58.9441,-63.79,1595,Mount Caubvick,58.8878,-63.7098,1652,elevation order flipped by error in datasource
+Australia,Mount Lidgbird,-31.5659,159.0834,777,Mount Gower,-31.5882,159.0735,875,missing higher point in datasource
+France,Tuchenn Kador,48.372,-3.953,384,Roc'h Ruz,48.4167,-3.8803,385,missing higher point in datasource
+Spain,Torre del Llambrión,43.1732,-4.857,2642,Torrecerredo,43.1978,-4.8529,2649,elevation order flipped by error in datasource
+Japan,Tsurugi-san,33.8536,134.0942,1955,Ishizuchi-san,33.7677,133.1151,1982,elevation order flipped by error in datasource
