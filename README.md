@@ -4,7 +4,7 @@ A **pinnacle point** is a point from which no higher point can be seen.
 
 Interactive Map: https://jgbreault.github.io/PinnaclePoints/
 
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png" width=50%/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png" width=60%/>
 
 Across the globe, 601 have been found. These are all pinnacle points with more than 300 m of prominence. The algorithm used for finding pinnacle points is outlined in the info section of the site, along with sources of error. The curvature of the Earth, and atmospheric refraction are taken into account.
 
@@ -21,7 +21,7 @@ Across the globe, 601 have been found. These are all pinnacle points with more t
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/Longest_Unbroken_Light_Path_on_Earth_(538_km).png"/>
 
 **Taking atmospheric refraction into account:**
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/atmosphericRefraction.png" width=50%/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/atmosphericRefraction.jpg" width=60%/>
 
 **Taking the curvature of the Earth into account:**
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/earthCurvature.png"/>
