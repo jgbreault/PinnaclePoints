@@ -18,10 +18,13 @@ Across the globe, 601 have been found. These are all pinnacle points with more t
 - pinnaclePoints.txt is the final result of pinnacle points in a txt file.
 
 **The path of light between the two farthest points on Earth that can see each other:**
+
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/Longest_Unbroken_Light_Path_on_Earth_(538_km).png"/>
 
 **Taking atmospheric refraction into account:**
+
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/atmosphericRefraction.jpg" width=60%/>
 
 **Taking the curvature of the Earth into account:**
+
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/earthCurvature.png"/>
