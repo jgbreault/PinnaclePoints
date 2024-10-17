@@ -28,7 +28,12 @@ HD  = 4 # max horizon distance
 '''
 Plotting distance vs elevation from persepctive of the direct line of sight.
 '''
-def plotLosElevationProfile(lat1, lng1, elv1, lat2, lng2, elv2, savePlot=False, plotTitle='', printInfo=True):
+def plotLosElevationProfile(lat1, lng1, elv1, 
+                            lat2, lng2, elv2, 
+                            savePlot=False, 
+                            plotTitle='', 
+                            printInfo=True,
+                            xLabel=''):
     
     dists, elvs = getLosData(lat1, lng1, elv1, lat2, lng2, elv2)
 
@@ -49,24 +54,39 @@ def plotLosElevationProfile(lat1, lng1, elv1, lat2, lng2, elv2, savePlot=False, 
             print('Direct Line of Sight: Yes')
 
         print(f'Distance: {round(dists[-1])} km')
+        
+    hasLineOfSight = np.all(lightPath[1:-1]>elvs[1:-1])
+    landBlocking = ''
+    if hasLineOfSight:
+        landBlocking = ' (None)'        
     
     plt.figure(figsize=(10,4))
     plt.plot(dists, elvs, color='k')
-    plt.fill_between(dists, lightPath, elvs, alpha=0.5, color='darkorange')
-    plt.xlabel('Distance from Observer to Target (km)')
-    plt.ylabel('Distance from Direct Line of Sight (m)')
+    plt.plot(dists, lightPath, color='orange', 
+             label='Path of light bent from atmospheric refraction') # light with bending
+    plt.plot(dists, np.zeros(len(dists)), linestyle=':', c='darkorange', 
+             label='Path of light if there was no atmosphere') # light without bending
+    plt.fill_between(dists, lightPath, elvs, alpha=1, color='red', where=(elvs > lightPath),
+                label=f'Land that blocks line of sight{landBlocking}')
+    plt.fill_between(dists, 0, elvs, alpha=0.33, color='grey', where=(elvs > 0),
+                    label='Land that would block line of sight if there were no atmosphere')
+    
+    if xLabel == '':
+        xLabel = 'Distance from Observer to Target (km)'
+    
+    plt.xlabel(xLabel)
+    plt.ylabel('Vertical Distance (m)')
     fig = plt.gcf()
     fig.patch.set_facecolor('w')
     fig.set_dpi(120)
     plt.grid()
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=1)
     
     if plotTitle != '':
         plt.title(plotTitle)
         
-    plt.axhline(0, linestyle=':', c='k', lw=1)
-
     if savePlot == True and plotTitle != '':
-        plt.savefig(f'../misc/pics/{plotTitle.replace(" ", "_")}')    
+        plt.savefig(f'../misc/pics/{plotTitle.replace(" ", "_")}') 
     
     plt.show()
 
