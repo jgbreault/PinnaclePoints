@@ -3,6 +3,7 @@
 A **pinnacle point** is a point from which no higher point can be seen.
 
 Interactive Map: https://www.pinnacle-points.com
+
 Blog: https://www.pinnacle-points.com/guide
 
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png" width=60%/>
