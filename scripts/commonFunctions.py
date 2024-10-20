@@ -58,7 +58,7 @@ def plotLosElevationProfile(lat1, lng1, elv1,
     hasLineOfSight = np.all(lightPath[1:-1]>elvs[1:-1])
     landBlocking = ''
     if hasLineOfSight:
-        landBlocking = ' (None)'        
+        landBlocking = ' (none)'        
     
     plt.figure(figsize=(10,4))
     plt.plot(dists, elvs, color='k')
@@ -69,7 +69,7 @@ def plotLosElevationProfile(lat1, lng1, elv1,
     plt.fill_between(dists, lightPath, elvs, alpha=1, color='red', where=(elvs > lightPath),
                 label=f'Land that blocks line of sight{landBlocking}')
     plt.fill_between(dists, 0, elvs, alpha=0.33, color='grey', where=(elvs > 0),
-                    label='Land that would block line of sight if there were no atmosphere')
+                    label='Land that would block line of sight if there was no atmosphere')
     
     if xLabel == '':
         xLabel = 'Distance from Observer to Target (km)'
