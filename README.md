@@ -4,7 +4,7 @@ A **pinnacle point** is a point from which no higher point can be seen.
 
 Across the globe, 602 have been found. These are all pinnacle points with more than 300 m of prominence. The algorithm used for finding pinnacle points is outlined in the info section of the Interactive Map, along with sources of error. The curvature of the Earth, atmospheric refraction, and local topography are taken into account. The base dataset is a list of 11,866,713 high points with over 100 feet of prominence. I use an elevation API to find the elvation of points between these high points.
 
-Interactive Map: https://www.pinnacle-points.com
+Interactive Map (Method in Info Section): https://www.pinnacle-points.com
 
 My Pinnacle Point Journal: https://www.pinnacle-points.com/guide
 
