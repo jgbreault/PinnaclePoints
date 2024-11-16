@@ -58,8 +58,8 @@ PinnaclePoints/
 │       ├── historicalResults/
 │       │   ├── iso_1km/             # The results that used all_iso-1km.txt as a base dataset
 │       │   └── prm_100ft/           # The results that used all_prm-100ft.txt as a base dataset
-│       ├── isolationPatches/        # Patches from all_iso-1km.txt
-│       └── prominencePatches/       # Patches from all_prm-100ft.txt
+│       ├── isolationPatches/        # Patches from all_iso-1km.txt (MISSING: add directory yourself)
+│       └── prominencePatches/       # Patches from all_prm-100ft.txt (MISSING: add directory yourself)
 ├── guide/ # My pinnacle point blog
 └── misc/
     ├── pinnaclePoints.apk # Downloadable app for android
