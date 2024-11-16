@@ -1,98 +1,93 @@
 import numpy as np
 import pandas as pd
 import commonFunctions as func
-import requests
-import math
 import os
 
 '''
-Saves a snapshot of the progress so the program can stop and start from where you left off.
+Saves a snapshot of the progress so the program can stop and start from where you left off
 '''
 def saveCheckpoint():
-    np.savetxt(checkpointFile, remainingOtotw, delimiter=',', fmt=dataFormat)
-    np.savetxt(outputFile, foundPp, delimiter=',', fmt=dataFormat)
-    print('\n')
-    print('CHECKPOINT SAVED')
+    np.savetxt(checkpointFile, remainingCandidates, delimiter=',')
+    np.savetxt(outputFile, foundPp, delimiter=',')
+    print(f'CHECKPOINT SAVED ({len(foundPp)} pinnacle points found)')
+    
+params = func.getParameters()
+candidateFile = params['candidate_file']
+hasIsolation = eval(params['has_isolation'])
+patchDir = params['patch_directory']
+patchSize = int(params['patch_size'])
+poleLat = func.getPoleLatitude(patchSize)
 
 ID  = func.ID
 LAT = func.LAT
 LNG = func.LNG
 ELV = func.ELV
-HD  = func.HD
+MHD  = func.MHD
+ISO = func.ISO
 
-dataFormat = '%d, %.4f, %.4f, %.2f, %.2f'
-lineBreak = '\n#############################\n'
+candidates = pd.read_csv(candidateFile)
+candidates['MHD'] = candidates.elevation.apply(func.horizonDistance).round(1)
 
-ototw = pd.read_csv('../dataSources/ototw_p300m.csv')
-ototw = ototw[['latitude', 'longitude', 'elevation_m']].sort_values(by='elevation_m', ascending=False)
-ototw = ototw.rename(columns={'elevation_m': 'elevation'})
-ototw['horizonDist'] = ototw.elevation.apply(func.horizonDistance).round(2)
-ototw = ototw.reset_index()
-ototw = ototw.drop(columns='index')
-ototw = ototw.reset_index()
-ototw = ototw.values
-
-summitPatches = func.getSummitPatches()
-
-# loading from checkpoint
-checkpointFile = f'{func.summitsDir}summits_checkpoint.txt'
-if os.path.exists(checkpointFile):
-    remainingOtotw = np.genfromtxt(checkpointFile, delimiter=',')
+if hasIsolation:
+    candidates = candidates[['id', 'latitude', 'longitude', 'elevation', 'MHD', 'isolation']]
 else:
-    remainingOtotw = ototw
+    candidates = candidates[['id', 'latitude', 'longitude', 'elevation', 'MHD']]
     
-outputFile = f'{func.summitsDir}pinnaclePoints_raw.txt'
+candidates = candidates.values
+
+# Loading from checkpoint
+checkpointFile = f'../dataSources/generatedDatasets/checkpoint.txt'
+if os.path.exists(checkpointFile):
+    remainingCandidates = np.genfromtxt(checkpointFile, delimiter=',')
+else:
+    remainingCandidates = candidates
+    
+outputFile = f'../dataSources/generatedDatasets/pinnaclePointsRaw.txt'
 if os.path.exists(outputFile):
     foundPp = np.genfromtxt(f'{outputFile}', delimiter=',')
 else:
     foundPp = []
-
-print(lineBreak)
     
-# finding pinnacle points in decending order or elevation
-ototwNum = len(ototw)
-remainingOtotwNum = len(remainingOtotw)
+# Finding pinnacle points in decending order or elevation
+candidateNum = len(candidates)
+remainingCandidateNum = len(remainingCandidates)
 foundPpNum = len(foundPp)
-while remainingOtotwNum > 0:
+while remainingCandidateNum > 0:
     
-    ppCandidate = remainingOtotw[0]
-    print(f'Location: {ppCandidate[LAT]}, {ppCandidate[LNG]}')
-    print(f'Elevation: {ppCandidate[ELV]}')
-    print(f'OTOTW Remaining: {remainingOtotwNum} ({round(100*(1-(remainingOtotwNum/ototwNum)), 2)}% complete)')
-    print(f'\n')
+    candidate = remainingCandidates[0]
+    print(f'Location: {candidate[LAT]}, {candidate[LNG]}')
+    print(f'Elevation: {candidate[ELV]}')
+    print(f'Candidates Remaining: {remainingCandidateNum} ({round(100*(1-(remainingCandidateNum/candidateNum)), 2)}% complete)')
     
-    distanceBetweenOtotw = [func.geod.line_length([ototw[LNG], 
-                                                   ppCandidate[LNG]], 
-                                                  [ototw[LAT], 
-                                                   ppCandidate[LAT]])
-                            for ototw in remainingOtotw]
+    # Finding lower candidates that can be seen, for removal
+    distanceBetweenCandidates = [func.geod.line_length([candidate2[LNG], candidate[LNG]], [candidate2[LAT], candidate[LAT]]) 
+                                 for candidate2 in remainingCandidates]
     
-    mayseenIndices = np.where(distanceBetweenOtotw < remainingOtotw[:,HD] + ppCandidate[HD])[0]
-    mayseenOtotw = remainingOtotw[mayseenIndices]
+    lowerIndicesToTest = np.where(distanceBetweenCandidates < remainingCandidates[:,MHD] + candidate[MHD])[0]
+    lowerCandidatesToTest = remainingCandidates[lowerIndicesToTest]
             
-    # bulk OTOTW point removal
-    ototwIndicesToRemove = []
-    for ototwPoint in mayseenOtotw:
-        # filtering out self and seen OTOTW
-        if ototwPoint[ID] == ppCandidate[ID] or func.hasSight(ppCandidate, ototwPoint) == True:
-            ototwIndicesToRemove.append(ototwPoint[ID])
-                
-    print(f'OTOTW Removed: {len(ototwIndicesToRemove)}/{len(mayseenOtotw)}')
+    indicesToRemove = []
+    for testCandidate in lowerCandidatesToTest:
+        # Filtering out self and other seen summits which would be lower from remainingCandidates
+        if candidate[ID] == testCandidate[ID] or func.hasSight(candidate, testCandidate) == True:
+            indicesToRemove.append(testCandidate[ID])
+                    
+    remainingCandidates = remainingCandidates[~np.isin(remainingCandidates[:,ID], indicesToRemove)]
+    remainingCandidateNum = len(remainingCandidates)
+    print(f'Candidates Removed: {len(indicesToRemove)} out of {len(lowerIndicesToTest)} tested')
     
-    remainingOtotw = remainingOtotw[~np.isin(remainingOtotw[:,ID], ototwIndicesToRemove)]
-    remainingOtotwNum = len(remainingOtotw)
+    patchSummits = func.getPatchSummits(candidate[LAT], candidate[LNG], patchDir, patchSize, poleLat)
     
-    patchSummits = func.getPatchSummits(ppCandidate[LAT], ppCandidate[LNG], summitPatches)
-    
-    candidateIsPp = func.isPinnaclePoint(ppCandidate, patchSummits)
+    candidateIsPp = func.isPinnaclePoint(candidate, patchSummits, hasIsolation)
     
     if candidateIsPp == True:
         if foundPpNum == 0:
-            foundPp.append(ppCandidate)
+            foundPp.append(candidate)
         else:
-            foundPp = np.concatenate((foundPp, [ppCandidate]))
+            foundPp = np.concatenate((foundPp, [candidate]))
             
         foundPpNum = len(foundPp)
+        
         saveCheckpoint()
         
-    print(lineBreak)
+    print('\n#############################\n')

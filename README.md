@@ -10,25 +10,67 @@ What is a Pinnacle Point?: https://www.pinnacle-points.com/guide/screens/what_is
 
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png" width=60%/>
 
-Across the globe, 601 have been found. These are all pinnacle points with more than 300 m of prominence. The algorithm used for finding pinnacle points is outlined in the info section of the Interactive Map, along with sources of error. The curvature of the Earth and atmospheric refraction are taken into account.
+Across the globe, 601 have been found. These are all pinnacle points with more than 300 m of prominence. The algorithm used for finding pinnacle points is outlined in the info section of the Interactive Map, along with sources of error. The curvature of the Earth, atmospheric refraction, and local topography are taken into account. The base dataset is a list of 11,866,713 high points with over 100 feet of prominence. I use an elevation API to find the elvation of points between these high points.
 
-**Future Plans for Pinnacle Points:**
-- Improve project structure
-- Find all pinnacle points with an isolation greater than 50 km
-- Blog components
-- Add notable points to blog
+**Future Plans:**
+- Find all pinnacle points with isolation greater than 100 km
+- Algorithmically find all the longest lines of sight on Earth
+- Mention notable points on blog
     - Most prominent point to not be a pinnacle point
     - Most isolated point to not be a pinnacle point
 - Summit more pinnacle points
+- Framework for blog
+
+**Project Structure:**
+```
+PinnaclePoints/
+├── pinnaclePoints.txt # The final pinacle point reuslt used in the interactive map 
+├── index.html         # Interactive pinnacle point map
+├── scripts/
+│   ├── analysis.ipynb         # Used to analyze datasets and generate the interactive map
+│   ├── commonFunctions.py     # Holds common functions used throughout this directory
+│   ├── parameters.txt         # Holds parameters that determine which dataset to use, etc...
+│   ├── patchMaker.py          # Divides summit_file into patches
+│   ├── pinnaclePointFinder.py # Identifies pinnacle points in candidate_file, outputs to pinnaclePointsRaw.txt
+│   └── pinnaclePointNamer.py  # Names pinnaclePointsRaw.txt by scraping PeakBagger, Wiki info by nearest extremal
+├── dataSources/
+│   ├── baseDatasets/
+│   │   ├── extremals.txt            # Essentially OTOTW from a different source. Only used for Wiki info and some names.
+│   │   ├── isolation/
+│   │   │   ├── all_iso-1km.txt      # All summits with over 1 km of isolation
+│   │   │   └── all_iso-100km.txt    # All summits with over 100 km of isolation
+│   │   └── prominence/
+│   │       ├── all_prm-100ft.txt    # All summits with over 100 ft of prominence
+│   │       └── ototw_prm-300m.txt   # All OTOTW with over 300 m of prominence
+│   └── generatedDatasets/
+│       ├── checkpoint.py            # Checkpoint of remaining candidates to validate, saved after each found pinnacle point
+│       ├── faultyPinnaclePoints.txt # Used to catalogue misidentified pinnacle points
+│       ├── pinnaclePointsRaw.txt    # The raw result of identified pinnacle points from pinnaclePointFinder.py
+│       ├── historicalResults/
+│       │   ├── iso_1km/             # The results that used all_iso-1km.txt as a base dataset
+│       │   └── prm_100ft/           # The results that used all_prm-100ft.txt as a base dataset
+│       ├── isolationPatches/        # Patches from all_iso-1km.txt
+│       └── prominencePatches/       # Patches from all_prm-100ft.txt
+├── guide/ # My pinnacle point blog
+└── misc/
+    ├── pinnaclePoints.apk # Downloadable app for android
+    ├── math/              # Derivations of equations used in the algorithm
+    ├── pics/              # Pics used in this README and more
+    └── scientificPapers/  # Relevant scientific papers
+```
 
 **To Run the Algorithm:**
-- Download Andrew Kirmse's list of <a href="https://www.andrewkirmse.com/prominence-update-2023#h.cap6s838fwux">11,866,713 summits</a> and put it into the dataSources directory.
-- scripts/summitFormatter.py divides Andrew Kirmse's summits into patches based on latitude and longitude.
-- scripts/pinnaclePointFinder.py uses an algorithm to find Earth's pinnacle points, in decending order of elevation.
-- scripts/pinnaclePointFormatter.py finds the names and wikipedia link info for the found pinnacle points.
-- scripts/pinnaclePointAnalysis.ipynb is used to generate index.html and pinnaclePoints.txt.
-- index.html is an interactive map showing all pinnacle points.
-- pinnaclePoints.txt is the final result of pinnacle points in a txt file.
+- Unzip either the contents of isolation/ or prominence/ in dataSources/baseDatasets/
+- Specify your parameters in scripts/parameters.txt (you can use copies from historicalResults/)
+    - summit_file     # Base dataset of summits, Must have id, latitude, longitude, and elevation. Sort summit_file by elevation.
+    - has_isolation: a boolean, does summit_file include isolation? If so the algorithm is faster. 
+    - candidate_file: records from summit_file that I want to test as pinnacle points
+    - patch_directory: directory of the pathches used by the algorthm
+    - patch_size: patches are patch_size deg latitude by patch_size deg longitude
+- Run scripts/patchMaker.py to divide summit_file into patches. Smaller patch_size is faster but takes more space.
+- Run scripts/pinnaclePointFinder.py to generate the raw pinnacle point result in pinnaclePointsRaw.txt
+    - Only 10,000 line-of-sight tests can be done a day, an API restication
+- Run scripts/pinnaclePointFormatter.py to format and give names to pinnaclePointsRaw.txt, generates pinnaclePoints.txt
 
 **The path of light between the two farthest points on Earth that can see each other:**
 

@@ -1,0 +1,38 @@
+Example:
+
+Identified Pinnacle Point
+Actual Pinnacle Point
+Area/Region
+Reason for misidentification
+
+#################################################################
+
+Torngarsoak Mountain
+Mount Caubvick
+Quebec/Labrador
+Incorrect elevation data in database from standard error
+
+Western Barren
+White Hill
+Nova Scotia, Cape Breton Island
+White hill is missing in database
+
+Briar Hill
+Grove Hill
+Michigan
+Incorrect elevation data in database from standard error
+
+Mount Lidgbird
+Mount Grower
+Remote Island, Australia
+Mount Grower is missing in database
+
+Tuchenn Kador
+Roc'h Ruz
+Brittanny, France
+Roc'h Ruz is missing in database
+
+Torre del Llambrión
+Torre Cerredo
+Northern Spain
+The point is right, but my naming algorithm is wrong

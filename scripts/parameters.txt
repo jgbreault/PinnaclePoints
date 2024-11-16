@@ -1,0 +1,5 @@
+summit_file = ../dataSources/baseDatasets/prominence/all_iso-1km.txt
+has_isolation = True
+candidate_file = ../dataSources/baseDatasets/isolation/all_iso-100km.txt
+patch_directory = ../dataSources/generatedDatasets/isolationPatches
+patch_size = 5

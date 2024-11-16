@@ -1,0 +1,4 @@
+input_file = ../dataSources/baseDatasets/antiprominence.txt
+input_file_columns = latitude, longitude, elevation, key_lat, key_lng, prominence
+output_directory = ../dataSources/generatedDatasets/Test
+patch_size = 30

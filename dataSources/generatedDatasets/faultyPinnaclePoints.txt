@@ -1,0 +1,30 @@
+nameFalse,latFalse,lngFalse,elevationFalse,prominenceFalse,nameTrue,latTrue,lngTrue,elevationTrue,prominenceTrue,reason
+Briar Hill,44.3662,-85.6794,519,120,Grove Hill,44.1376,-85.3446,521,318,0
+Western Barren,46.5983,-60.7608,532,67,White Hill,46.7058,-60.5986,533,533,1
+Torngarsoak Mountain,58.9444,-63.79,1593,1355,Mount Caubvick,58.8878,-63.7098,1652,1367,0
+Mount Lidgbird,-31.5633,159.0892,462,462,Mount Gower,-31.5882,159.0735,875,875,1
+Tuchenn Kador,48.3725,-3.953,384,85,Roc'h Ruz,48.4167,-3.8803,385,316,1
+Torre de Llambrion,43.1739,-4.8572,2642,305,Torrecerredo,43.1978,-4.8529,2649,1936,0
+Tsurugi-san,33.8544,134.0947,1955,1535,Ishizuchi-san,33.7677,133.1151,1982,1982,0
+,50.9794,-65.4892,1042,511,Minganie High Point,50.9741,-65.46317,1052,520,0
+Mount Waddington - Northwest Peak,51.3756,-125.2667,3941,3226,Mount Waddington,51.3737,-125.2636,4019,3279,1
+,56.6033,-169.6767,302,302,Ulakaia Hill,56.5785,-169.5675,287,287,0
+Melville Island Hill 760,75.4089,-114.6492,766,766,Melville Island High Point,75.3694,-115.0827,762,762,0
+,71.8378,-112.6825,647,647,Victoria Island High Point,71.8528,-112.6073,650,650,0
+Picacho del Diablo - Pico Sur,30.9903,-115.3739,3052,2094,Picacho del Diablo,30.9925,-115.3753,3095,2115,1
+Loma La Pelona,19.0319,-71.0053,3094,3094,Pico Duarte,19.0231,-70.9977,3098,3098,0
+Mont Aorai,-17.6097,-149.4953,1836,1836,Mont Orohena,-17.6214,-149.4768,2241,2241,0
+Te Kou,-21.24,-159.7744,504,504,Te Manga,-21.2358,-159.7634,653,653,1
+Mokoto,-23.1275,-134.9858,404,404,Mont Duff,-23.1292,-134.9719,491,491,0
+Namuere,-27.5953,-144.3697,520,520,Massif du Perau,-27.5952,-144.3735,650,650,1
+,-33.7625,-80.8128,1369,1369,Cerro de Los Inocentes,-33.7843,-80.8035,1350,1350,0
+Etna - Voragine Crater Rim,37.755,14.9953,3324,3324,Etna,37.7503,14.9946,3357,3357,1
+Expedition Peak,-40.3022,-9.9633,905,905,Edinburgh Peak,-40.3092,-9.9467,910,910,0
+East Carstensz Top,-4.0833,137.185,4804,4804,Carstensz Pyramid,-4.0785,137.1581,4884,4884,0
+Qaqqaq Kershaw,68.8397,-29.9211,3692,3692,Gunnbjorn Fjeld,68.9182,-29.8987,3694,3694,0
+Tête Blanche,66.7706,-65.1583,2217,2217,Mount Odin,66.5468,-65.4289,2143,2143,0
+,63.645,-50.3989,1787,773,Peak 1773,63.6913,-50.2168,1773,723,0
+Mount Darnley,-59.0403,-26.5325,1153,1153,Mount Belinda,-58.4356,-26.3818,1375,1375,0
+,22.7025,-83.3097,678,652,Pan de Guajaibón,22.7875,-83.3683,699,665,0
+Serra do Olho d'água - Pico 1130,-4.7664,-40.1314,1141,719,Pico Serra Branca,-4.7715,-40.1165,1154,733,1
+Bogda Feng II,43.7897,88.4111,5338,4014,Bogda Feng,43.8016,88.333,5445,4122,1
