@@ -29,21 +29,6 @@ Since the app is only available by downloading the APK, only Android devices are
 - Click [Download]. Open the APK on your device when it is done downloading. You may get a message similar to "For your security, your device is not allowed to install apps from this source". You'll have to go to your settings and allow unknown installs from this source. Feel free to change it back afterwards.
 - Click [Install].
 
-**Running the Algorithm:**
-- Add your summit_file and candidate_file (defined below) to dataSources/baseDatasets/
-    - My summit_files are too large to include in github without LFS. My sources are on the interactive map. 
-- Specify your parameters in scripts/parameters.txt (you can use copies from historicalResults/)
-    - summit_file: the base dataset of summits, Must have id, latitude, longitude, and elevation. Sort summit_file by elevation.
-    - has_isolation: a boolean, does summit_file include isolation? If so the algorithm is faster. 
-    - candidate_file: records from summit_file that I want to test as pinnacle points
-    - patch_directory: directory of the pathches used by the algorthm
-    - patch_size: patches are patch_size deg latitude by patch_size deg longitude
-- Run scripts/patchMaker.py to divide summit_file into patches. Smaller patch_size is faster but takes more space.
-- Run scripts/pinnaclePointFinder.py to generate the raw pinnacle point result in pinnaclePointsRaw.txt
-    - Only 10,000 line-of-sight tests can be done a day, an API restication
-- Run scripts/pinnaclePointFormatter.py to format and give names to pinnaclePointsRaw.txt, generates pinnaclePoints.txt
-
-
 **Project Structure:**
 ```
 PinnaclePoints/
@@ -82,6 +67,21 @@ PinnaclePoints/
     ├── pics/              # Pics used in this README and more
     └── scientificPapers/  # Relevant scientific papers
 ```
+
+**Running the Algorithm:**
+
+- Add your summit_file and candidate_file (defined below) to dataSources/baseDatasets/
+    - My summit_files are too large to include in github without LFS. My sources are on the interactive map. 
+- Specify your parameters in scripts/parameters.txt (you can use copies from historicalResults/)
+    - summit_file: the base dataset of summits, Must have id, latitude, longitude, and elevation. Sort summit_file by elevation.
+    - has_isolation: a boolean, does summit_file include isolation? If so the algorithm is faster. 
+    - candidate_file: records from summit_file that I want to test as pinnacle points
+    - patch_directory: directory of the pathches used by the algorthm
+    - patch_size: patches are patch_size deg latitude by patch_size deg longitude
+- Run scripts/patchMaker.py to divide summit_file into patches. Smaller patch_size is faster but takes more space.
+- Run scripts/pinnaclePointFinder.py to generate the raw pinnacle point result in pinnaclePointsRaw.txt
+    - Only 10,000 line-of-sight tests can be done a day, an API restication
+- Run scripts/pinnaclePointFormatter.py to format and give names to pinnaclePointsRaw.txt, generates pinnaclePoints.txt
 
 **The path of light between the two farthest points on Earth that can see each other:**
 
