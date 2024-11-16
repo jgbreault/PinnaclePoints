@@ -1,4 +1,0 @@
-summit_file = ../dataSources/baseDatasets/all_prm-100ft.txt
-candidate_file = ../dataSources/baseDatasets/ototw_prm-300m.txt
-patch_directory = ../dataSources/generatedDatasets/prominencePatches
-patch_size = 5
