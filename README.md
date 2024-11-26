@@ -2,24 +2,44 @@
 
 A **pinnacle point** is a point from which no higher point can be seen.
 
-Across the globe, 602 have been found. These are all pinnacle points with more than 300 m of prominence. The algorithm used for finding pinnacle points is outlined in the info section of the Interactive Map, along with sources of error. The curvature of the Earth, atmospheric refraction, and local topography are taken into account. The base dataset is a list of 11,866,713 high points with over 100 feet of prominence. I use an elevation API to find the elvation of points between these high points.
+Across the globe, 885 have been found. These are all pinnacle points with more than 300 m (1000 ft) of prominence or more than 160 km (100 miles) of isolation. The curvature of the Earth, atmospheric refraction, and local topography are taken into account. Two summits are defined to have line-of-sight if light can theoretically travel from one to the other under ideal atmospheric conditions. An explanation of the algorithm used can be found at pinnaclePointAlgorithmExplained.txt.
 
-Interactive Map (Method in Info Section): https://www.pinnacle-points.com
+Interactive Map: https://www.pinnacle-points.com
 
 My Pinnacle Point Journal: https://www.pinnacle-points.com/guide
 
 What is a Pinnacle Point?: https://www.pinnacle-points.com/guide/screens/what_is_pinnacle_point
 
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png" width=66.66%/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png" width=70%/>
 
 **Future Plans:**
-- Find all pinnacle points with isolation greater than 100 km
 - Algorithmically find all the longest lines of sight on Earth
+- Summit more pinnacle points
+- Framework for blog
 - Mention notable points on blog
     - Most prominent point to not be a pinnacle point
     - Most isolated point to not be a pinnacle point
-- Summit more pinnacle points
-- Framework for blog
+    
+**Data Sources:**
+1. <a href="https://www.andrewkirmse.com/prominence-update-2023">Mountains by Prominence</a>
+    - Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (30 m) of prominence. I use this dataset to find all pinnacle points with more than 300 m (1000 ft) of prominence.
+2. <a href="https://www.andrewkirmse.com/true-isolation">Mountains by Isolation</a>
+    - Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with over 1 km (0.6 miles) of isolation. I use this dataset to find all pinnacle points with more than 160 km (100 miles) of isolation.
+3. <a href="https://ototwmountains.com/">On-Top-Of-The-World Mountains</a>
+    - An on-top-of-the-world mountain (OTOTW) is a summit where no land rises above the horizontal plane from the summit. Since any land that rises above the horizontal plane would have higher elevation than the summit itself, if a summit is not an OTOTW then it can not be a pinnacle point either. In other words, pinnacle points are a subset of OTOTWs. Kai Xu found all 6,464 OTOTWs on Earth with over 300 m (1000 ft) of prominence. I identify which of these 6,464 summits are pinnacle points. Andreas Geyer-Schulz deserves mention as well for his
+<a href="https://nuntius35.gitlab.io/extremal_peaks/">extremal peaks</a>.
+4. <a href="https://aty.sdsu.edu/explain/atmos_refr/horizon.html">Atmospheric Refraction</a>
+    - The exact path light takes in the atmosphere depends on many factors. However, according to the San Diego State University, a ray's path can be approximated as the arc of a circle with radius seven times greater than Earth's. I use this when determining if two summits have line-of-sight.
+5. <a href="https://aty.sdsu.edu/explain/atmos_refr/horizon.html">Open-Meteo and Copernicus</a>
+    - Open-Meteo provides a free elevation API that uses the <a href="https://doi.org/10.5270/ESA-c5d3d65">Copernicus DEM</a>. I use this API to find the elevation of points that are not in any of my datasets.
+
+**Sources of Error:**
+- The Earth is approximated as a sphere instead of an ellipsoid. This is done for simpler math.
+- There is some inherent error in the data. The datasets have resolutions ranging from of 30 m (1 arcsecond) to 90 m (3 arcseconds). All data sources are surface elevation models, so trees and buildings are included.
+- Only 100 equidistant points are sampled when determining if two summits have an obstructed line-of-sight. Some points that could block line-of sight may not be captured in this sample. By increasing the number of sampled points, more pinnacle points could be found.
+- The algorithm assumes there to be no land below sea level, which is not quite true. Any pinnacle points below sea level would not have been identified. It is possible for some identified pinnacle points that are near basins below sea level to not truly be pinnacle points. This is because these points can see farther across their basin in reality than they could if the basin did not descend below sea level.
+- Only summits with more than 300 m (1000 ft) of prominence or more than 160 km (100 miles) of isolation are considered. The promience threshold is determined by the OTOTWs dataset since I only consider points in Source 1 that are OTOTWs. When finding pinnacle points in Source 2, high isolation points are obvious strong candidates when identifying pinnacle points. The specific value for the isolation threshold was decided arbitarily. Computation time increases considerably as the isolation threshold is lowered.
+- To take atmospheric refraction into account, light rays are approximated as arcs of circles (Source 4). The path light takes in the atmosphere is in fact much more complex and depends on many factors. Since the distance you can see from a given point depends on temperature and pressure, the distance you can see from a point technically changes with the seasons and even the time of day. Additionally, the approximation of light following the arc of a circle only holds true for altitudes that are small compared to the 8 km height of the <a href="https://aty.sdsu.edu/explain/thermal/hydrostatic.html#homog">homogeneous atmosphere</a>. This project is slightly outside of this scope.
 
 **App Download:**
 
@@ -36,12 +56,13 @@ PinnaclePoints/
 ├── pinnaclePoints.txt # The final pinacle point reuslt used in the interactive map 
 ├── index.html         # Interactive pinnacle point map
 ├── scripts/
-│   ├── analysis.ipynb         # Used to analyze datasets and generate the interactive map
-│   ├── commonFunctions.py     # Holds common functions used throughout this directory
-│   ├── parameters.txt         # Holds parameters that determine which dataset to use, etc...
-│   ├── patchMaker.py          # Divides summit_file into patches
-│   ├── pinnaclePointFinder.py # Identifies pinnacle points in candidate_file, outputs to pinnaclePointsRaw.txt
-│   └── pinnaclePointNamer.py  # Names pinnaclePointsRaw.txt by scraping PeakBagger, Wiki info by nearest extremal
+│   ├── analysis.ipynb            # Used to analyze datasets and generate the interactive map
+│   ├── commonFunctions.py        # Holds common functions used throughout this directory
+│   ├── historicalResultMerger.py # Used to merge results from different runs in a big file full of duplicates
+│   ├── lineOfSightFinder.py      # A work in progress, no looky
+│   ├── parameters.txt            # Holds parameters that determine which dataset to use, etc...
+│   ├── patchMaker.py             # Divides summit_file into patches
+│   └── pinnaclePointFinder.py    # Identifies pinnacle points in candidate_file, outputs to pinnaclePointsRaw.txt
 ├── dataSources/
 │   ├── baseDatasets/
 │   │   ├── extremals.txt            # Essentially OTOTW from a different source. Only used for Wiki info and some names.
@@ -52,20 +73,20 @@ PinnaclePoints/
 │   │       ├── all_prm-100ft.txt    # All summits with over 100 ft of prominence (MISSING: too large to include)
 │   │       └── ototw_prm-300m.txt   # All OTOTW with over 300 m of prominence
 │   └── generatedDatasets/
-│       ├── checkpoint.py            # Checkpoint of remaining candidates to validate, saved after each found pinnacle point
 │       ├── faultyPinnaclePoints.txt # Used to catalogue misidentified pinnacle points
-│       ├── pinnaclePointsRaw.txt    # The raw result of identified pinnacle points from pinnaclePointFinder.py
 │       ├── historicalResults/
-│       │   ├── iso_1km/             # The results that used all_iso-1km.txt as a base dataset
-│       │   └── prm_100ft/           # The results that used all_prm-100ft.txt as a base dataset
+│       │   ├── iso-1km/             # The results that used all_iso-1km.txt as a base dataset
+│       │   ├── prm-100ft/           # The results that used all_prm-100ft.txt as a base dataset
+│       │   └── prm_and_iso/         # The merged results from iso-1km and prm-100ft
 │       ├── isolationPatches/        # Patches from all_iso-1km.txt (MISSING: add directory yourself)
 │       └── prominencePatches/       # Patches from all_prm-100ft.txt (MISSING: add directory yourself)
 ├── guide/ # My pinnacle point blog
 └── misc/
-    ├── pinnaclePoints.apk # Downloadable app for android
-    ├── math/              # Derivations of equations used in the algorithm
-    ├── pics/              # Pics used in this README and more
-    └── scientificPapers/  # Relevant scientific papers
+    ├── pinnaclePoints.apk                  # Downloadable app for android
+    ├── pinnaclePointAlgorithmExplained.txt # An explanation of of the pinnacle point algorithm 
+    ├── math/                               # Derivations of equations used in the algorithm
+    ├── pics/                               # Pics used in this README and more
+    └── scientificPapers/                   # Relevant scientific papers
 ```
 
 **Running the Algorithm:**
@@ -73,7 +94,7 @@ PinnaclePoints/
 - Add your summit_file and candidate_file (defined below) to dataSources/baseDatasets/
     - My summit_files are too large to include in github without LFS. My sources are on the interactive map. 
 - Specify your parameters in scripts/parameters.txt (you can use copies from historicalResults/)
-    - summit_file: the base dataset of summits, Must have id, latitude, longitude, and elevation. Sort summit_file by elevation.
+    - summit_file: the base dataset of summits, Must have id, latitude, longitude, and elevation. Sort summit_file by elevation descending.
     - has_isolation: a boolean, does summit_file include isolation? If so the algorithm is faster. 
     - candidate_file: records from summit_file that I want to test as pinnacle points
     - patch_directory: directory of the pathches used by the algorthm

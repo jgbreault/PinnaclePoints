@@ -3,3 +3,4 @@ has_isolation = False
 candidate_file = ../dataSources/baseDatasets/prominenceSummits/ototw_prm-300m.txt
 patch_directory = ../dataSources/generatedDatasets/prominencePatches
 patch_size = 5
+is_single_global_patch = False

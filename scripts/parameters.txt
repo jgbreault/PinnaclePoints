@@ -1,5 +1,6 @@
-summit_file = ../dataSources/baseDatasets/isolationSummits/all_iso-1km.txt
-has_isolation = True
-candidate_file = ../dataSources/baseDatasets/isolationSummits/all_iso-100km.txt
-patch_directory = ../dataSources/generatedDatasets/isolationPatches
+summit_file = ../dataSources/generatedDatasets/historicalResults/pinnaclePointsRawMerged.txt
+has_isolation = False
+candidate_file = ../dataSources/generatedDatasets/historicalResults/pinnaclePointsRawMerged.txt
+patch_directory = .
 patch_size = 5
+is_single_global_patch = True

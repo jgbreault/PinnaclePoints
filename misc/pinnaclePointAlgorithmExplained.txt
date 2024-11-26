@@ -1,0 +1,35 @@
+[1] – Setting Up Global Summits
+
+The pinnacle point algorithm requires a dataset of all mountains on Earth stored in a txt file, called the summit_file. This file must have columns for id, latitude, longitude, and elevation. An additional column for isolation can be included as well, allowing the algorithm to run a bit faster. If including isolation, the has_isolation parameter in parameter.txt must be set to True. Use False otherwise. The id must be a unique identifier for each summit. The elevation and isolation columns must be in meters. The summits must be sorted by elevation descending.
+
+[2] – Setting Up Candidate Summits
+
+It is not computationally feasible to do pinnacle point validation on all summits on Earth. There are simply too many. The algorithm requires another txt file holding the particular summits from the summit_file that are to be tested, called the candidate_file. The path of the summit_file and candidate_file must be defined in parameters.txt. Refer to the README for an outline of the project structure. I define a list of Remaining Candidate Pinnacle Points (RCPPs) as all summits from the candidate_file.
+ 
+[3] – Finding Maximum Horizon Distance
+
+For a summit, the maximum horizon distance (MHD) is the distance that could be seen if all surrounding terrain was at sea level. The MHD of each summit in the summit_file is determined, defined as sqrt(2*(7/6)*R_earth*elevation). The factor of 7/6 is to account for atmospheric refraction increasing the distance that can be seen.
+
+[4] – Dividing Global Summits Into Patches
+
+For faster processing, the summit_file is divided into patches based on latitude and longitude. The size of the patches is initially patch_size degrees of latitude by patch_size degrees of longitude, where patch_size is defined in parameters.txt and must be a factor of 90 (I use 5 personally). The bounds of the patches are then extended to account for summits near the boundary of a patch being able to see other summits beyond the boundary. The extent to which the patch bounds are extended is dependent on the elevation of the terrain within and around the patch.
+
+[5] – Removing Candidates
+
+The highest elevation summit among the RCPPs is found so it can be determined if it is a pinnacle point. However, first it is determined which other RCPPs have line-of-sight with the current RCPP. Since these RCPPs have a lower elevation than the current RCPP, they are immediately removed from the list of RCPPs. Since two summits can only have line-of-sight if the sum of their MHDs is greater than the distance between them, I only do line-of-sight analysis (Step 6) with other RCPPs that meet this restriction. The current RCPP is removed from the list of RCPPs as well since it is currently being tested.
+
+[6] – Line-of-sight Analysis
+
+To determine if two summits have line-of-sight, 100 equidistant latitude-longitude points are generated between the observer and target summits. For each, the elevation is determined using Open-Meteo’s elevation API. The distance of each point to the target is calculated. The distance-elevation points are translated such that the observer is at the origin. Then the points are rotated such that the line connecting the observer and target is along the x-axis. The path that light would take if unobstructed is calculated at each of the 100 points. The light ray is approximated as an arc of a circle with radius seven times greater than Earth’s. If land is higher than the position of the light at any of the sampled points, then line-of-sight is obstructed.
+
+[7] – Validating Current RCPP
+
+The current RCPP’s patch from Step 4 is found by latitude and longitude. All summits from the patch that have a chance of disqualifying the current RCPP from being a pinnacle point are found. These are all patch summits where the patch summit’s elevation is greater than that of the current RCPP, and the sum of the patch summit’s MHD and the current RCPP MHD is greater than the distance between them. If isolation is included, another restriction is added to only include patch summits where the distance to the current RCPP is greater than the current RCPP's isolation. For each, the same line-of-sight analysis outlined in Step 6 is done. If none have line-of-sight, the current RCPP is a pinnacle point.
+
+[8] – Validating All Candidates
+
+Steps 5-7 are repeated until there are the list of RCPPs is empty.
+
+[9] – Combining Results
+
+Steps 1-8 are completed for two different datasets. The first is uses all 11,866,713 summits with over 100 ft (~30 m) of prominence in summit_file and all 6,464 OTOTWs with over 300 m (~1000 ft) of prominence in candidate_file; pinnacle points are a subset of OTOTWs. The other uses all 24,749,518 summits with over 1 km (~0.6 miles) of isolation in summit_file and all 1,333 summits with over 160 km (~100 miles) of isolation in candidate_file. There are many duplicates between these results. To remove them, the two results are merged, and Steps 1-8 are completed once more using the merged result as both the summit_file and candidate_file.

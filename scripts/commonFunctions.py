@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import os
 
 earthRadius = 6371146 # in m
-maxVisibleDistance = 538000 # The farthest any point on Earth can see, it is known 
+maxVisibleDistance = 542000 # The farthest any point on Earth can see, from Beyond Horizons
 geod = Geod(ellps='sphere')
 
 ID  = 0 # id (ordered by elevation)
@@ -109,7 +109,10 @@ def getPatchSummits(lat, lng, patchDir, patchSize, poleLat):
 Determines if a summit is a pinnacle point
 Must include a patch that contains the summit as input
 '''
-def isPinnaclePoint(candidate, patchSummits, hasIsolation=False, plotClosestInfo=False):
+def isPinnaclePoint(candidate, 
+                    patchSummits, 
+                    hasIsolation = False, 
+                    plotClosestInfo = False):
 
     # For patches holding a single summit
     if patchSummits.ndim == 1:
@@ -148,8 +151,8 @@ def isPinnaclePoint(candidate, patchSummits, hasIsolation=False, plotClosestInfo
                   f'{round(distanceToClosestHigherSummit/1000)} km away')
             
             if plotClosestInfo:
-                plotLosElevationProfile(summit[LAT], summit[LNG], 
-                                        summit[ELV], 
+                plotLosElevationProfile(candidate[LAT], candidate[LNG], 
+                                        candidate[ELV], 
                                         testSummit[LAT], testSummit[LNG], 
                                         testSummit[ELV])
 
