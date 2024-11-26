@@ -62,7 +62,8 @@ PinnaclePoints/
 │   ├── lineOfSightFinder.py      # A work in progress, no looky
 │   ├── parameters.txt            # Holds parameters that determine which dataset to use, etc...
 │   ├── patchMaker.py             # Divides summit_file into patches
-│   └── pinnaclePointFinder.py    # Identifies pinnacle points in candidate_file, outputs to pinnaclePointsRaw.txt
+│   ├── pinnaclePointFinder.py    # Identifies pinnacle points in candidate_file, outputs to pinnaclePointsRaw.txt
+│   └── pinnaclePointNamer.py     # Names pinnacle points based on closest extremal or closest PeakBagger summit
 ├── dataSources/
 │   ├── baseDatasets/
 │   │   ├── extremals.txt            # Essentially OTOTW from a different source. Only used for Wiki info and some names.
