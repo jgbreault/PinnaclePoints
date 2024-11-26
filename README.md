@@ -100,6 +100,7 @@ PinnaclePoints/
     - candidate_file: records from summit_file that I want to test as pinnacle points
     - patch_directory: directory of the pathches used by the algorthm
     - patch_size: patches are patch_size deg latitude by patch_size deg longitude
+    - is_single_global_patch: only True if not using patches, only recommended to removing duplicates from merged results
 - Run scripts/patchMaker.py to divide summit_file into patches. Smaller patch_size is faster but takes more space.
 - Run scripts/pinnaclePointFinder.py to generate the raw pinnacle point result in pinnaclePointsRaw.txt
     - Only 10,000 line-of-sight tests can be done a day, an API restication
