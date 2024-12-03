@@ -2,7 +2,6 @@ idFalse,nameTrue,latitudeTrue,longitudeTrue,elevationTrue,reason
 596,Grove Hill,44.1376,-85.3446,521,0
 591,White Hill,46.7058,-60.5986,533,1
 401,Minganie High Point,50.9741,-65.46317,1052,0
-695,Ulakaia Hill,56.5785,-169.5675,287,0
 493,Melville Island High Point,75.3694,-115.0827,762,0
 89,Etna,37.7503,14.9946,3357,1
 211,Mount Odin,66.5468,-65.4289,2143,0
