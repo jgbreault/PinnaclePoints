@@ -1,67 +1,112 @@
-import pandas as pd
-import numpy as np
 import commonFunctions as func
+import os
+import pandas as pd
+import math
+import numpy as np
 
-ID  = func.ID
-LAT = func.LAT
-LNG = func.LNG
-ELV = func.ELV
-MHD = func.MHD
-ISO = func.ISO
+minProminence = 1000 # in m TODO: put this in parameters
+
+def saveCheckpoint(remainingObservers, foundLinesOfSight):
+    remainingObservers = pd.DataFrame([obj.__dict__ for obj in remainingObservers])
+    remainingObservers.to_csv(checkpointFile, sep=',', index=False, header=True)
+    foundLinesOfSight.to_csv(outputFile, sep=',', index=False, header=True)
+    print('*** CHECKPOINT SAVED ***')
 
 params = func.getParameters()
 summitFile = params['summit_file']
-patchDir = params['patch_directory']
-patchSize = int(params['patch_size'])
-poleLat = func.getPoleLatitude(patchSize)
 
 # Loading from checkpoint
-checkpointFile = f'../dataSources/generatedDatasets/checkpoint.txt' # TODO: Change this
+checkpointFile = f'../dataSources/generatedDatasets/checkpoint.txt'
 if os.path.exists(checkpointFile):
-    remainingSummits = np.genfromtxt(checkpointFile, delimiter=',')
+    summits = pd.read_csv(checkpointFile)
 else:
     summits = pd.read_csv(summitFile)
-    summits = summits.sort_value(by='prominence', ascending=False)
-    summits['MHD'] = summits.elevation.apply(func.horizonDistance).round(1)
-    summits = summits[['id', 'latitude', 'longitude', 'elevation', 'MHD']]
-    summits = summits.values
-    remainingSummits = summits
-    
-outputFile = f'../dataSources/generatedDatasets/longestLOS.txt' # TODO: Change this
+    summits = summits.query('prominence > @minProminence')
+    summits = summits.sort_values('elevation', ascending=False)
+
+summits = summits.apply(lambda s: func.Summit(
+    s.latitude, s.longitude, s.elevation, id=s.id, prominence=s.prominence), axis=1).tolist() # Get rid of Id, prominence?
+        
+outputFile = f'../dataSources/generatedDatasets/longestLOS.txt'
 if os.path.exists(outputFile):
-    lineOfSights = np.genfromtxt(f'{outputFile}', delimiter=',')
+    linesOfSight = pd.read_csv(outputFile)
 else:
-    lineOfSights = []
+    linesOfSight = pd.DataFrame(columns=['latitude_O', 'longitude_O', 'elevation_O', 'prominence_O', 
+                                         'latitude_T', 'longitude_T', 'elevation_T', 'prominence_T', 
+                                         'distance'])
 
-for i, observer in enumerate(remainingSummits):
+# Find longest LOS longer than losDistanceCutOff for each summit
+for observerId, observer in enumerate(summits):
     
-    # May have to handle single summit patches
+    # Find targets where LOS is yet to be tested (lower elevation summits)
+    candidateTargets = summits[observerId+1:]
     
-    patchSummits = func.getPatchSummits(observer[LAT], observer[LNG], patchDir, patchSize, poleLat)
-    
-    distanceBetweenSummits = [geod.line_length([patchSummit[LNG], observer[LNG]], [patchSummit[LAT], observer[LAT]])
-                              for patchSummit in patchSummits]
-    
-    summitIndicesInRange = np.where(distanceBetweenSummits < patchSummits[:, MHD] + observer[MHD])[0]
-                                    & (patchSummits[:, ID] != observer[ID])
+    print(f'\n##### {len(candidateTargets)} Summits Left #####\n')
         
-    summitsInRange = patchSummits[summitIndicesInRange]
+    # Define initial list of new LOS candidates
+    losCandidates = [func.LineOfSight(observer, target, numPoints=1, skipProcessing=True) for target in candidateTargets]
+                 
+    # Find LOS candidates that could be seen if all land was at sea level
+    losCandidates = [los for los in losCandidates if los.passesMaxHorizonDistanceTest()]
     
-    # Sorting summitsInRange by distance descending
-    inRangeSortOrder = np.flip(np.argsort([distanceBetweenSummits[i] for i in summitIndicesInRange]))
-    distanceBetweenSummits = distanceBetweenSummits[inRangeSortOrder]
-    summitsInRange = summitsInRange[inRangeSortOrder]
-    
-    for i, target in enumerate(summitsInRange):
-        
-        if func.hasSight(observer, target):
-            # farthest LOS for this summit found!!!
-            lineOfSights.append([observer[ID], observer[LAT], observer[LNG], observer[ELV],
-                                 target[ID], target[LAT], target[LNG], target[ELV],
-                                 distanceBetweenSummits[i]])
+    print(f'LOS candidates after distance cuts: {len(losCandidates)}')
+
+    # Sort LOS candidates by distance (farthest first)
+    losCandidates = sorted(losCandidates, key=lambda point: point.surfaceDistance, reverse=True) # Not actually needed
             
-            # np.savetxt(checkpointFile, remainingSummits[i+1:], delimiter=',')
-            # np.savetxt(outputFile, lineOfSights, delimiter=',')
-            print(f'CHECKPOINT SAVED ({len(lineOfSights)} pinnacle points found)')
+    # Process in batches of apiLimit
+    numCandidatesTested = 0
+    numLosCandidateBatches = int(math.ceil(len(losCandidates)/func.apiLimit))
+    for batchId in range(numLosCandidateBatches):
+        losCandidateBatchMidLats = []
+        losCandidateBatchMidLngs = []
+        losCandidateBatch = losCandidates[batchId*func.apiLimit:(batchId+1)*func.apiLimit]
+        
+        # Find latitudes and longitudes for midpoints
+        for losCandidate in losCandidateBatch:
+            latitudeAsList, longitudeAsList = losCandidate.getLatitudesAndLongitudes()
+            losCandidateBatchMidLats.append(latitudeAsList[0])
+            losCandidateBatchMidLngs.append(longitudeAsList[0])
+        
+        # Find elevations for midpoints
+        losCandidateBatchMidElvs = func.getElevation(','.join(map(str, losCandidateBatchMidLats)), 
+                                                     ','.join(map(str, losCandidateBatchMidLngs)))
+        
+        losCandidate = None
+        for losCandidateBatchId in range(len(losCandidateBatch)):
+            
+            numCandidatesTested += 1
+            
+            losCandidate = func.LineOfSight(observer, 
+                                       losCandidateBatch[losCandidateBatchId].target, 
+                                       losPoints = [func.LosPoint(losCandidateBatchMidLats[losCandidateBatchId],
+                                                                  losCandidateBatchMidLngs[losCandidateBatchId],
+                                                                  losCandidateBatchMidElvs[losCandidateBatchId])])
 
-            break
+            # Check if LOS is blocked by midpoint
+            if losCandidate.passesLineOfSightTest():
+                
+                losCandidate = func.LineOfSight(observer, losCandidate.target, numPoints=func.apiLimit)
+                
+                # Check if LOS is blocked when numPoints=apiLimit
+                if losCandidate.passesLineOfSightTest():
+                    
+                    losCandidate = func.LineOfSight(observer, losCandidate.target, sampleDist=1) # Is 0.1 doable?
+                    
+                    # Check if LOS is blocked when sampleDist=0.1km
+                    if losCandidate.passesLineOfSightTest():
+                        
+                        print(f'LOS FOUND after testing {numCandidatesTested} candidates, ' + 
+                              f'{round(losCandidate.surfaceDistance/1000)} km long!!!')
+
+                        linesOfSight.loc[len(linesOfSight)] = [losCandidate.observer.latitude,
+                                                               losCandidate.observer.longitude,
+                                                               losCandidate.observer.elevation,
+                                                               losCandidate.observer.prominence,
+                                                               losCandidate.target.latitude,
+                                                               losCandidate.target.longitude,
+                                                               losCandidate.target.elevation,
+                                                               losCandidate.target.prominence,
+                                                               losCandidate.surfaceDistance]
+    
+    saveCheckpoint(candidateTargets, linesOfSight)

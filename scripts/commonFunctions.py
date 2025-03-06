@@ -7,15 +7,10 @@ import matplotlib.pyplot as plt
 import os
 
 earthRadius = 6371146 # in m
-maxVisibleDistance = 542000 # The farthest any point on Earth can see, from Beyond Horizons
 geod = Geod(ellps='sphere')
-
-ID  = 0 # id (ordered by elevation)
-LAT = 1 # latitude
-LNG = 2 # longitude
-ELV = 3 # elevation
-MHD = 4 # max horizon distance
-ISO = 5 # isolation
+losDistanceCutOff = 400*1000 # TODO: Put this in parameters
+apiLimit = 100
+lightCurvature = 5.6 # https://aty.sdsu.edu/explain/atmos_refr/bending.html
 
 '''
 Gets the stored parameters
@@ -44,49 +39,6 @@ Gets the longitudes used as boundaries for the patches
 '''
 def getPatchLngBoundaries(patchSize):
     return np.arange(-180, 180+patchSize, patchSize)
-
-'''
-Plotting the path of light between 2 points
-'''
-def plotLosElevationProfile(lat1, lng1, elv1, 
-                            lat2, lng2, elv2, 
-                            savePlot=False, 
-                            plotTitle='', 
-                            xLabel=''):
-    
-    dists, elvs = getLosData(lat1, lng1, elv1, lat2, lng2, elv2)
-    lightPath = getLightPath(dists)
-    dists = dists/1000 # m to km
-        
-    plt.figure(figsize=(10,4))
-    plt.plot(dists, elvs, color='k')
-    plt.plot(dists, lightPath, color='orange', 
-             label='Path of light bent from atmospheric refraction') # light with bending
-    plt.plot(dists, np.zeros(len(dists)), linestyle=':', c='darkorange', 
-             label='Path of light if there was no atmosphere') # light without bending
-    plt.fill_between(dists, lightPath, elvs, alpha=1, color='red', where=(elvs > lightPath),
-                label='Land that blocks line of sight')
-    plt.fill_between(dists, 0, elvs, alpha=0.33, color='grey', where=(elvs > 0),
-                    label='Land that would block line of sight if there was no atmosphere')
-    
-    if xLabel == '':
-        xLabel = 'Distance from Observer to Target (km)'
-    
-    plt.xlabel(xLabel)
-    plt.ylabel('Vertical Distance (m)')
-    fig = plt.gcf()
-    fig.patch.set_facecolor('w')
-    fig.set_dpi(160)
-    plt.grid()
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=1)
-    
-    if plotTitle != '':
-        plt.title(plotTitle)
-        
-    if savePlot == True and plotTitle != '':
-        plt.savefig(f'../misc/pics/{plotTitle.replace(" ", "_")}') 
-    
-    plt.show()
 
 '''
 Gets the summits in the patch associated with a point
@@ -169,17 +121,8 @@ The 7/6 factor accounts for atmospheric refraction
 '''
 def horizonDistance(height):
     if height > 0:
-        return np.sqrt(2*(7.0/6.0)*earthRadius*height)
+        return np.sqrt(2*(lightCurvature/(lightCurvature-1))*earthRadius*height)
     return 0
-
-'''
-Generate a list of lats and lngs between the two input points along the geodesic
-'''
-def getLatLngsBetweenPoints(lat1, lng1, lat2, lng2):
-    lngLats = geod.npts(lng1, lat1, lng2, lat2, 100) # 100 max per API call
-    lngs = np.array(lngLats)[:, 0]
-    lats = np.array(lngLats)[:, 1]
-    return lats, lngs
 
 '''
 Gets the elevations for points via an OpenMeteo API
@@ -190,79 +133,235 @@ def getElevation(latStr, lngStr):
     response = requests.get(f'https://api.open-meteo.com/v1/elevation?latitude={latStr}&longitude={lngStr}')
     return response.json()['elevation']
 
-'''
-Generate a list of 100 lats, lngs, dists, and elvs between the two input points along the geodesic
-Takes Earth's curvature into account
-dists and elvs start at 0
-'''
-def getElevationProfile(lat1, lng1, elv1, lat2, lng2, elv2):
-        
-    # Calling elevation API
-    lats, lngs = getLatLngsBetweenPoints(lat1, lng1, lat2, lng2)
-    latStr = ','.join(map(str, lats))
-    lngStr = ','.join(map(str, lngs))
-    elvs = getElevation(latStr, lngStr)
-
-    # npts doesn't include start/end points, so prepend/append them
-    lngs = np.insert(lngs, 0, lng1)
-    lngs = np.append(lngs, lng2)
-    lats = np.insert(lats, 0, lat1)
-    lats = np.append(lats, lat2)
-    elvs = np.insert(elvs, 0, elv1)
-    elvs = np.append(elvs, elv2)
-
-    dists = []
-    for i, lat in enumerate(lats):
-        lon = lngs[i]
-        dist = geod.line_length([lng1, lon], [lat1, lat])
-        dists.append(dist)
-    
-    # Adjusting for earth's curvature
-    angleBetweenPoints = np.array(dists)/earthRadius
-    dists = earthRadius * np.sin(angleBetweenPoints)
-    dropFromCurvature = earthRadius * (1 - np.cos(angleBetweenPoints))
-    elvs = elvs - dropFromCurvature - elvs[0]
-    
-    return lats, lngs, dists, elvs
 
 '''
 Rotates an elevation profile from getElevationProfile() by an angle
 '''
-def rotateElevationProfile(dists, elvs, angle):
-    dists = (dists * math.cos(angle)) - (elvs * math.sin(angle))
-    elvs = (dists * math.sin(angle)) + (elvs * math.cos(angle))
-    return dists, elvs
-
-'''
-Gets the distance and elevation data along the LOS between 2 points
-'''
-def getLosData(lat1, lng1, elv1, lat2, lng2, elv2):
+def rotate(x, y, angle):
     
-    lats, lngs, dists, elvs = getElevationProfile(lat1, lng1, elv1, lat2, lng2, elv2)
+    rotationMatrix = np.array([[np.cos(angle), -np.sin(angle)],
+                               [np.sin(angle),  np.cos(angle)]])
     
-    # Rotating to make LOS horizontal
-    angleBelowHorizontal = -np.arctan(elvs[-1]/dists[-1])
-    dists, elvs = rotateElevationProfile(dists, elvs, angleBelowHorizontal)
+    rotatedPoint = rotationMatrix @ np.array([x, y])
     
-    return dists, elvs
+    return rotatedPoint[0], rotatedPoint[1]
 
-'''
-Finds the path light takes between 2 points taking atmospheric refraction into account
-Approximated as the arc or a circle with radius 7*R_earth
-'''
-def getLightPath(dists):
-    distanceToTarget = dists[-1]
-    gamma = (7.0*earthRadius)**2 - (distanceToTarget)**2
-    return np.sqrt(gamma + dists*(distanceToTarget - dists)) - np.sqrt(gamma)
+class Summit:
 
-'''
-Determines if 2 points have direct line of sight
-Curvature of the Earth, atmospheric refraction, and local topography are taken into account
-'''
-def hasSight(p1, p2):
- 
-    dists, elvs = getLosData(p1[LAT], p1[LNG], p1[ELV], p2[LAT], p2[LNG], p2[ELV])
-    lightPath = getLightPath(dists)
+    def __init__(self,
+                 latitude, 
+                 longitude, 
+                 elevation, 
+                 id=None,
+                 prominence=None, 
+                 isolation=None):
+        self.latitude = latitude
+        self.longitude = longitude
+        self.elevation = elevation
+        self.id = id # Delete?
+        self.prominence = prominence
+        self.isolation = isolation
+        self.maxHorizonDistance = horizonDistance(elevation)
+        
+    def __str__(self):
+        
+        summitInfo = (f'Location: {self.latitude}, {self.longitude}\n' 
+                      + f'Elevation: {round(self.elevation)} m\n')
+        if self.prominence is not None:
+            summitInfo += f'Prominence: {round(self.prominence)} m\n'
+        if self.isolation is not None:
+            summitInfo += f'Isolation: {round(self.isolation)} km\n'
 
-    # Removing ends since they could be slightly above 0 after the translation/rotation
-    return not (elvs[1:-1] > lightPath[1:-1]).any()
+        return summitInfo    
+
+class LosPoint:
+        
+    def __init__(self, 
+                 latitude,
+                 longitude,
+                 elevation=None,
+                 surfaceDistance=None,
+                 straightDistance=None,
+                 earthHeight=None,
+                 lightHeight=None):
+        
+        self.latitude = latitude
+        self.longitude = longitude
+        self.elevation = elevation
+        self.surfaceDistance = surfaceDistance
+        self.straightDistance = straightDistance
+        self.earthHeight = earthHeight
+        self.lightHeight = lightHeight
+            
+    def __str__(self):
+        summitInfo = (f'Location: {self.latitude}, {self.longitude}\n' 
+                      + f'Elevation: {round(self.elevation)} m\n')
+        if self.surfaceDistance is not None:
+            summitInfo += f'Straight Distance: {round(self.straightDistance/1000)} km\n'
+        if self.earthHeight is not None:
+            summitInfo += f'Earth Height: {round(self.earthHeight)} m\n'
+        if self.lightHeight is not None:
+            summitInfo += f'Light Height: {round(self.lightHeight)} m\n'
+
+        return summitInfo   
+                 
+class LineOfSight:
+    
+    straightDist = None
+
+    def __init__(self, 
+                 observer,
+                 target,
+                 numPoints=None,
+                 losPoints=None,
+                 sampleDist=1,
+                 forceFull=False,
+                 skipProcessing=False): # in km
+        
+        self.observer = observer
+        self.target = target
+        self.sampleDist = sampleDist
+        self.forceFull = forceFull
+        
+        if losPoints is None:
+            losPoints = []
+        self.losPoints = losPoints
+        
+        self.surfaceDistance = geod.line_length([self.observer.longitude, self.target.longitude], 
+                                                     [self.observer.latitude, self.target.latitude])
+        
+        if numPoints is not None:
+            self.numPoints = numPoints
+        elif len(self.losPoints) == 0:
+            self.numPoints = math.ceil(self.surfaceDistance/(sampleDist*1000)) - 1 # numSamples - 1 
+            
+        if not skipProcessing:
+            self.process()
+        
+    def getLatitudesAndLongitudes(self):
+        lngLats = geod.npts(self.observer.longitude, self.observer.latitude, 
+                                     self.target.longitude, self.target.latitude, 
+                                     self.numPoints)
+
+        longitudes = np.array(lngLats)[:, 0]
+        latitudes = np.array(lngLats)[:, 1]
+        
+        return latitudes, longitudes
+        
+    def process(self):
+                                            
+        if len(self.losPoints) == 0:
+            
+            latitudes, longitudes = self.getLatitudesAndLongitudes()
+
+            midPoint = int(math.ceil(self.numPoints/2))
+            numBatches = int(math.ceil(self.numPoints/apiLimit))
+            
+            for i in range(numBatches):
+
+                rangeStartOuter = int(midPoint - (i+1)*apiLimit/2)
+                rangeEndOuter = int(midPoint + (i+1)*apiLimit/2)
+
+                rangeStartInner = int(rangeStartOuter + apiLimit/2)
+                rangeEndInner = int(rangeEndOuter - apiLimit/2)
+
+                if rangeStartOuter < 0:
+                    rangeStartOuter = 0
+
+                if rangeEndOuter > self.numPoints:
+                    rangeEndOuter = self.numPoints
+
+                batchLats = (list(latitudes[rangeStartOuter:rangeStartInner]) 
+                             + list(latitudes[rangeEndInner:rangeEndOuter]))
+                batchLngs = (list(longitudes[rangeStartOuter:rangeStartInner]) 
+                             + list(longitudes[rangeEndInner:rangeEndOuter]))
+
+                los = LineOfSight(self.observer, self.target, losPoints = [LosPoint(latitude, longitude) 
+                                                                           for (latitude, longitude) 
+                                                                           in zip(batchLats, batchLngs)])
+
+                if i == numBatches - 1:
+                    self.losPoints += los.losPoints
+                    self.losPoints = sorted(self.losPoints, key=lambda losPoint: losPoint.straightDistance)
+                else:
+                    self.losPoints += los.losPoints[1:-1]
+                    
+                if not self.passesLineOfSightTest() and not self.forceFull:
+                    break
+                                        
+        else:
+            longitudes = [point.longitude for point in self.losPoints]
+            latitudes = [point.latitude for point in self.losPoints]
+                    
+            elevations = [point.elevation for point in self.losPoints]
+            if any([elevation is None for elevation in elevations]):
+                elevations = getElevation(','.join(map(str, latitudes)), ','.join(map(str, longitudes)))
+            
+            latitudes = [self.observer.latitude] + latitudes + [self.target.latitude]
+            longitudes = [self.observer.longitude] + longitudes + [self.target.longitude]
+            elevations = [self.observer.elevation] + elevations + [self.target.elevation]
+                
+            surfaceDistances = []
+            for i, latitude in enumerate(latitudes):
+                longitude = longitudes[i]
+                distance = geod.line_length([self.observer.longitude, longitude], [self.observer.latitude, latitude])
+                surfaceDistances.append(distance)
+
+            angleBetweenPoints = np.array(surfaceDistances)/earthRadius
+            straightDistances = earthRadius * np.sin(angleBetweenPoints)
+            dropFromCurvature = earthRadius * (1 - np.cos(angleBetweenPoints))
+            earthHeights = elevations - dropFromCurvature - elevations[0]
+
+            angleBelowHorizontal = -np.arctan(earthHeights[-1]/straightDistances[-1])
+            straightDistances, earthHeights = rotate(straightDistances, earthHeights, angleBelowHorizontal)
+
+            distanceToTarget = straightDistances[-1]
+            gamma = (lightCurvature*earthRadius)**2 - (distanceToTarget)**2
+            lightPath = np.sqrt(gamma + straightDistances*(distanceToTarget - straightDistances)) - np.sqrt(gamma)
+
+            self.losPoints = [LosPoint(latitude, longitude, elevation, 
+                                       surfaceDistance, straightDistance, earthHeight, lightHeight) 
+                              for (latitude, longitude, elevation, 
+                                   surfaceDistance, straightDistance, earthHeight, lightHeight) 
+                              in zip(latitudes, longitudes, elevations, 
+                                     surfaceDistances, straightDistances, earthHeights, lightPath)]
+
+    def plot(self, plotName=''):
+                
+        if len(self.losPoints) == 0:
+            self.process()
+                
+        distances = [point.straightDistance/1000 for point in self.losPoints]
+        earthHeight = [point.earthHeight for point in self.losPoints]
+        lightHeight = [point.lightHeight for point in self.losPoints]
+        
+        plt.figure(figsize=(10,4))
+        plt.plot(distances, lightHeight, color='orange', label='Light', lw=1)
+        plt.plot(distances, earthHeight, color='k', label='Earth', lw=1)
+        plt.title('Line of sight test between\n' 
+                  + f'{self.observer.latitude}, {self.observer.longitude} ({round(self.observer.elevation)} m) ' 
+                  + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m)\n' 
+                  + f'{round(self.surfaceDistance/1000)} km apart ' 
+                  + f'[N={self.numPoints}, SD={round(self.surfaceDistance/(self.numPoints+1), 1)} m, LOS={self.passesLineOfSightTest()}]')
+        plt.xlabel('Distance (km)')
+        plt.ylabel('Height (m)')
+        
+        fig = plt.gcf()
+        fig.patch.set_facecolor('w')
+        fig.set_dpi(200)
+        plt.grid()
+        plt.legend()
+        
+        if plotName != '':
+            plt.savefig(plotName, dpi=200, bbox_inches='tight')
+
+        plt.show()
+        
+    def passesLineOfSightTest(self):
+        return all(losPoint.earthHeight < losPoint.lightHeight for losPoint in self.losPoints[1:-1])
+        
+    def passesMaxHorizonDistanceTest(self):
+        testResult =  (self.surfaceDistance < self.observer.maxHorizonDistance + self.target.maxHorizonDistance 
+                       and self.surfaceDistance > losDistanceCutOff)
+            
+        return testResult

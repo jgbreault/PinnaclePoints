@@ -1,6 +1,6 @@
-summit_file = ../dataSources/generatedDatasets/historicalResults/pinnaclePointsRawMerged.txt
+summit_file = ../dataSources/baseDatasets/prominenceSummits/all_prm-100ft.txt
 has_isolation = False
-candidate_file = ../dataSources/generatedDatasets/historicalResults/pinnaclePointsRawMerged.txt
-patch_directory = .
+candidate_file = ../dataSources/baseDatasets/prominenceSummits/ototw_prm-300m.txt
+patch_directory = ../dataSources/generatedDatasets/prominencePatches
 patch_size = 5
-is_single_global_patch = True
+is_single_global_patch = False
