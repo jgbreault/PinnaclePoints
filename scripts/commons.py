@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 
 ########## VARIABLES ##########
 
+defaultLightCurvature = 6.4
+scatterCoeff0 = 0.00001139 # Wavelength averaged scattering coefficient in 1/m, Penndorf 1957
+
 # summitFile = '../data/clean/summits_prm.csv'
 # pinnaclePointFile = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
 # patchDirectory = f'../data/patches/prm_{defaultLightCurvature}'
@@ -20,9 +23,6 @@ import matplotlib.pyplot as plt
 summitFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
 pinnaclePointFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
 patchDirectory = f'../data/patches/prm_iso_{defaultLightCurvature}'
-
-defaultLightCurvature = 6.4
-scatterCoeff0 = 0.00001139 # Wavelength averaged scattering coefficient in 1/m, Penndorf 1957
 
 defaultMaxSamplingDistance = 100 # in m
 ignoreBuffer = 4000 # in m
