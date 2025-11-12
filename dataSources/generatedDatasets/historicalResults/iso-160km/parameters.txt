@@ -1,6 +1,0 @@
-summit_file = ../dataSources/baseDatasets/isolationSummits/all_iso-1km.txt
-has_isolation = True
-candidate_file = ../dataSources/baseDatasets/isolationSummits/all_iso-160km.txt
-patch_directory = ../dataSources/generatedDatasets/isolationPatches
-patch_size = 5
-is_single_global_patch = False

@@ -1,119 +1,97 @@
-# PinnaclePoints
+# Pinnacle Points
 
-A **pinnacle point** is a point from which no higher point can be seen.
-
-Across the globe, 885 have been found. These are all pinnacle points with more than 300 m (1000 ft) of prominence or more than 160 km (100 miles) of isolation. The curvature of the Earth, atmospheric refraction, and local topography are taken into account. Two summits are defined to have line-of-sight if light can theoretically travel from one to the other under ideal atmospheric conditions. An explanation of the algorithm used can be found at pinnaclePointAlgorithmExplained.txt.
+Pinnacle points are a points from which no higher point can be seen. In other words, at a pinnacle point you would be at the highest elevation in sight. Two points are defined to have line of sight if light can theoretically travel from one to the other unobstructed in clear atmospheric conditions. The curvature of the Earth, atmospheric refraction, and local topography are all taken into account. It is possible for two pinnacle points of equal elevation to have line of sight since neither is tall enough to disqualify the other.
 
 Interactive Map: https://www.pinnacle-points.com
 
-My Pinnacle Point Journal: https://www.pinnacle-points.com/guide
-
-What is a Pinnacle Point?: https://www.pinnacle-points.com/guide/screens/what_is_pinnacle_point
-
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/pinnaclePoints_globe.png" width=70%/>
-
-**Future Plans:**
-- Algorithmically find all the longest lines of sight on Earth
-- Summit more pinnacle points
-- Framework for blog
-- Mention notable points on blog
-    - Most prominent point to not be a pinnacle point
-    - Most isolated point to not be a pinnacle point
+<!-- <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/images/global_pinnacle_points.png"/> -->
+<img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/images/global_pinnacle_points.png"/>
     
 **Data Sources:**
-1. <a href="https://www.andrewkirmse.com/prominence-update-2023">Mountains by Prominence</a>
-    - Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (30 m) of prominence. I use this dataset to find all pinnacle points with more than 300 m (1000 ft) of prominence.
-2. <a href="https://www.andrewkirmse.com/true-isolation">Mountains by Isolation</a>
-    - Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with over 1 km (0.6 miles) of isolation. I use this dataset to find all pinnacle points with more than 160 km (100 miles) of isolation.
-3. <a href="https://ototwmountains.com/">On-Top-Of-The-World Mountains</a>
-    - An on-top-of-the-world mountain (OTOTW) is a summit where no land rises above the horizontal plane from the summit. Since any land that rises above the horizontal plane would have higher elevation than the summit itself, if a summit is not an OTOTW then it can not be a pinnacle point either. In other words, pinnacle points are a subset of OTOTWs. Kai Xu found all 6,464 OTOTWs on Earth with over 300 m (1000 ft) of prominence. I identify which of these 6,464 summits are pinnacle points. Andreas Geyer-Schulz deserves mention as well for his
-<a href="https://nuntius35.gitlab.io/extremal_peaks/">extremal peaks</a>.
-4. <a href="https://aty.sdsu.edu/explain/atmos_refr/horizon.html">Atmospheric Refraction</a>
-    - The exact path light takes in the atmosphere depends on many factors. However, according to the San Diego State University, a ray's path can be approximated as the arc of a circle with radius seven times greater than Earth's. I use this when determining if two summits have line-of-sight.
-5. <a href="https://aty.sdsu.edu/explain/atmos_refr/horizon.html">Open-Meteo and Copernicus</a>
-    - Open-Meteo provides a free elevation API that uses the <a href="https://doi.org/10.5270/ESA-c5d3d65">Copernicus DEM</a>. I use this API to find the elevation of points that are not in any of my datasets.
+1. <a href="https://ototwmountains.com/">On-Top-Of-The-World Mountains</a>
+    - Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence. Prominence is the minimum vertical distance one must descend to reach a higher point. Kai Xu identified OTOTW mountains using this dataset, so I use this dataset to identify which OTOTW mountains are pinnacle points. This source primarily uses the Copernicus GLO-30 DEM.
+2. <a href="https://www.andrewkirmse.com/prominence-update-2023">Mountains by Prominence</a>
+    - Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with over 1 km of isolation. Isolation is the distance to the nearest higher point. Extreme isolation points are strong pinnacle point candidates, so I use this dataset to find all pinnacle points with an isolation of at least 100 km. This source uses the STRM 90m DEM.
+3. <a href="https://www.andrewkirmse.com/true-isolation">Mountains by Isolation</a>
+    - On-top-of-the-world (OTOTW) mountains are mountains where no land rises above the horizontal plane from its summit. Since any land that rises above the horizontal plane would have a higher elevation than the mountain itself, if a mountain is not an OTOTW mountain then it can not be a pinnacle point either. In other words, pinnacle points are a subset of OTOTW mountains. Kai Xu found all 6,464 OTOTW mountains on Earth with over 300 m of prominence, and I have identified which qualify as pinnacle points. Andreas Geyer-Schulz deserves mention as well for his <a href="https://nuntius35.gitlab.io/extremal_peaks/">extremal peaks</a>, a nearly identical concept to OTOTW mountains developed completely independently.
+4. <a href="https://open-meteo.com/en/docs/elevation-api">Open-Meteo's Elevation API</a>
+    - Open-Meteo offers an elevation API that can be used to find the elevation on any point on Earth. I host this API locally to find the elevation of points between summits that could obstruct line of sight. I also use this API to correct a few faulty summit elevations from the other data sources. This source uses the Copernicus GLO-90 DEM.
+5. <a href="https://beyondrange.wordpress.com/lines-of-sight/">Beyond Horizons</a>
+    - Beyond Horizons has catalogued many of the longest lines of sight ever captured by photograph. I use these confirmed lines of sight to determine how to model light bending from atmospheric refraction over great distances.
 
 **Sources of Error:**
-- The Earth is approximated as a sphere instead of an ellipsoid. This is done for simpler math.
-- There is some inherent error in the data. The datasets have resolutions ranging from of 30 m (1 arcsecond) to 90 m (3 arcseconds). All data sources are surface elevation models, so trees and buildings are included.
-- Only 100 equidistant points are sampled when determining if two summits have an obstructed line-of-sight. Some points that could block line-of sight may not be captured in this sample. By increasing the number of sampled points, more pinnacle points could be found.
-- The algorithm assumes there to be no land below sea level, which is not quite true. Any pinnacle points below sea level would not have been identified. It is possible for some identified pinnacle points that are near basins below sea level to not truly be pinnacle points. This is because these points can see farther across their basin in reality than they could if the basin did not descend below sea level.
-- Only summits with more than 300 m (1000 ft) of prominence or more than 160 km (100 miles) of isolation are considered. The promience threshold is determined by the OTOTWs dataset since I only consider points in Source 1 that are OTOTWs. When finding pinnacle points in Source 2, high isolation points are obvious strong candidates when identifying pinnacle points. The specific value for the isolation threshold was decided arbitarily. Computation time increases considerably as the isolation threshold is lowered.
-- To take atmospheric refraction into account, light rays are approximated as arcs of circles (Source 4). The path light takes in the atmosphere is in fact much more complex and depends on many factors. Since the distance you can see from a given point depends on temperature and pressure, the distance you can see from a point technically changes with the seasons and even the time of day. Additionally, the approximation of light following the arc of a circle only holds true for altitudes that are small compared to the 8 km height of the <a href="https://aty.sdsu.edu/explain/thermal/hydrostatic.html#homog">homogeneous atmosphere</a>. This project is slightly outside of this scope.
-
-**App Download:**
-
-Since the app is only available by downloading the APK, only Android devices are currently supported. I might put the app on the Android and Apple app stores eventually. Follow these steps to get the app on your Android device:
-- Go to misc/pinnaclePoints.apk
-- Click the button that looks like [...] (three dots).
-- Click [Download]. Open the APK on your device when it is done downloading. You may get a message similar to "For your security, your device is not allowed to install apps from this source". You'll have to go to your settings and allow unknown installs from this source. Feel free to change it back afterwards.
-- Click [Install].
+- There is some inherent error in the elevation data.
+- The Earth is approximated as a sphere instead of an ellipsoid for simpler math.
+- To take atmospheric refraction into account, light rays are approximated as arcs of circles. Though this is a commonly used approximation, the path light takes in the atmosphere is in fact much more complex and depends on many local factors. This is probably the largest source of error.
+- Only summits with more than 300 m of prominence or more than 100 km of isolation are considered. The prominence threshold is determined by the OTOTW mountain dataset. The isolation threshold was chosen arbitrarily to be a pretty number that my algorithm can handle in a reasonable amount of time.
+- When doing LOS analysis, a discrete number of points between the observer and target are sampled to see if the ground obstructs LOS. The samples are at most 100 m apart. It is possible for points that would block LOS to not be captured. By increasing the number of samples, more pinnacle points could be found.
 
 **Project Structure:**
 ```
 PinnaclePoints/
-├── CNAME              # Needed to host index.html on pinnacle-points.com
-├── pinnaclePoints.txt # The final pinacle point reuslt used in the interactive map 
-├── index.html         # Interactive pinnacle point map
+├── data/
+│   ├── clean/   # Modified versions of datasets that have been cleaned up
+│   ├── patches/ # Holds summit patches
+│   ├── raw/     # Raw untouched data straight from the source
+│   │   ├── all-peaks-sorted-p100.txt # Mountains by prominence
+│   │   ├── alliso-sorted.txt         # Mountains by isolation
+│   │   ├── beyond_horizons.txt       # Longest confirmed lines of sight
+│   │   ├── extremals-geojson.js      # Extremals (not used)
+│   │   └── ototw_p300.csv            # On-Top-Of-The-World mountains
+│   └── results/ # Data generated by algorithms
+│       └── pinnacle_points/ # Results from the pinnacle point algorithm
+│           ├── iso/     # Results for mountains by isolation
+│           ├── prm/     # Results for mountains by prominence
+│           └── prm_iso/ # The combined and final result
+├── misc/
+│   ├── images/    # Pretty pictures and plots
+│   ├── math/
+│   │   ├── formatted/
+│   │   │   ├── atmoshperic_refraction.pdf # Math for light bending
+│   │   │   ├── diagrams.pdf               # Diagrams to help with the math
+│   │   │   └── earth_curvature.pdf        # Math for Earth curvature
+│   │   └── raw/       # Math markdown
+│   ├── papers/    # Relevant scientific papers
+│   └── method.txt # The most complete explanation of this project
 ├── scripts/
-│   ├── analysis.ipynb            # Used to analyze datasets and generate the interactive map
-│   ├── commonFunctions.py        # Holds common functions used throughout this directory
-│   ├── historicalResultMerger.py # Used to merge results from different runs in a big file full of duplicates
-│   ├── lineOfSightFinder.py      # A work in progress, no looky
-│   ├── parameters.txt            # Holds parameters that determine which dataset to use, etc...
-│   ├── patchMaker.py             # Divides summit_file into patches
-│   ├── pinnaclePointFinder.py    # Identifies pinnacle points in candidate_file, outputs to pinnaclePointsRaw.txt
-│   └── pinnaclePointNamer.py     # Names pinnacle points based on closest extremal or closest PeakBagger summit
-├── dataSources/
-│   ├── baseDatasets/
-│   │   ├── extremals.txt            # Essentially OTOTW from a different source. Only used for Wiki info and some names.
-│   │   ├── isolationSummits/
-│   │   │   ├── all_iso-1km.txt      # All summits with over 1 km of isolation (MISSING: too large to include)
-│   │   │   └── all_iso-100km.txt    # All summits with over 100 km of isolation
-│   │   └── prominenceSummits/
-│   │       ├── all_prm-100ft.txt    # All summits with over 100 ft of prominence (MISSING: too large to include)
-│   │       └── ototw_prm-300m.txt   # All OTOTW with over 300 m of prominence
-│   └── generatedDatasets/
-│       ├── faultyPinnaclePoints.txt # Used to catalogue misidentified pinnacle points
-│       ├── historicalResults/
-│       │   ├── iso-1km/             # The results that used all_iso-1km.txt as a base dataset
-│       │   ├── prm-100ft/           # The results that used all_prm-100ft.txt as a base dataset
-│       │   └── prm_and_iso/         # The merged results from iso-1km and prm-100ft
-│       ├── isolationPatches/        # Patches from all_iso-1km.txt (MISSING: add directory yourself)
-│       └── prominencePatches/       # Patches from all_prm-100ft.txt (MISSING: add directory yourself)
-├── guide/ # My pinnacle point blog
-└── misc/
-    ├── pinnaclePoints.apk                  # Downloadable app for android
-    ├── pinnaclePointAlgorithmExplained.txt # An explanation of of the pinnacle point algorithm 
-    ├── math/                               # Derivations of equations used in the algorithm
-    ├── pics/                               # Pics used in this README and more
-    └── scientificPapers/                   # Relevant scientific papers
+│   ├── commons.py                  # Common contants, functions, and classes
+│   ├── known_los_analysis.ipynb    # Determines how to bend light using the confirmed longest lines of sight
+│   ├── known_los_parser.ipynb      # Parses html from Beyone Horizons for the confirmed longest lines of sight
+│   ├── patch_maker.py              # Divides a file containing global summits into patches
+│   ├── pinnacle_point_finder.py    # The algorithm to find pinnacle points
+│   ├── pinnacle_point_mapper.ipynb # Generates the interactive pinnacle point map
+│   ├── pinnacle_point_merger.py    # Merges the results of the isolation and prominence datasets
+│   └── summit_cleaner.py           # Cleans data from the isolation and prominence datasets
+├── CNAME              # Needed to host index.html on pinnacle-points.com
+├── index.html         # Interactive pinnacle point map
+└── README.md          # This file :D
 ```
 
-**Running the Algorithm:**
+**The longest line of sight confirmed by photograph:**
 
-- Add your summit_file and candidate_file (defined below) to dataSources/baseDatasets/
-    - My summit_files are too large to include in github without LFS. My sources are on the interactive map. 
-- Specify your parameters in scripts/parameters.txt (you can use copies from historicalResults/)
-    - summit_file: the base dataset of summits, Must have id, latitude, longitude, and elevation. Sort summit_file by elevation descending.
-    - has_isolation: a boolean, does summit_file include isolation? If so the algorithm is faster. 
-    - candidate_file: records from summit_file that I want to test as pinnacle points
-    - patch_directory: directory of the pathches used by the algorthm
-    - patch_size: patches are patch_size deg latitude by patch_size deg longitude
-    - is_single_global_patch: only True if not using patches, only recommended to removing duplicates from merged results
-- Run scripts/patchMaker.py to divide summit_file into patches. Smaller patch_size is faster but takes more space.
-- Run scripts/pinnaclePointFinder.py to generate the raw pinnacle point result in pinnaclePointsRaw.txt
-    - Only 10,000 line-of-sight tests can be done a day, an API restication
-- Run scripts/pinnaclePointFormatter.py to format and give names to pinnaclePointsRaw.txt, generates pinnaclePoints.txt
+<img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/images/longest_confirmed_LOS.png"/>
 
-**The path of light between the two farthest points on Earth that can see each other:**
+**Relevant Mathematics:**
 
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/pics/Longest_Unbroken_Light_Path_on_Earth_(538_km).png"/>
+<p align="center">
+    <img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/math/formatted/earth_curvature.png" width=49%/>
+    <img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/math/formatted/atmospheric_refraction.png" width=49%/>
+</p>
 
-**Taking atmospheric refraction into account:**
+<p align="center">
+    <img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/math/formatted/diagrams.png" width=49%/>
+</p>
 
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/atmosphericRefraction.jpg" width=60%/>
 
-**Taking the curvature of the Earth into account:**
+<!-- **The longest line of sight confirmed by photograph:**
 
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/earthCurvature.png"/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/images/longest_confirmed_LOS.png"/>
+
+**Relevant Mathematics:**
+
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/diagrams.pdf"/>
+
+<p align="center">
+    <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/earth_curvature.pdf" width=49%/>
+    <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/atmospheric_refraction.pdf" width=49%/>
+</p> -->
