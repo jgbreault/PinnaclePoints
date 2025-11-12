@@ -43,15 +43,16 @@ PinnaclePoints/
 │           ├── prm/     # Results for mountains by prominence
 │           └── prm_iso/ # The combined and final result
 ├── misc/
-│   ├── images/    # Pretty pictures and plots
+│   ├── images/             # Pretty pictures and plots
 │   ├── math/
 │   │   ├── formatted/
 │   │   │   ├── atmoshperic_refraction.pdf # Math for light bending
 │   │   │   ├── diagrams.pdf               # Diagrams to help with the math
 │   │   │   └── earth_curvature.pdf        # Math for Earth curvature
 │   │   └── raw/       # Math markdown
-│   ├── papers/    # Relevant scientific papers
-│   └── method.txt # The most complete explanation of this project
+│   ├── papers/             # Relevant scientific papers
+│   ├── method.txt          # Explanation of this project
+│   └── pinnacle_points.apk # Pinnacle point app for Android
 ├── scripts/
 │   ├── commons.py                  # Common contants, functions, and classes
 │   ├── known_los_analysis.ipynb    # Determines how to bend light using the confirmed longest lines of sight
