@@ -231,7 +231,7 @@ class LineOfSight():
         surfaceDistances = []
         for i, latitude in enumerate(latitudes):
             longitude = longitudes[i]
-            surfaceDistances.append(geod.line_length([self.observer.longitude, longitude], [self.observer.latitude, latitude]))
+            surfaceDistances.append(geod.line_length([self.observer.longitude, longitude], [self.observer.latitude, latitude])) #TODO getDistanceTo
 
         anglesBetweenObserverAndLosPoints = np.array(surfaceDistances)/earthRadius
         xDistances = earthRadius * np.sin(anglesBetweenObserverAndLosPoints)
@@ -259,7 +259,7 @@ class LineOfSight():
         return self.losPoints[-1].straightDistance
 
     def getSurfaceDistance(self):
-        return geod.line_length([self.observer.longitude, self.target.longitude], [self.observer.latitude, self.target.longitude])
+        return geod.line_length([self.observer.longitude, self.target.longitude], [self.observer.latitude, self.target.latitude])
     
     def getLightDistance(self):
         dx = np.diff([point.straightDistance for point in self.losPoints])
@@ -284,7 +284,7 @@ class LineOfSight():
                                                                         
     def plot(self, plotPath=''):
 
-        distances = np.array([point.straightDistance/1000 for point in self.losPoints])
+        distances = np.array([point.straightDistance/1000.0 for point in self.losPoints])
         groundHeight = np.array([point.groundHeight for point in self.losPoints])
         lightHeight = np.array([point.lightHeight for point in self.losPoints])
         
@@ -302,8 +302,8 @@ class LineOfSight():
         plt.title('Line of sight test between\n' 
                   + f'{self.observer.latitude}, {self.observer.longitude} ({round(self.observer.elevation)} m) ' 
                   + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m)\n' 
-                  + f'{round(self.losPoints[-1].surfaceDistance/1000, 1)} km apart '
-                  + f'[N={len(self.losPoints)}, C={self.lightCurvature}, LOS={not self.isObstructed()}]')
+                  + f'{round(self.getSurfaceDistance()/1000.0, 1)} km apart '
+                  + f'[N={self.numSamples}, C={self.lightCurvature}, LOS={not self.isObstructed()}]')
         
         plt.xlabel('Distance (km)')
         plt.ylabel('Height (m)')
@@ -315,7 +315,7 @@ class LineOfSight():
         plt.legend()
         
         if plotPath != '':
-            plt.savefig(plotName, bbox_inches='tight')
+            plt.savefig(plotPath, bbox_inches='tight')
 
         plt.show()
 
