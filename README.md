@@ -72,9 +72,9 @@ PinnaclePoints/
 
 **Relevant Mathematics:**
 
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/diagrams.pdf"/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/diagrams.png"/>
 
 <p align="center">
-    <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/earth_curvature.pdf" width=49%/>
-    <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/atmospheric_refraction.pdf" width=49%/>
+    <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/earth_curvature.png" width=49%/>
+    <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/atmospheric_refraction.png" width=49%/>
 </p>
