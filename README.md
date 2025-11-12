@@ -4,8 +4,7 @@ Pinnacle points are a points from which no higher point can be seen. In other wo
 
 Interactive Map: https://www.pinnacle-points.com
 
-<!-- <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/images/global_pinnacle_points.png"/> -->
-<img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/images/global_pinnacle_points.png"/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/images/global_pinnacle_points.png"/>
     
 **Data Sources:**
 1. <a href="https://ototwmountains.com/">On-Top-Of-The-World Mountains</a>
@@ -69,22 +68,6 @@ PinnaclePoints/
 
 **The longest line of sight confirmed by photograph:**
 
-<img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/images/longest_confirmed_LOS.png"/>
-
-**Relevant Mathematics:**
-
-<p align="center">
-    <img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/math/formatted/earth_curvature.png" width=49%/>
-    <img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/math/formatted/atmospheric_refraction.png" width=49%/>
-</p>
-
-<p align="center">
-    <img src="https://github.com/jgbreault/LongestLOS/blob/main/misc/math/formatted/diagrams.png" width=49%/>
-</p>
-
-
-<!-- **The longest line of sight confirmed by photograph:**
-
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/images/longest_confirmed_LOS.png"/>
 
 **Relevant Mathematics:**
@@ -94,4 +77,4 @@ PinnaclePoints/
 <p align="center">
     <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/earth_curvature.pdf" width=49%/>
     <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/atmospheric_refraction.pdf" width=49%/>
-</p> -->
+</p>
