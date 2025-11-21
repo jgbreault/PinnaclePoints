@@ -5,30 +5,31 @@ from pyproj import Geod
 import numpy as np
 import requests
 import matplotlib.pyplot as plt
+from scipy.integrate import quad
 
 
 ########## VARIABLES ##########
 
 defaultLightCurvature = 6.4
-scatterCoeff0 = 0.00001139 # Wavelength averaged scattering coefficient in 1/m, Penndorf 1957
+defaultScatterCoef0 = 0.00001139 # Wavelength averaged scattering coefficient in 1/m, Penndorf 1957
 
 # summitFile = '../data/clean/summits_prm.csv'
 # pinnaclePointFile = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
 # patchDirectory = f'../data/patches/prm_{defaultLightCurvature}'
 
-# summitFile = '../data/clean/summits_iso.csv'
-# pinnaclePointFile = '../data/results/pinnacle_points/iso/pinnacle_points.csv'
-# patchDirectory = f'../data/patches/iso_{defaultLightCurvature}'
+summitFile = '../data/clean/summits_iso.csv'
+pinnaclePointFile = '../data/results/pinnacle_points/iso/pinnacle_points.csv'
+patchDirectory = f'../data/patches/iso_{defaultLightCurvature}'
 
-summitFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
-pinnaclePointFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
-patchDirectory = f'../data/patches/prm_iso_{defaultLightCurvature}'
+# summitFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
+# pinnaclePointFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
+# patchDirectory = f'../data/patches/prm_iso_{defaultLightCurvature}'
 
 defaultMaxSamplingDistance = 100 # in m
 ignoreBuffer = 4000 # in m
 
 earthRadius = 6371146 # in m (Mean Sea Level, GPS, and the Geoid. Witold Fraczek 2003)
-atmosphereScaleHeight = 8400 # Scale height of the atmosphere, http://www.braeunig.us/space/atmos.htm
+atmosphereScaleHeight = 8500 # in m (https://web.archive.org/web/20250821225050/https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html)
 
 geod = Geod(ellps='sphere')
 
@@ -162,7 +163,7 @@ class Summit(Point):
     
             candidateLineOfSight.processFullLineOfSight()
     
-            if not candidateLineOfSight.isObstructed():
+            if not candidateLineOfSight.isObstructed() and candidateLineOfSight.hasContrast():
     
                 print(f'Tested Potential Disqualifying Summits: {j+1}')
                 print(f'In view of {summit.latitude}, {summit.longitude} ({round(summit.elevation)} m) {round(summit.distanceFromCandidate/1000)} km away')
@@ -182,6 +183,7 @@ class LosPoint(Point):
                  elevation,
                  surfaceDistance,
                  straightDistance,
+                 scatterCoef0 = defaultScatterCoef0,
                  lightHeight = None,
                  groundHeight = None):
         
@@ -193,10 +195,11 @@ class LosPoint(Point):
         self.straightDistance = straightDistance
         self.lightHeight = lightHeight
         self.groundHeight = groundHeight
+        self.scatterCoef0 = scatterCoef0
 
-    def getScatteringCoeff(self):
+    def getScatteringCoef(self):
         lightHeightFromSeaLevel = self.elevation + (self.lightHeight - self.groundHeight)
-        return scatterCoeff0 * math.exp(-lightHeightFromSeaLevel/atmosphereScaleHeight)
+        return self.scatterCoef0 * math.exp(-lightHeightFromSeaLevel/atmosphereScaleHeight)
 
 class LineOfSight():
 
@@ -204,12 +207,15 @@ class LineOfSight():
                  observer,
                  target,
                  lightCurvature = defaultLightCurvature,
+                 scatterCoef0 = defaultScatterCoef0,
                  minSamplingDistance = defaultMaxSamplingDistance):
         
         self.observer = observer
         self.target = target
         self.lightCurvature = lightCurvature
+        self.scatterCoef0 = scatterCoef0
         self.minSamplingDistance = minSamplingDistance
+        self.surfaceDistance = geod.line_length([self.observer.longitude, self.target.longitude], [self.observer.latitude, self.target.latitude])
         self.numSamples = math.ceil(self.observer.getDistanceTo(self.target)/minSamplingDistance)
         self.losPoints = []
 
@@ -231,7 +237,7 @@ class LineOfSight():
         surfaceDistances = []
         for i, latitude in enumerate(latitudes):
             longitude = longitudes[i]
-            surfaceDistances.append(geod.line_length([self.observer.longitude, longitude], [self.observer.latitude, latitude])) #TODO getDistanceTo
+            surfaceDistances.append(geod.line_length([self.observer.longitude, longitude], [self.observer.latitude, latitude]))
 
         anglesBetweenObserverAndLosPoints = np.array(surfaceDistances)/earthRadius
         xDistances = earthRadius * np.sin(anglesBetweenObserverAndLosPoints)
@@ -251,15 +257,12 @@ class LineOfSight():
         gamma = (self.lightCurvature*earthRadius)*(self.lightCurvature*earthRadius) - (distanceToTarget)*(distanceToTarget)
         lightHeights = np.sqrt(gamma + straightDistances*(distanceToTarget - straightDistances)) - np.sqrt(gamma)
         
-        self.losPoints = [LosPoint(latitude, longitude, elevation, surfaceDistance, straightDistance, lightHeight, groundHeight) 
+        self.losPoints = [LosPoint(latitude, longitude, elevation, surfaceDistance, straightDistance, self.scatterCoef0, lightHeight, groundHeight) 
                           for (latitude, longitude, elevation, surfaceDistance, straightDistance, lightHeight, groundHeight) 
                           in zip(latitudes, longitudes, elevations, surfaceDistances, straightDistances, lightHeights, groundHeights)]
 
     def getStraightDistance(self):
         return self.losPoints[-1].straightDistance
-
-    def getSurfaceDistance(self):
-        return geod.line_length([self.observer.longitude, self.target.longitude], [self.observer.latitude, self.target.latitude])
     
     def getLightDistance(self):
         dx = np.diff([point.straightDistance for point in self.losPoints])
@@ -267,7 +270,7 @@ class LineOfSight():
         return np.hypot(dx, dy).sum()
 
     def isInPossibleRange(self):
-        return self.observer.getMaxHorizonDistance() + self.target.getMaxHorizonDistance() > self.getSurfaceDistance()
+        return self.observer.getMaxHorizonDistance() + self.target.getMaxHorizonDistance() > self.surfaceDistance
 
     def isObstructed(self):        
         return not all(losPoint.groundHeight < losPoint.lightHeight 
@@ -275,20 +278,44 @@ class LineOfSight():
                        in self.losPoints
                        if losPoint.straightDistance > ignoreBuffer and losPoint.straightDistance < self.getStraightDistance()-ignoreBuffer)
 
-    def passesMidPointTest():
-        pass
+    def getLightElevation(self, x):
 
+        h1 = self.observer.elevation
+        h2 = self.target.elevation
+        D = self.surfaceDistance
+        R = earthRadius
+        C = self.lightCurvature
+        
+        delta_h = h2 - h1
+        d = math.sqrt(D**2 + delta_h**2)
+        r = (C - 1)*R
+        T = math.sqrt(r**2 - (d**2)/4)
+        
+        x0 = D/2 - (delta_h/d)*T
+        y0 = (h1 + h2)/2 + (D/d)*T
+        
+        return y0 - math.sqrt(r**2 - (x - x0)**2)
+
+    def getScatterCoef(self, lightElevation):
+        return self.scatterCoef0 * math.exp(-lightElevation/atmosphereScaleHeight)
+
+    def getContrast(self):
+        scatterCoefIntegralResult, error = quad(lambda x: self.getScatterCoef(self.getLightElevation(x)), 0, self.surfaceDistance)     
+        return math.exp(-scatterCoefIntegralResult)
+    
     def hasContrast(self):
-        scatterCoeff = sum(losPoint.getScatteringCoeff() for losPoint in self.losPoints) / len(self.losPoints)
-        return scatterCoeff * self.losPoints[-1].straightDistance < -math.log(0.02)
-                                                                        
+        return self.getContrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
+
+    def getMidPoint(self):
+        pass
+                                                            
     def plot(self, plotPath=''):
 
         distances = np.array([point.straightDistance/1000.0 for point in self.losPoints])
         groundHeight = np.array([point.groundHeight for point in self.losPoints])
         lightHeight = np.array([point.lightHeight for point in self.losPoints])
         
-        plt.figure(figsize=(10,4))
+        plt.figure(figsize=(15,5))
         
         plt.plot(distances, lightHeight, color='orange', label='Light', lw=1)
         plt.plot(distances, groundHeight, color='k', label='Earth', lw=1)
@@ -302,16 +329,16 @@ class LineOfSight():
         plt.title('Line of sight test between\n' 
                   + f'{self.observer.latitude}, {self.observer.longitude} ({round(self.observer.elevation)} m) ' 
                   + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m)\n' 
-                  + f'{round(self.getSurfaceDistance()/1000.0, 1)} km apart '
-                  + f'[N={self.numSamples}, C={self.lightCurvature}, LOS={not self.isObstructed()}]')
+                  + f'{round(self.surfaceDistance/1000.0, 1)} km apart '
+                  + f'[N={self.numSamples}, C={self.lightCurvature}, contrast={round(self.getContrast(), 4)}, LOS={not self.isObstructed()}]')
         
         plt.xlabel('Distance (km)')
         plt.ylabel('Height (m)')
         
         fig = plt.gcf()
         fig.patch.set_facecolor('w')
-        fig.set_dpi(200)
-        plt.grid()
+        fig.set_dpi(300)
+        plt.grid(ls=':')
         plt.legend()
         
         if plotPath != '':
@@ -395,7 +422,6 @@ class Patch():
         lngOffset = metaDataList[16][1] 
         self.lngOffset = float(lngOffset) if lngOffset != 'None' else None
 
-        # reading summit data
         self.summitsOuter = pd.read_csv(f'{patchDirectory}/{fileName}', comment='#')
 
     def save(self):
