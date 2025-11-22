@@ -17,7 +17,7 @@ Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth wit
 Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with over 1 km of isolation. Isolation is the distance to the nearest higher point. Extreme isolation points are strong pinnacle point candidates, so I use this dataset to find all pinnacle points with an isolation of at least 100 km. This source uses the STRM 90m DEM.
 
 4. Open-Meteo's Elevation API
-Open-Meteo offers an elevation API that can be used to find the elevation on any point on Earth. I host this API locally to find the elevation of points between summits that could obstruct line of sight. I also use this API to correct a few faulty summit elevations from the other data sources. This source uses the Copernicus GLO-90 DEM.
+Open-Meteo offers an elevation API that can be used to find the elevation of any point on Earth. I host this API locally to find the elevation of points between summits that could obstruct line of sight. I also use this API to correct a few faulty summit elevations from the other data sources. This source uses the Copernicus GLO-90 DEM.
 
 5. Beyond Horizons
 Beyond Horizons has catalogued many of the longest lines of sight ever captured by photograph. I use these confirmed lines of sight to determine how to model light bending from atmospheric refraction over great distances.
@@ -27,8 +27,8 @@ Beyond Horizons has catalogued many of the longest lines of sight ever captured 
 CLEANING SUMMIT DATA
 ------------------------------------------------------------
 
-For every OTOTW mountain, I determine if there is a summit in the prominence dataset with a matching latitude and longitude. If there is, I mark it as a pinnacle point candidate. Two OTOTW mountains had to be identified manually because the latitude and longitude didn’t match perfectly for some reason. The highest point of Michigan (Grove hill) was manually marked as a candidate as well, since it was omitted from the OTOTW result because of DEM errors.
-For the isolation dataset, I mark all 3,001 summits with at least 100 km of isolation as candidates. Many of these candidates have a prominence less than the 300 m, so analyzing the isolation dataset allows pinnacle points to be identified that are not possible from the prominence dataset.
+For every OTOTW mountain, I determine if there is a summit in the prominence dataset with a matching latitude and longitude. If there is, I mark it as a pinnacle point candidate. Two OTOTW mountains had to be identified manually because the latitude and longitude did not match perfectly for some reason. The highest point of Michigan (Grove hill) was manually marked as a candidate as well, since it was omitted from the OTOTW result because of DEM errors.
+For the isolation dataset, I mark all 3,001 summits with at least 100 km of isolation as candidates. Many of these candidates have a prominence less than the 300 m, so analyzing the isolation dataset allows pinnacle points to be identified that are not present in the prominence dataset.
 
 For both datasets, all distance metrics are converted to metres, and duplicate records removed. Since I use Open-Meteo’s elevation API in LOS analysis, I need to ensure that all summit elevations are at least as large as the elevations from Open-Meteo's API. Otherwise, some summits would be interpreted as “underground” by the algorithm, falsely blocking every LOS. I set the elevation for each summit to be the maximum between the original dataset and Open-Meteo’s API. Since the API has an error for longitudes that lie precisely on the 180° line, I subtract 0.0001° from such longitudes. Each summit is assigned a unique summitId.
 
@@ -79,7 +79,7 @@ PINNACLE POINT IDENTIFICATION
 
 A pinnacle point is a point from which no higher point can be seen. To determine if a candidate is a pinnacle point, the candidate’s patch is found. MHD analysis is done with each summit in the patch. Summits that pass MHD analysis and that have a greater elevation than the candidate are sorted by distance from the candidate ascending. Closer summits are more likely to have LOS with the candidate, so they are tested first. If any of these summits have LOS with the candidate, the candidate is not a pinnacle point and processing can stop. Otherwise, the candidate is a pinnacle point.
 
-To combine the pinnacle point results from the prominence and isolation datasets, they two individual results are merged with the isolation summitIds being multiplied by -1 to avoid repetition with the prominence summitIds. The merged result is treated as a new dataset to find pinnacle points in, and each summit is marked as a candidate. This removes duplicates between the two results.
+To combine the pinnacle point results from the prominence and isolation datasets, the two individual results are merged. The isolation summitIds are multiplied by -1 to avoid repetition with the prominence summitIds. The merged result is treated as a new dataset to find pinnacle points in, and each summit is marked as a candidate. This removes duplicates summits between the two results.
 
 
 ------------------------------------------------------------
