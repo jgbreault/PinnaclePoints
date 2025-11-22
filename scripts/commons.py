@@ -278,6 +278,7 @@ class LineOfSight():
                        in self.losPoints
                        if losPoint.straightDistance > ignoreBuffer and losPoint.straightDistance < self.getStraightDistance()-ignoreBuffer)
 
+    # TODO: Do this correctly!
     def getLightElevation(self, x):
 
         h1 = self.observer.elevation

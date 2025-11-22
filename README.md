@@ -77,5 +77,6 @@ PinnaclePoints/
     <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/earth_curvature.png" width=49%/>
     <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/atmospheric_refraction.png" width=49%/>
 </p>
-
-<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/diagrams.png" width=49%/>
+<p align="center">
+    <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/math/formatted/diagrams.png" width=49%/>
+</p>
