@@ -303,9 +303,11 @@ class LineOfSight():
     def getContrast(self):
         scatterCoefIntegralResult, error = quad(lambda x: self.getScatterCoef(self.getLightElevation(x)), 0, self.surfaceDistance)     
         return math.exp(-scatterCoefIntegralResult)
-    
+
+    # TODO: Return properly once fixed
     def hasContrast(self):
-        return self.getContrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
+        # return self.getContrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
+        return True
 
     def getMidPoint(self):
         pass
