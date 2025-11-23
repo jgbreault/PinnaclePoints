@@ -278,7 +278,6 @@ class LineOfSight():
                        in self.losPoints
                        if losPoint.straightDistance > ignoreBuffer and losPoint.straightDistance < self.getStraightDistance()-ignoreBuffer)
 
-    # TODO: Do this correctly!
     def getLightElevation(self, x):
 
         h1 = self.observer.elevation
@@ -287,15 +286,27 @@ class LineOfSight():
         R = earthRadius
         C = self.lightCurvature
         
-        delta_h = h2 - h1
-        d = math.sqrt(D**2 + delta_h**2)
-        r = (C - 1)*R
-        T = math.sqrt(r**2 - (d**2)/4)
+        theta = x/R
+        phi = D/R
+    
+        x1 = R + h1
+        y1 = 0
+    
+        x2 = (R+h2)*math.cos(phi)
+        y2 = (R+h2)*math.sin(phi)
+    
+        d = math.sqrt((x2-x1)**2 + (y2-y1)**2)
+    
+        RL = C*R
+    
+        Z = math.sqrt(RL**2 - (d/2)**2)
+    
+        Mx = (x1+x2)/2 - Z*((y2-y1)/d)
+        My = (y1+y2)/2 + Z*((x2-x1)/d)
+    
+        L0 = (Mx*math.cos(theta)+My*math.sin(theta)) + math.sqrt((Mx*math.cos(theta)+My*math.sin(theta))**2 - (Mx**2 + My**2 - RL**2))
         
-        x0 = D/2 - (delta_h/d)*T
-        y0 = (h1 + h2)/2 + (D/d)*T
-        
-        return y0 - math.sqrt(r**2 - (x - x0)**2)
+        return L0 - R
 
     def getScatterCoef(self, lightElevation):
         return self.scatterCoef0 * math.exp(-lightElevation/atmosphereScaleHeight)
@@ -304,19 +315,63 @@ class LineOfSight():
         scatterCoefIntegralResult, error = quad(lambda x: self.getScatterCoef(self.getLightElevation(x)), 0, self.surfaceDistance)     
         return math.exp(-scatterCoefIntegralResult)
 
-    # TODO: Return properly once fixed
     def hasContrast(self):
-        # return self.getContrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
-        return True
+        return self.getContrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
 
     def getMidPoint(self):
         pass
                                                             
-    def plot(self, plotPath=''):
+    def plot(self, flatEarth=False, plotPath=''):
 
-        distances = np.array([point.straightDistance/1000.0 for point in self.losPoints])
-        groundHeight = np.array([point.groundHeight for point in self.losPoints])
-        lightHeight = np.array([point.lightHeight for point in self.losPoints])
+        if not flatEarth:
+            distances = np.array([point.straightDistance/1000.0 for point in self.losPoints])
+            groundHeight = np.array([point.groundHeight for point in self.losPoints])
+            lightHeight = np.array([point.lightHeight for point in self.losPoints])
+        else:
+            distances = np.array([point.surfaceDistance/1000.0 for point in self.losPoints])
+            groundHeight = np.array([point.elevation for point in self.losPoints])
+            lightHeight = np.array([self.getLightElevation(point.surfaceDistance) for point in self.losPoints])
+        
+        plt.figure(figsize=(15,5))
+        
+        plt.plot(distances, lightHeight, color='orange', label='Light', lw=1)
+        plt.plot(distances, groundHeight, color='k', label='Earth', lw=1)
+
+        plt.fill_between(distances, y1=min(groundHeight), y2=groundHeight, color='silver')
+
+        # if self.isObstructed():
+        #     maxGroundInd = np.argmax(groundHeight-lightHeight)
+        #     plt.plot(distances[maxGroundInd], groundHeight[maxGroundInd], marker='x', color='red')
+        
+        plt.title('Line of sight test between\n' 
+                  + f'{self.observer.latitude}, {self.observer.longitude} ({round(self.observer.elevation)} m) ' 
+                  + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m)\n' 
+                  + f'{round(self.surfaceDistance/1000.0, 1)} km apart '
+                  + f'[N={self.numSamples}, C={self.lightCurvature}, contrast={round(self.getContrast(), 4)}, LOS={not self.isObstructed()}]')
+        
+        plt.xlabel('Distance (km)')
+
+        if not flatEarth:
+            plt.ylabel('Height (m)')
+        else:
+            plt.ylabel('Elevation (m)')
+        
+        fig = plt.gcf()
+        fig.patch.set_facecolor('w')
+        fig.set_dpi(300)
+        plt.grid(ls=':')
+        plt.legend()
+        
+        if plotPath != '':
+            plt.savefig(plotPath, bbox_inches='tight')
+
+        plt.show()
+
+    def plotFlatEarth(self, plotPath=''):
+
+        distances = np.array([point.surfaceDistance/1000.0 for point in self.losPoints])
+        groundHeight = np.array([point.elevation for point in self.losPoints])
+        lightHeight = np.array([self.getLightElevation(point.surfaceDistance) for point in self.losPoints])
         
         plt.figure(figsize=(15,5))
         
@@ -336,7 +391,7 @@ class LineOfSight():
                   + f'[N={self.numSamples}, C={self.lightCurvature}, contrast={round(self.getContrast(), 4)}, LOS={not self.isObstructed()}]')
         
         plt.xlabel('Distance (km)')
-        plt.ylabel('Height (m)')
+        plt.ylabel('Elevation (m)')
         
         fig = plt.gcf()
         fig.patch.set_facecolor('w')
