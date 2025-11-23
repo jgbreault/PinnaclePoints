@@ -323,7 +323,7 @@ class LineOfSight():
                                                             
     def plot(self, flatEarth=False, plotPath=''):
 
-        if not flatEarth:
+        if flatEarth == False:
             distances = np.array([point.straightDistance/1000.0 for point in self.losPoints])
             groundHeight = np.array([point.groundHeight for point in self.losPoints])
             lightHeight = np.array([point.lightHeight for point in self.losPoints])
@@ -355,43 +355,6 @@ class LineOfSight():
             plt.ylabel('Height (m)')
         else:
             plt.ylabel('Elevation (m)')
-        
-        fig = plt.gcf()
-        fig.patch.set_facecolor('w')
-        fig.set_dpi(300)
-        plt.grid(ls=':')
-        plt.legend()
-        
-        if plotPath != '':
-            plt.savefig(plotPath, bbox_inches='tight')
-
-        plt.show()
-
-    def plotFlatEarth(self, plotPath=''):
-
-        distances = np.array([point.surfaceDistance/1000.0 for point in self.losPoints])
-        groundHeight = np.array([point.elevation for point in self.losPoints])
-        lightHeight = np.array([self.getLightElevation(point.surfaceDistance) for point in self.losPoints])
-        
-        plt.figure(figsize=(15,5))
-        
-        plt.plot(distances, lightHeight, color='orange', label='Light', lw=1)
-        plt.plot(distances, groundHeight, color='k', label='Earth', lw=1)
-
-        plt.fill_between(distances, y1=min(groundHeight), y2=groundHeight, color='silver')
-
-        if self.isObstructed():
-            maxGroundInd = np.argmax(groundHeight)
-            plt.plot(distances[maxGroundInd], groundHeight[maxGroundInd], marker='x', color='red')
-        
-        plt.title('Line of sight test between\n' 
-                  + f'{self.observer.latitude}, {self.observer.longitude} ({round(self.observer.elevation)} m) ' 
-                  + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m)\n' 
-                  + f'{round(self.surfaceDistance/1000.0, 1)} km apart '
-                  + f'[N={self.numSamples}, C={self.lightCurvature}, contrast={round(self.getContrast(), 4)}, LOS={not self.isObstructed()}]')
-        
-        plt.xlabel('Distance (km)')
-        plt.ylabel('Elevation (m)')
         
         fig = plt.gcf()
         fig.patch.set_facecolor('w')
