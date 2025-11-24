@@ -12,21 +12,22 @@ from scipy.integrate import quad
 
 defaultLightCurvature = 6.4
 defaultScatterCoef0 = 0.00001139 # Wavelength averaged scattering coefficient in 1/m, Penndorf 1957
+defaultShadedRatio = 0.5, 
+defaultShadeIrradiationRatio = 0.5
+defaultMaxSamplingDistance = 100 # in m
+ignoreBuffer = 4000 # in m
 
-# summitFile = '../data/clean/summits_prm.csv'
-# pinnaclePointFile = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
-# patchDirectory = f'../data/patches/prm_{defaultLightCurvature}'
+summitFile = '../data/clean/summits_prm.csv'
+pinnaclePointFile = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
+patchDirectory = f'../data/patches/prm_{defaultLightCurvature}'
 
-summitFile = '../data/clean/summits_iso.csv'
-pinnaclePointFile = '../data/results/pinnacle_points/iso/pinnacle_points.csv'
-patchDirectory = f'../data/patches/iso_{defaultLightCurvature}'
+# summitFile = '../data/clean/summits_iso.csv'
+# pinnaclePointFile = '../data/results/pinnacle_points/iso/pinnacle_points.csv'
+# patchDirectory = f'../data/patches/iso_{defaultLightCurvature}'
 
 # summitFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
 # pinnaclePointFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
 # patchDirectory = f'../data/patches/prm_iso_{defaultLightCurvature}'
-
-defaultMaxSamplingDistance = 100 # in m
-ignoreBuffer = 4000 # in m
 
 earthRadius = 6371146 # in m (Mean Sea Level, GPS, and the Geoid. Witold Fraczek 2003)
 atmosphereScaleHeight = 8500 # in m (https://web.archive.org/web/20250821225050/https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html)
@@ -160,10 +161,10 @@ class Summit(Point):
                             elevation = summit.elevation)
 
             candidateLineOfSight = LineOfSight(self, target)
-    
+
             candidateLineOfSight.processFullLineOfSight()
     
-            if not candidateLineOfSight.isObstructed() and candidateLineOfSight.hasContrast():
+            if candidateLineOfSight.isValid():
     
                 print(f'Tested Potential Disqualifying Summits: {j+1}')
                 print(f'In view of {summit.latitude}, {summit.longitude} ({round(summit.elevation)} m) {round(summit.distanceFromCandidate/1000)} km away')
@@ -208,7 +209,9 @@ class LineOfSight():
                  target,
                  lightCurvature = defaultLightCurvature,
                  scatterCoef0 = defaultScatterCoef0,
-                 minSamplingDistance = defaultMaxSamplingDistance):
+                 minSamplingDistance = defaultMaxSamplingDistance,
+                 shadedRatio = defaultShadedRatio, 
+                 shadeIrradiationRatio = defaultShadeIrradiationRatio):
         
         self.observer = observer
         self.target = target
@@ -216,6 +219,8 @@ class LineOfSight():
         self.scatterCoef0 = scatterCoef0
         self.minSamplingDistance = minSamplingDistance
         self.surfaceDistance = geod.line_length([self.observer.longitude, self.target.longitude], [self.observer.latitude, self.target.latitude])
+        self.shadedRatio = shadedRatio
+        self.shadeIrradiationRatio = shadeIrradiationRatio
         self.numSamples = math.ceil(self.observer.getDistanceTo(self.target)/minSamplingDistance)
         self.losPoints = []
 
@@ -260,7 +265,7 @@ class LineOfSight():
         self.losPoints = [LosPoint(latitude, longitude, elevation, surfaceDistance, straightDistance, self.scatterCoef0, lightHeight, groundHeight) 
                           for (latitude, longitude, elevation, surfaceDistance, straightDistance, lightHeight, groundHeight) 
                           in zip(latitudes, longitudes, elevations, surfaceDistances, straightDistances, lightHeights, groundHeights)]
-
+    
     def getStraightDistance(self):
         return self.losPoints[-1].straightDistance
     
@@ -304,50 +309,67 @@ class LineOfSight():
         Mx = (x1+x2)/2 - Z*((y2-y1)/d)
         My = (y1+y2)/2 + Z*((x2-x1)/d)
     
-        L0 = (Mx*math.cos(theta)+My*math.sin(theta)) + math.sqrt((Mx*math.cos(theta)+My*math.sin(theta))**2 - (Mx**2 + My**2 - RL**2))
+        L0 = (Mx*math.cos(theta)+My*math.sin(theta)) + math.sqrt((Mx*math.cos(theta) + My*math.sin(theta))**2 - (Mx**2 + My**2 - RL**2))
         
         return L0 - R
 
-    def getScatterCoef(self, lightElevation):
-        return self.scatterCoef0 * math.exp(-lightElevation/atmosphereScaleHeight)
+    def getScatterCoef(self, x):
+        return self.scatterCoef0 * math.exp(-self.getLightElevation(x)/atmosphereScaleHeight)
 
     def getContrast(self):
-        scatterCoefIntegralResult, error = quad(lambda x: self.getScatterCoef(self.getLightElevation(x)), 0, self.surfaceDistance)     
-        return math.exp(-scatterCoefIntegralResult)
+
+        d1 = self.surfaceDistance * self.shadedRatio
+        d2 = self.surfaceDistance * (1 - self.shadedRatio)
+
+        scatterCoefIntResult1, error1 = quad(lambda x: self.getScatterCoef(x), 0, d1)   
+        scatterCoefIntResult2, error2 = quad(lambda x: self.getScatterCoef(x), d1, self.surfaceDistance)
+
+        contrast = math.exp(-scatterCoefIntResult2)/(1 - self.shadeIrradiationRatio + (self.shadeIrradiationRatio/math.exp(-scatterCoefIntResult1)))
+
+        return contrast
 
     def hasContrast(self):
         return self.getContrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
 
-    def getMidPoint(self):
-        pass
+    def isValid(self):
+        return not self.isObstructed() and self.hasContrast()
                                                             
-    def plot(self, flatEarth=False, plotPath=''):
+    def plot(self, flatEarth=False, legendLocation='lower right', plotPath=''):
 
         if flatEarth == False:
             distances = np.array([point.straightDistance/1000.0 for point in self.losPoints])
-            groundHeight = np.array([point.groundHeight for point in self.losPoints])
-            lightHeight = np.array([point.lightHeight for point in self.losPoints])
+            ground = np.array([point.groundHeight for point in self.losPoints])
+            light = np.array([point.lightHeight for point in self.losPoints])
         else:
             distances = np.array([point.surfaceDistance/1000.0 for point in self.losPoints])
-            groundHeight = np.array([point.elevation for point in self.losPoints])
-            lightHeight = np.array([self.getLightElevation(point.surfaceDistance) for point in self.losPoints])
+            ground = np.array([point.elevation for point in self.losPoints])
+            light = np.array([self.getLightElevation(point.surfaceDistance) for point in self.losPoints])
         
         plt.figure(figsize=(15,5))
+
+        plt.plot(distances, light, color='orange', label='Light', lw=2)
+
+        if self.shadeIrradiationRatio < 1:
+
+            plt.fill_between(distances, y1=ground, y2=max([max(ground), max(light)])*1.1, 
+                             color='#82c8e5', label='Sky')
+            plt.fill_between(distances, y1=ground, y2=max([max(ground), max(light)])*1.1, 
+                             where=(distances <= distances[-1]*self.shadedRatio), 
+                             color='k', alpha=1-self.shadeIrradiationRatio, label='Shadow')
         
-        plt.plot(distances, lightHeight, color='orange', label='Light', lw=1)
-        plt.plot(distances, groundHeight, color='k', label='Earth', lw=1)
+        plt.plot(distances, ground, color='k', lw=0.8)
 
-        plt.fill_between(distances, y1=min(groundHeight), y2=groundHeight, color='silver')
+        plt.fill_between(distances, y1=min([min(light), min(ground)]), y2=ground, color='darkgrey', label='Earth')
 
-        # if self.isObstructed():
-        #     maxGroundInd = np.argmax(groundHeight-lightHeight)
-        #     plt.plot(distances[maxGroundInd], groundHeight[maxGroundInd], marker='x', color='red')
+        if self.isObstructed():
+            maxInd = np.argmax(ground - light)
+            plt.plot(distances[maxInd], ground[maxInd], marker='x', color='red')
         
         plt.title('Line of sight test between\n' 
                   + f'{self.observer.latitude}, {self.observer.longitude} ({round(self.observer.elevation)} m) ' 
-                  + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m)\n' 
-                  + f'{round(self.surfaceDistance/1000.0, 1)} km apart '
-                  + f'[N={self.numSamples}, C={self.lightCurvature}, contrast={round(self.getContrast(), 4)}, LOS={not self.isObstructed()}]')
+                  + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m), ' 
+                  + f'{round(self.surfaceDistance/1000.0, 1)} km apart\n'
+                  + f'[N={self.numSamples}, C={self.lightCurvature}, S={self.shadedRatio}, I={self.shadeIrradiationRatio}, contrast={round(self.getContrast(), 4)}, LOS={not self.isObstructed()}]')
         
         plt.xlabel('Distance (km)')
 
@@ -359,8 +381,8 @@ class LineOfSight():
         fig = plt.gcf()
         fig.patch.set_facecolor('w')
         fig.set_dpi(300)
-        plt.grid(ls=':')
-        plt.legend()
+        plt.grid(ls=':', c='grey')
+        plt.legend(loc=legendLocation, framealpha=1)
         
         if plotPath != '':
             plt.savefig(plotPath, bbox_inches='tight')
