@@ -70,6 +70,7 @@ PinnaclePoints/
 **The longest line of sight confirmed by photograph:**
 
 <img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/images/longest_confirmed_LOS_flat.png"/>
+<img src="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/images/longest_confirmed_LOS.png"/>
 
 **Relevant Mathematics:**
 
