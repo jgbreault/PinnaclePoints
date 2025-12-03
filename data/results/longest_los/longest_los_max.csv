@@ -1,0 +1,4 @@
+observer_summitId,observer_latitude,observer_longitude,observer_elevation,target_summitId,target_latitude,target_longitude,target_elevation,distance,contrast
+29198,41.0594,77.6839,5875.08,2750,36.2944,78.7547,6443.32,537921,0.0225
+30272,41.0036,77.6167,5864.22,2750,36.2944,78.7547,6443.32,532867,0.0241
+43154,41.0281,77.3353,5749.17,3923,36.4844,77.4847,6359.64,505401,0.0331

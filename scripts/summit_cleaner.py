@@ -72,7 +72,7 @@ prmSummits = getSummitElevationsInBatches(prmSummits)
 prmSummits = prmSummits.sort_values('elevation', ascending=False)
 prmSummits = prmSummits.reset_index(drop=True)
 
-# TODO: Add comment, Grove hill
+# TODO: Add comment, Grove hill, gotta redo Ids now
 prmSummits.loc[[7763206], 'candidate'] = True
 
 endingNumPrmSummits = len(prmSummits)

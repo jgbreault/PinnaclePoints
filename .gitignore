@@ -1,0 +1,13 @@
+# Ignore large files
+data/patches/
+data/clean/summits_iso.csv
+data/clean/summits_prm.csv
+data/raw/alliso-sorted.txt
+data/raw/all-peaks-sorted-p100.txt
+
+# Hidden files
+.*
+_*
+
+# But don’t ignore
+!.gitignore
