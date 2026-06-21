@@ -6,35 +6,40 @@ Two points have line of sight if light can travel from one to the other unobstru
 
 **2. Pinnacle points.** A pinnacle point is a point from which no higher elevation can be seen. This project identifies every pinnacle point on Earth with at least 300 m of prominence or 100 km of isolation. Two pinnacle points of equal elevation can still see each other, since neither is high enough to disqualify the other.
 
-A full write-up of the method is in [misc/method.txt](misc/method.txt).
+A full write-up of the method is in <a href="misc/method.txt" target="_blank" rel="noopener noreferrer">misc/method.txt</a>.
 
 
 ## Interactive Maps
 
-- **[Longest Lines of Sight](https://www.pinnacle-points.com/longest-lines-of-sight)** — The longest lines of sight on Earth
-- **[Pinnacle Points](https://www.pinnacle-points.com)** — Every pinnacle point on Earth
+- **<a href="https://www.pinnacle-points.com/longest-lines-of-sight" target="_blank" rel="noopener noreferrer">Longest Lines of Sight</a>** — The longest lines of sight on Earth
+- **<a href="https://www.pinnacle-points.com" target="_blank" rel="noopener noreferrer">Pinnacle Points</a>** — Every pinnacle point on Earth
+
+<p align="center">
+  <a href="https://www.pinnacle-points.com/longest-lines-of-sight" target="_blank" rel="noopener noreferrer"><img src="misc/images/longest_los_map.png" width="49%"/></a>
+  <a href="https://www.pinnacle-points.com" target="_blank" rel="noopener noreferrer"><img src="misc/images/pinnacle_point_map.png" width="49%"/></a>
+</p>
 
 
 ## Plots
 
-**The longest line of sight theoretically possible (this project):** a 508 km sightline across the Kunlun and Pamir ranges.
+**The longest line of sight theoretically possible (from this project):**
 <img src="misc/images/longest_los_JGB.png"/>
 
-**The longest line of sight confirmed by photograph:** 443 km, from Pic de Finestrelles (Spain) to Pic Gaspard (France).
+**The longest line of sight confirmed by photograph:**
 <img src="misc/images/longest_los_confirmed.png"/>
 
 
 ## Data Sources
 
-1. <a href="https://ototwmountains.com/">On-Top-Of-The-World Mountains</a>
-    - On-top-of-the-world (OTOTW) mountains are mountains where no land rises above their horizontal plane. Since any land that rises above that plane would be higher than the mountain itself, a mountain that is not an OTOTW mountain cannot be a pinnacle point — pinnacle points are a subset of OTOTW mountains. Kai Xu found all 6,464 OTOTW mountains on Earth with over 300 m of prominence, and I identify which of them qualify as pinnacle points.
-2. <a href="https://www.andrewkirmse.com/prominence-update-2023">Mountains by Prominence</a>
+1. <a href="https://ototwmountains.com/" target="_blank" rel="noopener noreferrer">On-Top-Of-The-World Mountains</a>
+    - On-top-of-the-world (OTOTW) mountains are mountains where no land rises above their horizontal plane. Since any land that rises above that plane would be higher than the mountain itself, a mountain that is not an OTOTW mountain cannot be a pinnacle point. In other words, pinnacle points are a subset of OTOTW mountains. Kai Xu found all 6,464 OTOTW mountains on Earth with over 300 m of prominence, and I identify which of them qualify as pinnacle points.
+2. <a href="https://www.andrewkirmse.com/prominence-update-2023" target="_blank" rel="noopener noreferrer">Mountains by Prominence</a>
     - Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence. Prominence is the minimum vertical distance one must descend from a summit to reach higher ground. This dataset is used to determine which OTOTW mountains qualify as pinnacle points, and to select the summits above the 500 m prominence threshold used in the search for the longest lines of sight.
-3. <a href="https://www.andrewkirmse.com/true-isolation">Mountains by Isolation</a>
+3. <a href="https://www.andrewkirmse.com/true-isolation" target="_blank" rel="noopener noreferrer">Mountains by Isolation</a>
     - Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with over 1 km of isolation. Isolation is the distance from a summit to the nearest higher point. Extreme isolation makes a summit a strong pinnacle point candidate, so this dataset is used to find every pinnacle point with at least 100 km of isolation.
-4. <a href="https://open-meteo.com/en/docs/elevation-api">Open-Meteo's Elevation API</a>
+4. <a href="https://open-meteo.com/en/docs/elevation-api" target="_blank" rel="noopener noreferrer">Open-Meteo's Elevation API</a>
     - Open-Meteo offers an elevation API that returns the elevation of any point on Earth. It is used to find the elevation of points between summits that could obstruct line of sight.
-5. <a href="https://beyondrange.wordpress.com/lines-of-sight/">Beyond Horizons</a>
+5. <a href="https://beyondrange.wordpress.com/lines-of-sight/" target="_blank" rel="noopener noreferrer">Beyond Horizons</a>
     - Beyond Horizons has catalogued many of the longest lines of sight to ever be captured by photograph. These confirmed lines of sight are used to calibrate the way light bending is modelled from atmospheric refraction.
 
 
