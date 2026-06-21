@@ -313,17 +313,17 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
         </ul>
 
         <h2>Data Sources</h2>
-        <h4><a href="https://www.andrewkirmse.com/prominence-update-2023">1. Mountains by Prominence</a></h4>
+        <h4><a target="_blank" rel="noopener noreferrer" href="https://www.andrewkirmse.com/prominence-update-2023">1. Mountains by Prominence</a></h4>
         <p>
             Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence.
             Prominence is the minimum vertical distance one must descend to reach a higher point.
         </p>
-        <h4><a href="https://open-meteo.com/en/docs/elevation-api">2. Open-Meteo's Elevation API</a></h4>
+        <h4><a target="_blank" rel="noopener noreferrer" href="https://open-meteo.com/en/docs/elevation-api">2. Open-Meteo's Elevation API</a></h4>
         <p>
             Open-Meteo offers an elevation API that can be used to find the elevation of any point on Earth.
             I use this API to find the elevation of points between summits that could obstruct line of sight.
         </p>
-        <h4><a href="https://beyondrange.wordpress.com/lines-of-sight/">3. Beyond Horizons</a></h4>
+        <h4><a target="_blank" rel="noopener noreferrer" href="https://beyondrange.wordpress.com/lines-of-sight/">3. Beyond Horizons</a></h4>
         <p>
             Beyond Horizons has catalogued many of the longest lines of sight to ever be captured by photograph.
             I use these confirmed extreme lines of sight to fine-tune the way light bending is modelled from atmospheric refraction.
