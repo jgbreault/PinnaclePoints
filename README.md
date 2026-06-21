@@ -1,4 +1,4 @@
-# The Longest Lines of Sight and Pinnacle Points
+# The Longest Lines of Sight Earth and Pinnacle Points
 
 Two points have line of sight if light can travel from one to the other unobstructed and with enough contrast to be visible under clear atmospheric conditions. Deciding whether two points can see each other means modelling many physical phenomena: Earth's curvature, local topography, atmospheric refraction, atmospheric scattering, and partial irradiation. This project applies a line-of-sight model that considers these phenomena to two problems.
 
