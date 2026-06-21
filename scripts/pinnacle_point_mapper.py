@@ -307,7 +307,7 @@ pinnacle_point_map.get_root().html.add_child(folium.Element('''
         <h2>Links</h2>
         <ul>
             <li>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jgbreault/PinnaclePoints/blob/main/misc/method.txt">
+                <a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/jgbreault/PinnaclePoints/refs/heads/main/misc/method.txt">
                     Method
                 </a>
             </li>
