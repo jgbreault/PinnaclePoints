@@ -330,8 +330,8 @@ candidate line of sight.
 Each candidate is then screened with a single midpoint check (is the light above
 the ground at the halfway point?) before the full line-of-sight analysis is run,
 which avoids the cost of sampling pairs that are obviously blocked. The surviving
-lines of sight, and those that are the longest for any summit (counting each summit
-whether it is the observer or the target), are written to data/results/longest_los/.
+lines of sight, and those that are the longest for both the observer and target, 
+are written to data/results/longest_los/.
 
 
 ------------------------------------------------------------
