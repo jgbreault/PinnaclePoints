@@ -289,7 +289,7 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
             with sufficent contrast for visibilty under clear atmospheric conditions.
             Many physical phenomenon are modelled including Earth's curvature, local topograpghy,
             atmospheric refraction, atmospheric scattering, and partial irradiation.
-            This map shows all 111 ground-based lines of sight over 400 km long that are the longest for both the observer and target. 
+            This map shows all 111 ground-to-ground lines of sight over 400 km long that are the longest for both the observer and target. 
             Lines of sight are only consdered if both the observer and target have over 500 m of prominence.
         </p>
 
