@@ -281,7 +281,7 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
     </div>
     <div id="infoWindow" style="display: none; overflow-y: auto; position: absolute; top: 50%; left: 50%;
         transform: translate(-50%, -50%); background-color: rgba(255, 255, 255, 0.9); padding: 30px; width: 95%;
-        height: 68%;  z-index: 1000;">
+        height: 50%;  z-index: 1000;">
 
         <h2>Summary</h2>
         <p>
