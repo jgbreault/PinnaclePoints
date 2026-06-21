@@ -81,3 +81,33 @@ $$P_1 = (x_1, y_1) = (R_\oplus + h_1,\; 0), \qquad P_2 = (x_2, y_2) = \big((R_\o
 $$D_d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}, \qquad \phi = \frac{D_s}{R_\oplus}$$
 
 **Choosing $S$ and $a$.** The shaded segment is the near, observer-side half of the path ($S = 0.5$), because airlight is dominated by the air closest to the observer, so shadowing it helps contrast most. The shade irradiation ratio $a$ is set per line of sight from its bearing, to approximate sunrise/sunset. The sun can only rise or set along the east-west horizon, so only an east-west sightline can place the observer's foreground in shadow with the target lit beyond; a north-south sightline has the sun broadside and gets no benefit. Hence $a = 1 - (1 - a_{\min})\,|\sin(\text{bearing})|$ with $a_{\min} = 0.1$: east-west gives $a = 0.1$ (deepest shadow, highest contrast), north-south gives $a = 1$ (plain extinction), and bearings between interpolate. $a_{\min}$ stays above $0$ because fully shadowed air is still lit by diffuse skylight.
+
+**Irradiation by bearing.** The table below evaluates $a = 1 - (1 - a_{\min})\,|\sin(\text{bearing})|$ at $15^\circ$ steps, alongside the resulting reduction in shaded-segment irradiation, $1 - a = (1 - a_{\min})\,|\sin(\text{bearing})|$. Because the relation depends on $|\sin(\text{bearing})|$, it is symmetric every $180^\circ$: the reduction is largest ($1 - a = 0.9$) for east-west sightlines and vanishes for north-south ones.
+
+| Bearing | Reduction ($1 - a$) | Irradiation ($a$) |
+|:-------:|:-------------------:|:-----------------:|
+| $0^\circ$ (N)   | 0.000 | 1.000 |
+| $15^\circ$      | 0.233 | 0.767 |
+| $30^\circ$      | 0.450 | 0.550 |
+| $45^\circ$      | 0.636 | 0.364 |
+| $60^\circ$      | 0.779 | 0.221 |
+| $75^\circ$      | 0.869 | 0.131 |
+| $90^\circ$ (E)  | 0.900 | 0.100 |
+| $105^\circ$     | 0.869 | 0.131 |
+| $120^\circ$     | 0.779 | 0.221 |
+| $135^\circ$     | 0.636 | 0.364 |
+| $150^\circ$     | 0.450 | 0.550 |
+| $165^\circ$     | 0.233 | 0.767 |
+| $180^\circ$ (S) | 0.000 | 1.000 |
+| $195^\circ$     | 0.233 | 0.767 |
+| $210^\circ$     | 0.450 | 0.550 |
+| $225^\circ$     | 0.636 | 0.364 |
+| $240^\circ$     | 0.779 | 0.221 |
+| $255^\circ$     | 0.869 | 0.131 |
+| $270^\circ$ (W) | 0.900 | 0.100 |
+| $285^\circ$     | 0.869 | 0.131 |
+| $300^\circ$     | 0.779 | 0.221 |
+| $315^\circ$     | 0.636 | 0.364 |
+| $330^\circ$     | 0.450 | 0.550 |
+| $345^\circ$     | 0.233 | 0.767 |
+| $360^\circ$ (N) | 0.000 | 1.000 |
