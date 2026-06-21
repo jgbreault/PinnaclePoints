@@ -236,6 +236,17 @@ legend_html = """
                 infoIcon.style.fill = "rgba(255, 255, 0, 0.9)";
             }
         }
+
+        // Close the info window when clicking anywhere outside it (or its icon).
+        // Capture phase so it still fires over map markers that stop propagation.
+        document.addEventListener("click", function(event) {
+            var infoWindow = document.getElementById("infoWindow");
+            if (!infoWindow || infoWindow.style.display !== "block") return;
+            if (event.target.closest("#infoWindow") || event.target.closest("#infoIcon")) return;
+            infoWindow.style.display = "none";
+            var infoIcon = document.getElementById("informationIcon");
+            if (infoIcon) infoIcon.style.fill = "rgba(255, 255, 255, 0.9)";
+        }, true);
     </script>
 
     <script>
