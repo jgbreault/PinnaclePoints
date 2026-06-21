@@ -168,10 +168,7 @@ legend_html = """
                     border-style: solid; border-width: 0 3px 3px 0; transform: rotate(225deg);"></div>
                 <h4 style="margin: 0; margin-right: 30px;"><b>Longest<br>Lines of Sight</b></h4>
             </div>
-            <div id="legendContent" style="display: block; margin-top: 5px;">
-                <center style="margin-top: 15px; margin-bottom: 15px;">
-                    The longest ground-based <br>lines of sight on Earth
-                </center>
+            <div id="legendContent" style="display: block; margin-top: 20px;">
 
                 <div style="
                   display: flex;
