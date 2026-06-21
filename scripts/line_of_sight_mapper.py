@@ -38,6 +38,7 @@ max_distance = los_data.distance.max()
 
 def get_distance_color(distance):
     '''Colours a line of sight based on its distance'''
+    
     span = max_distance - min_distance
     fraction = (distance - min_distance)/span if span else 0.5
     rgba_color = colormap(fraction)
@@ -49,6 +50,7 @@ def get_distance_color(distance):
 
 def get_summit_links(latitude, longitude):
     '''PeakBagger and Google Maps links for a summit'''
+    
     lat_rounded = round(latitude, 4)
     lng_rounded = round(longitude, 4)
     return (
@@ -58,6 +60,7 @@ def get_summit_links(latitude, longitude):
 
 def get_geodesic_line(latitude_1, longitude_1, latitude_2, longitude_2, num_points=25):
     '''Great-circle path between two points, as [lat, lng] pairs for a folium PolyLine'''
+    
     intermediate = me.geod.npts(longitude_1, latitude_1, longitude_2, latitude_2, num_points)
     return [[latitude_1, longitude_1]] + [[lat, lng] for lng, lat in intermediate] + [[latitude_2, longitude_2]]
 
@@ -125,8 +128,8 @@ def add_line_of_sight_to_map(los):
 
     line_text = (
         f'<b>Distance:</b> {distance_km} km<br>'
-        f'<b>Observer:</b> {observer_location} ({observer_elevation} m)<br>'
-        f'<b>Target:</b> {target_location} ({target_elevation} m)'
+        f'<b>From:</b> {observer_location} ({observer_elevation} m)<br>'
+        f'<b>To:</b> {target_location} ({target_elevation} m)'
     )
 
     # visible line, then an invisible wider line on top to make the line easy to click
@@ -286,7 +289,7 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
             with sufficent contrast for visibilty under clear atmospheric conditions.
             Many physical phenomenon are modelled including Earth's curvature, local topograpghy,
             atmospheric refraction, atmospheric scattering, and partial irradiation.
-            This map shows all ground-based lines of sight over 400 km long that are the longest for both the observer and target. 
+            This map shows all 111 ground-based lines of sight over 400 km long that are the longest for both the observer and target. 
             Lines of sight are only consdered if both the observer and target have over 500 m of prominence.
         </p>
 
