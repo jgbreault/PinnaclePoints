@@ -1,3 +1,16 @@
+"""
+Shared constants, functions, and classes for the pinnacle point pipeline.
+
+A pinnacle point is a point from which no higher point can be seen. The classes
+below model the physics used to decide that: Earth's curvature, atmospheric
+refraction (light bending), and atmospheric scattering (contrast). See
+../misc/method.txt for the full method and ../misc/math/ for the derivations.
+
+The shade irradiation ratio (atmospheric scattering) is set per line of sight
+from its bearing. The other scripts import this module as `me` (e.g.
+`import commons as me`).
+"""
+
 import math
 import pandas as pd
 from textwrap import dedent
@@ -10,73 +23,80 @@ from scipy.integrate import quad
 
 ########## VARIABLES ##########
 
-defaultLightCurvature = 6.4
-defaultScatterCoef0 = 0.00001139 # Wavelength averaged scattering coefficient in 1/m, Penndorf 1957
-defaultShadedRatio = 0.5
-defaultShadeIrradiationRatio = 0.5
-defaultMaxSamplingDistance = 100 # in m
-ignoreBuffer = 4000 # in m
+# Switch the three paths below as a group to run the prominence dataset (prm),
+# the isolation dataset (iso), or the merged final result (prm_iso).
 
-summitFile = '../data/clean/summits_prm.csv'
-pinnaclePointFile = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
-patchDirectory = f'../data/patches/prm_{defaultLightCurvature}'
+default_light_curvature = 6.4
+default_sea_level_scatter_coefficient = 0.00001139 # Wavelength averaged scattering coefficient in 1/m, Penndorf 1957
+default_shaded_ratio = 0.5
+default_shade_irradiation_ratio = 0.5
+min_shade_irradiation_ratio = 0.1 # darkest the observer-side shadow gets (east-west sightlines), floored by diffuse skylight
+default_max_sampling_distance = 100 # in m
+ignore_buffer = 4000 # in m
 
-# summitFile = '../data/clean/summits_iso.csv'
-# pinnaclePointFile = '../data/results/pinnacle_points/iso/pinnacle_points.csv'
-# patchDirectory = f'../data/patches/iso_{defaultLightCurvature}'
+summit_file = '../data/clean/summits_prm.csv'
+pinnacle_point_file = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
+patch_directory = f'../data/patches/prm_{default_light_curvature}'
 
-# summitFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
-# pinnaclePointFile = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
-# patchDirectory = f'../data/patches/prm_iso_{defaultLightCurvature}'
+# summit_file = '../data/clean/summits_iso.csv'
+# pinnacle_point_file = '../data/results/pinnacle_points/iso/pinnacle_points.csv'
+# patch_directory = f'../data/patches/iso_{default_light_curvature}'
 
-earthRadius = 6371146 # in m (Mean Sea Level, GPS, and the Geoid. Witold Fraczek 2003)
-atmosphereScaleHeight = 8500 # in m (https://web.archive.org/web/20250821225050/https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html)
+# summit_file = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
+# pinnacle_point_file = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
+# patch_directory = f'../data/patches/prm_iso_{default_light_curvature}'
+
+earth_radius = 6371146 # in m (Mean Sea Level, GPS, and the Geoid. Witold Fraczek 2003)
+atmosphere_scale_height = 8500 # in m (https://web.archive.org/web/20250821225050/https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html)
 
 geod = Geod(ellps='sphere')
 
-apiRequestUrl = 'http://127.0.0.1:8080/v1/elevation'
-apiRequestLimit = 100
+api_request_url = 'http://127.0.0.1:8080/v1/elevation'
+api_request_limit = 100
 session = requests.Session()
 
-"""
-Patch Size Info:
-- Can't go below maxOffset = 6.614 = convertDistanceToDeltaLat(2*horizonDistance(everestElevation)), everestElevation = 8737.79
-  Otherwise patches that border the pole-patches would cross beyond the poles
-- Can only be an integer N where maxOffset < (90-N)/N < 90
-"""
-patchSize = 10
-allowedPatchSizes = [10, 15, 18, 30, 45]
-assert(patchSize in allowedPatchSizes)
+# patch_size (in degrees) must divide 90 so the latitude bands and the pole caps
+# tile cleanly (each pole cap spans the outermost patch_size degrees of latitude).
+# Smaller patches give less overlap between neighbouring patches but produce more
+# patch files. The outer-bound offset can exceed one patch near the tallest
+# mountains, but those are far from the poles, and any latitude beyond +/-90 is
+# clamped, so patches never cross the poles.
+patch_size = 10
+assert 90 % patch_size == 0, 'patch_size must divide 90'
 
 
 ########## FUNCTIONS ##########
 
-def getPoleLatitude():
-    return 90 - patchSize
+def get_pole_latitude():
+    return 90 - patch_size
 
-def getPatchLatBoundaries():
-    poleLat = getPoleLatitude()
-    return np.arange(-poleLat, poleLat+patchSize, patchSize)
+def get_patch_lat_boundaries():
+    pole_lat = get_pole_latitude()
+    return np.arange(-pole_lat, pole_lat+patch_size, patch_size)
     
-def getPatchLngBoundaries():
-    return np.arange(-180, 180+patchSize, patchSize)
+def get_patch_lng_boundaries():
+    return np.arange(-180, 180+patch_size, patch_size)
 
-def horizonDistance(height, lightCurvature=defaultLightCurvature):
+def horizon_distance(height, light_curvature=default_light_curvature):
+    """Maximum horizon distance (MHD): how far a point of the given height could
+    see if all other land were at sea level. Returns 0 for non-positive heights."""
     if height > 0:
-        return math.sqrt(2*(lightCurvature/(lightCurvature-1))*earthRadius*height)
+        return math.sqrt(2*(light_curvature/(light_curvature-1))*earth_radius*height)
     return 0
 
-def getElevations(latitudes, longitudes):
+def get_elevations(latitudes, longitudes):
+    """Look up ground elevations for the given coordinates via the locally hosted
+    Open-Meteo elevation API, in chunks of api_request_limit."""
 
     elevations = []
-    for i in range(0, len(latitudes), apiRequestLimit):
-        chunkLatitudes = latitudes[i : i+apiRequestLimit]
-        chunkLongitudes = longitudes[i : i+apiRequestLimit]
+    for i in range(0, len(latitudes), api_request_limit):
+        chunk_latitudes = latitudes[i : i+api_request_limit]
+        chunk_longitudes = longitudes[i : i+api_request_limit]
     
-        params = {'latitude': ','.join(map(str, chunkLatitudes)),
-                  'longitude': ','.join(map(str, chunkLongitudes))}
+        params = {'latitude': ','.join(map(str, chunk_latitudes)),
+                  'longitude': ','.join(map(str, chunk_longitudes))}
 
-        response = session.get(apiRequestUrl, params=params)
+        response = session.get(api_request_url, params=params)
     
         if response.status_code == 200:
             data = response.json()
@@ -90,6 +110,8 @@ def getElevations(latitudes, longitudes):
 ########## CLASSES ##########
 
 class Point:
+    """A location on Earth: latitude, longitude, and elevation. If elevation is
+    not given, it is looked up from the Open-Meteo elevation API."""
 
     def __init__(self,
                  latitude,
@@ -97,15 +119,19 @@ class Point:
                  elevation=None):
         self.latitude = latitude
         self.longitude = longitude
+        if elevation is None:
+            elevation = get_elevations([latitude], [longitude])[0]
         self.elevation = elevation
 
 class Summit(Point):
+    """A mountain summit. Pinnacle point candidates are summits; the heavy
+    lifting (is_pinnacle_point) lives here."""
 
     def __init__(self,
                  latitude,
                  longitude,
-                 elevation,
-                 summitId=None,
+                 elevation=None,
+                 summit_id=None,
                  prominence=None,
                  isolation=None):
         
@@ -113,223 +139,209 @@ class Summit(Point):
                          longitude,
                          elevation)
 
-        self.summitId = summitId
+        self.summit_id = summit_id
         self.prominence = prominence
         self.isolation = isolation
 
-    def getMaxHorizonDistance(self):
-        return horizonDistance(self.elevation)
+    def get_max_horizon_distance(self):
+        return horizon_distance(self.elevation)
 
-    def getPatch(self):
-        poleLatitude = getPoleLatitude()
-        
-        if self.latitude >= poleLatitude:
-            return Patch(90, poleLatitude)
-        
-        elif self.latitude < -poleLatitude:
-            return Patch(-poleLatitude, -90)
-        
+    def get_patch(self):
+        """Return the Patch this summit falls in (a pole cap, or the 10x10 degree
+        square it lands in)."""
+        pole_latitude = get_pole_latitude()
+
+        if self.latitude >= pole_latitude:
+            return Patch(90, pole_latitude)
+
+        elif self.latitude < -pole_latitude:
+            return Patch(-pole_latitude, -90)
+
         else:
-            # Round down to nearst multiple of patchSize
-            latMin = int((self.latitude // patchSize) * patchSize)
-            lngMin = int((self.longitude // patchSize) * patchSize)
+            # Round down to nearest multiple of patch_size
+            lat_min = int((self.latitude // patch_size) * patch_size)
+            lng_min = int((self.longitude // patch_size) * patch_size)
     
-            return Patch(latMin+patchSize, latMin, lngMin+patchSize, lngMin)
+            return Patch(lat_min+patch_size, lat_min, lng_min+patch_size, lng_min)
 
-    def getDistanceTo(self, summit):
-        return geod.line_length([summit.longitude, self.longitude], [summit.latitude, self.latitude])
+    def is_pinnacle_point(self):
+        """Return True if no higher summit has a valid line of sight with this one.
 
-    def isPinnaclePoint(self):
+        Only summits in this summit's patch that are higher and within combined
+        MHD range can disqualify it. They are tested nearest-first (nearer summits
+        are likelier to be visible); the first valid line of sight disqualifies
+        the candidate."""
 
-        # Candidates are Pinnacle Points until proven guilty
-        isPinnaclePoint = True
+        # Candidates are pinnacle points until proven guilty
+        is_pinnacle_point = True
         
-        patchSummits = self.getPatch().summitsOuter
-        patchSummits['distanceFromCandidate'] = round(patchSummits.apply(lambda patchSummit: round(self.getDistanceTo(patchSummit)), axis=1))        
-        patchSummitsInMhdRange = patchSummits.query('(summitId != @self.summitId) & '
+        patch_summits = self.get_patch().summits_outer
+        distances_from_candidate = geod.inv(np.full(len(patch_summits), self.longitude),
+                                          np.full(len(patch_summits), self.latitude),
+                                          patch_summits.longitude.values,
+                                          patch_summits.latitude.values)[2]
+        patch_summits['distance_from_candidate'] = np.round(distances_from_candidate)
+        patch_summits_in_mhd_range = patch_summits.query('(summit_id != @self.summit_id) & '
                                                     '(elevation > @self.elevation) & '
-                                                    '(distanceFromCandidate < maxHorizonDistance + @self.getMaxHorizonDistance())')
+                                                    '(distance_from_candidate < max_horizon_distance + @self.get_max_horizon_distance())')
     
-        print(f'Potential Disqualifying Summits: {len(patchSummitsInMhdRange)}')
+        print(f'Potential Disqualifying Summits: {len(patch_summits_in_mhd_range)}')
         
-        patchSummitsInMhdRange = patchSummitsInMhdRange.sort_values('distanceFromCandidate')
+        patch_summits_in_mhd_range = patch_summits_in_mhd_range.sort_values('distance_from_candidate')
     
-        for j, summit in enumerate(patchSummitsInMhdRange.itertuples()):
+        for j, summit in enumerate(patch_summits_in_mhd_range.itertuples()):
     
             target = Summit(latitude = summit.latitude,
                             longitude = summit.longitude,
                             elevation = summit.elevation)
 
-            candidateLineOfSight = LineOfSight(self, target)
+            candidate_line_of_sight = LineOfSight(self, target)
 
-            candidateLineOfSight.processFullLineOfSight()
+            candidate_line_of_sight.process_full_line_of_sight()
     
-            if candidateLineOfSight.isValid():
+            if candidate_line_of_sight.is_valid():
     
                 print(f'Tested Potential Disqualifying Summits: {j+1}')
-                print(f'In view of {summit.latitude}, {summit.longitude} ({round(summit.elevation)} m) {round(summit.distanceFromCandidate/1000)} km away')
+                print(f'In view of {summit.latitude}, {summit.longitude} ({round(summit.elevation)} m) {round(summit.distance_from_candidate/1000)} km away')
                 
-                isPinnaclePoint = False
+                is_pinnacle_point = False
                 break
 
-        print(f'Pinnacle Point: {isPinnaclePoint}')
+        print(f'Pinnacle Point: {is_pinnacle_point}')
 
-        return isPinnaclePoint
+        return is_pinnacle_point
 
 class LosPoint(Point):
+    """One sampled point along a line of sight, carrying both its distance along
+    the straight observer-target line and the heights of the ground and the light
+    ray there (in the rotated frame; see LineOfSight.process_full_line_of_sight)."""
 
     def __init__(self,
                  latitude,
                  longitude,
                  elevation,
-                 surfaceDistance,
-                 straightDistance,
-                 scatterCoef0 = defaultScatterCoef0,
-                 lightHeight = None,
-                 groundHeight = None):
+                 surface_distance,
+                 straight_distance,
+                 light_height = None,
+                 ground_height = None):
         
         super().__init__(latitude,
                          longitude,
                          elevation)
         
-        self.surfaceDistance = surfaceDistance
-        self.straightDistance = straightDistance
-        self.lightHeight = lightHeight
-        self.groundHeight = groundHeight
-        self.scatterCoef0 = scatterCoef0
-
-    def getScatteringCoef(self):
-        lightHeightFromSeaLevel = self.elevation + (self.lightHeight - self.groundHeight)
-        return self.scatterCoef0 * math.exp(-lightHeightFromSeaLevel/atmosphereScaleHeight)
+        self.surface_distance = surface_distance
+        self.straight_distance = straight_distance
+        self.light_height = light_height
+        self.ground_height = ground_height
 
 class LineOfSight():
+    """A candidate line of sight between an observer and a target summit.
+
+    A line of sight is valid (is_valid) when it is both geometrically unobstructed
+    (is_obstructed is False, accounting for Earth's curvature and refraction) and
+    bright enough to see (has_contrast, accounting for atmospheric scattering).
+    """
 
     def __init__(self,
                  observer,
                  target,
-                 lightCurvature = defaultLightCurvature,
-                 scatterCoef0 = defaultScatterCoef0,
-                 minSamplingDistance = defaultMaxSamplingDistance,
-                 shadedRatio = defaultShadedRatio, 
-                 shadeIrradiationRatio = defaultShadeIrradiationRatio):
+                 light_curvature = default_light_curvature,
+                 sea_level_scatter_coefficient = default_sea_level_scatter_coefficient,
+                 max_sampling_distance = default_max_sampling_distance,
+                 shaded_ratio = default_shaded_ratio, 
+                 shade_irradiation_ratio = None):
         
         self.observer = observer
         self.target = target
-        self.lightCurvature = lightCurvature
-        self.scatterCoef0 = scatterCoef0
-        self.minSamplingDistance = minSamplingDistance
-        self.surfaceDistance = geod.line_length([self.observer.longitude, self.target.longitude], [self.observer.latitude, self.target.latitude])
-        self.shadedRatio = shadedRatio
-        self.shadeIrradiationRatio = shadeIrradiationRatio
-        self.numSamples = math.ceil(self.observer.getDistanceTo(self.target)/minSamplingDistance)
-        self.losPoints = []
+        self.light_curvature = light_curvature
+        self.sea_level_scatter_coefficient = sea_level_scatter_coefficient
+        self.max_sampling_distance = max_sampling_distance
+        forward_azimuth, _, self.surface_distance = geod.inv(self.observer.longitude, self.observer.latitude,
+                                                             self.target.longitude, self.target.latitude)
+        self.forward_azimuth = forward_azimuth
+        self.shaded_ratio = shaded_ratio
+        # The shaded segment is the observer-side half of the path, where suppressing
+        # airlight helps contrast most. How shadowed it can get depends on bearing: an
+        # east-west sightline can sit in the sunrise/sunset shadow (irradiation ->
+        # min_shade_irradiation_ratio), a north-south one cannot (the sun is broadside,
+        # so irradiation -> 1 and there is no contrast benefit).
+        if shade_irradiation_ratio is None:
+            shade_irradiation_ratio = 1 - (1 - min_shade_irradiation_ratio)*abs(math.sin(math.radians(forward_azimuth)))
+        self.shade_irradiation_ratio = shade_irradiation_ratio
+        self.num_samples = math.ceil(self.surface_distance/max_sampling_distance)
+        self.los_points = []
 
-    def processFullLineOfSight(self):
-        
-        lngLats = geod.npts(self.observer.longitude, self.observer.latitude, 
+    def process_full_line_of_sight(self):
+        """Sample the ground between observer and target, place every sample into
+        the rotated vertical cross-section, and store the resulting LosPoints with
+        ground and light heights ready for is_obstructed."""
+
+        lng_lats = geod.npts(self.observer.longitude, self.observer.latitude,
                             self.target.longitude, self.target.latitude, 
-                            self.numSamples)
+                            self.num_samples)
 
-        latitudes = np.array(lngLats)[:, 1]
-        longitudes = np.array(lngLats)[:, 0]
+        latitudes = np.array(lng_lats)[:, 1]
+        longitudes = np.array(lng_lats)[:, 0]
 
-        elevations = getElevations(latitudes, longitudes)
+        elevations = get_elevations(latitudes, longitudes)
     
         latitudes = np.concatenate([[self.observer.latitude], latitudes, [self.target.latitude]])
         longitudes = np.concatenate([[self.observer.longitude], longitudes, [self.target.longitude]])
         elevations = np.concatenate([[self.observer.elevation], elevations, [self.target.elevation]])
 
-        surfaceDistances = []
+        surface_distances = []
         for i, latitude in enumerate(latitudes):
             longitude = longitudes[i]
-            surfaceDistances.append(geod.line_length([self.observer.longitude, longitude], [self.observer.latitude, latitude]))
+            surface_distances.append(geod.line_length([self.observer.longitude, longitude], [self.observer.latitude, latitude]))
 
-        anglesBetweenObserverAndLosPoints = np.array(surfaceDistances)/earthRadius
-        xDistances = earthRadius * np.sin(anglesBetweenObserverAndLosPoints)
-        dropFromCurvature = earthRadius * (1 - np.cos(anglesBetweenObserverAndLosPoints))
-        yHeights = elevations - dropFromCurvature - elevations[0]
+        angles_between_observer_and_los_points = np.array(surface_distances)/earth_radius
+        x_distances = (earth_radius + elevations)*np.sin(angles_between_observer_and_los_points)
+        drop_from_curvature = earth_radius * (1 - np.cos(angles_between_observer_and_los_points))
+        y_heights = elevations*np.cos(angles_between_observer_and_los_points) - drop_from_curvature - elevations[0]
 
-        angleBelowHorizontal = -np.arctan(yHeights[-1]/xDistances[-1])
-    
-        rotationMatrix = np.array([[math.cos(angleBelowHorizontal), -math.sin(angleBelowHorizontal)],
-                                   [math.sin(angleBelowHorizontal),  math.cos(angleBelowHorizontal)]])
+        angle_below_horizontal = -np.arctan(y_heights[-1]/x_distances[-1])
+
+        rotation_matrix = np.array([[math.cos(angle_below_horizontal), -math.sin(angle_below_horizontal)],
+                                   [math.sin(angle_below_horizontal),  math.cos(angle_below_horizontal)]])
+
+        # Rotate so the straight observer-target line lies on the x-axis. Both the ground and
+        # (below) the light arc are expressed in this same rotated frame, so their heights can
+        # be compared directly in is_obstructed().
+        rotated_points = rotation_matrix @ np.array([x_distances, y_heights])
+        straight_distances = rotated_points[0]
+        ground_heights = rotated_points[1]
+
+        # Light bends as the arc of a circle of radius k*earth_radius through the observer and
+        # target. In the rotated frame the height of light above the straight line is
+        # y = sqrt(gamma + s*(D - s)) - sqrt(gamma), where gamma = (k*R)^2 - (D/2)^2 and D is
+        # the straight (chord) distance to the target. See atmospheric_refraction.pdf.
+        distance_to_target = straight_distances[-1]
+        gamma = (self.light_curvature*earth_radius)**2 - (distance_to_target/2)**2
+        light_heights = np.sqrt(gamma + straight_distances*(distance_to_target - straight_distances)) - np.sqrt(gamma)
         
-        rotatedPoints = rotationMatrix @ np.array([xDistances, yHeights])
-        straightDistances = rotatedPoints[0]
-        groundHeights = rotatedPoints[1]
-
-        distanceToTarget = straightDistances[-1]
-        gamma = (self.lightCurvature*earthRadius)*(self.lightCurvature*earthRadius) - (distanceToTarget)*(distanceToTarget)
-        lightHeights = np.sqrt(gamma + straightDistances*(distanceToTarget - straightDistances)) - np.sqrt(gamma)
-        
-        self.losPoints = [LosPoint(latitude, longitude, elevation, surfaceDistance, straightDistance, self.scatterCoef0, lightHeight, groundHeight) 
-                          for (latitude, longitude, elevation, surfaceDistance, straightDistance, lightHeight, groundHeight) 
-                          in zip(latitudes, longitudes, elevations, surfaceDistances, straightDistances, lightHeights, groundHeights)]
+        self.los_points = [LosPoint(latitude, longitude, elevation, surface_distance, straight_distance, light_height, ground_height) 
+                          for (latitude, longitude, elevation, surface_distance, straight_distance, light_height, ground_height) 
+                          in zip(latitudes, longitudes, elevations, surface_distances, straight_distances, light_heights, ground_heights)]
     
-    def getStraightDistance(self):
-        return self.losPoints[-1].straightDistance
+    def get_straight_distance(self):
+        return self.los_points[-1].straight_distance
     
-    def getLightDistance(self):
-        dx = np.diff([point.straightDistance for point in self.losPoints])
-        dy = np.diff([point.lightHeight for point in self.losPoints])
-        return np.hypot(dx, dy).sum()
+    def is_obstructed(self):
+        """True if the ground rises above the light ray at any sample. Samples
+        within ignore_buffer of either endpoint are skipped to avoid DEM noise
+        near the summits falsely blocking the line of sight."""
+        return not all(los_point.ground_height < los_point.light_height
+                       for los_point 
+                       in self.los_points
+                       if los_point.straight_distance > ignore_buffer and los_point.straight_distance < self.get_straight_distance()-ignore_buffer)
 
-    def isInPossibleRange(self):
-        return self.observer.getMaxHorizonDistance() + self.target.getMaxHorizonDistance() > self.surfaceDistance
-
-    def isObstructed(self):        
-        return not all(losPoint.groundHeight < losPoint.lightHeight 
-                       for losPoint 
-                       in self.losPoints
-                       if losPoint.straightDistance > ignoreBuffer and losPoint.straightDistance < self.getStraightDistance()-ignoreBuffer)
-
-    def getStraightElelvation(self, x):
+    def get_light_distance_from_centre(self, x):
 
         h1 = self.observer.elevation
         h2 = self.target.elevation
-        D = self.surfaceDistance
-        R = earthRadius
-        phi = D/R
-        theta = x/R
-
-        x1 = R + h1
-        y1 = 0
-        x2 = (R + h2)*math.cos(phi)
-        y2 = (R + h2)*math.sin(phi)
-
-        if y2 != y1:
-            m = (x2 - x1)/(y2 - y1)
-        else:
-            m=1
-            
-        b = x1
-        y = (x-b)/m
-
-        r = b/(math.cos(theta) - m*math.sin(theta))
-
-        return r - R
-    
-    def getLightLength(self, x1, x2, h=1e-6):
-        
-        arcLength, error = quad(
-            lambda x: math.sqrt(
-                self.getLightDistanceFromCentre(x)**2 - self.derivative(self.getLightDistanceFromCentre, x, h)**2
-            ), x1, x2
-        )
-
-        return arcLength/earthRadius
-
-    # TODO Doesn't need to be in the class
-    def derivative(self, function, x, h=1e-6):
-        return (function(x + h) - function(x - h)) / (2*h)
-
-    def getLightDistanceFromCentre(self, x):
-
-        h1 = self.observer.elevation
-        h2 = self.target.elevation
-        D = self.surfaceDistance
-        R = earthRadius
-        C = self.lightCurvature
+        D = self.surface_distance
+        R = earth_radius
+        k = self.light_curvature
         
         theta = x/R
         phi = D/R
@@ -342,7 +354,7 @@ class LineOfSight():
     
         d = math.sqrt((x2-x1)**2 + (y2-y1)**2)
     
-        RL = C*R
+        RL = k*R
     
         Z = math.sqrt(RL**2 - (d/2)**2)
     
@@ -353,70 +365,91 @@ class LineOfSight():
 
         return L0
 
-    def getLightElevation(self, x):
-        
-        return self.getLightDistanceFromCentre(x) - earthRadius
+    def get_light_elevation(self, x):
+        return self.get_light_distance_from_centre(x) - earth_radius
 
-    def getScatterCoef(self, x):
-        return self.scatterCoef0 * math.exp(-self.getLightElevation(x)/atmosphereScaleHeight)
+    def get_scatter_coefficient(self, x):
+        return self.sea_level_scatter_coefficient * math.exp(-self.get_light_elevation(x)/atmosphere_scale_height)
 
-    def getContrast(self):
+    def get_contrast(self):
+        """Contrast of the target against the sky (Vollmer 2020). The path is split
+        into a shaded segment (fraction shaded_ratio, starting at the observer) and
+        a sunlit segment, and the scattering coefficient is integrated along the
+        curved light path of each. The light-path element is ds = (L/R) dx to leading
+        order, where L is the distance from Earth's centre to the ray, so the
+        surface-distance integral is weighted by L/R. The shade irradiation ratio is
+        set from the line-of-sight bearing (see __init__).
+        See ../misc/math/raw/atmospheric_scattering.ipynb."""
 
-        d1 = self.surfaceDistance * self.shadedRatio
-        d2 = self.surfaceDistance * (1 - self.shadedRatio)
+        d1 = self.surface_distance * self.shaded_ratio  # shaded segment ends here
 
-        scatterCoefIntResult1, error1 = quad(lambda x: self.getScatterCoef(x), 0, d1)   
-        scatterCoefIntResult2, error2 = quad(lambda x: self.getScatterCoef(x), d1, self.surfaceDistance)
+        # scattering coefficient per unit light-path length, integrated over surface
+        # distance x: beta(height of ray at x) * (light-path element ds/dx = L/R)
+        def optical_depth_density(x):
+            return self.get_scatter_coefficient(x) * self.get_light_distance_from_centre(x)/earth_radius
 
-        contrast = math.exp(-scatterCoefIntResult2)/(1 - self.shadeIrradiationRatio + (self.shadeIrradiationRatio/math.exp(-scatterCoefIntResult1)))
+        scatter_integral_shaded = quad(optical_depth_density, 0, d1)[0]
+        scatter_integral_sunlit = quad(optical_depth_density, d1, self.surface_distance)[0]
+
+        contrast = math.exp(-scatter_integral_sunlit)/(1 - self.shade_irradiation_ratio + (self.shade_irradiation_ratio/math.exp(-scatter_integral_shaded)))
 
         return contrast
 
-    def hasContrast(self):
-        return self.getContrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
+    def has_contrast(self):
+        return self.get_contrast() > 0.02 # 0.02 is from Below the Horizon, Michael Vollmer, 2020
 
-    def isValid(self):
-        return not self.isObstructed() and self.hasContrast()
+    def is_valid(self):
+        return not self.is_obstructed() and self.has_contrast()
                                                             
-    def plot(self, baseline='sea', legendLocation='best', plotPath=''):
+    def plot(self, baseline='straight', legend_location='best', plot_path=''):
+        """Plot the line of sight in the rotated frame used by is_obstructed: the
+        straight observer-target line is the reference and ground and light heights
+        are measured perpendicular to it (the exact geometry of the obstruction
+        test). baseline='straight' keeps the straight line flat at 0;
+        baseline='light' makes the light ray the flat reference instead."""
 
-        distances = np.array([point.surfaceDistance/1000.0 for point in self.losPoints])
-        ground = np.array([point.elevation for point in self.losPoints])
-        light = np.array([self.getLightElevation(point.surfaceDistance) for point in self.losPoints])
-        straight = np.array([self.getStraightElelvation(point.surfaceDistance) for point in self.losPoints])
+        distances = np.array([point.surface_distance/1000.0 for point in self.los_points])
+        ground = np.array([point.ground_height for point in self.los_points])
+        light = np.array([point.light_height for point in self.los_points])
+        straight = np.zeros_like(distances)
 
         if baseline == 'light':
-            ground, light, straight = ground-light, light-light, straight-light
-        elif baseline == 'straight':
-            ground, light, straight = ground-straight, light-straight, straight-straight
+            ground, straight, light = ground - light, straight - light, light - light
 
         plt.figure(figsize=(15,5))
-        
-        plt.plot(distances, light, color='orange', label='Light', lw=2)
+
+        plt.plot(distances, light, color='yellow', label='Light', lw=2)
         plt.plot(distances, straight, color='k', label='Straight', lw=1, ls='--')
 
-        if self.shadeIrradiationRatio < 1:
+        sky_top = max(ground.max(), light.max())
+        if self.shade_irradiation_ratio < 1:
 
-            plt.fill_between(distances, y1=ground, y2=max([max(ground), max(light)]), 
-                             color='#82c8e5', label='Sky')
-            plt.fill_between(distances, y1=ground, y2=max([max(ground), max(light)]), 
-                             where=(distances <= distances[-1]*self.shadedRatio), 
-                             color='k', alpha=1-self.shadeIrradiationRatio, label='Shadow')
-        
+            plt.fill_between(distances, y1=ground, y2=sky_top,
+                             color='cornflowerblue', label='Sky')
+            plt.fill_between(distances, y1=ground, y2=sky_top,
+                             where=(distances <= distances[-1]*self.shaded_ratio),
+                             color='k', alpha=1-self.shade_irradiation_ratio, label='Shadow')
+
         plt.plot(distances, ground, color='k', lw=0.8)
 
-        plt.fill_between(distances, y1=min([min(light), min(ground), min(straight)]), y2=ground, color='darkgrey', label='Earth')
+        plt.fill_between(distances, y1=min(light.min(), ground.min(), straight.min()), y2=ground, color='darkgrey', label='Earth')
 
-        if self.isObstructed():
-            maxInd = np.argmax(ground - light)
-            plt.plot(distances[maxInd], ground[maxInd], marker='x', color='red')
-        
-        plt.title('Line of sight test between\n' 
-                  + f'{self.observer.latitude}, {self.observer.longitude} ({round(self.observer.elevation)} m) ' 
-                  + f'and {self.target.latitude}, {self.target.longitude} ({round(self.target.elevation)} m), ' 
-                  + f'{round(self.surfaceDistance/1000.0, 1)} km apart\n'
-                  + f'[N={self.numSamples}, C={self.lightCurvature}, S={self.shadedRatio}, I={self.shadeIrradiationRatio}, ' 
-                  + f'contrast={round(self.getContrast(), 4)}, LOS={not self.isObstructed()}]')
+        obstructed = self.is_obstructed()
+        if obstructed:
+            max_ind = np.argmax(ground - light)
+            plt.plot(distances[max_ind], ground[max_ind], marker='x', color='red')
+
+        observer_label = f'{self.observer.latitude:.4f}°, {self.observer.longitude:.4f}° ({self.observer.elevation:.0f} m)'
+        target_label = f'{self.target.latitude:.4f}°, {self.target.longitude:.4f}° ({self.target.elevation:.0f} m)'
+        plt.title('Line-of-Sight Test\n'
+                  f'{observer_label}  →  {target_label}\n' + 
+                  f'Distance = {self.surface_distance/1000:.1f} km    '
+                  f'Light Curvature = {self.light_curvature:.1f}    '
+                  f'Obstructed = {obstructed}\n'
+                  f'Bearing = {self.forward_azimuth % 360:.1f}°    '
+                  f'Shade Irradiation = {self.shade_irradiation_ratio:.2f}    '
+                  f'Shaded Ratio = {self.shaded_ratio:.2f}    '
+                  f'Contrast = {self.get_contrast():.3f}')
         
         plt.xlabel('Distance (km)')
 
@@ -425,197 +458,233 @@ class LineOfSight():
         fig = plt.gcf()
         fig.patch.set_facecolor('w')
         fig.set_dpi(300)
-        plt.grid(ls=':', c='grey')
-        plt.legend(loc=legendLocation, framealpha=1)
+        plt.grid(ls=':', c='k', alpha=0.5)
+        plt.legend(loc=legend_location, framealpha=1)
         
-        if plotPath != '':
-            plt.savefig(plotPath, bbox_inches='tight')
+        if plot_path != '':
+            plt.savefig(plot_path, bbox_inches='tight')
 
         plt.show()
 
 class Patch():
+    """A region of the globe used to limit which summits are checked against a
+    candidate. Inner bounds tile the globe exactly; outer bounds extend far enough
+    that every summit which could have a line of sight with an inner summit is
+    included (see set_outer_bounds). Patches are cached as CSVs in patch_directory.
+    """
 
     def __init__(self,
-                 northInner,
-                 southInner,
-                 eastInner=None,
-                 westInner=None,
-                 globalSummits=None):
+                 north_inner,
+                 south_inner,
+                 east_inner=None,
+                 west_inner=None,
+                 global_summits=None):
 
-        self.globalSummits = globalSummits
+        self.global_summits = global_summits
         
-        self.numSummitsInner = None
-        self.summitsOuter = None
+        self.num_summits_inner = None
+        self.summits_outer = None
         
-        self.northInner = northInner
-        self.southInner = southInner
-        self.eastInner = eastInner
-        self.westInner = westInner
+        self.north_inner = north_inner
+        self.south_inner = south_inner
+        self.east_inner = east_inner
+        self.west_inner = west_inner
 
-        self.northOuter = None
-        self.southOuter = None
-        self.eastOuter = None
-        self.westOuter = None
+        self.north_outer = None
+        self.south_outer = None
+        self.east_outer = None
+        self.west_outer = None
 
-        self.latOffset = None
-        self.lngOffset = None
+        self.lat_offset = None
+        self.lng_offset = None
 
-        if type(globalSummits) == type(None):
+        if type(global_summits) == type(None):
             try:
-                self.loadPatch()
-            except:
-                print(f'Error loading patch {self.getFileName()}')
+                self.load_patch()
+            except Exception as error:
+                print(f'Error loading patch {self.get_file_name()}: {error}')
         else:
-            self.setOuterBounds()
-            self.summitsOuter = self.getSummitsInRange(self.northOuter, self.southOuter, self.eastOuter, self.westOuter)
-            self.numGlobalSummits = len(globalSummits)
-            self.globalSummits = None  # No need to keep this populated once we have summitsOuter
+            self.set_outer_bounds()
+            self.summits_outer = self.get_summits_in_range(self.north_outer, self.south_outer, self.east_outer, self.west_outer)
+            self.num_global_summits = len(global_summits)
+            self.global_summits = None  # No need to keep this populated once we have summits_outer
             self.save()
 
     def __str__(self):        
-        return self.getMetadata()
+        return self.get_metadata()
 
-    def getFileName(self):
-        if self.isPolePatch():
-            fileName = f'{self.northInner}N_{self.southInner}S.csv'
+    def get_file_name(self):
+        if self.is_pole_patch():
+            file_name = f'{self.north_inner}N_{self.south_inner}S.csv'
         else:
-            fileName = f'{self.northInner}N_{self.southInner}S_{self.eastInner}E_{self.westInner}W.csv'
-        return fileName
+            file_name = f'{self.north_inner}N_{self.south_inner}S_{self.east_inner}E_{self.west_inner}W.csv'
+        return file_name
 
-    def loadPatch(self):
-        fileName = self.getFileName()
+    def load_patch(self):
+        file_name = self.get_file_name()
 
         # reading metadata
-        metaDataList = []
-        with open(f'{patchDirectory}/{fileName}', 'r') as rawMetaData:
-            for i, line in enumerate(rawMetaData):
+        metadata_list = []
+        with open(f'{patch_directory}/{file_name}', 'r') as raw_metadata:
+            for i, line in enumerate(raw_metadata):
                 if i >= 17:
                     break
-                metaDataList.append(line.strip().split(': '))
+                metadata_list.append(line.strip().split(': '))
                 
-        self.numGlobalSummits = int(metaDataList[0][1])
-        self.numSummitsInner = int(metaDataList[2][1])
+        self.num_global_summits = int(metadata_list[0][1])
+        self.num_summits_inner = int(metadata_list[2][1])
 
-        self.northOuter = float(metaDataList[10][1])
-        self.southOuter = float(metaDataList[11][1])
+        self.north_outer = float(metadata_list[10][1])
+        self.south_outer = float(metadata_list[11][1])
 
-        eastOuter = metaDataList[12][1]
-        self.eastOuter = float(eastOuter) if eastOuter != 'None' else None
-        westOuter = metaDataList[13][1]        
-        self.westOuter = float(westOuter) if westOuter != 'None' else None
+        east_outer = metadata_list[12][1]
+        self.east_outer = float(east_outer) if east_outer != 'None' else None
+        west_outer = metadata_list[13][1]        
+        self.west_outer = float(west_outer) if west_outer != 'None' else None
 
 
-        self.latOffset = float(metaDataList[15][1])
-        lngOffset = metaDataList[16][1] 
-        self.lngOffset = float(lngOffset) if lngOffset != 'None' else None
+        self.lat_offset = float(metadata_list[15][1])
+        lng_offset = metadata_list[16][1] 
+        self.lng_offset = float(lng_offset) if lng_offset != 'None' else None
 
-        self.summitsOuter = pd.read_csv(f'{patchDirectory}/{fileName}', comment='#')
+        self.summits_outer = pd.read_csv(f'{patch_directory}/{file_name}', comment='#')
 
     def save(self):
-        fileName = self.getFileName()
+        file_name = self.get_file_name()
         
         # this is needed to add the metadata as a comment in csv before data
-        with open(f'{patchDirectory}/{fileName}', 'w') as patchFile:
-            patchFile.write(self.getMetadata(isComment=True))
-            self.summitsOuter.to_csv(patchFile, index=False)
-            print(f'Saved {fileName}')
+        with open(f'{patch_directory}/{file_name}', 'w') as patch_file:
+            patch_file.write(self.get_metadata(is_comment=True))
+            self.summits_outer.to_csv(patch_file, index=False)
+            print(f'Saved {file_name}')
 
-    def getMetadata(self, isComment=False):
+    def get_metadata(self, is_comment=False):
         
         metadata = dedent(f"""\
-            Global Summits: {self.numGlobalSummits}
+            Global Summits: {self.num_global_summits}
 
-            Patch Summits (Inner): {self.numSummitsInner}
-            Patch Summits (Outer): {len(self.summitsOuter)}
+            Patch Summits (Inner): {self.num_summits_inner}
+            Patch Summits (Outer): {len(self.summits_outer)}
 
-            North (Inner): {self.northInner}
-            South (Inner): {self.southInner}
-            East (Inner): {self.eastInner}
-            West (Inner): {self.westInner}
+            North (Inner): {self.north_inner}
+            South (Inner): {self.south_inner}
+            East (Inner): {self.east_inner}
+            West (Inner): {self.west_inner}
 
-            North (Outer): {self.northOuter}
-            South (Outer): {self.southOuter}
-            East (Outer): {self.eastOuter}
-            West (Outer): {self.westOuter}
+            North (Outer): {self.north_outer}
+            South (Outer): {self.south_outer}
+            East (Outer): {self.east_outer}
+            West (Outer): {self.west_outer}
 
-            Lat Offset: {self.latOffset}
-            Lng Offset: {self.lngOffset}\
+            Lat Offset: {self.lat_offset}
+            Lng Offset: {self.lng_offset}\
         """)
         
-        if isComment:
+        if is_comment:
             return '\n'.join('# ' + line for line in metadata.splitlines()) + '\n#\n'
         return metadata
 
-    def isPolePatch(self):
-        return self.eastInner is None and self.westInner is None
+    def is_pole_patch(self):
+        return self.east_inner is None and self.west_inner is None
 
-    def isLngSeamPatch(self, eastBound, westBound):
-        return eastBound < 0 and westBound > 0
+    def is_lng_seam_patch(self, east_bound, west_bound):
+        return east_bound < 0 and west_bound > 0
 
-    def makeLatitudeValid(self, latitude):
+    def make_latitude_valid(self, latitude):
         if latitude > 90:
             return 90
         elif latitude < -90:
             return -90
         return latitude
 
-    def makeLongitudeValid(self, longitude):
+    def make_longitude_valid(self, longitude):
         if longitude > 180:
             return longitude - 360
         elif longitude < -180:
             return longitude + 360
         return longitude
 
-    def convertDistanceToDeltaLat(self, distance):
+    def convert_distance_to_delta_lat(self, distance):
         return distance / 111320  # There are 111320 m per deg of latitude
 
-    def convertDistanceToDeltaLng(self, distance, latitude):
-        return self.convertDistanceToDeltaLat(distance) / math.cos(math.radians(latitude))
+    def convert_distance_to_delta_lng(self, distance, latitude):
+        return self.convert_distance_to_delta_lat(distance) / math.cos(math.radians(latitude))
 
-    def getOffsetDistance(self):
-        summitsInner = self.getSummitsInRange(self.northInner, self.southInner, self.eastInner, self.westInner)
-        self.numSummitsInner = len(summitsInner)
-        return horizonDistance(self.globalSummits.elevation.max()) + horizonDistance(summitsInner.elevation.max())
+    def get_offset_bounds(self, offset_distance):
+        """Inner bounds expanded outward by offset_distance. Returns
+        (north, south, east, west); east and west are None for pole patches."""
+        lat_offset = self.convert_distance_to_delta_lat(offset_distance)
+        north = self.make_latitude_valid(self.north_inner + lat_offset)
+        south = self.make_latitude_valid(self.south_inner - lat_offset)
 
-    def getPatchSummits(latitude, longitude):
-        poleLatitude = getPoleLatitude()
+        if self.is_pole_patch():
+            return north, south, None, None
+
+        lat_for_offset = self.south_inner if self.south_inner < 0 else self.north_inner
+        lng_offset = self.convert_distance_to_delta_lng(offset_distance, lat_for_offset)
+        east = self.make_longitude_valid(self.east_inner + lng_offset)
+        west = self.make_longitude_valid(self.west_inner - lng_offset)
+        return north, south, east, west
+
+    def get_summits_within_offset(self, offset_distance):
+        """Summits inside the inner bounds expanded by offset_distance."""
+        north, south, east, west = self.get_offset_bounds(offset_distance)
+
+        if self.is_pole_patch():
+            return self.get_summits_in_range(north, south, None, None)
+
+        lat_for_offset = self.south_inner if self.south_inner < 0 else self.north_inner
+        lng_offset = self.convert_distance_to_delta_lng(offset_distance, lat_for_offset)
+        if patch_size + 2*lng_offset >= 360:
+            # the buffer wraps all the way around at this latitude; take the whole band
+            return self.global_summits.query('latitude >= @south and latitude < @north')
+
+        return self.get_summits_in_range(north, south, east, west)
+
+    def get_offset_distance(self):
+        summits_inner = self.get_summits_in_range(self.north_inner, self.south_inner, self.east_inner, self.west_inner)
+        self.num_summits_inner = len(summits_inner)
+        inner_max_elevation = summits_inner.elevation.max()
+
+        # A disqualifying summit can only lie inside the outer bounds, and the outer
+        # bounds never reach past this patch's neighbours. So the worst-case
+        # disqualifier is the tallest summit in that neighbourhood -- far shorter than
+        # Everest for most of the globe, which keeps the outer bounds (and the overlap
+        # between patches) small.
+        #
+        # To find it safely, search the largest region the outer bounds could ever
+        # cover (sized with the tallest summit on Earth). The real, smaller outer
+        # bounds always fall inside this region, so its tallest summit is a valid worst
+        # case. This searches global_summits, never the already-buffered patch files.
+        largest_possible_offset = horizon_distance(self.global_summits.elevation.max()) + horizon_distance(inner_max_elevation)
+        neighbourhood = self.get_summits_within_offset(largest_possible_offset)
+        neighbourhood_max_elevation = neighbourhood.elevation.max()
+
+        return horizon_distance(neighbourhood_max_elevation) + horizon_distance(inner_max_elevation)
+
+    def set_outer_bounds(self):
+        """Extend the inner bounds by MHD(tallest summit in this patch's neighbourhood)
+        + MHD(tallest summit in this patch), so no possible line of sight into the patch
+        is missed while keeping overlap small. Longitude uses the patch edge farthest
+        from the equator (worst case)."""
+        offset_distance = self.get_offset_distance()
+
+        self.lat_offset = self.convert_distance_to_delta_lat(offset_distance)
+        self.north_outer, self.south_outer, self.east_outer, self.west_outer = self.get_offset_bounds(offset_distance)
+
+        if not self.is_pole_patch():
+            lat_for_offset = self.south_inner if self.south_inner < 0 else self.north_inner
+            self.lng_offset = self.convert_distance_to_delta_lng(offset_distance, lat_for_offset)
+
+    def get_summits_in_range(self, north_bound, south_bound, east_bound, west_bound):
         
-        if latitude >= poleLatitude:
-            patchSummits = Patch(90, poleLatitude)
+        lat_condition = 'latitude >= @south_bound and latitude < @north_bound'
         
-        elif latitude < -poleLatitude:
-            patchSummits = Patch(-poleLatitude, -90)
-        
+        if self.is_pole_patch():
+            summits_in_range = self.global_summits.query(lat_condition)
+        elif self.is_lng_seam_patch(east_bound, west_bound):
+            summits_in_range = self.global_summits.query(lat_condition + ' and (longitude >= @west_bound or longitude < @east_bound)')
         else:
-            # Round down to nearst multiple of patchSize
-            latMin = int((latitude // patchSize) * patchSize)
-            lngMin = int((longitude // patchSize) * patchSize)
-
-        return Patch(latMin+patchSize, latMin, lngMin+patchSize, lngMin)
-
-    def setOuterBounds(self):
-        offsetDistance = self.getOffsetDistance()
+            summits_in_range = self.global_summits.query(lat_condition + ' and longitude >= @west_bound and longitude < @east_bound')
         
-        self.latOffset = self.convertDistanceToDeltaLat(offsetDistance)
-        self.northOuter = self.makeLatitudeValid(self.northInner + self.latOffset)
-        self.southOuter = self.makeLatitudeValid(self.southInner - self.latOffset)
-
-        if not self.isPolePatch():
-            latForOffset = self.southInner if self.southInner < 0 else self.northInner
-            self.lngOffset = self.convertDistanceToDeltaLng(offsetDistance, latForOffset)
-
-            self.eastOuter = self.makeLongitudeValid(self.eastInner + self.lngOffset)
-            self.westOuter = self.makeLongitudeValid(self.westInner - self.lngOffset)
-
-    def getSummitsInRange(self, northBound, southBound, eastBound, westBound):
-        
-        latCondition = 'latitude >= @southBound and latitude < @northBound'
-        
-        if self.isPolePatch():
-            summitsInRange = self.globalSummits.query(latCondition)
-        elif self.isLngSeamPatch(eastBound, westBound):
-            summitsInRange = self.globalSummits.query(latCondition + ' and (longitude >= @westBound or longitude < @eastBound)')
-        else:
-            summitsInRange = self.globalSummits.query(latCondition + ' and longitude >= @westBound and longitude < @eastBound')
-        
-        return summitsInRange
+        return summits_in_range

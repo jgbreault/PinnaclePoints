@@ -1,95 +1,365 @@
 SEARCHING FOR PINNACLE POINTS
 =============================
 
-This document outlines the method used to identify all pinnacle points on Earth with at least 300 m of prominence or 100 km of isolation.
+Pinnacle points are points from which no higher elevation can be seen. Two 
+points have line of sight if light can travel from one to the other unobstructed 
+with sufficent contrast for visibilty under clear atmospheric conditions. Many 
+physical phenomenon are modelled including Earth's curvature, local topograpghy, 
+atmospheric refraction, atmospheric scattering, and partial irradiation. It is 
+possible for two pinnacle points with equal elevation to have line of sight since 
+neither would be high enough to disqualify the other.
+
+This document explains the method used to identify every pinnacle point on Earth
+with at least 300 m of prominence or 100 km of isolation.
+
+
+------------------------------------------------------------
+NOTATION
+------------------------------------------------------------
+
+The same symbols are used throughout this document and in the math notebooks
+under misc/math/.
+
+  R_earth   Mean radius of the Earth at sea level (treated as a sphere).
+  k         Light curvature factor. A light ray is modelled as the arc of a
+            circle whose radius is R_light = k * R_earth. Larger k means
+            straighter light (less bending).
+  h, h1, h2 Elevation above sea level. h1 is the observer, h2 is the target.
+  D_s       Surface distance: the sea-level arc length between observer and
+            target along the surface of the Earth.
+  D_d       Direct (straight-line) distance: the length of the straight chord
+            between observer and target.
+  MHD       Maximum horizon distance: the farthest a point of a given elevation
+            could see if all other land were at sea level.
+  H         Scale height of the atmosphere.
+  beta_0    Scattering coefficient at sea level.
+  beta(h)   Scattering coefficient at elevation h, beta_0 * exp(-h / H).
+  S         Shaded ratio: the fraction of the light path that lies in shadow.
+            The shaded segment is contiguous and starts at the observer.
+  a         Shade irradiation ratio: how brightly the shaded (observer-side)
+            segment is lit relative to the sunlit segment (0 = fully dark,
+            1 = equally lit). Set per line of sight from its bearing (below).
+  C         Contrast of the target against the background sky, as seen by the
+            observer.
+
+Throughout, "observer" and "target" refer to the two summits being tested for
+line of sight.
 
 
 ------------------------------------------------------------
 DATA SOURCES
 ------------------------------------------------------------
+
 1. On-Top-Of-The-World Mountains
-On-top-of-the-world (OTOTW) mountains are mountains where no land rises above the horizontal plane from its summit. Since any land that rises above the horizontal plane would have a higher elevation than the mountain itself, if a mountain is not an OTOTW mountain then it can not be a pinnacle point either. In other words, pinnacle points are a subset of OTOTW mountains. Kai Xu found all 6,464 OTOTW mountains on Earth with over 300 m of prominence, and I have identified which qualify as pinnacle points. Andreas Geyer-Schulz deserves mention as well for his extremal peaks, a nearly identical concept to OTOTW mountains developed completely independently.
+On-top-of-the-world (OTOTW) mountains are summits where no land rises above its 
+horizontal plane. Since any land that rises above the horizontal plane would have 
+a higher elevation than the summit itself, if a mountain is not an OTOTW mountain 
+then it can not be a pinnacle point either. In other words, pinnacle points are a 
+subset of OTOTW mountains. Kai Xu found all 6,464 OTOTW mountains on Earth with 
+over 300 m of prominence, and I have identified which qualify as pinnacle points.
 
 2. Mountains by Prominence
-Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence. Prominence is the minimum vertical distance one must descend to reach a higher point. Kai Xu identified OTOTW mountains using this dataset, so I use this dataset to identify which OTOTW mountains are pinnacle points. This source primarily uses the Copernicus GLO-30 DEM.
+Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with 
+over 100 ft (~30 m) of prominence. Prominence is the minimum vertical distance one 
+must descend to reach a higher point. Kai Xu identified OTOTW mountains using this 
+dataset, so I use this dataset to help identify which OTOTW mountains qualify as 
+pinnacle points. This source primarily uses the Copernicus GLO-30 DEM.
 
 3. Mountains by Isolation
-Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with over 1 km of isolation. Isolation is the distance to the nearest higher point. Extreme isolation points are strong pinnacle point candidates, so I use this dataset to find all pinnacle points with an isolation of at least 100 km. This source uses the STRM 90m DEM.
+Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with 
+over 1 km of isolation. Isolation is the distance to the nearest higher point. 
+Extreme isolation points are strong pinnacle point candidates, so I use this 
+dataset to find all pinnacle points among the 3001 summits with at least 100 km of 
+isolation. This source uses the SRTM 90 m DEM.
 
 4. Open-Meteo's Elevation API
-Open-Meteo offers an elevation API that can be used to find the elevation of any point on Earth. I host this API locally to find the elevation of points between summits that could obstruct line of sight. I also use this API to correct a few faulty summit elevations from the other data sources. This source uses the Copernicus GLO-90 DEM.
+Open-Meteo offers an elevation API that can be used to find the elevation of any 
+point on Earth. I use this API to find the elevation of points between summits that 
+could obstruct line of sight. This source uses the Copernicus GLO-90 DEM.
 
 5. Beyond Horizons
-Beyond Horizons has catalogued many of the longest lines of sight ever captured by photograph. I use these confirmed lines of sight to determine how to model light bending from atmospheric refraction over great distances.
+Beyond Horizons has catalogued many of the longest lines of sight to ever be 
+captured by photograph. I use these confirmed extreme lines of sight to fine-tune 
+the way light bending is modelled from atmospheric refraction.
 
 
 ------------------------------------------------------------
 CLEANING SUMMIT DATA
 ------------------------------------------------------------
 
-For every OTOTW mountain, I determine if there is a summit in the prominence dataset with a matching latitude and longitude. If there is, I mark it as a pinnacle point candidate. Two OTOTW mountains had to be identified manually because the latitude and longitude did not match perfectly for some reason. The highest point of Michigan (Grove hill) was manually marked as a candidate as well, since it was omitted from the OTOTW result because of DEM errors.
-For the isolation dataset, I mark all 3,001 summits with at least 100 km of isolation as candidates. Many of these candidates have a prominence less than the 300 m, so analyzing the isolation dataset allows pinnacle points to be identified that are not present in the prominence dataset.
+For every OTOTW mountain, I check whether the prominence dataset contains a summit
+with a matching latitude and longitude. If so, I mark that summit as a pinnacle
+point candidate. Two OTOTW mountains had to be matched manually because their
+coordinates did not match exactly between the two datasets. The highest point of
+Michigan (Grove Hill) was marked as a candidate manually as well, since it was
+omitted from the OTOTW result because of DEM errors.
 
-For both datasets, all distance metrics are converted to metres, and duplicate records removed. Since I use Open-Meteo’s elevation API in LOS analysis, I need to ensure that all summit elevations are at least as large as the elevations from Open-Meteo's API. Otherwise, some summits would be interpreted as “underground” by the algorithm, falsely blocking every LOS. I set the elevation for each summit to be the maximum between the original dataset and Open-Meteo’s API. Since the API has an error for longitudes that lie precisely on the 180° line, I subtract 0.0001° from such longitudes. Each summit is assigned a unique summitId.
+For the isolation dataset, I mark all 3,001 summits with at least 100 km of
+isolation as candidates. Many of these candidates have less than 300 m of
+prominence, so analysing the isolation dataset uncovers pinnacle points that the
+prominence dataset misses.
+
+For both datasets, all distances are converted to metres and duplicate records are
+removed. Because line-of-sight analysis samples elevations from Open-Meteo's API,
+every summit's elevation must be at least as large as the API's elevation at the
+same coordinate. Otherwise a summit would be interpreted as being underground,
+which would falsely block every line of sight. I therefore set each summit's
+elevation to the maximum of the original dataset value and the API value. The API
+has an error for longitudes that lie exactly on the 180 degree line, so I subtract
+0.0001 degrees from any such longitude. Each summit is assigned a unique
+summit_id.
 
 
 ------------------------------------------------------------
 DIVIDING SUMMITS INTO PATCHES
 ------------------------------------------------------------
 
-When searching for summits that may have LOS with an observer, it is faster to only consider targets in the neighbourhood of the observer. I divide the datasets into patches for this reason. Each pole has its own patch with a radius of 10°. Everywhere else, there is a patch for each 10°x10° square. Each patch has a set of inner bounds and outer bounds. The inner bounds of adjacent patches border each other perfectly, however, the outer bounds extend into adjacent patches. This is to take into account the fact that summits within the inner bounds of one patch may have LOS with summits within the inner bounds of another. The size of a patch’s outer bounds is dynamic. I use MHD analysis to minimize the area within the outer bounds while guaranteeing every summit that could have LOS with a summit within the inner bounds is included.
+When searching for summits that may have line of sight with an observer, it is far
+faster to consider only summits in the observer's neighbourhood. I divide the
+globe into patches for this reason. Each pole has its own patch with a radius of
+10 degrees. Everywhere else there is one patch per 10x10 degree square.
+
+Each patch has inner bounds and outer bounds. The inner bounds of adjacent patches
+border each other exactly and tile the globe with no overlap. The outer bounds
+extend past the inner bounds into neighbouring patches, because a summit inside one
+patch's inner bounds may have line of sight with a summit inside another patch's
+inner bounds.
+
+The size of the outer extension is chosen so that no possible line of sight is
+ever missed. Terrain can only block a line of sight, never extend it, so two
+summits can have line of sight only if their separation is at most the sum of
+their maximum horizon distances (see MHD analysis below). The farthest a
+disqualifying summit could lie from a patch's inner region is therefore
+
+    offset = MHD(tallest summit the outer bounds can reach) + MHD(tallest summit in the patch).
+
+The first term is the tallest summit the outer bounds can reach (nearby summits),
+not the tallest on Earth, which keeps the outer bounds tight. To find it without
+missing anything, the tallest summit is taken from the largest region the outer
+bounds could ever cover (sized using the tallest summit on Earth); the real,
+smaller outer bounds always fall inside that region, so its tallest summit is a
+safe worst case. The outer bounds extend the inner bounds by this offset, so every 
+summit that could possibly have line of sight with a summit inside the patch is 
+guaranteed to be included. The offset is converted from metres to degrees of 
+latitude, and to degrees of longitude using the cosine of the patch edge that is 
+farthest from the equator (the worst case).
 
 
 ------------------------------------------------------------
-LIGHT BENDING FROM ATMOSPHERIC REFRACTION
+EARTH'S CURVATURE
 ------------------------------------------------------------
 
-Atmospheric refraction prevents light rays from travelling in straight lines. It is more accurate to model light rays as arcs of circles. A light ray’s radius of curvature can be expressed in terms of the radius of Earth: R_light = C * R_earth. I need the value of C that best models light for extreme LOS. I have seen values ranging from 5.6 to 7.7 being used.
+Line-of-sight analysis is done in a two-dimensional vertical cross-section that
+contains the observer, the target, and the centre of the Earth. Each sampled point
+along the great circle between observer and target has a surface distance D_s from
+the observer and an elevation h. The point at radius (R_earth + h) and central
+angle theta = D_s / R_earth is placed in Cartesian coordinates with the observer
+at the origin:
 
-I tabulated all known extreme LOS from Beyond Horizons that have been confirmed by photograph. Beyond Horizons only includes the name, region, and elevation for the observer and target. Latitudes and longitudes were found manually using PeakBagger and other sources. I omitted all records where either the observer or target is a town instead of a summit. In these cases, the exact location of the observer/target cannot be determined. Records were also omitted if the actual distance between the observer and target is not within 1 km of Beyond Horizons’ reported distance. I added a small number of other confirmed LOS from reliable sources as well.
+    x = (R_earth + h) * sin(theta)
+    y = (R_earth + h) * cos(theta) - R_earth - h1
 
-Next, LOS analysis was done on the remaining observer-target pairs. I determined C = 6.4 to be the largest value of C, the minimum amount of light curvature, that allowed all LOS to be simulated as unobstructed. This value is used for all remaining LOS analyses.
+The whole cross-section is then rotated so that the straight line from observer to
+target lies on the x-axis. In this rotated frame the height of the ground is
+measured perpendicular to the straight observer-target line, which makes it
+directly comparable to the height of the light ray (below). See
+misc/math/formatted/earth_curvature.png and diagrams.png.
+
+
+------------------------------------------------------------
+ATMOSPHERIC REFRACTION (LIGHT BENDING)
+------------------------------------------------------------
+
+Atmospheric refraction prevents light from travelling in a straight line. Light is
+modelled instead as the arc of a circle whose radius is R_light = k * R_earth. In
+the rotated frame from the previous section, where the observer is at (0, 0) and
+the target is at (D_d, 0), the height of the light arc above the straight line is
+
+    y(x) = sqrt(gamma + x * (D_d - x)) - sqrt(gamma),   gamma = (k * R_earth)^2 - (D_d / 2)^2.
+
+See misc/math/formatted/atmospheric_refraction.png and diagrams.png.
+
+The value of k must be calibrated. Discovered published values range from about 
+5.6 to 7.7. I tabulated every extreme line of sight from Beyond Horizons that has 
+been confirmed by photograph. Beyond Horizons lists only the name, region, and 
+elevation of the observer and target, so I found latitudes and longitudes 
+manually using PeakBagger and other sources. I discarded any record whose 
+observer or target is a town rather than a summit (the exact location cannot be 
+pinned down), and any record whose measured distance differs from Beyond Horizons' 
+reported distance by more than 1 km. I added a small number of other confirmed 
+lines of sight from reliable sources. I then ran line-of-sight analysis on each 
+remaining observer-target pair and found k = 6.4 to be the largest value of k 
+(the least amount of bending) that still leaves every confirmed line of sight 
+unobstructed. k = 6.4 is used for all remaining analysis. This calibration is done 
+in scripts/known_los_analysis.ipynb.
 
 
 ------------------------------------------------------------
 MAXIMUM HORIZON DISTANCE (MHD) ANALYSIS
 ------------------------------------------------------------
 
-LOS analysis is computationally costly, so it is avoided whenever possible. Before doing LOS analysis, MHD analysis can be done to quickly test if LOS analysis is worth doing. MHD analysis determines if there would be LOS if all land between the observer and target were at sea level. The maximum distance that can be seen from a summit in this scenario is given by:
+Line-of-sight analysis is expensive, so it is avoided whenever possible. Maximum
+horizon distance analysis is a quick test that decides whether full line-of-sight
+analysis is even worth doing. The maximum horizon distance is how far a point of
+elevation h could see if all other land were at sea level:
 
-MHD = sqrt(2 * C / (C - 1) * R_earth * elevation), MHD = 0 for negative elevations.
+    MHD = sqrt(2 * k / (k - 1) * R_earth * h),   MHD = 0 for h <= 0.
 
-If the distance between the observer and target is larger than the sum of their MHD values, then there is no need to do LOS analysis because LOS is guaranteed to be obstructed by the curvature of the Earth.
+If the distance between observer and target is greater than the sum of their
+maximum horizon distances, then the curvature of the Earth alone blocks the line of
+sight and no further analysis is needed.
 
 
 ------------------------------------------------------------
-LINE OF SIGHT (LOS) ANALYSIS
+LINE-OF-SIGHT (LOS) ANALYSIS
 ------------------------------------------------------------
 
-Given an observer and target, I need determine if light can theoretically travel between them. First, I find the distance between the observer and target along the surface of the Earth at sea level. I then determine the minimum number of equidistant points between the observer and target I can sample such that the distance between samples does not exceed 100 m. The elevations for the samples are obtained using Open-Meteo’s elevation API hosted locally.
+Given an observer and a target, I first measure their surface distance D_s. I then
+choose the smallest number of equidistant sample points between them such that no 
+two adjacent samples are more than 100 m apart. The elevations of the samples are 
+obtained from Open-Meteo's elevation API, hosted locally using Docker to bypass 
+request limits.
 
-I use some fancy math (refer to misc/math/formatted/earth_curvature.pdf and misc/math/formatted/diagrams.pdf) to map these [distance-from-observer, elevation] points to their real-world positions, treating the observer as the origin and fixing the straight line that connects the observer and target to the x-axis. In this coordinate system, the circular path of light between the observer and target is calculated using even fancier math (refer to misc/math/formatted/atmospheric_refraction.pdf and misc/math/formatted/diagrams.pdf).
+Each sample is placed into the rotated cross-section described under "Earth's
+Curvature", giving the height of the ground, and the light arc described under
+"Atmospheric Refraction" gives the height of the light. The line of sight is
+geometrically unobstructed only if the light is above the ground at every sample.
 
-The data sources use 3 different DEMs, and a local maximum in one DEM may not be in another. To ensure summits are treated as local maxima, LOS can only be obstructed by points at least 4 km from both the observer and target. Within 4 km, noise can falsely block LOS. LOS is unobstructed only if light is above the ground at each sample within the valid range.
+The data sources use three different DEMs, and a local maximum in one DEM may not
+be a local maximum in another. To keep summits from blocking themselves through
+this DEM noise, the ground can only obstruct the line of sight at samples that are
+at least 4 km from both the observer and the target.
+
+
+------------------------------------------------------------
+ATMOSPHERIC SCATTERING (CONTRAST)
+------------------------------------------------------------
+
+A line of sight being geometrically unobstructed is not enough for the target to
+be visible. Air scatters light, so a distant target fades into the background sky.
+The target is only visible if its contrast against the sky exceeds the threshold
+of human vision, which is taken to be 0.02 (Vollmer, "Below the horizon - the
+physics of extreme visual ranges", 2020).
+
+The contrast is computed with Vollmer's model. The scattering coefficient falls off
+exponentially with elevation, beta(h) = beta_0 * exp(-h / H), and is integrated
+along the curved light path. The light path is split into a shaded segment (a
+fraction S of the path, starting at the observer) and a sunlit segment (the
+remaining 1 - S). With beta_1 and beta_2 the average scattering coefficients over
+the shaded and sunlit segments, the contrast is
+
+    C = exp(-beta_2 * d_2) / (1 - a + a / exp(-beta_1 * d_1)),
+
+where d_1 = S * D_s is the shaded length and d_2 = (1 - S) * D_s is the sunlit
+length. The full derivation is in misc/math/formatted/atmospheric_scattering.png
+and the notebook misc/math/raw/atmospheric_scattering.ipynb.
+
+I keep S = 0.5: the near, observer-side half of the path is treated as shadowed,
+because airlight is dominated by the air closest to the observer, so shadowing it
+helps contrast most. The shade irradiation ratio a is set per line of sight from
+its bearing, to approximate sunrise/sunset. This is the best case for visibility, 
+when the foreground air is shadowed and only the air near the target is lit 
+(partial irradiation). The near-observer airlight that washes the target out is 
+suppressed, raising contrast thus extending the maximum visual range. The sun can 
+only rise or set along the east-west horizon, so only an east-west line of sight can 
+place the observer's foreground in shadow with the target lit beyond it; a 
+north-south line of sight has the sun broadside and gets no such benefit. Accordingly,
+
+    a = 1 - (1 - a_min) * |sin(bearing)|,
+
+where the bearing is the observer-to-target forward azimuth and a_min = 0.1. An
+east-west line of sight gets a = a_min = 0.1 (deepest foreground shadow, highest
+contrast), a north-south line of sight gets a = 1 (no shadow benefit, plain
+extinction), and bearings in between interpolate. a_min is held above 0 because
+even fully shadowed air is still lit by diffuse skylight. These remain
+simplifications (S is fixed, and the sun is taken to be exactly on the east-west
+horizon) and are a significant source of uncertainty (see below).
+
+A line of sight is considered valid only if it is both geometrically unobstructed 
+and has contrast above 0.02.
 
 
 ------------------------------------------------------------
 PINNACLE POINT IDENTIFICATION
 ------------------------------------------------------------
 
-A pinnacle point is a point from which no higher point can be seen. To determine if a candidate is a pinnacle point, the candidate’s patch is found. MHD analysis is done with each summit in the patch. Summits that pass MHD analysis and that have a greater elevation than the candidate are sorted by distance from the candidate ascending. Closer summits are more likely to have LOS with the candidate, so they are tested first. If any of these summits have LOS with the candidate, the candidate is not a pinnacle point and processing can stop. Otherwise, the candidate is a pinnacle point.
+To test whether a candidate is a pinnacle point, I find the patch the candidate
+belongs to and run MHD analysis against every summit in that patch. Higher summits 
+that pass MHD analysis are sorted by distance from the candidate, nearest first, 
+because nearer summits are more likely to have line of sight. Each is tested in 
+turn. If any one of them has a valid line of sight with the candidate, the 
+candidate can see higher ground and is not a pinnacle point, so testing stops. If 
+none of them do, the candidate is a pinnacle point.
 
-To combine the pinnacle point results from the prominence and isolation datasets, the two individual results are merged. The isolation summitIds are multiplied by -1 to avoid repetition with the prominence summitIds. The merged result is treated as a new dataset to find pinnacle points in, and each summit is marked as a candidate. This removes duplicates summits between the two results.
+To combine the prominence and isolation results, the two sets of pinnacle points
+are merged. The isolation summit_ids are multiplied by -1 to keep them distinct
+from the prominence summit_ids. The merged set is then treated as a fresh dataset
+in which every summit is a candidate, and the pinnacle point search is run once
+more. This removes any summit that appears in both results due to minor elevation 
+differences between the prominence and isolation datasets, only the highest 
+elevation duplcate summit remains.
+
+
+------------------------------------------------------------
+FINDING THE LONGEST LINES OF SIGHT
+------------------------------------------------------------
+
+The same line-of-sight machinery can also be used to search for the longest 
+lines of sight on Earth, rather than to classify pinnacle points. This is done in
+scripts/line_of_sight_finder.py.
+
+The search is bounded by a distance threshold (currently 300 km), which exists
+purely for speed. Each observer-target pair is built in the direction that gives it 
+the best chance of being visible: the lower summit is the observer and the higher 
+summit is the target. The contrast model shadows the observer-side air (see 
+ATMOSPHERIC SCATTERING above), and shadowing the denser air at the lower end 
+suppresses the most airlight, so this direction maximises contrast.
+
+Starting from the prominence dataset, only summits above a prominence threshold
+(currently 500 m) are considered. Two cheap horizon filters then prune the search
+before any pairing. Because the observer is the lower summit, its horizon can reach 
+no farther than the target's, so the target's horizon must reach at least half the 
+distance threshold on its own for the pair to span it; any summit too short for this 
+cannot be a target. Conversely, even when an observer is paired with the tallest 
+summit its patch can offer, their combined maximum horizon distances must still 
+exceed the distance threshold, or the observer cannot reach that far; any summit too 
+short for this cannot be an observer. Every surviving pair that is farther apart than 
+the distance threshold and within their combined maximum horizon distance becomes a 
+candidate line of sight.
+
+Each candidate is then screened with a single midpoint check (is the light above
+the ground at the halfway point?) before the full line-of-sight analysis is run,
+which avoids the cost of sampling pairs that are obviously blocked. The surviving
+lines of sight, and those that are the longest for any summit (counting each summit
+whether it is the observer or the target), are written to data/results/longest_los/.
 
 
 ------------------------------------------------------------
 SOURCES OF ERROR
 ------------------------------------------------------------
 
-- MHD analysis does not properly account for negative elevations.
-- LOS analysis does not properly account for points within 4 km of the observer or target.
-- There is some inherent error in the elevation data.
-- The Earth is approximated as a sphere instead of an ellipsoid for simpler math.
-- To take atmospheric refraction into account, light rays are approximated as arcs of circles. Though this is a commonly used approximation, the path light takes in the atmosphere is in fact much more complex and depends on many local factors. This is probably the largest source of error.
-- Only summits with more than 300 m of prominence or more than 100 km of isolation are considered. The prominence threshold is determined by the OTOTW mountain dataset. The isolation threshold was chosen arbitrarily to be a pretty number that my algorithm can handle in a reasonable amount of time.
-- When doing LOS analysis, a discrete number of points between the observer and target are sampled to see if the ground obstructs LOS. The samples are at most 100 m apart. It is possible for points that would block LOS to not be captured. By increasing the number of samples, more pinnacle points could be found.
+- Modelling light as the arc of a circle is a common approximation, but the true
+  path of light through the atmosphere is far more complex and depends on many
+  local factors.
+- The sea-level scattering coefficient (Penndorf 1957) accounts for molecular
+  (Rayleigh) scattering only. It ignores aerosols and haze, which dominate real
+  extinction near the ground and vary greatly with conditions.
+- The shaded ratio S is fixed at 0.5 and the shade irradiation ratio a is derived
+  only from the line-of-sight bearing (a_min = 0.1 for east-west, 1 for
+  north-south). Real shadow geometry also depends on terrain, position of the sun, 
+  and more.
+- The minimum-refraction calibration (largest k that fits the confirmed lines of
+  sight) and the Rayleigh-only scattering both make the method slightly permissive,
+  i.e. biased toward labelling a candidate a pinnacle point.
+- There is inherent error in the elevation data.
+- Line-of-sight samples are at most 100 m apart, so an obstruction that falls
+  between two samples can be missed. Sampling more densely would find more
+  pinnacle points.
+- Line-of-sight analysis ignores possible obstructions within 4 km of the observer
+  or the target.
+- Only summits with more than 300 m of prominence or more than 100 km of isolation
+  are considered. The prominence threshold comes from the OTOTW dataset. The
+  isolation threshold was chosen as a round number the algorithm can handle in a
+  reasonable amount of time.
+- The Earth is approximated as a sphere rather than an ellipsoid for simpler math.
+- MHD analysis treats negative elevations as zero.

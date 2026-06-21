@@ -1,29 +1,32 @@
+import os
 import pandas as pd
 import commons as me
 
-poleLat = me.getPoleLatitude()
-latBoundaries = me.getPatchLatBoundaries()
-lngBoundaries = me.getPatchLngBoundaries()
+os.makedirs(me.patch_directory, exist_ok=True)
 
-summits = pd.read_csv(me.summitFile)
+pole_lat = me.get_pole_latitude()
+lat_boundaries = me.get_patch_lat_boundaries()
+lng_boundaries = me.get_patch_lng_boundaries()
 
-summits['maxHorizonDistance'] = summits.elevation.apply(me.horizonDistance).astype(int)
+summits = pd.read_csv(me.summit_file)
+
+summits['max_horizon_distance'] = summits.elevation.apply(me.horizon_distance).astype(int)
 
 # Bottom patch
-me.Patch(globalSummits = summits,
-         northInner = -poleLat,
-         southInner = -90)
+me.Patch(global_summits = summits,
+         north_inner = -pole_lat,
+         south_inner = -90)
 
 # Middle patches
-for lat in latBoundaries[:-1]:
-    for lng in lngBoundaries[:-1]:
-        me.Patch(globalSummits = summits,
-                 northInner = lat + me.patchSize, 
-                 southInner = lat, 
-                 eastInner = lng + me.patchSize, 
-                 westInner = lng)
+for lat in lat_boundaries[:-1]:
+    for lng in lng_boundaries[:-1]:
+        me.Patch(global_summits = summits,
+                 north_inner = lat + me.patch_size, 
+                 south_inner = lat, 
+                 east_inner = lng + me.patch_size, 
+                 west_inner = lng)
 
 # Top patch
-me.Patch(globalSummits = summits,
-         northInner = 90,
-         southInner = poleLat)
+me.Patch(global_summits = summits,
+         north_inner = 90,
+         south_inner = pole_lat)

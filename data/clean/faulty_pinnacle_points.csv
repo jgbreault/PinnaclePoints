@@ -1,4 +1,4 @@
-summitId,latitudeTrue,longitudeTrue,elevationTrue,type
+summit_id,latitude_true,longitude_true,elevation_true,type
 5965837,75.3694,-115.0827,762,0
 1342026,66.5468,-65.4289,2143,0
 -454766,69.2024,-143.802,2736,0
