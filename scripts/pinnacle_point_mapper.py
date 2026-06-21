@@ -337,23 +337,23 @@ pinnacle_point_map.get_root().html.add_child(folium.Element('''
             Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence.
             Prominence is the minimum vertical distance one must descend to reach a higher point.
             OTOTW mountains were idenitifed using this dataset,
-            so I use this dataset to help determine which OTOTW mountains qualify as pinnacle points.
+            so this dataset is used to help determine which OTOTW mountains qualify as pinnacle points.
         </p>
         <h4><a target="_blank" rel="noopener noreferrer" href="https://www.andrewkirmse.com/true-isolation">3. Mountains by Isolation</a></h4>
         <p>
             Andrew Kirmse and Jonathan de Ferranti found all 24,749,518 summits on Earth with over 1 km of isolation.
             Isolation is the distance to the nearest higher point. Extreme isolation points are strong pinnacle point candidates,
-            so I use this dataset to find all pinnacle points with an isolation of at least 100 km.
+            so this dataset is used to find all pinnacle points with an isolation of at least 100 km.
         </p>
         <h4><a target="_blank" rel="noopener noreferrer" href="https://open-meteo.com/en/docs/elevation-api">4. Open-Meteo's Elevation API</a></h4>
         <p>
             Open-Meteo offers an elevation API that can be used to find the elevation of any point on Earth.
-            I use this API to find the elevation of points between summits that could obstruct line of sight.
+            This API is used to find the elevation of points between summits that could obstruct line of sight.
         </p>
         <h4><a target="_blank" rel="noopener noreferrer" href="https://beyondrange.wordpress.com/lines-of-sight/">5. Beyond Horizons</a></h4>
         <p>
             Beyond Horizons has catalogued many of the longest lines of sight to ever be captured by photograph.
-            I use these confirmed extreme lines of sight to fine-tune the way light bending is modelled from atmospheric refraction.
+            These confirmed lines of sight are used to fine-tune the way light bending is modelled from atmospheric refraction.
         </p>
     </div>
 '''))

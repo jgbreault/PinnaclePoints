@@ -289,8 +289,8 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
             with sufficent contrast for visibilty under clear atmospheric conditions.
             Many physical phenomenon are modelled including Earth's curvature, local topograpghy,
             atmospheric refraction, atmospheric scattering, and partial irradiation.
-            This map shows ground-based lines of sight over 400 km long.
-            If a summit has more than one line of sight over 400 km long, only the longest is shown.
+            This map shows all ground-based lines of sight over 400 km long that are the longest for both the observer and target. 
+            Lines of sight are only consdered if both the observer and target have over 500 m of prominence.
         </p>
 
         <h2>Links</h2>
@@ -307,7 +307,12 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
             </li>
             <li>
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/jgbreault/PinnaclePoints/blob/main/data/results/longest_los/longest_los_max.csv">
-                    Result
+                    CSV of lines of sight shown on map
+                </a>
+            </li>
+            <li>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jgbreault/PinnaclePoints/blob/main/data/results/longest_los/longest_los.csv">
+                    CSV of all discovered lines of sight
                 </a>
             </li>
         </ul>
@@ -316,17 +321,18 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
         <h4><a target="_blank" rel="noopener noreferrer" href="https://www.andrewkirmse.com/prominence-update-2023">1. Mountains by Prominence</a></h4>
         <p>
             Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence.
-            Prominence is the minimum vertical distance one must descend to reach a higher point.
+            Prominence is the minimum vertical distance one must descend to reach a higher point. 
+            This dataset is used to identify summits beyond the prominence threshold of 500 m.
         </p>
         <h4><a target="_blank" rel="noopener noreferrer" href="https://open-meteo.com/en/docs/elevation-api">2. Open-Meteo's Elevation API</a></h4>
         <p>
             Open-Meteo offers an elevation API that can be used to find the elevation of any point on Earth.
-            I use this API to find the elevation of points between summits that could obstruct line of sight.
+            This API is used to find the elevation of points between summits that could obstruct line of sight.
         </p>
         <h4><a target="_blank" rel="noopener noreferrer" href="https://beyondrange.wordpress.com/lines-of-sight/">3. Beyond Horizons</a></h4>
         <p>
             Beyond Horizons has catalogued many of the longest lines of sight to ever be captured by photograph.
-            I use these confirmed extreme lines of sight to fine-tune the way light bending is modelled from atmospheric refraction.
+            These confirmed lines of sight are used to fine-tune the way light bending is modelled from atmospheric refraction.
         </p>
     </div>
 '''))
