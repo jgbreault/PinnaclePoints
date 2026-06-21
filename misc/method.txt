@@ -17,7 +17,7 @@ with at least 300 m of prominence or 100 km of isolation.
 NOTATION
 ------------------------------------------------------------
 
-The same symbols are used throughout this document and in the math notebooks
+The same symbols are used throughout this document and in the math documents
 under misc/math/.
 
   R_earth   Mean radius of the Earth at sea level (treated as a sphere).
@@ -79,7 +79,7 @@ could obstruct line of sight. This source uses the Copernicus GLO-90 DEM.
 
 5. Beyond Horizons
 Beyond Horizons has catalogued many of the longest lines of sight to ever be 
-captured by photograph. I use these confirmed extreme lines of sight to fine-tune 
+captured by photograph. I use these confirmed extreme lines of sight to calibrate 
 the way light bending is modelled from atmospheric refraction.
 
 
@@ -163,7 +163,7 @@ The whole cross-section is then rotated so that the straight line from observer 
 target lies on the x-axis. In this rotated frame the height of the ground is
 measured perpendicular to the straight observer-target line, which makes it
 directly comparable to the height of the light ray (below). See
-misc/math/formatted/earth_curvature.png and diagrams.png.
+misc/math/formatted/earth_curvature.pdf.
 
 
 ------------------------------------------------------------
@@ -177,7 +177,7 @@ the target is at (D_d, 0), the height of the light arc above the straight line i
 
     y(x) = sqrt(gamma + x * (D_d - x)) - sqrt(gamma),   gamma = (k * R_earth)^2 - (D_d / 2)^2.
 
-See misc/math/formatted/atmospheric_refraction.png and diagrams.png.
+See misc/math/formatted/atmospheric_refraction.pdf.
 
 The value of k must be calibrated. Discovered published values range from about 
 5.6 to 7.7. I tabulated every extreme line of sight from Beyond Horizons that has 
@@ -190,8 +190,9 @@ reported distance by more than 1 km. I added a small number of other confirmed
 lines of sight from reliable sources. I then ran line-of-sight analysis on each 
 remaining observer-target pair and found k = 6.4 to be the largest value of k 
 (the least amount of bending) that still leaves every confirmed line of sight 
-unobstructed. k = 6.4 is used for all remaining analysis. This calibration is done 
-in scripts/known_los_analysis.ipynb.
+unobstructed. k = 6.4 is used for all remaining analysis. The confirmed lines of
+sight are assembled in scripts/confirmed_los_parser.py and this calibration is done
+in scripts/confirmed_los_curvature_finder.py.
 
 
 ------------------------------------------------------------
@@ -251,8 +252,8 @@ the shaded and sunlit segments, the contrast is
     C = exp(-beta_2 * d_2) / (1 - a + a / exp(-beta_1 * d_1)),
 
 where d_1 = S * D_s is the shaded length and d_2 = (1 - S) * D_s is the sunlit
-length. The full derivation is in misc/math/formatted/atmospheric_scattering.png
-and the notebook misc/math/raw/atmospheric_scattering.ipynb.
+length. The full derivation is in misc/math/formatted/atmospheric_scattering.pdf
+and misc/math/raw/atmospheric_scattering.md.
 
 I keep S = 0.5: the near, observer-side half of the path is treated as shadowed,
 because airlight is dominated by the air closest to the observer, so shadowing it

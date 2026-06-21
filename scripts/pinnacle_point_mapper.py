@@ -353,7 +353,7 @@ pinnacle_point_map.get_root().html.add_child(folium.Element('''
         <h4><a target="_blank" rel="noopener noreferrer" href="https://beyondrange.wordpress.com/lines-of-sight/">5. Beyond Horizons</a></h4>
         <p>
             Beyond Horizons has catalogued many of the longest lines of sight to ever be captured by photograph.
-            These confirmed lines of sight are used to fine-tune the way light bending is modelled from atmospheric refraction.
+            These confirmed lines of sight are used to calibrate the way light bending is modelled from atmospheric refraction.
         </p>
     </div>
 '''))
