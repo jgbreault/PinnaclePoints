@@ -64,7 +64,7 @@ def get_geodesic_line(latitude_1, longitude_1, latitude_2, longitude_2, num_poin
     intermediate = me.geod.npts(longitude_1, latitude_1, longitude_2, latitude_2, num_points)
     return [[latitude_1, longitude_1]] + [[lat, lng] for lng, lat in intermediate] + [[latitude_2, longitude_2]]
 
-line_of_sight_map = folium.Map(location=[0, 0], zoom_start=3, tiles=None, world_copy_jump=True)
+line_of_sight_map = folium.Map(location=[0, 10], zoom_start=3, tiles=None, world_copy_jump=True)
 
 folium.TileLayer(name = 'Street').add_to(line_of_sight_map)
 

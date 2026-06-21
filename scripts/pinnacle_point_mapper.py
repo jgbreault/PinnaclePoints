@@ -154,7 +154,7 @@ def add_point_to_map(summit):
         invisible_circle.add_child(folium.Popup(marker_text, max_width=300).add_to(invisible_circle))
 
 summits = pinnacle_points.sort_values('elevation', ascending=True)
-pinnacle_point_map = folium.Map(location=[0, 0], zoom_start=3, tiles=None, world_copy_jump=True)
+pinnacle_point_map = folium.Map(location=[0, 10], zoom_start=3, tiles=None, world_copy_jump=True)
 
 folium.TileLayer(name = 'Street').add_to(pinnacle_point_map)
 
