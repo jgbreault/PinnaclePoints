@@ -107,6 +107,82 @@ def get_elevations(latitudes, longitudes):
     return elevations
 
 
+def light_elevation_at_fraction(observer_elevation,
+                                target_elevation,
+                                surface_distance,
+                                fraction,
+                                light_curvature=default_light_curvature):
+    """Elevation above sea level of the (refracted) light ray a `fraction` of the
+    way along each line of sight (0 = observer, 1 = target), per candidate.
+
+    Vectorised, array-in/array-out form of LineOfSight.get_light_elevation, used to
+    screen many candidate lines of sight at one sample point at once (see
+    line_of_sight_finder.py). See ../misc/math/formatted/atmospheric_refraction.pdf."""
+    R = earth_radius
+    k = light_curvature
+    h1 = observer_elevation
+    h2 = target_elevation
+    D = surface_distance
+
+    x = fraction * D
+    theta = x / R
+    phi = D / R
+
+    x1 = R + h1
+    x2 = (R + h2) * np.cos(phi)
+    y2 = (R + h2) * np.sin(phi)          # y1 = 0, so y2 - y1 = y2
+
+    d = np.sqrt((x2 - x1)**2 + y2**2)    # chord between observer and target in the cross-section
+    RL = k * R
+    Z = np.sqrt(RL**2 - (d / 2)**2)
+
+    Mx = (x1 + x2) / 2 - Z * (y2 / d)    # centre of the light-arc circle
+    My = y2 / 2 + Z * ((x2 - x1) / d)
+
+    proj = Mx * np.cos(theta) + My * np.sin(theta)
+    light_distance_from_centre = proj + np.sqrt(proj**2 - (Mx**2 + My**2 - RL**2))
+
+    return light_distance_from_centre - R
+
+
+def points_at_fraction(observer_latitude,
+                       observer_longitude,
+                       forward_azimuth,
+                       surface_distance,
+                       fraction):
+    """Latitude/longitude of the point a `fraction` of the way along each geodesic,
+    following the observer-to-target great circle. Vectorised."""
+    x = fraction * surface_distance
+    longitudes, latitudes, _ = geod.fwd(observer_longitude, observer_latitude, forward_azimuth, x)
+    return latitudes, longitudes
+
+
+def screening_fractions():
+    """Produce (numerator, denominator) sample points in screening order:
+
+        1/2, then 1/4 3/4, then 3/8 5/8 1/8 7/8, then sixteenths, ...
+
+    i.e. the middle first, then each successive halving level, and within a level
+    the points nearest the middle (inner) before the points nearest the ends
+    (outer), alternating to the left then the right of the middle. The numerators
+    are the odd multiples of 1/2^k that are new at each level, so no point repeats.
+
+    `yield` makes this a generator: each value is produced on demand (just loop over
+    it), and the function pauses after each `yield` and resumes there on the next
+    request. The `while True` is an endless sequence, so the caller must stop itself
+    (the screen breaks once it converges); never wrap it in list()."""
+    
+    yield (1, 2)
+    k = 2
+    while True:
+        denominator = 2**k
+        middle = 2**(k - 1)
+        for offset in range(1, middle, 2):          # odd offsets keep the numerator odd
+            yield (middle - offset, denominator)     # inner/outer, left of middle
+            yield (middle + offset, denominator)     # its mirror, right of middle
+        k += 1
+
+
 ########## CLASSES ##########
 
 class Point:
@@ -197,10 +273,11 @@ class Summit(Point):
 
             candidate_line_of_sight = LineOfSight(self, target)
 
-            candidate_line_of_sight.process_full_line_of_sight()
-    
-            if candidate_line_of_sight.is_valid():
-    
+            # Early-exit check: abandons an obstructed line of sight as soon as a
+            # batch of sampled elevations blocks it, and only tests contrast when
+            # nothing does. Same result as process_full_line_of_sight + is_valid.
+            if candidate_line_of_sight.is_valid_early():
+
                 print(f'Tested Potential Disqualifying Summits: {j+1}')
                 print(f'In view of {summit.latitude}, {summit.longitude} ({round(summit.elevation)} m) {round(summit.distance_from_candidate/1000)} km away')
                 
@@ -400,7 +477,80 @@ class LineOfSight():
 
     def is_valid(self):
         return not self.is_obstructed() and self.has_contrast()
-                                                            
+
+    def is_obstructed_early(self):
+        """Batched, early-exit form of is_obstructed that does NOT need
+        process_full_line_of_sight to have been run first.
+
+        Samples the ground between observer and target in chunks of
+        api_request_limit and returns True the moment a chunk contains a point
+        (outside ignore_buffer) where the ground reaches the ray, so an obstructed
+        line of sight is abandoned without fetching the rest of its elevations.
+        Returns False only after every chunk has come back clear. The rotated-frame
+        geometry and the ignore_buffer skip match is_obstructed exactly; it just
+        stops early and keeps no los_points (use process_full_line_of_sight + plot
+        when you want to visualise the whole line of sight)."""
+
+        R = earth_radius
+        h1 = self.observer.elevation
+        h2 = self.target.elevation
+        D = self.surface_distance
+        k = self.light_curvature
+        num_samples = self.num_samples
+
+        if num_samples < 1:
+            return False
+
+        # The rotation that puts the straight observer-target line on the x-axis
+        # depends only on the target endpoint (the last point in
+        # process_full_line_of_sight).
+        theta_target = D / R
+        x_target = (R + h2) * math.sin(theta_target)
+        y_target = h2 * math.cos(theta_target) - R * (1 - math.cos(theta_target)) - h1
+        angle = -math.atan(y_target / x_target)
+        cos_a = math.cos(angle)
+        sin_a = math.sin(angle)
+
+        distance_to_target = cos_a * x_target - sin_a * y_target   # target's straight (chord) distance
+        gamma = (k * R)**2 - (distance_to_target / 2)**2
+        sqrt_gamma = math.sqrt(gamma)
+
+        # Intermediate sample points, equally spaced along the geodesic (endpoints
+        # excluded, as in process_full_line_of_sight). The i-th sample sits at
+        # surface distance (i+1)/(num_samples+1) * D from the observer.
+        lng_lats = geod.npts(self.observer.longitude, self.observer.latitude,
+                             self.target.longitude, self.target.latitude, num_samples)
+        sample_latitudes = np.array(lng_lats)[:, 1]
+        sample_longitudes = np.array(lng_lats)[:, 0]
+        sample_surface_distance = (np.arange(1, num_samples + 1) / (num_samples + 1)) * D
+
+        for start in range(0, num_samples, api_request_limit):
+            chunk = slice(start, start + api_request_limit)
+
+            elevations = np.array(get_elevations(sample_latitudes[chunk], sample_longitudes[chunk]))
+            s = sample_surface_distance[chunk]
+
+            theta = s / R
+            x = (R + elevations) * np.sin(theta)
+            y = elevations * np.cos(theta) - R * (1 - np.cos(theta)) - h1
+            straight = cos_a * x - sin_a * y
+            ground_height = sin_a * x + cos_a * y
+            light_height = np.sqrt(gamma + straight * (distance_to_target - straight)) - sqrt_gamma
+
+            # Only points beyond ignore_buffer of either summit can obstruct (same as
+            # is_obstructed). Give up on the first such blocking point.
+            considered = (straight > ignore_buffer) & (straight < distance_to_target - ignore_buffer)
+            if np.any(considered & (ground_height >= light_height)):
+                return True
+
+        return False
+
+    def is_valid_early(self):
+        """Like is_valid, but uses is_obstructed_early and only computes the
+        (analytic) contrast when nothing obstructs the beam -- so obstructed lines
+        of sight never pay for the contrast test. Same result as is_valid."""
+        return not self.is_obstructed_early() and self.has_contrast()
+
     def plot(self, baseline='straight', legend_location='best', plot_path=''):
         """Plot the line of sight in the rotated frame used by is_obstructed: the
         straight observer-target line is the reference and ground and light heights

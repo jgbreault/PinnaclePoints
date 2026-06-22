@@ -82,6 +82,8 @@ $$D_d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}, \qquad \phi = \frac{D_s}{R_\oplus}
 
 **Choosing $S$ and $a$.** The shaded segment is the near, observer-side half of the path ($S = 0.5$), because airlight is dominated by the air closest to the observer, so shadowing it helps contrast most. The shade irradiation ratio $a$ is set per line of sight from its bearing, to approximate sunrise/sunset. The sun can only rise or set along the east-west horizon, so only an east-west sightline can place the observer's foreground in shadow with the target lit beyond; a north-south sightline has the sun broadside and gets no benefit. Hence $a = 1 - (1 - a_{\min})\,|\sin(\text{bearing})|$ with $a_{\min} = 0.1$: east-west gives $a = 0.1$ (deepest shadow, highest contrast), north-south gives $a = 1$ (plain extinction), and bearings between interpolate. $a_{\min}$ stays above $0$ because fully shadowed air is still lit by diffuse skylight.
 
+\newpage
+
 **Irradiation by bearing.** The table below evaluates $a = 1 - (1 - a_{\min})\,|\sin(\text{bearing})|$ at $15^\circ$ steps, alongside the resulting reduction in shaded-segment irradiation, $1 - a = (1 - a_{\min})\,|\sin(\text{bearing})|$. Because the relation depends on $|\sin(\text{bearing})|$, it is symmetric every $180^\circ$: the reduction is largest ($1 - a = 0.9$) for east-west sightlines and vanishes for north-south ones.
 
 | Bearing | Reduction ($1 - a$) | Irradiation ($a$) |

@@ -231,6 +231,13 @@ be a local maximum in another. To keep summits from blocking themselves through
 this DEM noise, the ground can only obstruct the line of sight at samples that are
 at least 4 km from both the observer and the target.
 
+For speed, the samples are fetched from the elevation API in batches, and the
+obstruction test gives up as soon as a batch contains a point (outside the 4 km
+buffer) where the ground reaches the light, so an obstructed line of sight is
+abandoned without fetching the rest of its samples. The contrast test is only run
+when nothing obstructs the beam, since contrast does not matter for a line of sight
+that is already blocked.
+
 
 ------------------------------------------------------------
 ATMOSPHERIC SCATTERING (CONTRAST)
@@ -286,11 +293,13 @@ PINNACLE POINT IDENTIFICATION
 
 To test whether a candidate is a pinnacle point, I find the patch the candidate
 belongs to and run MHD analysis against every summit in that patch. Higher summits 
-that pass MHD analysis are sorted by distance from the candidate, nearest first, 
-because nearer summits are more likely to have line of sight. Each is tested in 
-turn. If any one of them has a valid line of sight with the candidate, the 
-candidate can see higher ground and is not a pinnacle point, so testing stops. If 
-none of them do, the candidate is a pinnacle point.
+that pass MHD analysis are sorted by distance from the candidate, nearest first,
+because nearer summits are more likely to have line of sight. Each is tested in
+turn, the line-of-sight test abandoning early as soon as the ground blocks the beam
+and only checking contrast when nothing does (see LINE-OF-SIGHT ANALYSIS). If any
+one of them has a valid line of sight with the candidate, the candidate can see
+higher ground and is not a pinnacle point, so testing stops. If none of them do,
+the candidate is a pinnacle point.
 
 To combine the prominence and isolation results, the two sets of pinnacle points
 are merged. The isolation summit_ids are multiplied by -1 to keep them distinct
@@ -317,22 +326,42 @@ ATMOSPHERIC SCATTERING above), and shadowing the denser air at the lower end
 suppresses the most airlight, so this direction maximises contrast.
 
 Starting from the prominence dataset, only summits above a prominence threshold
-(currently 500 m) are considered. Two cheap horizon filters then prune the search
+(currently 300 m) are considered. Two cheap horizon filters then prune the search
 before any pairing. Because the observer is the lower summit, its horizon can reach 
 no farther than the target's, so the target's horizon must reach at least half the 
 distance threshold on its own for the pair to span it; any summit too short for this 
 cannot be a target. Conversely, even when an observer is paired with the tallest 
 summit its patch can offer, their combined maximum horizon distances must still 
 exceed the distance threshold, or the observer cannot reach that far; any summit too 
-short for this cannot be an observer. Every surviving pair that is farther apart than 
-the distance threshold and within their combined maximum horizon distance becomes a 
+short for this cannot be an observer. Every surviving pair that is farther apart than
+the distance threshold and within their combined maximum horizon distance becomes a
 candidate line of sight.
 
-Each candidate is then screened with a single midpoint check (is the light above
-the ground at the halfway point?) before the full line-of-sight analysis is run,
-which avoids the cost of sampling pairs that are obviously blocked. The surviving
-lines of sight, and those that are the longest for both the observer and target, 
-are written to data/results/longest_los/.
+Because each candidate pair belongs to exactly one patch, the patches are independent
+and the candidates are handled in batches to bound memory: as patches are scanned the
+candidates pile up, and once at least a batch's worth have accumulated (currently
+1,000,000, checked after each patch) that whole batch is screened and fully analysed,
+the valid lines of sight are kept, and the rest of the batch is discarded before
+scanning continues. Peak memory is therefore set by one batch rather than by every
+candidate on Earth, which matters at low prominence thresholds where the candidate
+count explodes.
+
+Each batch is screened before full analysis. Rather than finishing one candidate at a
+time, a single sample point is tested across all surviving candidates in the batch at
+once. The points are taken in order of increasing resolution: the middle of every
+line of sight first, then the quarters, then the eighths, sixteenths, and so on, and
+within each level the points nearest the middle before those nearest the ends. At
+each point only obstruction is checked, not contrast, and a candidate is dropped the
+instant the ground blocks its ray at a single point. Points within 4 km of either
+summit are skipped, and a point is only sampled when it lies outside that buffer for
+every surviving candidate. Sampling keeps refining until a newly sampled point
+removes no candidates, at which point the screen has converged.
+
+Only the survivors then get full line-of-sight analysis (every point checked for
+obstruction, plus the contrast of the whole beam, with the early exit described
+above). The valid lines of sight from every batch are collected, and once all
+patches are done both the full set and the subset that are the longest for both
+their observer and target are written to data/results/longest_los/.
 
 
 ------------------------------------------------------------

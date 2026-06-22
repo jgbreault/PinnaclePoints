@@ -269,7 +269,7 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
   </div>
 '''))
 
-line_of_sight_map.get_root().html.add_child(folium.Element('''
+line_of_sight_map.get_root().html.add_child(folium.Element(f'''
     <div id="infoIcon" style="position: absolute; bottom: 10px; right: 0px; cursor: pointer; z-index: 1001;">
         <svg id="informationIcon" width="100" height="100" viewBox="0 0 50 50" fill="white" stroke="black" stroke-width="4"
             stroke-linecap="round" stroke-linejoin="round" onclick="toggleInfoWindow()" style="fill: rgba(255, 255, 255, 0.9)">
@@ -285,12 +285,13 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
 
         <h2>Summary</h2>
         <p>
-            Two points have line of sight if light can travel from one to the other unobstructed
-            with sufficent contrast for visibilty under clear atmospheric conditions.
-            Many physical phenomenon are modelled including Earth's curvature, local topograpghy,
-            atmospheric refraction, atmospheric scattering, and partial irradiation.
-            This map shows all 111 ground-to-ground lines of sight over 400 km long that are the longest for both the observer and target. 
-            Lines of sight are only consdered if both the observer and target have over 500 m of prominence.
+            Two points have line of sight if light can travel from one to the other unobstructed 
+            with sufficent contrast for visibilty under clear atmospheric conditions. 
+            Many physical phenomenon are modelled including Earth's curvature, local topograpghy, 
+            atmospheric refraction, atmospheric scattering, and partial irradiation. 
+            Lines of sight are only consdered between summits with at least 300 m of prominence.
+            This map shows {len(los_data)} ground-to-ground lines of sight that are over 300 km long.
+            It is limited to lines of sight that are the longest for both summits involved.
         </p>
 
         <h2>Links</h2>
@@ -312,7 +313,7 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
             </li>
             <li>
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/jgbreault/PinnaclePoints/blob/main/data/results/longest_los/longest_los.csv">
-                    CSV of all discovered lines of sight
+                    CSV of all lines of sight over 300 km long
                 </a>
             </li>
         </ul>
@@ -322,7 +323,7 @@ line_of_sight_map.get_root().html.add_child(folium.Element('''
         <p>
             Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence.
             Prominence is the minimum vertical distance one must descend to reach a higher point. 
-            This dataset is used to identify summits beyond the prominence threshold of 500 m.
+            This dataset is used to identify summits beyond the prominence threshold of 300 m.
         </p>
         <h4><a target="_blank" rel="noopener noreferrer" href="https://open-meteo.com/en/docs/elevation-api">2. Open-Meteo's Elevation API</a></h4>
         <p>

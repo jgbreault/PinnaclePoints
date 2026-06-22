@@ -2,24 +2,47 @@
 Find the longest lines of sight on Earth between summits above a prominence
 threshold, using the patch system for speed.
 
-Each patch's outer bounds are built to contain every summit that could share a
-line of sight with a summit in its inner region, so pairing each patch's inner
-summits with its outer summits finds every possible pair without comparing every
-summit against every other. Each pair is built in the reverse direction, with the
-lower summit as the observer and the higher as the target: the contrast model
-shadows the observer-side air, and shadowing the denser air at the lower end
-suppresses the most airlight, giving the pair its best chance of being visible (see
-../misc/method.txt). summit_ids run from the highest summit (id 0) to the lowest, so
-the larger id is the lower summit; comparing ids keeps each pair to a single patch
-and makes the lower summit the observer. Two cheap horizon filters drop summits that
-can never reach the distance threshold before any pairing. Only cheap geometry runs
-at the pairing stage (vectorised), so a LineOfSight is built only for pairs that are
-far enough apart and within combined horizon range. Each survivor is then
-pre-screened with a single midpoint elevation check before the full line-of-sight
-test is run. Results are written to ../data/results/longest_los/.
+Candidate generation: each patch's outer summits are paired with its inner summits
+(lower summit as observer, higher as target), and two cheap horizon filters plus a
+distance/horizon geometry check drop pairs that can never span the distance
+threshold. Each candidate pair belongs to exactly one patch, so patches are
+independent and can be processed in any grouping.
 
-Requires the patches to be generated first (patch_maker.py) and the locally hosted
-elevation API used by commons. Work in progress.
+Streaming in batches (to bound memory)
+--------------------------------------
+Candidates are accumulated as lightweight parallel arrays while patches are scanned.
+Once at least candidate_batch_size of them have piled up (checked after each patch),
+that whole batch is screened and fully analysed, the valid lines of sight are kept
+and the rest of the batch is discarded, and scanning continues. Peak memory is
+therefore bounded by one batch of candidates rather than every candidate on Earth,
+which matters at low prominence thresholds where the candidate count explodes.
+
+Progressive batched screen
+--------------------------
+Full line-of-sight analysis is expensive (it samples the ground every ~100 m along
+each line and computes contrast), so each batch is screened first. Rather than
+finishing one candidate at a time, a single sample point is tested across all
+surviving candidates in the batch at once:
+
+  1. the middle of every line of sight,
+  2. then the quarters (1/4, 3/4),
+  3. then the eighths, sixteenths, and so on,
+
+and within each level the points nearest the middle (inner) before the points
+nearest the ends (outer), alternating left then right of the middle. At each point
+only obstruction is checked (no contrast), and a candidate is dropped the instant it
+fails a single point. Points within ignore_buffer of either summit are skipped: a
+point is only sampled when it is outside that buffer for every surviving candidate.
+Sampling keeps refining until a newly sampled point removes no candidates.
+
+Only the survivors then get full line-of-sight analysis, which also gives up early:
+their sampled elevations are fetched in API-sized batches and the line of sight is
+abandoned the moment a batch contains an obstructing point (LineOfSight.is_valid_early).
+The contrast of the whole beam is only computed for the ones that no batch ever
+blocks. Results are written to ../data/results/longest_los/.
+
+Requires the patches (patch_maker.py) and the locally hosted elevation API used by
+commons.
 """
 
 import os
@@ -30,8 +53,11 @@ import commons as me
 
 start_time = time.time()
 
-prominence_threshold = 500    # in m
-distance_threshold = 400*1000 # in m
+prominence_threshold = 300       # in m
+distance_threshold = 300*1000    # in m
+candidate_batch_size = 1000000   # screen + analyse once this many candidates have accumulated
+screen_block_size = 100000       # sample a screening point in blocks of this many (also its progress cadence)
+analysis_progress_every = 100    # print full-analysis progress every this many survivors
 result_directory = '../data/results/longest_los'
 
 # Every patch, as (north_inner, south_inner, east_inner, west_inner). Built the
@@ -46,6 +72,11 @@ for lat in lat_boundaries[:-1]:
         patch_bounds.append((lat + me.patch_size, lat, lng + me.patch_size, lng))
 patch_bounds.append((90, pole_lat, None, None))
 
+# Candidate fields, accumulated as parallel arrays between processing batches.
+fields = ['observer_summit_id', 'observer_latitude', 'observer_longitude', 'observer_elevation',
+          'target_summit_id', 'target_latitude', 'target_longitude', 'target_elevation',
+          'surface_distance', 'forward_azimuth']
+
 
 def get_inner_summits(patch):
     """The summits of a loaded patch that fall within its inner bounds."""
@@ -56,7 +87,120 @@ def get_inner_summits(patch):
     return summits[inside]
 
 
-candidate_lines_of_sight = []
+def screen_and_analyse(observer_summit_id, observer_latitude, observer_longitude, observer_elevation,
+                       target_summit_id, target_latitude, target_longitude, target_elevation,
+                       surface_distance, forward_azimuth):
+    """Screen one batch of candidate lines of sight, then fully analyse the
+    survivors, and return the valid lines of sight.
+
+    The progressive screen tests one sample point across all surviving candidates at
+    a time (obstruction only), dropping any candidate the instant the ground blocks
+    its ray. A point is skipped entirely unless it is outside ignore_buffer for every
+    survivor. Survivors then get the full, early-exit obstruction + contrast test."""
+
+    num = len(surface_distance)
+    alive = np.ones(num, dtype=bool)
+    print(f'  screening {num:,} candidates')
+
+    for point_number, (numerator, denominator) in enumerate(me.screening_fractions(), start=1):
+
+        alive_index = np.where(alive)[0]
+        if len(alive_index) == 0:
+            break
+
+        fraction = numerator / denominator
+
+        # Stop refining once the sample spacing is finer than full analysis would use.
+        if surface_distance[alive_index].max() / denominator < me.default_max_sampling_distance:
+            break
+
+        # Skip this point unless it is outside ignore_buffer for every surviving
+        # candidate (it does not count as a round that removed nothing).
+        distance_along = fraction * surface_distance[alive_index]
+        inside_buffer = ((distance_along < me.ignore_buffer)
+                         | (distance_along > surface_distance[alive_index] - me.ignore_buffer))
+        if np.any(inside_buffer):
+            continue
+
+        # Sample the point in blocks so the long points show progress as they go.
+        total_this_point = len(alive_index)
+        removed = 0
+        processed = 0
+        for block_start in range(0, total_this_point, screen_block_size):
+            block = alive_index[block_start:block_start + screen_block_size]
+
+            latitudes, longitudes = me.points_at_fraction(observer_latitude[block],
+                                                           observer_longitude[block],
+                                                           forward_azimuth[block],
+                                                           surface_distance[block],
+                                                           fraction)
+            ground_elevation = np.array(me.get_elevations(latitudes, longitudes))
+            light_elevation = me.light_elevation_at_fraction(observer_elevation[block],
+                                                            target_elevation[block],
+                                                            surface_distance[block],
+                                                            fraction)
+
+            # Obstructed at this point when the ground is at or above the ray.
+            blocked = ground_elevation >= light_elevation
+            alive[block[blocked]] = False
+            removed += int(blocked.sum())
+            processed += len(block)
+
+            if processed < total_this_point:  # the final tally is printed just below
+                print(f'      point {point_number} ({numerator}/{denominator}): '
+                      f'sampled {processed:,}/{total_this_point:,}, {removed:,} blocked')
+
+        print(f'    point {point_number} ({numerator}/{denominator}): '
+              f'{total_this_point:,} sampled, {removed:,} blocked, {int(alive.sum()):,} remain')
+
+        if removed == 0:
+            break
+
+    survivor_index = np.where(alive)[0]
+    num_survivors = len(survivor_index)
+    print(f'  {num_survivors:,}/{num:,} survived screening; running full analysis')
+
+    valid = []
+    for count, c in enumerate(survivor_index, start=1):
+        observer = me.Summit(summit_id = observer_summit_id[c],
+                             latitude = observer_latitude[c],
+                             longitude = observer_longitude[c],
+                             elevation = observer_elevation[c])
+        target = me.Summit(summit_id = target_summit_id[c],
+                           latitude = target_latitude[c],
+                           longitude = target_longitude[c],
+                           elevation = target_elevation[c])
+
+        los = me.LineOfSight(observer, target)
+        if los.is_valid_early():
+            valid.append(los)
+
+        if count % analysis_progress_every == 0 or count == num_survivors:
+            print(f'    analysed {count:,}/{num_survivors:,}, {len(valid)} valid')
+
+    print(f'  {len(valid)} valid lines of sight in this batch')
+    return valid
+
+
+chunks = {field: [] for field in fields}
+pending = 0                  # candidates accumulated but not yet processed
+num_candidates_total = 0
+valid_lines_of_sight = []
+
+
+def process_pending_batch(through_patch):
+    """Concatenate the accumulated candidate chunks into one batch, screen and
+    analyse it, keep the valid lines of sight, and clear the chunks."""
+    global pending
+    batch = {field: np.concatenate(chunks[field]) for field in fields}
+    for field in fields:
+        chunks[field].clear()
+    print(f'\nProcessing {pending:,} candidates ({through_patch}):')
+    valid_lines_of_sight.extend(screen_and_analyse(**batch))
+    print(f'  running total: {len(valid_lines_of_sight)} valid lines of sight\n')
+    pending = 0
+
+
 for i, bounds in enumerate(patch_bounds):
 
     patch = me.Patch(*bounds)
@@ -69,17 +213,15 @@ for i, bounds in enumerate(patch_bounds):
         continue
 
     # Each pair is built in the reverse direction: the lower summit is the observer
-    # and the higher summit is the target (see the module docstring). summit_ids run
-    # from the highest summit (id 0) downwards, so the larger id is the lower summit.
+    # and the higher summit is the target. summit_ids run from the highest summit
+    # (id 0) downwards, so the larger id is the lower summit.
 
     # The observer is the lower summit, so its horizon can reach no farther than the
-    # target's; a target must therefore reach half the distance threshold on its own
-    # for the pair to span it. Drop summits too short to ever be a target.
+    # target's; a target must therefore reach half the distance threshold on its own.
     targets = outer.query('max_horizon_distance > @distance_threshold/2')
 
     # Even paired with the tallest summit the patch can offer, an observer's combined
-    # horizon must exceed the distance threshold. Drop summits too short to ever be
-    # an observer.
+    # horizon must exceed the distance threshold.
     tallest_max_horizon_distance = outer.max_horizon_distance.max()
     inner = inner.query('max_horizon_distance > @distance_threshold - @tallest_max_horizon_distance')
 
@@ -94,10 +236,10 @@ for i, bounds in enumerate(patch_bounds):
 
     for observer in inner.itertuples():
 
-        # Distance from this observer to every candidate target.
-        distances = me.geod.inv(np.full(len(targets), observer.longitude),
-                                np.full(len(targets), observer.latitude),
-                                target_longitude, target_latitude)[2]
+        # Forward azimuth and distance from this observer to every candidate target.
+        forward_azimuths, _, distances = me.geod.inv(np.full(len(targets), observer.longitude),
+                                                     np.full(len(targets), observer.latitude),
+                                                     target_longitude, target_latitude)
         observer_max_horizon_distance = me.horizon_distance(observer.elevation)
 
         # Keep pairs that are far enough apart and within combined horizon range. The
@@ -107,82 +249,43 @@ for i, bounds in enumerate(patch_bounds):
                         & (distances > distance_threshold)
                         & (distances < observer_max_horizon_distance + target_max_horizon_distance))
 
-        for j in np.where(is_candidate)[0]:
-            obs = me.Summit(summit_id = observer.summit_id,
-                            latitude = observer.latitude,
-                            longitude = observer.longitude,
-                            elevation = observer.elevation)
-            trg = me.Summit(summit_id = target_summit_id[j],
-                            latitude = target_latitude[j],
-                            longitude = target_longitude[j],
-                            elevation = target_elevation[j])
-            candidate_lines_of_sight.append(me.LineOfSight(obs, trg))
+        kept = np.where(is_candidate)[0]
+        if len(kept) == 0:
+            continue
 
-    print(f'Patch {i+1}/{len(patch_bounds)}: {len(candidate_lines_of_sight)} line-of-sight candidates so far')
+        n = len(kept)
+        chunks['observer_summit_id'].append(np.full(n, observer.summit_id))
+        chunks['observer_latitude'].append(np.full(n, observer.latitude))
+        chunks['observer_longitude'].append(np.full(n, observer.longitude))
+        chunks['observer_elevation'].append(np.full(n, observer.elevation))
+        chunks['target_summit_id'].append(target_summit_id[kept])
+        chunks['target_latitude'].append(target_latitude[kept])
+        chunks['target_longitude'].append(target_longitude[kept])
+        chunks['target_elevation'].append(target_elevation[kept])
+        chunks['surface_distance'].append(distances[kept])
+        chunks['forward_azimuth'].append(forward_azimuths[kept])
+        pending += n
+        num_candidates_total += n
 
-num_los_candidates = len(candidate_lines_of_sight)
-print(f'\n{num_los_candidates} line-of-sight candidates found\n')
+    print(f'Patch {i+1}/{len(patch_bounds)}: {pending:,} candidates pending '
+          f'({num_candidates_total:,} found, {len(valid_lines_of_sight)} valid so far)')
 
-los_passed_mid_test = []
-for start in range(0, len(candidate_lines_of_sight), me.api_request_limit):
+    # Process the accumulated candidates once enough have piled up.
+    if pending >= candidate_batch_size:
+        process_pending_batch(through_patch=f'through patch {i+1}/{len(patch_bounds)}')
 
-    los_batch = candidate_lines_of_sight[start:start + me.api_request_limit]
+# Process whatever is left over after the last patch.
+if pending > 0:
+    process_pending_batch(through_patch='final batch')
 
-    observer_lats = [los.observer.latitude for los in los_batch]
-    observer_lngs = [los.observer.longitude for los in los_batch]
+print(f'\n{num_candidates_total:,} line-of-sight candidates found in total')
 
-    target_lats = [los.target.latitude for los in los_batch]
-    target_lngs = [los.target.longitude for los in los_batch]
+if num_candidates_total == 0:
+    print('No line-of-sight candidates found.')
+    raise SystemExit
 
-    mid_lats = []
-    mid_lngs = []
-    mid_light_elevations = []
 
-    for los in los_batch:
-
-        observer_lat = los.observer.latitude
-        observer_lng = los.observer.longitude
-
-        target_lat = los.target.latitude
-        target_lng = los.target.longitude
-
-        mid_point = me.geod.npts(observer_lng, observer_lat, target_lng, target_lat, 1)[0]
-
-        mid_lats.append(mid_point[1])
-        mid_lngs.append(mid_point[0])
-
-        mid_light_elevations.append(los.get_light_elevation(los.surface_distance/2))
-
-    mid_elevations = me.get_elevations(mid_lats, mid_lngs)
-
-    for i, los in enumerate(los_batch):
-
-        mid_light_elevation = mid_light_elevations[i]
-        mid_elevation = mid_elevations[i]
-
-        if mid_light_elevation > mid_elevation:
-            los_passed_mid_test.append(los)
-
-num_los_passed_mid_test = len(los_passed_mid_test)
-print(f'{num_los_passed_mid_test}/{num_los_candidates} ({round(100*num_los_passed_mid_test/num_los_candidates, 2)}%) ' +
-      'line-of-sight candidates passed the mid-point test')
-print('\n')
-
-valid_lines_of_sight = []
-for i, los in enumerate(los_passed_mid_test):
-
-    los.process_full_line_of_sight()
-
-    los_is_valid = los.is_valid()
-    los.los_points = []
-
-    if los_is_valid:
-        valid_lines_of_sight.append(los)
-
-    if i%1000 == 999 or i == num_los_passed_mid_test-1:
-        print(f'Found {len(valid_lines_of_sight)} valid lines of sight in {i+1}/{num_los_passed_mid_test} candidates')
-
-print('\n')
+########## OUTPUT ##########
 
 observer_summit_ids = []
 observer_latitudes = []
@@ -195,6 +298,7 @@ target_longitudes = []
 target_elevations = []
 
 surface_distances = []
+bearings = []
 contrasts = []
 
 for los in valid_lines_of_sight:
@@ -210,6 +314,7 @@ for los in valid_lines_of_sight:
     target_elevations.append(los.target.elevation)
 
     surface_distances.append(los.surface_distance)
+    bearings.append(los.forward_azimuth % 360)  # observer-to-target compass bearing, 0-360 deg
     contrasts.append(los.get_contrast())
 
 los_data = pd.DataFrame({
@@ -222,8 +327,13 @@ los_data = pd.DataFrame({
     'target_longitude': target_longitudes,
     'target_elevation': target_elevations,
     'distance': surface_distances,
+    'bearing': bearings,
     'contrast': contrasts
 })
+
+os.makedirs(result_directory, exist_ok=True)
+los_data.to_csv(f'{result_directory}/longest_los.csv', index=False)
+print(f'Wrote {result_directory}/longest_los.csv ({len(los_data)} valid lines of sight)')
 
 # Pair each line of sight with both of its summits, so a summit can claim its
 # longest line of sight whether it appears as the observer or the target.
@@ -237,9 +347,12 @@ max_distance_per_summit = summit_los.groupby('summit_id')['distance'].max()
 is_max = ((los_data['distance'] == los_data['observer_summit_id'].map(max_distance_per_summit))
           & (los_data['distance'] == los_data['target_summit_id'].map(max_distance_per_summit)))
 max_los_data = los_data[is_max].copy()
+max_los_data.to_csv(f'{result_directory}/longest_los_max.csv', index=False)
 
 n_max, n_total = len(max_los_data), len(los_data)
-print(f'{n_max}/{n_total} ({100*n_max/n_total:.2f}%) lines of sight are the longest for both their summits')
+percent_max = round(100*n_max/n_total, 2) if n_total else 0
+print(f'Wrote {result_directory}/longest_los_max.csv '
+      f'({n_max}/{n_total} ({percent_max}%) are the longest for both their summits)')
 print('\n')
 
 end_time = time.time()
