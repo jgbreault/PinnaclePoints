@@ -307,12 +307,12 @@ pinnacle_point_map.get_root().html.add_child(folium.Element('''
         <p>
             Pinnacle points are points from which no higher elevation can be seen. Two
             points have line of sight if light can travel from one to the other unobstructed
-            with sufficent contrast for visibilty under clear atmospheric conditions. Many
-            physical phenomenon are modelled including Earth's curvature, local topograpghy,
+            with sufficient contrast for visibility under clear atmospheric conditions. Many
+            physical phenomena are modelled including Earth's curvature, local topography,
             atmospheric refraction, atmospheric scattering, and partial irradiation. It is
             possible for two pinnacle points with equal elevation to have line of sight since
             neither would be high enough to disqualify the other. This map shows all 1554
-            pinnacle points on Earth with at least 300 m of prominence or 100 km or isolation.
+            pinnacle points on Earth with at least 300 m of prominence or 100 km of isolation.
         </p>
 
         <h2>Links</h2>
@@ -347,7 +347,7 @@ pinnacle_point_map.get_root().html.add_child(folium.Element('''
         <p>
             Andrew Kirmse and Jonathan de Ferranti found all 11,866,713 summits on Earth with over 100 ft (~30 m) of prominence.
             Prominence is the minimum vertical distance one must descend to reach a higher point.
-            OTOTW mountains were idenitifed using this dataset,
+            OTOTW mountains were identified using this dataset,
             so this dataset is used to help determine which OTOTW mountains qualify as pinnacle points.
         </p>
         <h4><a target="_blank" rel="noopener noreferrer" href="https://www.andrewkirmse.com/true-isolation">3. Mountains by Isolation</a></h4>

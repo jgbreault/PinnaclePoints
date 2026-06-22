@@ -286,10 +286,10 @@ line_of_sight_map.get_root().html.add_child(folium.Element(f'''
         <h2>Summary</h2>
         <p>
             Two points have line of sight if light can travel from one to the other unobstructed 
-            with sufficent contrast for visibilty under clear atmospheric conditions. 
-            Many physical phenomenon are modelled including Earth's curvature, local topograpghy, 
+            with sufficient contrast for visibility under clear atmospheric conditions. 
+            Many physical phenomena are modelled including Earth's curvature, local topography, 
             atmospheric refraction, atmospheric scattering, and partial irradiation. 
-            Lines of sight are only consdered between summits with at least 300 m of prominence.
+            Lines of sight are only considered between summits with at least 300 m of prominence.
             This map shows {len(los_data)} ground-to-ground lines of sight that are over 300 km long.
             It is limited to lines of sight that are the longest for both summits involved.
         </p>

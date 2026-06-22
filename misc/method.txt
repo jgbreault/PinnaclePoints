@@ -3,8 +3,8 @@ SEARCHING FOR PINNACLE POINTS
 
 Pinnacle points are points from which no higher elevation can be seen. Two 
 points have line of sight if light can travel from one to the other unobstructed 
-with sufficent contrast for visibilty under clear atmospheric conditions. Many 
-physical phenomenon are modelled including Earth's curvature, local topograpghy, 
+with sufficient contrast for visibility under clear atmospheric conditions. Many 
+physical phenomena are modelled including Earth's curvature, local topography, 
 atmospheric refraction, atmospheric scattering, and partial irradiation. It is 
 possible for two pinnacle points with equal elevation to have line of sight since 
 neither would be high enough to disqualify the other.
@@ -307,7 +307,7 @@ from the prominence summit_ids. The merged set is then treated as a fresh datase
 in which every summit is a candidate, and the pinnacle point search is run once
 more. This removes any summit that appears in both results due to minor elevation 
 differences between the prominence and isolation datasets, only the highest 
-elevation duplcate summit remains.
+elevation duplicate summit remains.
 
 
 ------------------------------------------------------------
