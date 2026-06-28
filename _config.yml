@@ -1,0 +1,5 @@
+exclude:
+  - misc/
+  - scripts/
+  - data/
+  - code/

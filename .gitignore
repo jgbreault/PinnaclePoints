@@ -11,3 +11,4 @@ _*
 
 # But don’t ignore
 !.gitignore
+!_config.yml
