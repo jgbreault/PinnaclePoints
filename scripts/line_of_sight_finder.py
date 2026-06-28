@@ -2,11 +2,12 @@
 Find the longest lines of sight on Earth between summits above a prominence
 threshold, using the patch system for speed.
 
-Candidate generation: each patch's outer summits are paired with its inner summits
-(lower summit as observer, higher as target), and two cheap horizon filters plus a
-distance/horizon geometry check drop pairs that can never span the distance
-threshold. Each candidate pair belongs to exactly one patch, so patches are
-independent and can be processed in any grouping.
+Candidate generation: each patch's outer summits are paired with its inner summits,
+and two cheap horizon filters plus a distance/horizon geometry check drop pairs that
+can never span the distance threshold. Each candidate pair belongs to exactly one
+patch, so patches are independent and can be processed in any grouping. For the
+sunrise irradiation model (see commons.py), the observer is taken to be the
+westernmost summit of each pair and the target the easternmost.
 
 Streaming in batches (to bound memory)
 --------------------------------------
@@ -212,15 +213,18 @@ for i, bounds in enumerate(patch_bounds):
     if len(outer) == 0 or len(inner) == 0:
         continue
 
-    # Each pair is built in the reverse direction: the lower summit is the observer
-    # and the higher summit is the target. summit_ids run from the highest summit
-    # (id 0) downwards, so the larger id is the lower summit.
+    # Pairing pruning is done in terms of the lower and higher summit of a pair (the
+    # observer/target labels are assigned later, by longitude). summit_ids run from the
+    # highest summit (id 0) downwards, so the larger id is the lower summit, and the id
+    # comparison below generates each pair exactly once with the loop summit as the
+    # lower one.
 
-    # The observer is the lower summit, so its horizon can reach no farther than the
-    # target's; a target must therefore reach half the distance threshold on its own.
+    # The lower summit's horizon reaches no farther than the higher summit's, so the
+    # higher summit must reach at least half the distance threshold on its own to be a
+    # candidate target.
     targets = outer.query('max_horizon_distance > @distance_threshold/2')
 
-    # Even paired with the tallest summit the patch can offer, an observer's combined
+    # Even paired with the tallest summit the patch can offer, a lower summit's combined
     # horizon must exceed the distance threshold.
     tallest_max_horizon_distance = outer.max_horizon_distance.max()
     inner = inner.query('max_horizon_distance > @distance_threshold - @tallest_max_horizon_distance')
@@ -234,36 +238,58 @@ for i, bounds in enumerate(patch_bounds):
     target_summit_id = targets.summit_id.values
     target_max_horizon_distance = targets.max_horizon_distance.values
 
-    for observer in inner.itertuples():
+    for lower_summit in inner.itertuples():
 
-        # Forward azimuth and distance from this observer to every candidate target.
-        forward_azimuths, _, distances = me.geod.inv(np.full(len(targets), observer.longitude),
-                                                     np.full(len(targets), observer.latitude),
-                                                     target_longitude, target_latitude)
-        observer_max_horizon_distance = me.horizon_distance(observer.elevation)
+        # Forward and back azimuth and distance from this (lower) summit to every target.
+        forward_azimuths, back_azimuths, distances = me.geod.inv(np.full(len(targets), lower_summit.longitude),
+                                                                 np.full(len(targets), lower_summit.latitude),
+                                                                 target_longitude, target_latitude)
+        lower_max_horizon_distance = me.horizon_distance(lower_summit.elevation)
 
         # Keep pairs that are far enough apart and within combined horizon range. The
-        # id comparison makes the observer the lower (larger-id) summit and generates
-        # each pair from a single patch only.
-        is_candidate = ((target_summit_id < observer.summit_id)
+        # id comparison keeps the loop summit as the lower (larger-id) summit and
+        # generates each pair from a single patch only.
+        is_candidate = ((target_summit_id < lower_summit.summit_id)
                         & (distances > distance_threshold)
-                        & (distances < observer_max_horizon_distance + target_max_horizon_distance))
+                        & (distances < lower_max_horizon_distance + target_max_horizon_distance))
 
         kept = np.where(is_candidate)[0]
         if len(kept) == 0:
             continue
 
         n = len(kept)
-        chunks['observer_summit_id'].append(np.full(n, observer.summit_id))
-        chunks['observer_latitude'].append(np.full(n, observer.latitude))
-        chunks['observer_longitude'].append(np.full(n, observer.longitude))
-        chunks['observer_elevation'].append(np.full(n, observer.elevation))
-        chunks['target_summit_id'].append(target_summit_id[kept])
-        chunks['target_latitude'].append(target_latitude[kept])
-        chunks['target_longitude'].append(target_longitude[kept])
-        chunks['target_elevation'].append(target_elevation[kept])
+
+        # Sunrise model: the sun rises in the east, so the eastern air (and the eastern
+        # summit) is lit first while the western air is still in the Earth's shadow. The
+        # observer is therefore the westernmost summit and the target the easternmost, so
+        # the observer-side (western) half is the shadowed half. The loop summit may be
+        # either end, so assign observer/target by longitude here. The signed shortest
+        # east-west difference handles the +/-180 meridian; the forward azimuth from the
+        # western (observer) summit toward the eastern (target) summit is the back azimuth
+        # when the loop summit is the eastern one.
+        target_longitude_kept = target_longitude[kept]
+        loop_is_west = ((lower_summit.longitude - target_longitude_kept + 180) % 360 - 180) < 0
+
+        lower_id = np.full(n, lower_summit.summit_id)
+        lower_lat = np.full(n, lower_summit.latitude)
+        lower_lng = np.full(n, lower_summit.longitude)
+        lower_elev = np.full(n, lower_summit.elevation)
+
+        trg_id = target_summit_id[kept]
+        trg_lat = target_latitude[kept]
+        trg_lng = target_longitude_kept
+        trg_elev = target_elevation[kept]
+
+        chunks['observer_summit_id'].append(np.where(loop_is_west, lower_id, trg_id))
+        chunks['observer_latitude'].append(np.where(loop_is_west, lower_lat, trg_lat))
+        chunks['observer_longitude'].append(np.where(loop_is_west, lower_lng, trg_lng))
+        chunks['observer_elevation'].append(np.where(loop_is_west, lower_elev, trg_elev))
+        chunks['target_summit_id'].append(np.where(loop_is_west, trg_id, lower_id))
+        chunks['target_latitude'].append(np.where(loop_is_west, trg_lat, lower_lat))
+        chunks['target_longitude'].append(np.where(loop_is_west, trg_lng, lower_lng))
+        chunks['target_elevation'].append(np.where(loop_is_west, trg_elev, lower_elev))
         chunks['surface_distance'].append(distances[kept])
-        chunks['forward_azimuth'].append(forward_azimuths[kept])
+        chunks['forward_azimuth'].append(np.where(loop_is_west, forward_azimuths[kept], back_azimuths[kept]))
         pending += n
         num_candidates_total += n
 
@@ -299,6 +325,8 @@ target_elevations = []
 
 surface_distances = []
 bearings = []
+optimal_azimuths = []
+sun_azimuth_offsets = []
 contrasts = []
 
 for los in valid_lines_of_sight:
@@ -313,8 +341,12 @@ for los in valid_lines_of_sight:
     target_longitudes.append(los.target.longitude)
     target_elevations.append(los.target.elevation)
 
+    bearing = los.forward_azimuth % 360
+    optimal = los.optimal_azimuth % 360
     surface_distances.append(los.surface_distance)
-    bearings.append(los.forward_azimuth % 360)  # observer-to-target compass bearing, 0-360 deg
+    bearings.append(bearing)  # observer-to-target compass bearing, 0-360 deg
+    optimal_azimuths.append(optimal)  # sunrise/sunset azimuth giving best contrast at observer's latitude
+    sun_azimuth_offsets.append(abs(((bearing - optimal) + 180) % 360 - 180))  # deg off optimal
     contrasts.append(los.get_contrast())
 
 los_data = pd.DataFrame({
@@ -328,6 +360,8 @@ los_data = pd.DataFrame({
     'target_elevation': target_elevations,
     'distance': surface_distances,
     'bearing': bearings,
+    'optimal_azimuth': optimal_azimuths,
+    'sun_azimuth_offset': sun_azimuth_offsets,
     'contrast': contrasts
 })
 

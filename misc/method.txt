@@ -229,10 +229,10 @@ geometrically unobstructed only if the light is above the ground at every sample
 The data sources use three different DEMs, and a local maximum in one DEM may not
 be a local maximum in another. To keep summits from blocking themselves through
 this DEM noise, the ground can only obstruct the line of sight at samples that are
-at least 4 km from both the observer and the target.
+at least 1.2 km from both the observer and the target.
 
 For speed, the samples are fetched from the elevation API in batches, and the
-obstruction test gives up as soon as a batch contains a point (outside the 4 km
+obstruction test gives up as soon as a batch contains a point (outside the 1.2 km
 buffer) where the ground reaches the light, so an obstructed line of sight is
 abandoned without fetching the rest of its samples. The contrast test is only run
 when nothing obstructs the beam, since contrast does not matter for a line of sight
@@ -265,23 +265,48 @@ and misc/math/raw/atmospheric_scattering.md.
 I keep S = 0.5: the near, observer-side half of the path is treated as shadowed,
 because airlight is dominated by the air closest to the observer, so shadowing it
 helps contrast most. The shade irradiation ratio a is set per line of sight from
-its bearing, to approximate sunrise/sunset. This is the best case for visibility, 
-when the foreground air is shadowed and only the air near the target is lit 
-(partial irradiation). The near-observer airlight that washes the target out is 
-suppressed, raising contrast thus extending the maximum visual range. The sun can 
-only rise or set along the east-west horizon, so only an east-west line of sight can 
-place the observer's foreground in shadow with the target lit beyond it; a 
-north-south line of sight has the sun broadside and gets no such benefit. Accordingly,
+its bearing, to approximate the best possible sunrise or sunset alignment on any
+day of the year. This is the best case for visibility, when the foreground air is
+shadowed and only the air near the target is lit (partial irradiation).
 
-    a = 1 - (1 - a_min) * |sin(bearing)|,
+The sun does not rise exactly due east in general: at the observer's latitude phi,
+the sunrise azimuth ranges between 90 - delta and 90 + delta degrees from North
+over the course of a year, where
 
-where the bearing is the observer-to-target forward azimuth and a_min = 0.1. An
-east-west line of sight gets a = a_min = 0.1 (deepest foreground shadow, highest
-contrast), a north-south line of sight gets a = 1 (no shadow benefit, plain
-extinction), and bearings in between interpolate. a_min is held above 0 because
-even fully shadowed air is still lit by diffuse skylight. These remain
-simplifications (S is fixed, and the sun is taken to be exactly on the east-west
-horizon) and are a significant source of uncertainty (see below).
+    delta = arcsin(sin(epsilon) / cos(phi)),    epsilon = 23.44 deg (Earth's axial tilt).
+
+At higher latitudes the range is wider; above the polar circles (|phi| > 90 - epsilon)
+the sun can rise at any azimuth on some day of the year, so delta is capped at 90.
+The symmetric sunset range is [270 - delta, 270 + delta].
+
+For each line of sight I identify the optimal sun azimuth: the nearest sunrise or
+sunset azimuth to the bearing. A bearing already within the sunrise or sunset range
+has zero deviation (the sun can rise or set exactly along that bearing on some day),
+and gets the full shadow benefit. A bearing outside any achievable sunrise or sunset
+azimuth is assigned the nearest range edge as its optimal azimuth, and the benefit
+degrades by the cosine of the angular deviation from that edge:
+
+    a = 1 - (1 - a_min) * cos(deviation),
+
+where deviation is the angular distance between the bearing and the optimal sun
+azimuth, and a_min = 0.1. A bearing within the sunrise or sunset range gets
+a = a_min (deepest foreground shadow, highest contrast). A bearing 90 degrees off
+the nearest achievable sun azimuth gets a = 1 (no shadow benefit). a_min is held
+above 0 because even fully shadowed air is still lit by diffuse skylight.
+
+This formula reduces to the previous approximation a = 1 - (1 - a_min)|sin(bearing)|
+in the limit of zero axial tilt (epsilon = 0, delta = 0, sunrise exactly due east),
+confirming it is a proper generalisation.
+
+Which summit is the observer -- and hence which sunrise or sunset range applies --
+is decided by each search: the longest-line-of-sight search forces the western summit
+to be the observer, so only the sunrise range [90 - delta, 90 + delta] is relevant
+(the target is always to the east). The pinnacle point search makes the candidate
+itself the observer; since the target can be in any direction, both the sunrise and
+sunset ranges are checked and the nearest of the two is used. These remain
+simplifications (S is fixed, and the optimal sun azimuth is derived from latitude
+alone rather than from actual terrain geometry) and are a significant source of
+uncertainty (see below).
 
 A line of sight is considered valid only if it is both geometrically unobstructed 
 and has contrast above 0.02.
@@ -295,11 +320,15 @@ To test whether a candidate is a pinnacle point, I find the patch the candidate
 belongs to and run MHD analysis against every summit in that patch. Higher summits 
 that pass MHD analysis are sorted by distance from the candidate, nearest first,
 because nearer summits are more likely to have line of sight. Each is tested in
-turn, the line-of-sight test abandoning early as soon as the ground blocks the beam
-and only checking contrast when nothing does (see LINE-OF-SIGHT ANALYSIS). If any
-one of them has a valid line of sight with the candidate, the candidate can see
-higher ground and is not a pinnacle point, so testing stops. If none of them do,
-the candidate is a pinnacle point.
+turn. The candidate is always the observer -- it is the point whose view is being
+tested, so the candidate is the one whose foreground air is partially irradiated, and
+the shade factor follows from the candidate-to-target bearing (the symmetric
+sunrise/sunset treatment of ATMOSPHERIC SCATTERING, not the westernmost-observer rule
+the longest-line-of-sight search uses). The line-of-sight test abandons early as soon
+as the ground blocks the beam, only checking contrast when nothing does (see
+LINE-OF-SIGHT ANALYSIS). If any one of them has a valid line of sight with the
+candidate, the candidate can see higher ground and is not a pinnacle point, so
+testing stops. If none of them do, the candidate is a pinnacle point.
 
 To combine the prominence and isolation results, the two sets of pinnacle points
 are merged. The isolation summit_ids are multiplied by -1 to keep them distinct
@@ -314,28 +343,29 @@ elevation duplicate summit remains.
 FINDING THE LONGEST LINES OF SIGHT
 ------------------------------------------------------------
 
-The same line-of-sight machinery can also be used to search for the longest 
+The same line-of-sight machinery can also be used to search for the longest
 lines of sight on Earth, rather than to classify pinnacle points. This is done in
-scripts/line_of_sight_finder.py.
+scripts2/line_of_sight_finder.py.
 
 The search is bounded by a distance threshold (currently 300 km), which exists
-purely for speed. Each observer-target pair is built in the direction that gives it 
-the best chance of being visible: the lower summit is the observer and the higher 
-summit is the target. The contrast model shadows the observer-side air (see 
-ATMOSPHERIC SCATTERING above), and shadowing the denser air at the lower end 
-suppresses the most airlight, so this direction maximises contrast.
+purely for speed. To model sunrise (see ATMOSPHERIC SCATTERING above), each pair's
+observer is taken to be the westernmost summit and the target the easternmost, so
+the observer-side air is the western air still in the Earth's shadow at sunrise.
+Because the observer is always to the west, the bearing is always roughly eastward
+and only the sunrise azimuth range applies when computing contrast.
 
 Starting from the prominence dataset, only summits above a prominence threshold
 (currently 300 m) are considered. Two cheap horizon filters then prune the search
-before any pairing. Because the observer is the lower summit, its horizon can reach 
-no farther than the target's, so the target's horizon must reach at least half the 
-distance threshold on its own for the pair to span it; any summit too short for this 
-cannot be a target. Conversely, even when an observer is paired with the tallest 
-summit its patch can offer, their combined maximum horizon distances must still 
-exceed the distance threshold, or the observer cannot reach that far; any summit too 
-short for this cannot be an observer. Every surviving pair that is farther apart than
-the distance threshold and within their combined maximum horizon distance becomes a
-candidate line of sight.
+before any pairing, working in terms of the lower and higher summit of a pair
+(independent of the east-west observer/target labelling). The lower summit's horizon
+can reach no farther than the higher summit's, so the higher summit must reach at
+least half the distance threshold on its own for the pair to span it; any summit too
+short for this cannot be the higher end of a long pair. Conversely, even paired with
+the tallest summit its patch can offer, a lower summit's combined maximum horizon
+distance must still exceed the distance threshold; any summit too short for this
+cannot be the lower end. Every surviving pair that is farther apart than the distance
+threshold and within their combined maximum horizon distance becomes a candidate line
+of sight.
 
 Because each candidate pair belongs to exactly one patch, the patches are independent
 and the candidates are handled in batches to bound memory: as patches are scanned the
@@ -352,7 +382,7 @@ once. The points are taken in order of increasing resolution: the middle of ever
 line of sight first, then the quarters, then the eighths, sixteenths, and so on, and
 within each level the points nearest the middle before those nearest the ends. At
 each point only obstruction is checked, not contrast, and a candidate is dropped the
-instant the ground blocks its ray at a single point. Points within 4 km of either
+instant the ground blocks its ray at a single point. Points within 1.2 km of either
 summit are skipped, and a point is only sampled when it lies outside that buffer for
 every surviving candidate. Sampling keeps refining until a newly sampled point
 removes no candidates, at which point the screen has converged.
@@ -361,7 +391,12 @@ Only the survivors then get full line-of-sight analysis (every point checked for
 obstruction, plus the contrast of the whole beam, with the early exit described
 above). The valid lines of sight from every batch are collected, and once all
 patches are done both the full set and the subset that are the longest for both
-their observer and target are written to data/results/longest_los/.
+their observer and target are written to data/results/longest_los/. Each output row
+includes the bearing, the optimal sun azimuth (the sunrise azimuth nearest the
+bearing at the observer's latitude), and the sun azimuth offset (how many degrees
+the bearing deviates from the optimal sun azimuth; zero means the bearing falls
+within the achievable sunrise range and can be perfectly aligned with the sun on
+some day of the year).
 
 
 ------------------------------------------------------------
@@ -385,7 +420,7 @@ SOURCES OF ERROR
 - Line-of-sight samples are at most 100 m apart, so an obstruction that falls
   between two samples can be missed. Sampling more densely would find more
   pinnacle points.
-- Line-of-sight analysis ignores possible obstructions within 4 km of the observer
+- Line-of-sight analysis ignores possible obstructions within 1.2 km of the observer
   or the target.
 - Only summits with more than 300 m of prominence or more than 100 km of isolation
   are considered. The prominence threshold comes from the OTOTW dataset. The

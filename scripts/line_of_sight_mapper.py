@@ -51,8 +51,8 @@ def get_distance_color(distance):
 def get_summit_links(latitude, longitude):
     '''PeakBagger and Google Maps links for a summit'''
     
-    lat_rounded = round(latitude, 4)
-    lng_rounded = round(longitude, 4)
+    lat_rounded = f'{latitude:.4f}'
+    lng_rounded = f'{longitude:.4f}'
     return (
         f'<a href=https://www.peakbagger.com/search.aspx?tid=R&lat={lat_rounded}&lon={lng_rounded}&ss= target="_blank" rel="noopener noreferrer">PeakBagger</a> | '
         f'<a href=https://www.google.com/maps/place/{lat_rounded},{lng_rounded} target="_blank" rel="noopener noreferrer">Google Maps</a>'
@@ -117,11 +117,14 @@ def add_line_of_sight_to_map(los):
     color = get_distance_color(los.distance)
     distance_km = round(los.distance/1000, 1)
     contrast = round(los.contrast, 3)
+    bearing = round(los.bearing, 1)
+    optimal_azimuth = round(los.optimal_azimuth, 1)
+    sun_azimuth_offset = round(los.sun_azimuth_offset, 1)
 
     observer_elevation = round(los.observer_elevation)
     target_elevation = round(los.target_elevation)
-    observer_location = f'{round(los.observer_latitude, 4)}, {round(los.observer_longitude, 4)}'
-    target_location = f'{round(los.target_latitude, 4)}, {round(los.target_longitude, 4)}'
+    observer_location = f'{los.observer_latitude:.4f}, {los.observer_longitude:.4f}'
+    target_location = f'{los.target_latitude:.4f}, {los.target_longitude:.4f}'
 
     line_coords = get_geodesic_line(los.observer_latitude, los.observer_longitude,
                                     los.target_latitude, los.target_longitude)

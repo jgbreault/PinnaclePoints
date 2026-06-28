@@ -1,3 +1,16 @@
+"""
+Tests every candidate summit to determine whether it is a pinnacle point.
+
+A summit is a pinnacle point if no higher summit is visible from it. The test is
+performed by Summit.is_pinnacle_point() in commons.py, which loads the relevant
+spatial patch, screens pairs by maximum horizon distance, and then runs full
+line-of-sight analysis (geometric obstruction + atmospheric contrast) for survivors.
+
+Run summit_cleaner.py then patch_maker.py before running this script.
+The 'candidate' flag in the summit CSV (set by summit_cleaner.py) controls which
+summits are tested — only OTOTW mountains and extreme-isolation summits are candidates.
+"""
+
 import pandas as pd
 import commons as me
 import time

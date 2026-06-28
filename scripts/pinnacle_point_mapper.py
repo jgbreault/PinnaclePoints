@@ -16,42 +16,31 @@ import commons as me
 pinnacle_points = pd.read_csv('../data/results/pinnacle_points/prm_iso/pinnacle_points.csv')
 faulty_towers = pd.read_csv('../data/clean/faulty_pinnacle_points.csv')
 
+# Elevation colormap shared by the pinnacle point and LOS mapper: sea level → Everest.
+_colormap = LinearSegmentedColormap.from_list('custom_colormap', [
+    (0.0,  'limegreen'),
+    (0.25, 'yellow'),
+    (0.5,  'orange'),
+    (0.75, 'red'),
+    (1.0,  'indigo'),
+])
+_max_elevation = pinnacle_points.elevation.max()
+
 def get_pinnacle_point_color(elevation):
-    '''Colours pinnacle point markers on the map based on elevation'''
-
-    # Defining colors for colormap
-    colors = [
-        (0.0, 'limegreen'),
-        (0.25, 'yellow'),
-        (0.5, 'orange'),
-        (0.75, 'red'),
-        (1.0, 'indigo')
-    ]
-
-    # Create the colormap
-    colormap = LinearSegmentedColormap.from_list('custom_colormap', colors)
-    rgba_color = colormap(elevation/pinnacle_points.elevation.max())
-
-    # Convert RGBA to HEX
-    hex_color = "#{:02x}{:02x}{:02x}".format(
-        int(rgba_color[0] * 255), # Red
-        int(rgba_color[1] * 255), # Green
-        int(rgba_color[2] * 255)  # Blue
-    )
-
-    return hex_color
+    '''Colours a pinnacle point marker based on its elevation'''
+    rgba = _colormap(elevation / _max_elevation)
+    return '#{:02x}{:02x}{:02x}'.format(int(rgba[0] * 255), int(rgba[1] * 255), int(rgba[2] * 255))
 
 def get_marker_text(summit):
 
-    lat_rounded = round(summit.latitude, 4)
-    lng_rounded = round(summit.longitude, 4)
+    lat_rounded = f'{summit.latitude:.4f}'
+    lng_rounded = f'{summit.longitude:.4f}'
 
     marker_text = (
-        # f'<b>SummitId:</b> {round(summit.summit_id)}<br>' +
-        f'<b>Elevation:</b> {round(summit.elevation)} m<br>' +
-        f'<b>Location:</b> {lat_rounded}, {lng_rounded}<br>' +
-        f'<a href=https://www.peakbagger.com/search.aspx?tid=R&lat={lat_rounded}&lon={lng_rounded}&ss=>PeakBagger</a> | ' +
-        f'<a href=https://www.google.com/maps/place/{lat_rounded},{lng_rounded}>Google Maps</a>'
+        f'<b>Elevation:</b> {round(summit.elevation)} m<br>'
+        f'<b>Location:</b> {lat_rounded}, {lng_rounded}<br>'
+        f'<a href=https://www.peakbagger.com/search.aspx?tid=R&lat={lat_rounded}&lon={lng_rounded}&ss= target="_blank" rel="noopener noreferrer">PeakBagger</a> | '
+        f'<a href=https://www.google.com/maps/place/{lat_rounded},{lng_rounded} target="_blank" rel="noopener noreferrer">Google Maps</a>'
     )
 
     return marker_text
@@ -75,7 +64,7 @@ def add_point_to_map(summit):
 
         if fault_type == 0:
 
-            marker_flase = folium.RegularPolygonMarker(
+            marker_false = folium.RegularPolygonMarker(
                 location = [summit.latitude, summit.longitude],
                 number_of_sides=3,
                 radius = 11,

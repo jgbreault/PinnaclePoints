@@ -32,22 +32,23 @@ default_shaded_ratio = 0.5
 default_shade_irradiation_ratio = 0.5
 min_shade_irradiation_ratio = 0.1 # darkest the observer-side shadow gets (east-west sightlines), floored by diffuse skylight
 default_max_sampling_distance = 100 # in m
-ignore_buffer = 4000 # in m
+ignore_buffer = 1200 # in m
 
-summit_file = '../data/clean/summits_prm.csv'
-pinnacle_point_file = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
-patch_directory = f'../data/patches/prm_{default_light_curvature}'
+# summit_file = '../data/clean/summits_prm.csv'
+# pinnacle_point_file = '../data/results/pinnacle_points/prm/pinnacle_points.csv'
+# patch_directory = f'../data/patches/prm_{default_light_curvature}'
 
 # summit_file = '../data/clean/summits_iso.csv'
 # pinnacle_point_file = '../data/results/pinnacle_points/iso/pinnacle_points.csv'
 # patch_directory = f'../data/patches/iso_{default_light_curvature}'
 
-# summit_file = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
-# pinnacle_point_file = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
-# patch_directory = f'../data/patches/prm_iso_{default_light_curvature}'
+summit_file = '../data/results/pinnacle_points/prm_iso/pinnacle_points_merged.csv'
+pinnacle_point_file = '../data/results/pinnacle_points/prm_iso/pinnacle_points.csv'
+patch_directory = f'../data/patches/prm_iso_{default_light_curvature}'
 
 earth_radius = 6371146 # in m (Mean Sea Level, GPS, and the Geoid. Witold Fraczek 2003)
 atmosphere_scale_height = 8500 # in m (https://web.archive.org/web/20250821225050/https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html)
+earth_axial_tilt = 23.44 # in degrees
 
 geod = Geod(ellps='sphere')
 
@@ -181,6 +182,45 @@ def screening_fractions():
             yield (middle - offset, denominator)     # inner/outer, left of middle
             yield (middle + offset, denominator)     # its mirror, right of middle
         k += 1
+
+
+def sunrise_azimuth_half_range(latitude):
+    """Half-width of the sunrise azimuth range in degrees for the given latitude.
+
+    The sun rises between (90 - delta) and (90 + delta) degrees from North over
+    the course of a year, where delta depends on latitude and Earth's axial tilt.
+    Returns 90 for latitudes at or inside the polar circles (sun can rise at any
+    azimuth on some day of the year)."""
+    lat_abs = abs(latitude)
+    if lat_abs >= 90 - earth_axial_tilt:
+        return 90.0
+    return math.degrees(math.asin(math.sin(math.radians(earth_axial_tilt))
+                                   / math.cos(math.radians(lat_abs))))
+
+
+def optimal_sun_azimuth(bearing, latitude):
+    """The sunrise or sunset azimuth (degrees from North, 0-360) that gives the
+    best contrast for a line of sight at the given bearing and observer latitude.
+
+    Sunrise azimuths span [90 - delta, 90 + delta] across the year; sunset spans
+    [270 - delta, 270 + delta], where delta = sunrise_azimuth_half_range(latitude).
+    Returns the bearing itself (deviation = 0) when it falls within either range,
+    or the nearest range edge otherwise. Both ranges are checked so pinnacle point
+    tests (where the target can be in any direction) benefit from either sunrise or
+    sunset alignment, whichever is closer to the bearing."""
+    b = bearing % 360
+    delta = sunrise_azimuth_half_range(latitude)
+
+    def nearest_and_deviation(b, center, delta):
+        diff = ((b - center) + 180) % 360 - 180   # signed angular diff, in [-180, 180]
+        if abs(diff) <= delta:
+            return b, 0.0
+        nearest = (center + math.copysign(delta, diff)) % 360
+        return nearest, abs(diff) - delta
+
+    sunrise_opt, sunrise_dev = nearest_and_deviation(b, 90, delta)
+    sunset_opt,  sunset_dev  = nearest_and_deviation(b, 270, delta)
+    return sunrise_opt if sunrise_dev <= sunset_dev else sunset_opt
 
 
 ########## CLASSES ##########
@@ -337,13 +377,17 @@ class LineOfSight():
                                                              self.target.longitude, self.target.latitude)
         self.forward_azimuth = forward_azimuth
         self.shaded_ratio = shaded_ratio
-        # The shaded segment is the observer-side half of the path, where suppressing
-        # airlight helps contrast most. How shadowed it can get depends on bearing: an
-        # east-west sightline can sit in the sunrise/sunset shadow (irradiation ->
-        # min_shade_irradiation_ratio), a north-south one cannot (the sun is broadside,
-        # so irradiation -> 1 and there is no contrast benefit).
+        # The optimal sun azimuth is the sunrise or sunset azimuth (for the observer's
+        # latitude) that is nearest to this line of sight's bearing. Bearings within the
+        # sunrise or sunset range can be perfectly aligned with the sun on some day of
+        # the year, giving maximum contrast benefit (irradiation -> min_shade_irradiation_ratio).
+        # Bearings outside any achievable sunrise/sunset azimuth degrade by cos(deviation),
+        # reaching irradiation = 1 (no benefit) only when 90 degrees off the nearest
+        # achievable sun azimuth.
+        self.optimal_azimuth = optimal_sun_azimuth(forward_azimuth, observer.latitude)
         if shade_irradiation_ratio is None:
-            shade_irradiation_ratio = 1 - (1 - min_shade_irradiation_ratio)*abs(math.sin(math.radians(forward_azimuth)))
+            deviation = abs(((forward_azimuth - self.optimal_azimuth) + 180) % 360 - 180)
+            shade_irradiation_ratio = 1 - (1 - min_shade_irradiation_ratio) * math.cos(math.radians(deviation))
         self.shade_irradiation_ratio = shade_irradiation_ratio
         self.num_samples = math.ceil(self.surface_distance/max_sampling_distance)
         self.los_points = []
@@ -551,37 +595,67 @@ class LineOfSight():
         of sight never pay for the contrast test. Same result as is_valid."""
         return not self.is_obstructed_early() and self.has_contrast()
 
-    def plot(self, baseline='straight', legend_location='best', plot_path=''):
+    def plot(self, legend_location='best', plot_path='',
+             deviation_from_optimal=None, light_curvature=None,
+             shade_irradiation_ratio=None, shaded_ratio=None):
         """Plot the line of sight in the rotated frame used by is_obstructed: the
         straight observer-target line is the reference and ground and light heights
-        are measured perpendicular to it (the exact geometry of the obstruction
-        test). baseline='straight' keeps the straight line flat at 0;
-        baseline='light' makes the light ray the flat reference instead."""
+        are measured perpendicular to it (exact geometry of the obstruction test).
 
-        distances = np.array([point.surface_distance/1000.0 for point in self.los_points])
-        ground = np.array([point.ground_height for point in self.los_points])
-        light = np.array([point.light_height for point in self.los_points])
+        The four optional overrides let you explore what-if scenarios without
+        re-running the full analysis. Each defaults to the value computed at
+        construction time if not supplied:
+          deviation_from_optimal  — degrees off the nearest sunrise/sunset azimuth;
+                                    also re-derives shade_irradiation_ratio unless
+                                    that is explicitly overridden too.
+          light_curvature         — k in R_light = k * R_earth; recomputes the
+                                    light arc and the contrast integral.
+          shade_irradiation_ratio — brightness of the shaded segment (0–1).
+          shaded_ratio            — fraction of the path in shadow from the observer."""
+
+        # Resolve each parameter: explicit override wins, otherwise use actual value.
+        plot_k = light_curvature if light_curvature is not None else self.light_curvature
+        plot_shaded_ratio = shaded_ratio if shaded_ratio is not None else self.shaded_ratio
+
+        bearing = self.forward_azimuth % 360
+        plot_deviation = (deviation_from_optimal if deviation_from_optimal is not None
+                          else abs(((bearing - self.optimal_azimuth) + 180) % 360 - 180))
+
+        # shade_irradiation_ratio: explicit override wins; if only deviation is
+        # overridden, re-derive from the new deviation; otherwise use actual value.
+        if shade_irradiation_ratio is not None:
+            plot_shade_irradiation = shade_irradiation_ratio
+        elif deviation_from_optimal is not None:
+            plot_shade_irradiation = 1 - (1 - min_shade_irradiation_ratio) * math.cos(math.radians(plot_deviation))
+        else:
+            plot_shade_irradiation = self.shade_irradiation_ratio
+
+        distances = np.array([p.surface_distance/1000.0 for p in self.los_points])
+        ground = np.array([p.ground_height for p in self.los_points])
         straight = np.zeros_like(distances)
 
-        if baseline == 'light':
-            ground, straight, light = ground - light, straight - light, light - light
+        # Recompute light arc heights if light_curvature is overridden.
+        if light_curvature is not None:
+            straight_dists = np.array([p.straight_distance for p in self.los_points])
+            d_target = self.los_points[-1].straight_distance
+            gamma = (plot_k * earth_radius)**2 - (d_target / 2)**2
+            light = np.sqrt(gamma + straight_dists * (d_target - straight_dists)) - math.sqrt(gamma)
+        else:
+            light = np.array([p.light_height for p in self.los_points])
 
-        plt.figure(figsize=(15,5))
-
+        plt.figure(figsize=(15, 5))
         plt.plot(distances, light, color='yellow', label='Light', lw=2)
         plt.plot(distances, straight, color='k', label='Straight', lw=1, ls='--')
 
         sky_top = max(ground.max(), light.max())
-        if self.shade_irradiation_ratio < 1:
-
+        if plot_shade_irradiation < 1:
             plt.fill_between(distances, y1=ground, y2=sky_top,
                              color='cornflowerblue', label='Sky')
             plt.fill_between(distances, y1=ground, y2=sky_top,
-                             where=(distances <= distances[-1]*self.shaded_ratio),
-                             color='k', alpha=1-self.shade_irradiation_ratio, label='Shadow')
+                             where=(distances <= distances[-1] * plot_shaded_ratio),
+                             color='k', alpha=1 - plot_shade_irradiation, label='Shadow')
 
         plt.plot(distances, ground, color='k', lw=0.8)
-
         plt.fill_between(distances, y1=min(light.min(), ground.min(), straight.min()), y2=ground, color='darkgrey', label='Earth')
 
         obstructed = self.is_obstructed()
@@ -589,28 +663,56 @@ class LineOfSight():
             max_ind = np.argmax(ground - light)
             plt.plot(distances[max_ind], ground[max_ind], marker='x', color='red')
 
+        # Compute contrast with all overrides applied. The optical depth density
+        # integrand uses plot_k for the light arc, so it is always inlined here
+        # rather than delegating to get_contrast() which uses self.light_curvature.
+        h1 = self.observer.elevation
+        h2 = self.target.elevation
+        D = self.surface_distance
+        R = earth_radius
+        phi = D / R
+        x1, y1 = R + h1, 0
+        x2, y2 = (R + h2) * math.cos(phi), (R + h2) * math.sin(phi)
+        d_chord = math.sqrt((x2 - x1)**2 + y2**2)
+        RL = plot_k * R
+        Z = math.sqrt(RL**2 - (d_chord / 2)**2)
+        Mx = (x1 + x2) / 2 - Z * (y2 / d_chord)
+        My = (y1 + y2) / 2 + Z * ((x2 - x1) / d_chord)
+
+        def optical_depth_density(x):
+            theta = x / R
+            proj = Mx * math.cos(theta) + My * math.sin(theta)
+            L = proj + math.sqrt(proj**2 - (Mx**2 + My**2 - RL**2))
+            scatter = self.sea_level_scatter_coefficient * math.exp(-(L - R) / atmosphere_scale_height)
+            return scatter * L / R
+
+        d1 = D * plot_shaded_ratio
+        scatter_shaded = quad(optical_depth_density, 0, d1)[0]
+        scatter_sunlit = quad(optical_depth_density, d1, D)[0]
+        contrast = math.exp(-scatter_sunlit) / (1 - plot_shade_irradiation + plot_shade_irradiation / math.exp(-scatter_shaded))
+
         observer_label = f'{self.observer.latitude:.4f}°, {self.observer.longitude:.4f}° ({self.observer.elevation:.0f} m)'
         target_label = f'{self.target.latitude:.4f}°, {self.target.longitude:.4f}° ({self.target.elevation:.0f} m)'
         plt.title('Line-of-Sight Test\n'
-                  f'{observer_label}  →  {target_label}\n' + 
+                  f'{observer_label}  →  {target_label}\n'
                   f'Distance = {self.surface_distance/1000:.1f} km    '
-                  f'Light Curvature = {self.light_curvature:.1f}    '
+                  f'Light Curvature = {plot_k:.1f}    '
                   f'Obstructed = {obstructed}\n'
-                  f'Bearing = {self.forward_azimuth % 360:.1f}°    '
-                  f'Shade Irradiation = {self.shade_irradiation_ratio:.2f}    '
-                  f'Shaded Ratio = {self.shaded_ratio:.2f}    '
-                  f'Contrast = {self.get_contrast():.3f}')
-        
-        plt.xlabel('Distance (km)')
+                  f'Bearing = {bearing:.1f}°    '
+                  f'Optimal Sun Azimuth = {self.optimal_azimuth:.1f}°    '
+                  f'Deviation from Optimal = {plot_deviation:.1f}°\n'
+                  f'Shade Irradiation = {plot_shade_irradiation:.2f}    '
+                  f'Shaded Ratio = {plot_shaded_ratio:.2f}    '
+                  f'Contrast = {contrast:.3f}')
 
+        plt.xlabel('Distance (km)')
         plt.ylabel('Height (m)')
-            
         fig = plt.gcf()
         fig.patch.set_facecolor('w')
         fig.set_dpi(300)
         plt.grid(ls=':', c='k', alpha=0.5)
         plt.legend(loc=legend_location, framealpha=1)
-        
+
         if plot_path != '':
             plt.savefig(plot_path, bbox_inches='tight')
 
