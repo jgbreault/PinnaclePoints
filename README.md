@@ -97,6 +97,7 @@ PinnaclePoints/
 │   ├── confirmed_los_parser.py            # Parses confirmed lines of sight from Beyond Horizons
 │   ├── confirmed_los_curvature_finder.py  # Calibrates light curvature from confirmed lines of sight
 │   └── general_analysis.ipynb             # Assorted analysis and figures
+├── _config.yml            # Jekyll config: excludes misc/, scripts/, data/, code/ from GitHub Pages
 ├── CNAME                  # Needed to host the maps on pinnacle-points.com
 ├── index.html             # Interactive pinnacle point map
 ├── longest-lines-of-sight.html  # Interactive longest lines of sight map
