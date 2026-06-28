@@ -48,24 +48,37 @@ def get_marker_text(summit):
 def add_point_to_map(summit):
     '''Adds a summit to the pinnacle point map'''
 
-    marker_text = get_marker_text(summit)
-
     correction = faulty_towers.query('summit_id == @summit.summit_id')
 
     if len(correction) == 1:
 
+        latitude_false = correction.latitude_false.values[0]
+        longitude_false = correction.longitude_false.values[0]
+        elevation_false = correction.elevation_false.values[0]
         latitude_true = correction.latitude_true.values[0]
         longitude_true = correction.longitude_true.values[0]
         elevation_true = correction.elevation_true.values[0]
         fault_type = correction.type.values[0]
 
         summit_color = get_pinnacle_point_color(elevation_true)
-        marker_text_correction = marker_text + '<br><br>Misidentified by algorithm'
+
+        def make_popup_text(lat, lng, elv, extra=''):
+            lat_str = f'{lat:.4f}'
+            lng_str = f'{lng:.4f}'
+            text = (
+                f'<b>Elevation:</b> {round(elv)} m<br>'
+                f'<b>Location:</b> {lat_str}, {lng_str}<br>'
+                f'<a href=https://www.peakbagger.com/search.aspx?tid=R&lat={lat_str}&lon={lng_str}&ss= target="_blank" rel="noopener noreferrer">PeakBagger</a> | '
+                f'<a href=https://www.google.com/maps/place/{lat_str},{lng_str} target="_blank" rel="noopener noreferrer">Google Maps</a>'
+            )
+            if extra:
+                text += f'<br><br>{extra}'
+            return text
 
         if fault_type == 0:
 
             marker_false = folium.RegularPolygonMarker(
-                location = [summit.latitude, summit.longitude],
+                location = [latitude_false, longitude_false],
                 number_of_sides=3,
                 radius = 11,
                 fill = True,
@@ -80,17 +93,19 @@ def add_point_to_map(summit):
 
             # For better usability on mobile
             invisible_circle_false = folium.CircleMarker(
-                location = [summit.latitude, summit.longitude],
+                location = [latitude_false, longitude_false],
                 radius = 12,
                 fill = True,
                 fill_opacity = 0,
                 weight = 0
             ).add_to(pinnacle_point_map)
 
-            invisible_circle_false.add_child(folium.Popup(marker_text_correction, max_width=300).add_to(invisible_circle_false))
+            invisible_circle_false.add_child(folium.Popup(
+                make_popup_text(latitude_false, longitude_false, elevation_false, 'Misidentified by algorithm'),
+                max_width=300).add_to(invisible_circle_false))
 
             # Adding a line to the true summit for misidentifications
-            fault_to_true_line = [[summit.latitude, summit.longitude], [correction.latitude_true.values[0], correction.longitude_true.values[0]]]
+            fault_to_true_line = [[latitude_false, longitude_false], [latitude_true, longitude_true]]
             folium.PolyLine(fault_to_true_line, color=summit_color, weight=1, opacity=1).add_to(pinnacle_point_map)
 
             marker_true = folium.RegularPolygonMarker(
@@ -115,7 +130,9 @@ def add_point_to_map(summit):
                 weight = 0
             ).add_to(pinnacle_point_map)
 
-            invisible_circle_true.add_child(folium.Popup(marker_text, max_width=300).add_to(invisible_circle_true))
+            invisible_circle_true.add_child(folium.Popup(
+                make_popup_text(latitude_true, longitude_true, elevation_true),
+                max_width=300).add_to(invisible_circle_true))
 
     else:
 
@@ -140,7 +157,7 @@ def add_point_to_map(summit):
             fill_opacity = 0,
             weight = 0
         ).add_to(pinnacle_point_map)
-        invisible_circle.add_child(folium.Popup(marker_text, max_width=300).add_to(invisible_circle))
+        invisible_circle.add_child(folium.Popup(get_marker_text(summit), max_width=300).add_to(invisible_circle))
 
 summits = pinnacle_points.sort_values('elevation', ascending=True)
 pinnacle_point_map = folium.Map(location=[0, 15], zoom_start=3, tiles=None, world_copy_jump=True)
